@@ -102,10 +102,10 @@
     "zod": "4.1.5"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^8.0.0",
-    "@storybook/addon-vitest": "^8.0.0",
-    "@storybook/nextjs-vite": "^8.0.0",
-    "@storybook/react": "^8.0.0",
+    "@storybook/addon-a11y": "^7.6.17",
+    "@storybook/addon-vitest": "^7.6.17",
+    "@storybook/nextjs-vite": "^7.6.17",
+    "@storybook/react": "^7.6.17",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -114,7 +114,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.2.4",
     "postcss": "^8",
-    "storybook": "^8.0.0",
+    "storybook": "^7.6.17",
     "tailwindcss": "^3.3.0",
     "tsx": "^4.7.0",
     "typescript": "^5",
