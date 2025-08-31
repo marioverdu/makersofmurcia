@@ -75,6 +75,34 @@ export const getDictionary = async (locale: Locale) => {
           required: 'Campo requerido',
           invalidEmail: 'Email inválido',
           success: '¡Gracias por tu mensaje! Te responderé pronto.'
+        },
+        posts: {
+          title: 'Blog y contenido',
+          subtitle: 'Artículos y recursos sobre desarrollo digital',
+          readMore: 'Leer más',
+          publishedOn: 'Publicado el',
+          author: 'Autor',
+          tags: 'Etiquetas',
+          categories: 'Categorías',
+          search: 'Buscar posts...',
+          noPosts: 'No hay posts disponibles',
+          loading: 'Cargando posts...',
+          error: 'Error al cargar posts',
+          posts: 'Posts',
+          aboutMe: 'Sobre mi',
+          uiDeveloper: 'Frontend Developer (Next.js / React)',
+          hey: '¡Hey!',
+          musicUnlocked: '¡Música desbloqueada!',
+          developmentMode: 'Modo desarrollo: Usando posts de muestra',
+          productionInfo: 'En producción, esta página cargará posts desde la base de datos Neon.',
+          notice: 'Aviso:',
+          samplePostsInfo: 'Se están mostrando posts de muestra mientras se resuelve el problema con la API.',
+          possibleSolutions: 'Posibles soluciones:',
+          checkApiFile: 'Verifica que existe el archivo app/api/posts/route.ts',
+          ensureJsonResponse: 'Asegúrate de que la API devuelve un objeto JSON válido',
+          checkNeonConnection: 'Comprueba la conexión con la base de datos Neon',
+          pageUnderMaintenance: 'Página en Mantenimiento',
+          maintenanceMessage: 'Disculpa las molestias, estamos trabajando para mejorar.'
         }
       }
     }
