@@ -59,6 +59,22 @@ export const getDictionary = async (locale: Locale) => {
           title: 'Mario Verdú',
           subtitle: 'Desarrollo de producto digital',
           description: 'Desarrollo de producto digital alineado con tu visión de negocio'
+        },
+        contact: {
+          title: 'Contacto',
+          subtitle: '¿Tienes un proyecto en mente? Hablemos',
+          name: 'Nombre',
+          email: 'Email',
+          message: 'Mensaje',
+          send: 'Enviar mensaje',
+          sending: 'Enviando...',
+          sent: 'Mensaje enviado',
+          error: 'Error al enviar mensaje',
+          phone: 'Teléfono',
+          subject: 'Asunto',
+          required: 'Campo requerido',
+          invalidEmail: 'Email inválido',
+          success: '¡Gracias por tu mensaje! Te responderé pronto.'
         }
       }
     }
