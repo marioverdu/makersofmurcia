@@ -1,12 +1,19 @@
 // Este archivo es generado automáticamente durante el build
 // No editar manualmente - se sobrescribirá en el próximo build
-// Generado el: 2025-08-30T23:10:08.150Z
+// Generado el: 2025-08-31T03:21:33.944Z
 
 export const GENERATED_ROUTES = [
   {
     "path": "/[lang]",
     "type": "layout",
     "filePath": "app/[lang]/layout.tsx",
+    "isProtected": false,
+    "isDynamic": true
+  },
+  {
+    "path": "/[lang]",
+    "type": "loading",
+    "filePath": "app/[lang]/loading.tsx",
     "isProtected": false,
     "isDynamic": true
   },
@@ -49,6 +56,13 @@ export const GENERATED_ROUTES = [
     "path": "/[lang]/posts/view/[id]",
     "type": "page",
     "filePath": "app/[lang]/posts/view/[id]/page.tsx",
+    "isProtected": false,
+    "isDynamic": true
+  },
+  {
+    "path": "/[lang]/work-experience",
+    "type": "loading",
+    "filePath": "app/[lang]/work-experience/loading.tsx",
     "isProtected": false,
     "isDynamic": true
   },
@@ -651,6 +665,13 @@ export const GENERATED_ROUTES = [
     "path": "/test-preview",
     "type": "page",
     "filePath": "app/test-preview/page.tsx",
+    "isProtected": false,
+    "isDynamic": false
+  },
+  {
+    "path": "/work-experience",
+    "type": "loading",
+    "filePath": "app/work-experience/loading.tsx",
     "isProtected": false,
     "isDynamic": false
   },

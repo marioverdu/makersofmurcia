@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { UnifiedLoading } from "@/components/ui/unified-loading"
+import { NavigationWrapper } from "@/components/ui/navigation-wrapper"
 
-export default function LoginPage() {
+// Componente que usa useSearchParams
+function LoginPageContent() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [debugInfo, setDebugInfo] = useState<any>(null)
@@ -191,5 +193,14 @@ export default function LoginPage() {
         )}
       </div>
     </div>
+  )
+}
+
+// Componente principal con NavigationWrapper
+export default function LoginPage() {
+  return (
+    <NavigationWrapper>
+      <LoginPageContent />
+    </NavigationWrapper>
   )
 }

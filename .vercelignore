@@ -1,0 +1,37 @@
+# Archivos de desarrollo
+.env.local
+.env.development
+.env.test
+
+# Archivos de backup
+*.backup
+package-lock.json.backup
+
+# Archivos de test y debug
+scripts/test-*.js
+scripts/debug-*.js
+scripts/verify-*.js
+
+# Archivos de Storybook (no necesarios en producción)
+.storybook/
+stories/
+
+# Archivos de desarrollo
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos temporales
+.tmp/
+.temp/
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db

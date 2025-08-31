@@ -76,7 +76,7 @@ async function verifyProductionAnalytics() {
     console.log(`   - Usuarios únicos (30 días): ${analyticsTest[0].unique_users}`)
     
     console.log('\n🎉 ¡Analíticas listas para producción!')
-    console.log('🌐 URL de producción: https://aaa23444.vercel.app/admin/analytics')
+    console.log('🌐 URL de producción: https://marioverdu.com/admin/analytics')
     console.log('📊 Los datos se obtienen de la base de datos Neon conectada')
     
   } catch (error) {

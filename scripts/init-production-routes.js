@@ -9,7 +9,7 @@ const https = require('https');
 const http = require('http');
 
 // Configuración
-const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://aaa23444.vercel.app';
+const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://marioverdu.com';
 const INIT_ENDPOINT = '/api/admin/routes/init-production';
 
 function makeRequest(url, method = 'GET', data = null) {

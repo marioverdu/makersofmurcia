@@ -130,7 +130,7 @@ npm run test-quick-replies
 
 Las quick replies están completamente funcionales en todos los entornos:
 - ✅ **Desarrollo**: `http://localhost:3000`
-- ✅ **Producción**: `https://aaa23444.vercel.app`
+- ✅ **Producción**: `https://marioverdu.com`
 - ✅ **URLs correctas**: Telegram, Email y X/Twitter
 - ✅ **Funcionalidad**: Apertura en nueva pestaña
 - ✅ **Compatibilidad**: Todos los navegadores

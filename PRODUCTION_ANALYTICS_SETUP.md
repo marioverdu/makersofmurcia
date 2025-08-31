@@ -96,7 +96,7 @@ npm run create-analytics-tables
 ## 🚀 Próximos Pasos
 
 1. **Deploy a producción**: Los cambios se aplicarán automáticamente
-2. **Acceder al dashboard**: https://aaa23444.vercel.app/admin/analytics
+2. **Acceder al dashboard**: https://marioverdu.com/admin/analytics
 3. **Monitorear datos**: Los eventos se registrarán automáticamente
 4. **Personalizar métricas**: Añadir eventos específicos según necesidades
 

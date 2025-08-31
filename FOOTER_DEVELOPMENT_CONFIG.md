@@ -58,12 +58,12 @@ Se cambió la lógica de ambos footers del chat:
 - **Información mostrada**: `selecting_time | waiting` o `🔔 notifications`
 
 ### **❌ Producción (Vercel)**
-- **URLs**: `https://aaa23444.vercel.app`
+- **URLs**: `https://marioverdu.com`
 - **Footer**: **OCULTO**
 - **Experiencia**: Chat limpio sin información de debug
 
 ### **❌ Preview (Vercel)**
-- **URLs**: `https://preview-aaa23444.vercel.app`
+- **URLs**: `https://preview.marioverdu.com`
 - **Footer**: **OCULTO**
 - **Experiencia**: Chat limpio sin información de debug
 

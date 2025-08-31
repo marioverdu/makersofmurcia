@@ -1,4 +1,4 @@
-import OpenAI from '@ai-sdk/openai';
+import { OpenAI } from '@ai-sdk/openai';
 
 // Configurar el cliente de OpenAI
 const openai = new OpenAI({

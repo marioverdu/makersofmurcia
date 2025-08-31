@@ -17,13 +17,13 @@ const environments = [
   {
     name: 'Producción (Vercel)',
     NODE_ENV: 'production',
-    hostname: 'aaa23444.vercel.app',
+    hostname: 'marioverdu.com',
     shouldShow: false
   },
   {
     name: 'Preview (Vercel)',
     NODE_ENV: 'production',
-    hostname: 'preview-aaa23444.vercel.app',
+    hostname: 'preview.marioverdu.com',
     shouldShow: false
   }
 ]
