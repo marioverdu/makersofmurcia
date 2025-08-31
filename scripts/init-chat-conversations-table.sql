@@ -1,0 +1,8 @@
+-- Este script ya no es el principal para la creación, se usa 'drop-and-recreate-chat-tables.sql'
+-- Sin embargo, su contenido original era:
+-- CREATE TABLE IF NOT EXISTS chat_conversations (
+--     id TEXT PRIMARY KEY DEFAULT (('conv_' || EXTRACT(EPOCH FROM NOW())::bigint) || '_' || SUBSTR(MD5(RANDOM()::TEXT), 0, 8)),
+--     user_id TEXT NOT NULL,
+--     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+--     last_activity TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+-- );

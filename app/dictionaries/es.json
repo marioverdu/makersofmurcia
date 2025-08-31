@@ -1,0 +1,173 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "notFound": "No encontrado",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "view": "Ver",
+    "close": "Cerrar",
+    "open": "Abrir",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "all": "Todos",
+    "none": "Ninguno",
+    "yes": "Sí",
+    "no": "No",
+    "ok": "OK",
+    "submit": "Enviar",
+    "reset": "Restablecer",
+    "confirm": "Confirmar",
+    "dismiss": "Descartar"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "posts": "Blog",
+    "workExperience": "Experiencia Laboral",
+    "contact": "Contacto",
+    "admin": "Administración",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión"
+  },
+  "home": {
+    "title": "Mario Verdú",
+    "subtitle": "Desarrollo de producto digital alineado con tu visión de negocio",
+    "description": "Desarrollo de producto digital alineado con tu visión de negocio",
+    "hero": {
+      "title": "Desarrollo de producto digital",
+      "subtitle": "Alineado con tu visión de negocio",
+      "cta": "Contactar",
+      "learnMore": "Conoce más"
+    },
+    "services": {
+      "title": "Servicios",
+      "uxui": "Diseño UX/UI",
+      "web": "Desarrollo Web",
+      "mobile": "Desarrollo Móvil",
+      "consulting": "Consultoría"
+    },
+    "about": {
+      "title": "Sobre mí",
+      "description": "Desarrollador de productos digitales con experiencia en diseño y desarrollo."
+    },
+    "sections": {
+      "randomTexts": [
+        "Construyamos tu negocio",
+        "\"Menos pero mejor\" ―Dieter Rams"
+      ],
+      "hero": {
+        "firstText": "Equivócate rápido",
+        "secondText": "Trabaja inteligentemente no más"
+      },
+      "mainTitle": "Desarrollo de producto digital",
+      "subtitle": "alineado con tu visión de negocio",
+      "userUnderstanding": {
+        "badge": "Know your user",
+        "title": "Comprendo a tu usuario",
+        "description": "Exploro las necesidades de mi cliente, recopilo la documentación cuantitativa y cualitativa disponible, documento cada fase del proceso y alineo las necesidades del usuario y del cliente con ayuda de herramienas intelectuales (Análisis competitivo, bocetaje, flujos de usuario, etc)"
+      },
+      "solutionDesign": {
+        "badge": "Know your user",
+        "title": "Defino y diseño soluciones",
+        "description": "Itero en comunicación continua y planteo un MVP componentizado en Diseño o código. Puesta en común de las debilidades y oportunidades del proyecto así como el enfoque estratégico a seguir en cuanto al alcance los entregables."
+      },
+      "testingLaunch": {
+        "badge": "Know your user",
+        "title": "Pruebo, optimizo y lanzo",
+        "description": "Reviso, componetizo y prototipo. Recopilación de feedback y refinamiento de las soluciones. Entrega del proyecto y de la documentación técnica, actualización de las librerías con las mejoras validadas."
+      },
+      "deploying": "Deploying",
+      "cta": "¿Listo para empezar?"
+    }
+  },
+  "posts": {
+    "title": "Blog y contenido",
+    "subtitle": "Artículos y recursos sobre desarrollo digital",
+    "readMore": "Leer más",
+    "publishedOn": "Publicado el",
+    "author": "Autor",
+    "tags": "Etiquetas",
+    "categories": "Categorías",
+    "search": "Buscar posts...",
+    "noPosts": "No hay posts disponibles",
+    "loading": "Cargando posts...",
+    "error": "Error al cargar posts",
+    "posts": "Posts",
+    "aboutMe": "Sobre mi",
+    "uiDeveloper": "Frontend Developer (Next.js / React)",
+    "hey": "¡Hey!",
+    "musicUnlocked": "¡Música desbloqueada!",
+    "developmentMode": "Modo desarrollo: Usando posts de muestra",
+    "productionInfo": "En producción, esta página cargará posts desde la base de datos Neon.",
+    "notice": "Aviso:",
+    "samplePostsInfo": "Se están mostrando posts de muestra mientras se resuelve el problema con la API.",
+    "possibleSolutions": "Posibles soluciones:",
+    "checkApiFile": "Verifica que existe el archivo app/api/posts/route.ts",
+    "ensureJsonResponse": "Asegúrate de que la API devuelve un objeto JSON válido",
+    "checkNeonConnection": "Comprueba la conexión con la base de datos Neon",
+    "pageUnderMaintenance": "Página en Mantenimiento",
+    "maintenanceMessage": "Disculpa las molestias, estamos trabajando para mejorar."
+  },
+  "workExperience": {
+    "title": "Experiencia Laboral",
+    "subtitle": "Mi trayectoria profesional y proyectos",
+    "experience": "Experiencia",
+    "education": "Educación",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "current": "Actual",
+    "previous": "Anterior",
+    "years": "años",
+    "months": "meses",
+    "days": "días",
+    "technologies": "Tecnologías",
+    "responsibilities": "Responsabilidades",
+    "achievements": "Logros",
+    "company": "Empresa",
+    "position": "Cargo",
+    "duration": "Duración",
+    "location": "Ubicación",
+    "description": "Descripción"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes un proyecto en mente? Hablemos",
+    "name": "Nombre",
+    "email": "Email",
+    "message": "Mensaje",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "sent": "Mensaje enviado",
+    "error": "Error al enviar mensaje",
+    "phone": "Teléfono",
+    "subject": "Asunto",
+    "required": "Campo requerido",
+    "invalidEmail": "Email inválido",
+    "success": "¡Gracias por tu mensaje! Te responderé pronto."
+  },
+  "admin": {
+    "title": "Administración",
+    "dashboard": "Panel de control",
+    "posts": "Posts",
+    "routes": "Rutas",
+    "analytics": "Analíticas",
+    "booking": "Reservas",
+    "users": "Usuarios",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión",
+    "protected": "Área protegida",
+    "unauthorized": "No autorizado"
+  },
+  "footer": {
+    "copyright": "© 2024 Mario Verdú. Todos los derechos reservados.",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "contact": "Contacto"
+  }
+}

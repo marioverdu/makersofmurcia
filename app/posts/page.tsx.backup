@@ -1,0 +1,929 @@
+"use client"
+
+import type React from "react"
+
+import { useState, useEffect, useRef, useMemo } from "react"
+import { Header } from "@/components/ui/header"
+import { Trophy } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { PortfolioCard } from "@/components/portfolio-card" // Import the new component
+
+// Actualizar la interfaz Post en la parte superior del archivo
+export interface Post {
+  id: number | string
+  title: string
+  content: string
+  excerpt?: string
+  coverImage?: string
+  featured_image?: string
+  date?: string
+  created_at: string
+  updated_at?: string
+  published?: boolean
+  slug?: string
+  contentType?: string
+  environment?: "production" | "development" | "all"
+  tags?: string[]
+}
+
+// Sample posts for development mode
+const samplePosts: Post[] = [
+  {
+    id: "sample-1",
+    title: "Diseño de interfaces modernas con Tailwind CSS",
+    content:
+      "<p>Tailwind CSS ha revolucionado la forma en que construimos interfaces de usuario. Con su enfoque utility-first, podemos crear diseños complejos y responsivos sin salir de nuestro HTML.</p><p>En este post exploramos las mejores prácticas y técnicas avanzadas para crear interfaces modernas y atractivas.</p>",
+    excerpt: "Explorando las mejores prácticas para crear interfaces modernas con Tailwind CSS",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    published: true,
+    featured_image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    slug: "diseno-interfaces-tailwind",
+    contentType: "post",
+    environment: "development",
+  },
+  {
+    id: "sample-2",
+    title: "El futuro del desarrollo web con React y Next.js",
+    content:
+      "<p>Next.js se ha convertido en el framework de referencia para construir aplicaciones React. Su enfoque en la experiencia del desarrollador y el rendimiento lo hacen ideal para proyectos de cualquier escala.</p><p>Analizamos las últimas características y cómo pueden mejorar tu flujo de trabajo.</p>",
+    excerpt: "Analizando las últimas tendencias en desarrollo web con React y Next.js",
+    created_at: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
+    updated_at: new Date(Date.now() - 86400000).toISOString(),
+    published: true,
+    featured_image:
+      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    slug: "futuro-desarrollo-react-nextjs",
+    contentType: "post",
+    environment: "development",
+  },
+  {
+    id: "sample-3",
+    title: "Optimización de rendimiento en aplicaciones web",
+    content:
+      "<p>El rendimiento es crucial para ofrecer una buena experiencia de usuario. En este artículo compartimos estrategias para mejorar la velocidad de carga y la interactividad de tus aplicaciones web.</p><p>Desde la optimización de imágenes hasta técnicas avanzadas de caching, cubrimos todo lo que necesitas saber.</p>",
+    excerpt: "Estrategias efectivas para mejorar el rendimiento de tus aplicaciones web",
+    created_at: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
+    updated_at: new Date(Date.now() - 172800000).toISOString(),
+    published: true,
+    featured_image:
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
+    slug: "optimizacion-rendimiento-web",
+    contentType: "post",
+    environment: "development",
+  },
+  {
+    id: "sample-4",
+    title: "ASCII Art: Creatividad con caracteres",
+    content: `
+ ,--.   ,--.             ,--.          
+ |   \`.'   | ,--,--.,--.-'  '-. ,---.  
+ |  |'.'|  |' ,-.  ||  '-.  .-'| .-. | 
+ |  |   |  |\ '-'  ||  | |  |  ' '-' ' 
+ \`--'   \`--' \`--\`--'\`--' \`--'   \`---'  
+                                       
+ ,--.   ,--.,------.,--.,--.,--.,---.  
+ |   \`.'   ||  .---'|  ||  ||  || o   \\ 
+ |  |'.'|  ||  \`--,  '  ''  '|  ||  .  | 
+ |  |   |  ||  |\`    \`----'  |  ||  |\\  \\ 
+ \`--'   \`--'\`--'        \`--. \`--'\`--' '--'
+                                       
+ `,
+    excerpt: "Explorando el arte ASCII como forma de expresión creativa",
+    created_at: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
+    updated_at: new Date(Date.now() - 259200000),
+    published: true,
+    slug: "ascii-art-creatividad",
+    contentType: "ascii-art",
+    environment: "development",
+  },
+  {
+    id: "sample-5",
+    title: "La importancia del diseño responsivo",
+    content:
+      "<p>En un mundo donde los usuarios acceden a la web desde una variedad de dispositivos, el diseño responsivo es más importante que nunca.</p><p>Exploramos las mejores prácticas y herramientas para crear experiencias que se adapten a cualquier tamaño de pantalla.</p>",
+    excerpt: "Creando experiencias web que funcionen en cualquier dispositivo",
+    created_at: new Date(Date.now() - 345600000).toISOString(), // 4 days ago
+    updated_at: new Date(Date.now() - 345600000).toISOString(),
+    published: true,
+    featured_image:
+      "https://images.unsplash.com/photo-1481487196290-c152efe083f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1562&q=80",
+    slug: "importancia-diseno-responsivo",
+    contentType: "post",
+    environment: "development",
+  },
+  {
+    id: "sample-6",
+    title: "Hello world",
+    content: "<p>This is a test post</p>",
+    excerpt: "Test post",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    published: true,
+    featured_image:
+      "https://images.unsplash.com/photo-1481487196290-c152efe083f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1562&q=80",
+    slug: "hello-world",
+    contentType: "post",
+    environment: "production",
+  },
+]
+
+// Añadir el post "Sobre mí" después de la definición de samplePosts
+const aboutMePost: Post = {
+  id: "about-me",
+  title: "Sobre mí",
+  content: `
+   <p>Hola, soy Mario Verdú, desarrollador UI con experiencia en la creación de interfaces modernas y atractivas.</p>
+   <p>Me especializo en React, Next.js y Tailwind CSS, creando experiencias web que combinan estética y funcionalidad.</p>
+   <p>Mi enfoque se centra en construir interfaces que no solo se vean bien, sino que también ofrezcan una excelente experiencia de usuario.</p>
+   <p>Siempre estoy aprendiendo nuevas tecnologías y explorando formas innovadoras de mejorar mis habilidades.</p>
+ `,
+  excerpt: "Desarrollador UI especializado en React, Next.js y Tailwind CSS",
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+  published: true,
+  featured_image: "https://assets.marioverdu.com/avatar/avatar-2.webp",
+  slug: "sobre-mi",
+  contentType: "post",
+  environment: "production",
+}
+
+// Post específico para la pestaña About que se muestra en todos los entornos
+const aboutTabPost: Post = {
+  id: "about-tab",
+  title: "Sobre este proyecto",
+  content:
+    '<p>¡Hola!</p><p>Soy Mario Verdú, Desarrollador web con más de 6 años de experiencia en Diseño de productos digitales.</p><p>Diseño, valido, itero y prototipo productos diferenciales siempre comprometido con el desarrollo de sistemas de diseño limpios, vibrantes y funcionales 🌱</p><p>Trabajo con equipos que entienden la comunicación como una experiencia transversal que impacta en todos los recovecos del negocio 🚀</p><p><a href="mailto:contact@marioverdu.com" class="text-primary hover:underline font-medium">¿Hablamos?</a></p>',
+  excerpt: "",
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+  published: true,
+  featured_image: "/placeholder.svg?height=400&width=600",
+  slug: "sobre-este-proyecto",
+  contentType: "post",
+  environment: "all", // Se mostrará en todos los entornos
+}
+
+// Post específico para la pestaña Portfolio
+const portfolioTabPost: Post = {
+  id: "portfolio-tab",
+  title: "Mi Portfolio",
+  content: "<p>Aquí encontrarás una selección de mis proyectos más recientes.</p><p>¡Pronto habrá más contenido!</p>",
+  excerpt: "Una muestra de mis trabajos y proyectos.",
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+  published: true,
+  featured_image: "/placeholder.svg?height=400&width=600",
+  slug: "mi-portfolio",
+  contentType: "post",
+  environment: "all",
+}
+
+// Datos de ejemplo para las cards del portfolio
+const portfolioItems = [
+  {
+    id: 1,
+    title: "Proyecto Web Corporativa",
+    description: "Desarrollo de un sitio web moderno y responsivo para una empresa de tecnología.",
+    imageUrl: "/placeholder.svg?height=120&width=304",
+    link: "#",
+  },
+  {
+    id: 2,
+    title: "Aplicación Móvil de Gestión",
+    description: "Creación de una aplicación móvil para la gestión de tareas y proyectos internos.",
+    imageUrl: "/placeholder.svg?height=120&width=304",
+    link: "#",
+  },
+  {
+    id: 3,
+    title: "E-commerce Personalizado",
+    description: "Plataforma de comercio electrónico con funcionalidades avanzadas y diseño único.",
+    imageUrl: "/placeholder.svg?height=120&width=304",
+    link: "#",
+  },
+  {
+    id: 4,
+    title: "Dashboard Analítico",
+    description: "Diseño e implementación de un dashboard interactivo para visualización de datos.",
+    imageUrl: "/placeholder.svg?height=120&width=304",
+    link: "#",
+  },
+  {
+    id: 5,
+    title: "Sistema de Reservas Online",
+    description: "Desarrollo de un sistema de reservas para servicios con calendario integrado.",
+    imageUrl: "/placeholder.svg?height=120&width=304",
+    link: "#",
+  },
+  {
+    id: 6,
+    title: "Blog de Contenido Dinámico",
+    description: "Creación de un blog con CMS personalizado y optimización SEO.",
+    imageUrl: "/placeholder.svg?height=120&width=304",
+    link: "#",
+  },
+]
+
+// Combinar todos los posts en un solo array
+const allPosts: Post[] = [...samplePosts, aboutMePost, aboutTabPost, portfolioTabPost]
+
+export default function PostsPage() {
+  const router = useRouter()
+  const [checkingVisibility, setCheckingVisibility] = useState(true)
+  const [maintenance, setMaintenance] = useState(false)
+
+  const [posts, setPosts] = useState<Post[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isAvatarInHeader, setIsAvatarInHeader] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [clickCount, setClickCount] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState<"posts" | "portfolio" | "music" | "about" | "examples">(
+    "posts",
+  )
+  const [avatarClickCount, setAvatarClickCount] = useState(0)
+  const [showMusicTab, setShowMusicTab] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const { toast } = useToast()
+  const [showTrophyToast, setShowTrophyToast] = useState(false)
+
+  // Determinar si estamos en producción
+  const [isProduction, setIsProduction] = useState(false)
+
+  // Efecto para detectar el entorno
+  useEffect(() => {
+    const isProd =
+      process.env.NEXT_PUBLIC_VERCEL_ENV === "production" || process.env.NEXT_PUBLIC_ENVIRONMENT === "production"
+    setIsProduction(isProd)
+    console.log("Entorno detectado:", isProd ? "PRODUCCIÓN" : "DESARROLLO")
+    console.log("NEXT_PUBLIC_VERCEL_ENV:", process.env.NEXT_PUBLIC_VERCEL_ENV)
+    console.log("NEXT_PUBLIC_ENVIRONMENT:", process.env.NEXT_PUBLIC_ENVIRONMENT)
+  }, [])
+
+  // Efecto para manejar el scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollThreshold = 150
+      setIsAvatarInHeader(window.scrollY > scrollThreshold)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  // Function to load posts
+  const loadPosts = async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      // Check if we're in lite environment (v0 preview)
+      const isLiteEnvironment =
+        typeof window !== "undefined" &&
+        (window.location.hostname.includes("vusercontent.net") || window.location.hostname.includes("v0.dev"))
+
+      // In preview environment, don't even try to load posts from API
+      if (isLiteEnvironment) {
+        console.log("Preview environment detected, using fallback posts")
+        setPosts(allPosts) // Ensure allPosts are used as fallback
+        setIsLoading(false)
+        return
+      }
+
+      // In development or production, try to load from API
+      console.log("Trying to load posts from API...")
+
+      try {
+        const response = await fetch("/api/posts", {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        })
+
+        console.log("Response status:", response.status)
+        console.log("Content-Type:", response.headers.get("Content-Type"))
+
+        // Check if the response is HTML instead of JSON (common error)
+        const contentType = response.headers.get("Content-Type") || ""
+
+        if (contentType.includes("text/html")) {
+          console.warn("API returned HTML instead of JSON. Using sample posts as fallback.")
+          setPosts(allPosts)
+        } else if (!response.ok) {
+          throw new Error(`HTTP Error: ${response.status}`)
+        } else {
+          // Parse JSON response
+          const data = await response.json()
+          console.log(`Posts loaded: ${data.length}`)
+          setPosts(data)
+        }
+      } catch (err) {
+        console.error("Error fetching posts:", err)
+        setError(`Error loading posts: ${err instanceof Error ? err.message : String(err)}`)
+
+        // Always use sample posts as fallback
+        console.warn("Using sample posts as fallback due to API error.")
+        setPosts(allPosts)
+      }
+    } catch (err) {
+      console.error("Error in loadPosts:", err)
+      setError(`General error: ${err instanceof Error ? err.message : String(err)}`)
+      setPosts(allPosts)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Efecto para cargar posts
+  useEffect(() => {
+    loadPosts()
+
+    // Define custom event handler for post updates
+    const handlePostsUpdated = () => {
+      console.log("Posts updated event received, reloading posts...")
+      loadPosts()
+    }
+
+    // Add event listener for custom event
+    window.addEventListener("posts-updated", handlePostsUpdated)
+
+    // Clean up event listener
+    return () => {
+      window.removeEventListener("posts-updated", handlePostsUpdated)
+    }
+  }, [isProduction])
+
+  useEffect(() => {
+    // Lógica de visibilidad de rutas para la prioridad
+    const checkVisibility = async () => {
+      setCheckingVisibility(true)
+      let visibility: { [key: string]: boolean } = {}
+      const localVisibilityRaw = typeof window !== "undefined" ? localStorage.getItem("routesVisibility") : null
+      if (localVisibilityRaw) {
+        try {
+          visibility = JSON.parse(localVisibilityRaw)
+        } catch {
+          visibility = {}
+        }
+      } else {
+        // Si no hay en localStorage, consulta la API
+        try {
+          const res = await fetch("/api/admin/routes")
+          const data = await res.json()
+          if (data && data.data && data.data.routes) {
+            data.data.routes.forEach((route: any) => {
+              visibility[route.path] = route.isVisible
+            })
+          }
+        } catch {
+          // Si falla la API, asume todo visible
+          visibility = { "/": true, "/work-experience": true, "/posts": true }
+        }
+      }
+      // Lógica de prioridad: /, /work-experience, /posts
+      const priorities = ["/", "/work-experience", "/posts"]
+      const current = "/posts"
+      if (!visibility[current]) {
+        // Buscar la siguiente ruta prioritaria activa
+        const next = priorities.find((r) => r !== current && visibility[r])
+        if (next) {
+          router.replace(next)
+        } else {
+          setMaintenance(true)
+        }
+      }
+      setCheckingVisibility(false)
+    }
+    checkVisibility()
+  }, [router])
+
+  const filteredPosts = useMemo(() => {
+    const fallbackPosts: Post[] = [
+      {
+        id: "prueba-concepto",
+        title: "Prueba de concepto para comprobar que los posts funcionan",
+        content: "lorem ipsum",
+        excerpt: "Prueba de concepto para comprobar que los posts funcionan",
+        created_at: "2025-04-25T21:20:00.000Z",
+        updated_at: "2025-04-25T21:20:00.000Z",
+        published: true,
+        slug: "prueba-concepto",
+        contentType: "post",
+        environment: "all",
+      },
+      {
+        id: "hello-world-ascii",
+        title: "Hello world",
+        content: `My first post with ASCII artt
+
+  ___ ___        .__
+ /   |   \\  ____ |  | _____    ___________    ____ _____
+/    ~    \\/  _ \\|  | \\__  \\   \\____ \\__  \\  /    \\\\__  \\
+\\    Y    (  <_> )  |__/ __ \\_ |  |_> > __ \\|   |  \\/ __ \\_
+ \\___|_  / \\____/|____(____  / |   __(____  /___|  (____  /
+       \\/                  \\/  |__|       \\/     \\/     \\/`,
+        excerpt: "My first post with ASCII art",
+        created_at: "2025-03-24T02:30:00.000Z",
+        updated_at: "2025-03-24T02:30:00.000Z",
+        published: true,
+        slug: "hello-world-ascii",
+        contentType: "ascii-art",
+        environment: "all",
+      },
+    ]
+
+    const isPreviewEnvironment =
+      typeof window !== "undefined" &&
+      (window.location.hostname.includes("vusercontent.net") || window.location.hostname.includes("v0.dev"))
+
+    let postsToProcess: Post[]
+
+    if (isPreviewEnvironment || error) {
+      console.log("Using fallback posts for preview environment or error state")
+      postsToProcess = fallbackPosts
+    } else {
+      postsToProcess = posts.length > 0 ? posts : allPosts
+    }
+
+    // Filter out specific static posts if they are handled by separate tabs
+    postsToProcess = postsToProcess.filter((post) => post.id !== aboutTabPost.id && post.id !== portfolioTabPost.id)
+
+    // Apply category-specific filtering
+    if (selectedCategory === "posts") {
+      return postsToProcess.filter(
+        (post) =>
+          post.contentType === "post" ||
+          post.contentType === "ascii-art" ||
+          post.contentType === "photo" ||
+          post.contentType === "quote" ||
+          post.contentType === "music-player" ||
+          post.contentType === "video-player",
+      )
+    } else if (selectedCategory === "examples") {
+      // Assuming 'examples' category might show all content types or specific ones
+      return postsToProcess
+    } else if (selectedCategory === "music") {
+      return postsToProcess.filter((post) => post.contentType === "music-player")
+    }
+    // If selectedCategory is 'about' or 'portfolio', this memo will return an empty array,
+    // as those are handled by separate conditional rendering blocks.
+    return []
+  }, [posts, error, selectedCategory])
+
+  // Función para formatear fechas
+  function formatDate(dateString: string) {
+    if (!dateString) return "Fecha desconocida"
+
+    try {
+      const date = new Date(dateString)
+      return date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      })
+    } catch (error) {
+      return "Fecha inválida"
+    }
+  }
+
+  // Función para detectar ASCII art
+  const isAsciiArt = (content: string) => {
+    const lines = content.split("\n")
+    return (
+      lines.length > 3 &&
+      (content.includes("___") || content.includes("\\") || content.includes("/") || content.includes("|")) &&
+      lines.some((line) => line.length > 20)
+    )
+  }
+
+  // Función para detectar si el contenido contiene una URL de imagen
+  function containsImageUrl(content: string): boolean {
+    const imageUrlRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))/i
+    return imageUrlRegex.test(content)
+  }
+
+  // Función para extraer la URL de imagen del contenido
+  function extractImageUrl(content: string): string | null {
+    const imageUrlRegex = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))/i
+    const match = content.match(imageUrlRegex)
+    return match ? match[0] : null
+  }
+
+  // Función para renderizar el contenido del post
+  function renderPostContent(post: Post) {
+    if (!post || !post.content) {
+      return <p className="text-gray-500">No hay contenido disponible</p>
+    }
+
+    const contentTypeValue = post.contentType || (post.featured_image ? "photo" : "post")
+
+    if (isProduction && post.environment !== "production" && post.environment !== "all") {
+      return null
+    }
+
+    // Verificar si el contenido contiene una URL de imagen
+    if (containsImageUrl(post.content)) {
+      const imageUrl = extractImageUrl(post.content)
+      if (imageUrl) {
+        return (
+          <div className="my-4 w-full">
+            <img
+              src={imageUrl || "/placeholder.svg"}
+              alt={post.title}
+              className="w-full rounded-md object-cover"
+              style={{ maxHeight: "300px" }}
+            />
+          </div>
+        )
+      }
+    }
+
+    switch (contentTypeValue) {
+      case "ascii-art":
+        return (
+          <pre className="font-mono text-[1vw] my-4 p-4 bg-black text-green-400 rounded-md leading-tight whitespace-pre w-full max-w-full text-left scale-100 origin-top transform-gpu overflow-x-auto block">
+            {post.content}
+          </pre>
+        )
+      case "quote":
+        return (
+          <blockquote className="text-xl font-serif text-gray-700 italic border-l-4 border-gray-300 pl-4 my-4">
+            {post.content.replace(/>^|\s/g, "")}
+          </blockquote>
+        )
+      case "music-player":
+        return <div className="my-4 w-full" dangerouslySetInnerHTML={{ __html: post.content }} />
+      case "video-player":
+        return (
+          <div className="my-4 w-full aspect-video">
+            <iframe
+              src={`https://www.youtube.com/embed/${post.content.match(/video-id="([^"]+)"/) ? post.content.match(/video-id="([^"]+)"/)[1] : "dQw4w9WgXcQ"}`}
+              className="w-full h-full"
+              allowFullScreen
+              title={post.title}
+            ></iframe>
+          </div>
+        )
+      case "photo":
+        return (
+          <div className="my-4 w-full">
+            <img
+              src={post.featured_image || post.coverImage || "/placeholder.svg"}
+              alt={post.title}
+              className="w-full rounded-md"
+            />
+          </div>
+        )
+      case "post":
+      case "post+":
+      default:
+        if (isAsciiArt(post.content)) {
+          return (
+            // Contenedor ASCII Art - Este es el elemento principal que contiene el arte ASCII
+            <pre
+              // Estilos del contenedor ASCII
+              className="
+                font-mono                  /* Tipografía monoespaciada (necesaria para ASCII art) */
+                text-[2.5vw] xs:text-[2vw] sm:text-[1.5vw] md:text-[1.2vw] lg:text-[1vw]  /* Tamaño de texto responsivo */
+                my-4                       /* Margen vertical */
+                p-4                        /* Padding interno */
+                bg-black                   /* Fondo negro (terminal) */
+                text-green-400             /* Color de texto verde (estilo terminal) */
+                rounded-md                 /* Bordes redondeados */
+                leading-tight              /* Altura de línea ajustada */
+                whitespace-pre             /* Preserva espacios en blanco y saltos de línea */
+                w-full                     /* Ancho completo */
+                min-w-full                 /* Ancho mínimo completo para forzar el ancho en móviles */
+                text-left                  /* Alineación de texto */
+                scale-100                  /* Mantener escala 100% en todos los dispositivos */
+                transform-gpu              /* Usa aceleración GPU para transformaciones */
+                overflow-x-auto            /* Scroll horizontal si es necesario */
+                block                      /* Elemento de bloque */
+                box-border                 /* Asegura que padding no afecte el ancho total */
+              "
+            >
+              {/* Contenido ASCII - El arte ASCII real */}
+              {post.content}
+            </pre>
+          )
+        }
+        return (
+          <div className="my-4 prose max-w-none">
+            <div dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, "<br />") }} />
+          </div>
+        )
+    }
+  }
+
+  // useRef to store the timer
+  const clickTimerRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Función para manejar triple click
+  const handleTripleClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+
+    setClickCount((prev) => {
+      const newCount = prev + 1
+
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current)
+      }
+
+      clickTimerRef.current = setTimeout(() => {
+        setClickCount(0)
+      }, 500)
+
+      if (newCount === 3) {
+        setShowTooltip(true)
+        setTimeout(() => setShowTooltip(false), 3000)
+        return 0
+      }
+
+      return newCount
+    })
+  }
+
+  // Función para manejar click en avatar
+  const handleAvatarClick = () => {
+    const newCount = avatarClickCount + 1
+    setAvatarClickCount(newCount)
+
+    if (newCount >= 10 && !showMusicTab) {
+      setShowMusicTab(true)
+      setShowTrophyToast(true)
+      setTimeout(() => {
+        setShowTrophyToast(false)
+      }, 5000)
+    }
+  }
+
+  // Modificar la función searchPosts para que funcione de manera consistente en todos los entornos
+  // Reemplazar la función searchPosts actual con esta versión mejorada:
+
+  // Función para navegar a un post específico
+
+  // Función para resaltar coincidencias de búsqueda
+
+  // Efecto para manejar click fuera de la búsqueda
+
+  // Añadir un nuevo efecto para manejar la navegación directa:
+
+  // Returns condicionales después de TODOS los hooks
+  // El spinner debe ser lo primero que se retorna
+  if (typeof window !== "undefined" && checkingVisibility) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-gray-800" style={{ width: 64, height: 64 }} />
+      </div>
+    )
+  }
+  if (maintenance) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+        <h1 className="text-3xl font-bold mb-4">Sitio en mantenimiento</h1>
+        <p className="text-lg text-gray-600">Estamos realizando tareas de mantenimiento. Por favor, vuelve más tarde.</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-[#F7F8FC]">
+      <Header className="bg-[#F7F8FC]">
+        <div className="flex items-center absolute left-4 md:left-[60px]">
+          {isAvatarInHeader && (
+            <Link
+              href="/"
+              className="h-[28px] w-[28px] overflow-hidden rounded-full transition-all duration-300 ease-in-out"
+            >
+              <img
+                src="https://assets.marioverdu.com/avatar/avatar-2.webp"
+                alt="Avatar"
+                width={28}
+                height={28}
+                className="h-full w-full object-cover"
+              />
+            </Link>
+          )}
+        </div>
+      </Header>
+
+      {/* Profile Card */}
+      <div className="relative h-[204px] w-full">
+        {/* Fondo sólido */}
+        <div className="absolute h-full w-full">
+          <div className="h-[204px] w-full"></div>
+        </div>
+
+        {/* Contenido del header */}
+        <div className="absolute left-1/2 -bottom-[120px] z-10 w-[300px] -translate-x-1/2 rounded-[10px] p-5 text-center">
+          <div
+            className={`relative mx-auto mb-[10px] h-[80px] w-[80px] overflow-hidden rounded-full transition-opacity duration-300 ${isAvatarInHeader ? "opacity-0" : "opacity-100"} cursor-pointer`}
+            onClick={(e) => {
+              handleAvatarClick()
+              handleTripleClick(e)
+            }}
+          >
+            <img
+              src="https://assets.marioverdu.com/avatar/avatar-2.webp"
+              alt="Avatar"
+              width={80}
+              height={80}
+              className="h-full w-full object-cover"
+            />
+            {showTooltip && !isAvatarInHeader && (
+              <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 px-4 py-2 rounded-lg shadow-lg text-sm font-medium z-10 whitespace-nowrap after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-t-white dark:after:border-t-gray-800">
+                ¡Hey!
+              </div>
+            )}
+          </div>
+
+          <h2 className="text-base font-medium text-[hsl(var(--color-text))]">Mario Verdú</h2>
+
+          <p className="line-clamp-2 text-sm font-normal text-gray-500 mb-6">Desarrollador UI</p>
+
+          <div className="flex justify-center">
+            <div className="w-full">
+              <div className="flex space-x-4 justify-center">
+                <button
+                  className={`text-[#333] ${selectedCategory === "posts" ? "" : "opacity-50"}`}
+                  onClick={() => setSelectedCategory("posts")}
+                >
+                  Posts
+                </button>
+                <button
+                  className={`text-[#333] ${selectedCategory === "portfolio" ? "" : "opacity-50"}`}
+                  onClick={() => setSelectedCategory("portfolio")}
+                >
+                  Portfolio
+                </button>
+                {!isProduction && (
+                  <button
+                    className={`text-[#333] ${selectedCategory === "examples" ? "" : "opacity-50"}`}
+                    onClick={() => setSelectedCategory("examples")}
+                  >
+                    Examples
+                  </button>
+                )}
+                {showMusicTab && (
+                  <button
+                    className={`text-[#333] ${selectedCategory === "music" ? "" : "opacity-50"}`}
+                    onClick={() => setSelectedCategory("music")}
+                  >
+                    Music
+                  </button>
+                )}
+                <button
+                  className={`text-[#333] ${selectedCategory === "about" ? "" : "opacity-50"}`}
+                  onClick={() => setSelectedCategory("about")}
+                >
+                  Sobre mi
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Posts section with adjusted margin to account for profile card */}
+      <div className="pt-[140px] pb-[72px] w-full px-4 sm:w-[83.33%] sm:px-0 max-w-[1000px] mx-auto flex flex-col items-center gap-6">
+        {isLoading ? (
+          <div
+            className="bg-white/30 backdrop-blur-md border border-gray-100 rounded-lg shadow-sm w-full md:w-[658px] xl:w-[800px] p-6 flex flex-col items-center justify-center"
+            style={{ borderBottom: "1px solid rgba(0, 94, 182, 0.1)" }}
+          >
+            <p className="text-gray-500">Cargando posts...</p>
+          </div>
+        ) : error && selectedCategory === "posts" && filteredPosts.length === 0 ? (
+          <div
+            className="bg-white/30 backdrop-blur-md border border-gray-100 rounded-lg shadow-sm w-full md:w-[658px] xl:w-[800px] p-6 flex flex-col items-center justify-center"
+            style={{ borderBottom: "1px solid rgba(0, 94, 182, 0.1)" }}
+          >
+            {!isProduction ? (
+              <>
+                <p className="text-blue-500 mb-2">Modo desarrollo: Usando posts de muestra</p>
+                <p className="text-gray-500 mb-4">
+                  En producción, esta página cargará posts desde la base de datos Neon.
+                </p>
+                <div className="flex space-x-4 mb-4">
+                  <button
+                    onClick={() => setPosts(samplePosts)}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+                  >
+                    Cargar posts de muestra
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="text-amber-600 mb-2">Aviso: {error}</p>
+                <p className="text-gray-500 mb-4">
+                  Se están mostrando posts de muestra mientras se resuelve el problema con la API.
+                </p>
+                <div className="mt-2 mb-4 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
+                  <p className="font-medium text-blue-800">Posibles soluciones:</p>
+                  <ul className="list-disc pl-5 mt-1 text-blue-700 space-y-1">
+                    <li>
+                      Verifica que existe el archivo <code>app/api/posts/route.ts</code>
+                    </li>
+                    <li>Asegúrate de que la API devuelve un objeto JSON válido</li>
+                    <li>Comprueba la conexión con la base de datos Neon</li>
+                  </ul>
+                </div>
+              </>
+            )}
+          </div>
+        ) : selectedCategory === "about" ? (
+          // Mostrar el post específico de About cuando se selecciona esa categoría
+          <div
+            key={aboutTabPost.id}
+            className="bg-white/30 backdrop-blur-md border border-gray-100 rounded-lg shadow-sm w-full md:w-[658px] xl:w-[800px] mb-8"
+            style={{ borderBottom: "1px solid rgba(0, 94, 182, 0.1)" }}
+          >
+            <article className="pt-6 px-4 pb-4 overflow-hidden">
+              <h2 className="text-xl text-left mb-2 font-['Arial_Medium',_Arial,_sans-serif] font-normal">
+                {aboutTabPost.title}
+              </h2>
+              {aboutTabPost.excerpt && <p className="text-gray-600 text-left mb-4">{aboutTabPost.excerpt}</p>}
+              <div className="my-4 prose max-w-none">
+                <div dangerouslySetInnerHTML={{ __html: aboutTabPost.content.replace(/\n/g, "<br />") }} />
+              </div>
+              <time
+                dateTime={aboutTabPost.created_at}
+                className="block text-sm text-gray-500 mt-4 underline decoration-gray-300"
+              >
+                {formatDate(aboutTabPost.created_at)}
+              </time>
+            </article>
+          </div>
+        ) : selectedCategory === "portfolio" ? (
+          // Mostrar el grid de cards del portfolio
+          <div className="w-full flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-11">
+              {portfolioItems.map((item) => (
+                <PortfolioCard
+                  key={item.id}
+                  title={item.title}
+                  description={item.description}
+                  imageUrl={item.imageUrl}
+                  link={item.link}
+                />
+              ))}
+            </div>
+          </div>
+        ) : filteredPosts.length === 0 ? (
+          <div
+            className="bg-white/30 backdrop-blur-md border border-gray-100 rounded-lg shadow-sm w-full md:w-[658px] xl:w-[800px] p-6 flex flex-col items-center justify-center"
+            style={{ borderBottom: "1px solid rgba(0, 94, 182, 0.1)" }}
+          >
+            <p className="text-gray-500">No hay posts disponibles.</p>
+          </div>
+        ) : (
+          filteredPosts.map((post) => (
+            <Link
+              href={`/posts/view/${post.id}`}
+              key={post.id}
+              className="bg-white/30 backdrop-blur-md border border-gray-100 rounded-lg shadow-sm w-full md:w-[658px] xl:w-[800px] mb-8 block hover:outline hover:outline-2 hover:outline-[#3D5B6A] hover:outline-offset-8 transition-all duration-300 ease-out"
+              style={{ borderBottom: "1px solid rgba(0, 94, 182, 0.1)" }}
+            >
+              <article className="pt-6 px-4 pb-6 overflow-hidden">
+                <h2 className="text-xl text-left mb-2 font-['Arial_Medium',_Arial,_sans-serif] font-normal">
+                  {post.title}
+                </h2>
+                {post.excerpt && <p className="text-gray-600 text-left mb-4">{post.excerpt}</p>}
+
+                {renderPostContent(post)}
+
+                <time
+                  dateTime={post.created_at}
+                  className="block text-sm text-gray-500 mt-4 underline decoration-gray-300"
+                >
+                  {formatDate(post.created_at)}
+                </time>
+              </article>
+            </Link>
+          ))
+        )}
+      </div>
+      {showTrophyToast && (
+        <div className="fixed bottom-4 right-4 z-50 bg-[rgba(30,30,30,0.9)] text-white border border-[rgba(255,255,255,0.2)] rounded-lg shadow-lg p-2 max-w-[350px] flex items-center gap-2 h-10 animate-in slide-in-from-bottom-5">
+          <div className="bg-yellow-500/20 p-1.5 rounded-full flex items-center justify-center">
+            <Trophy className="h-5 w-5 text-yellow-500" />
+          </div>
+          <div className="font-medium text-sm">¡Música desbloqueada!</div>
+        </div>
+      )}
+
+      {/* Chat Tuenti */}
+      {/* <ChatTuentiMaster buttonPosition="bottom-right" /> */}
+    </div>
+  )
+}
