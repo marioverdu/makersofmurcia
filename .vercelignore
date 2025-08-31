@@ -1,22 +1,30 @@
-# Storybook files
+# Storybook files (completely excluded)
 .storybook/
 stories/
 *.stories.tsx
 *.stories.ts
+*.stories.js
+*.stories.jsx
 
-# Development files
+# Development and backup files
 *.backup
 *.original
-*.test.js
-*.test.ts
+package-lock.json.backup
+app/admin/posts/page.tsx.backup
+app/home-page-client.tsx.backup
+app/posts/page.tsx.backup
+
+# Test and debug files
 scripts/test-*.js
 scripts/debug-*.js
+scripts/test-*.cjs
+scripts/debug-*.cjs
 
 # Package manager conflicts
 pnpm-lock.yaml
 yarn.lock
 
-# Documentation
+# Documentation (keep README.md)
 *.md
 !README.md
 
@@ -25,6 +33,9 @@ yarn.lock
 node_modules/
 .vercel/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Environment files (keep .env.example)
 .env.local
@@ -49,3 +60,12 @@ out/
 # Testing
 coverage/
 .nyc_output/
+__tests__/
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+
+# Temporary files
+.tmp/
+.temp/
