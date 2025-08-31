@@ -92,4 +92,4 @@ export const StateTransitions: Story = {
       </div>
     );
   },
-}; 
+};

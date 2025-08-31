@@ -3,10 +3,10 @@
 ## 📋 Problema
 
 Al desplegar en Vercel v0, Next.js muestra warnings como:
-```
+\`\`\`
 useSearchParams() should be wrapped in a suspense boundary
 usePathname() should be wrapped in a suspense boundary
-```
+\`\`\`
 
 ## ✅ Solución
 
@@ -15,7 +15,7 @@ Usar el componente `NavigationWrapper` para envolver componentes que usan hooks 
 ## 🔧 Uso
 
 ### Antes (causa warnings):
-```tsx
+\`\`\`tsx
 "use client"
 import { useSearchParams, usePathname } from "next/navigation"
 
@@ -25,10 +25,10 @@ export default function MyComponent() {
   
   return <div>...</div>
 }
-```
+\`\`\`
 
 ### Después (sin warnings):
-```tsx
+\`\`\`tsx
 "use client"
 import { useSearchParams, usePathname } from "next/navigation"
 import { NavigationWrapper } from "@/components/ui/navigation-wrapper"
@@ -47,7 +47,7 @@ export default function MyComponent() {
     </NavigationWrapper>
   )
 }
-```
+\`\`\`
 
 ## 📁 Archivos que ya usan NavigationWrapper
 
@@ -78,7 +78,7 @@ Para migrar un componente existente:
 2. Envolver el componente principal con `NavigationWrapper`
 3. Exportar el componente envuelto
 
-```tsx
+\`\`\`tsx
 // Paso 1: Crear componente interno
 function ComponentContent() {
   const searchParams = useSearchParams()
@@ -93,4 +93,4 @@ export default function Component() {
     </NavigationWrapper>
   )
 }
-```
+\`\`\`

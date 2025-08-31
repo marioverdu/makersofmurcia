@@ -74,4 +74,3 @@ export async function PUT(request: NextRequest) {
     } as ApiResponse, { status: 500 });
   }
 }
-

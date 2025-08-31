@@ -26,7 +26,7 @@ Se ha **restaurado completamente** la funcionalidad de edición en la página `/
 ## 🔧 **Componentes Creados/Restaurados**
 
 ### 1. **`components/editable-field.tsx`**
-```typescript
+\`\`\`typescript
 interface EditableFieldProps {
   value: string
   onSave: (value: string) => void
@@ -37,10 +37,10 @@ interface EditableFieldProps {
   placeholder?: string
   multiline?: boolean
 }
-```
+\`\`\`
 
 ### 2. **`hooks/use-admin-auth.ts`**
-```typescript
+\`\`\`typescript
 export function useAdminAuth() {
   // En desarrollo, siempre permitir acceso de admin
   if (process.env.NODE_ENV === 'development') {
@@ -48,10 +48,10 @@ export function useAdminAuth() {
   }
   // En producción, verificación real
 }
-```
+\`\`\`
 
 ### 3. **Datos Mock en `work-experience-client.tsx`**
-```typescript
+\`\`\`typescript
 const useWorkExperienceData = () => {
   const mockData = {
     aboutMe: { /* datos mock */ },
@@ -70,27 +70,27 @@ const useWorkExperienceData = () => {
     }
   }
 }
-```
+\`\`\`
 
 ## 🔄 **Flujo de Edición**
 
 ### 1. **Activación**
-```
+\`\`\`
 Usuario → ProfileCard → Menú Contextual (3 puntos) → "Editar contenido"
-```
+\`\`\`
 
 ### 2. **Evento Personalizado**
-```typescript
+\`\`\`typescript
 window.dispatchEvent(new CustomEvent("activateWorkExperienceEdit", {
   detail: { isEditing: true }
 }))
-```
+\`\`\`
 
 ### 3. **Activación Global**
-```typescript
+\`\`\`typescript
 // Todas las cards se vuelven editables simultáneamente
 setIsEditing(true)
-```
+\`\`\`
 
 ### 4. **Edición In-Situ**
 - Todos los campos de todas las cards se vuelven editables
@@ -128,14 +128,14 @@ setIsEditing(true)
 ## 🚀 **Cómo Probar**
 
 ### 1. **Ejecutar el servidor**
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ### 2. **Visitar página principal**
-```
+\`\`\`
 http://localhost:3000/work-experience
-```
+\`\`\`
 
 ### 3. **Probar la funcionalidad**
 1. Haz clic en los tres puntos junto al botón de contacto
@@ -146,9 +146,9 @@ http://localhost:3000/work-experience
 6. Verifica que aparece la alerta de confirmación
 
 ### 4. **Página de test**
-```
+\`\`\`
 http://localhost:3000/work-experience-test-simple
-```
+\`\`\`
 
 ## 📊 **Estado Actual**
 
@@ -182,4 +182,4 @@ La funcionalidad de edición está **completamente restaurada** y funciona perfe
 3. **Guardar cambios** con el botón "Guardar cambios" (azul, semibold)
 4. **Ver confirmaciones** de los cambios realizados
 
-La experiencia es **idéntica a producción** pero con datos simulados para facilitar el desarrollo y testing. 
+La experiencia es **idéntica a producción** pero con datos simulados para facilitar el desarrollo y testing.

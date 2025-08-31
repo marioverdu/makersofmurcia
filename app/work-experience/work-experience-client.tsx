@@ -977,4 +977,3 @@ export default function WorkExperienceClient({ lang = 'es', dict }: WorkExperien
     </>
   )
 }
-

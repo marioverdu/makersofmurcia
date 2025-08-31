@@ -24,12 +24,12 @@ Se ha implementado un sistema SEO completo para los posts que aprovecha **todas 
 
 ### **2. Sitemap Multiidioma**
 
-```typescript
+\`\`\`typescript
 // URLs generadas automáticamente:
 https://marioverdu.com/es/posts/view/1
 https://marioverdu.com/en/posts/view/1
 https://marioverdu.com/posts/view/1 (redirige a /es/)
-```
+\`\`\`
 
 - ✅ **URLs por cada idioma** soportado
 - ✅ **Prioridades SEO** optimizadas
@@ -39,7 +39,7 @@ https://marioverdu.com/posts/view/1 (redirige a /es/)
 ### **3. Datos Estructurados (Schema.org)**
 
 #### **BlogPosting Schema**
-```json
+\`\`\`json
 {
   "@type": "BlogPosting",
   "headline": "Título del Post",
@@ -52,10 +52,10 @@ https://marioverdu.com/posts/view/1 (redirige a /es/)
   "keywords": "tag1, tag2, tag3",
   "inLanguage": "es-ES"
 }
-```
+\`\`\`
 
 #### **Breadcrumbs Schema**
-```json
+\`\`\`json
 {
   "@type": "BreadcrumbList",
   "itemListElement": [
@@ -64,10 +64,10 @@ https://marioverdu.com/posts/view/1 (redirige a /es/)
     { "position": 3, "name": "Título del Post", "item": "https://marioverdu.com/es/posts/view/1" }
   ]
 }
-```
+\`\`\`
 
 #### **WebSite Schema con SearchAction**
-```json
+\`\`\`json
 {
   "@type": "WebSite",
   "potentialAction": {
@@ -75,27 +75,27 @@ https://marioverdu.com/posts/view/1 (redirige a /es/)
     "target": "https://marioverdu.com/search?q={search_term_string}"
   }
 }
-```
+\`\`\`
 
 ### **4. Content Enhancement para Fragmentos**
 
 #### **IDs Automáticos en Headings**
-```html
+\`\`\`html
 <!-- Antes -->
 <h2>Mi Título Importante</h2>
 
 <!-- Después -->
 <h2 id="mi-titulo-importante">Mi Título Importante</h2>
-```
+\`\`\`
 
 #### **Clases Semánticas**
-```html
+\`\`\`html
 <ol class="seo-ordered-list">
 <ul class="seo-unordered-list">
 <table class="seo-table" role="table">
 <blockquote class="seo-blockquote" role="blockquote">
 <p class="seo-important-paragraph">
-```
+\`\`\`
 
 #### **Estilos CSS Optimizados**
 - ✅ **Anchor links** en headings con `scroll-mt-20`
@@ -105,7 +105,7 @@ https://marioverdu.com/posts/view/1 (redirige a /es/)
 
 ### **5. Robots.txt Optimizado**
 
-```txt
+\`\`\`txt
 User-agent: *
 Allow: /
 Disallow: /admin/
@@ -121,7 +121,7 @@ User-agent: ChatGPT-User
 Disallow: /
 
 Sitemap: https://marioverdu.com/sitemap.xml
-```
+\`\`\`
 
 ## 🎯 **Fragmentos Optimizados para Google**
 
@@ -195,10 +195,10 @@ Sitemap: https://marioverdu.com/sitemap.xml
 ## 🚀 **Cómo Probar la Implementación**
 
 ### **1. Verificar Metadata**
-```bash
+\`\`\`bash
 curl -I https://marioverdu.com/es/posts/view/1
 # Verificar headers: canonical, hreflang, og:type=article
-```
+\`\`\`
 
 ### **2. Verificar Schema.org**
 - Abrir **Google Rich Results Test**: https://search.google.com/test/rich-results
@@ -206,16 +206,16 @@ curl -I https://marioverdu.com/es/posts/view/1
 - Verificar: **Article**, **Breadcrumb**, **WebSite** schemas
 
 ### **3. Verificar Sitemap**
-```bash
+\`\`\`bash
 curl https://marioverdu.com/sitemap.xml
 # Verificar URLs por idioma y fechas de modificación
-```
+\`\`\`
 
 ### **4. Verificar Robots.txt**
-```bash
+\`\`\`bash
 curl https://marioverdu.com/robots.txt
 # Verificar reglas y sitemap URL
-```
+\`\`\`
 
 ### **5. Verificar Fragmentos**
 - Abrir cualquier post en el navegador

@@ -58,7 +58,7 @@ Implementar el modo de edición funcional para la página `/work-experience` que
 - `PUT /api/work-experience/update` - Guardar cambios en cards
 
 ### Estados Principales
-```typescript
+\`\`\`typescript
 // Estados de datos
 const [workExperienceData, setWorkExperienceData] = useState<WorkExperienceData>({...})
 const [dataLoading, setDataLoading] = useState(true)
@@ -67,7 +67,7 @@ const [dataError, setDataError] = useState<string | null>(null)
 // Estados de edición
 const [isEditing, setIsEditing] = useState(false)
 const [isSaving, setIsSaving] = useState(false)
-```
+\`\`\`
 
 ## 🎨 Interfaz de Usuario
 

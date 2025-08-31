@@ -126,5 +126,3 @@ export const AdminPosts: Story = {
   name: '/admin/posts',
   args: { path: '/admin/posts' },
 };
-
-

@@ -73,7 +73,7 @@ Se ha clonado exitosamente la página `/work-experience` del proyecto origen (`/
 
 ## 🎯 **ESTRUCTURA DE LA PÁGINA**
 
-```
+\`\`\`
 /work-experience-fix
 ├── Header transparente con avatar dinámico
 ├── Sección de perfil (móvil/escritorio)
@@ -83,7 +83,7 @@ Se ha clonado exitosamente la página `/work-experience` del proyecto origen (`/
 │   └── Educación - Timeline de estudios
 ├── Footer
 └── Chat Tuenti integrado
-```
+\`\`\`
 
 ---
 
@@ -153,4 +153,3 @@ Se ha clonado exitosamente la página `/work-experience` del proyecto origen (`/
 La página `/work-experience-fix` ha sido implementada exitosamente como una copia exacta del proyecto origen, manteniendo toda la funcionalidad, diseño y características originales. La página está completamente funcional y lista para ser utilizada.
 
 **Estado:** ✅ **COMPLETADO Y FUNCIONANDO**
-

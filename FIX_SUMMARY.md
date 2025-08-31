@@ -15,7 +15,7 @@
 ## 🔧 **Fixes Implementados**
 
 ### **1. Actualización de la Página Principal**
-```typescript
+\`\`\`typescript
 // app/work-experience/page.tsx
 import WorkExperienceClientNew from "./work-experience-client-new"
 
@@ -26,7 +26,7 @@ export default function WorkExperiencePage() {
     </>
   )
 }
-```
+\`\`\`
 
 ### **2. Mejora del Hook useWorkExperience**
 - ✅ **Logging mejorado** para debugging
@@ -47,7 +47,7 @@ export default function WorkExperiencePage() {
 ## 🎯 **Flujo de Guardado Corregido**
 
 ### **1. Usuario Edita Campo**
-```
+\`\`\`
 Usuario → Hace clic en campo editable
 ↓
 Campo se convierte en input con borde azul
@@ -55,10 +55,10 @@ Campo se convierte en input con borde azul
 Usuario edita el contenido
 ↓
 Campo se marca como "con cambios" (azul)
-```
+\`\`\`
 
 ### **2. Usuario Guarda Cambios**
-```
+\`\`\`
 Usuario → Hace clic en "Guardar cambios"
 ↓
 Sistema valida los cambios
@@ -70,14 +70,14 @@ Se actualiza la base de datos Neon
 Se recarga el estado local
 ↓
 Se muestra confirmación
-```
+\`\`\`
 
 ## 🚀 **Cómo Probar el Sistema**
 
 ### **1. Acceso**
-```
+\`\`\`
 http://localhost:3000/work-experience
-```
+\`\`\`
 
 ### **2. Activación de Edición**
 1. Hacer clic en los tres puntos del ProfileCard
@@ -161,4 +161,3 @@ http://localhost:3000/work-experience
 5. **Backup** - Sistema de backup automático
 
 El sistema implementa todas las **best practices** de Next.js y proporciona una **experiencia de usuario excepcional** para la edición inline de contenido.
-

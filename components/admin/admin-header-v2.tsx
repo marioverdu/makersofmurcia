@@ -119,5 +119,3 @@ export function AdminHeaderV2({ hideAvatar = false }: { hideAvatar?: boolean }) 
 }
 
 export default AdminHeaderV2
-
-

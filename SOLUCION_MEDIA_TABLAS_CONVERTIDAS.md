@@ -17,7 +17,7 @@
 ## 🔍 **ANÁLISIS DEL PROBLEMA:**
 
 ### **✅ FUNCIONES JAVASCRIPT DISPONIBLES:**
-```typescript
+\`\`\`typescript
 // Las funciones están expuestas correctamente en el contexto global
 React.useEffect(() => {
   window.showMediaButton = showMediaButton
@@ -26,7 +26,7 @@ React.useEffect(() => {
   window.adjustCellHeight = adjustCellHeight
   // ... más funciones
 }, [])
-```
+\`\`\`
 
 ### **❌ PROBLEMA EN TABLAS CONVERTIDAS:**
 - **HTML generado** incluye los event listeners correctos
@@ -39,7 +39,7 @@ React.useEffect(() => {
 ## 🛠️ **SOLUCIÓN IMPLEMENTADA:**
 
 ### **✅ RE-APLICACIÓN DE EVENT LISTENERS:**
-```typescript
+\`\`\`typescript
 // 🆕 ASEGURAR QUE LAS FUNCIONES DE MEDIA ESTÉN DISPONIBLES
 // Buscar todas las celdas de la tabla insertada y asegurar que tengan acceso a las funciones
 const insertedTable = fragment.querySelector('.table-container')
@@ -78,7 +78,7 @@ if (insertedTable) {
     }
   })
 }
-```
+\`\`\`
 
 ---
 
@@ -137,26 +137,26 @@ if (insertedTable) {
 ## 🧪 **CASOS DE PRUEBA:**
 
 ### **✅ TABLA MARKDOWN CONVERTIDA:**
-```
+\`\`\`
 | Modelo | Contraste | Lúmenes | Precio | Notas |
 |--------|-----------|---------|---------|-------|
 | BenQ   | 320:1     | 3000    | $1,299 | DLP   |
-```
+\`\`\`
 
 **Resultado**: ✅ **Botón `+` funciona, modal de media funciona, inserción de imágenes funciona**
 
 ### **✅ TABLA TSV CONVERTIDA:**
-```
+\`\`\`
 Modelo	Contraste	Lúmenes	Precio
 BenQ	320:1	3000	$1,299
-```
+\`\`\`
 
 **Resultado**: ✅ **Botón `+` funciona, modal de media funciona, inserción de imágenes funciona**
 
 ### **✅ TABLA HTML CONVERTIDA:**
-```html
+\`\`\`html
 <table><tr><td>Modelo</td><td>Contraste</td></tr></table>
-```
+\`\`\`
 
 **Resultado**: ✅ **Botón `+` funciona, modal de media funciona, inserción de imágenes funciona**
 

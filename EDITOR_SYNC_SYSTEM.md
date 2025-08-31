@@ -20,7 +20,7 @@ El sistema de sincronización del editor garantiza que el contenido mostrado en 
 
 ### 1. Carga Correcta de Datos
 
-```typescript
+\`\`\`typescript
 const openEditModal = (post: Post) => {
   // Cargar datos bilingües desde la base de datos
   setEditContentEs(post.content_es || post.content || '')
@@ -38,11 +38,11 @@ const openEditModal = (post: Post) => {
     initialContent: initialContent.substring(0, 100) + '...'
   })
 }
-```
+\`\`\`
 
 ### 2. Sincronización Automática del Editor
 
-```typescript
+\`\`\`typescript
 useEffect(() => {
   if (isEditModalOpen && contentRef.current && editContent !== undefined) {
     // Solo actualizar si el contenido es diferente para evitar loops
@@ -52,11 +52,11 @@ useEffect(() => {
     }
   }
 }, [editContent, isEditModalOpen])
-```
+\`\`\`
 
 ### 3. Cambio de Tabs Sincronizado
 
-```typescript
+\`\`\`typescript
 const switchLanguageTab = async (newLang: 'es' | 'en') => {
   // Guardar contenido actual antes de cambiar
   const currentContent = contentRef.current.innerHTML
@@ -80,45 +80,45 @@ const switchLanguageTab = async (newLang: 'es' | 'en') => {
     }
   }
 }
-```
+\`\`\`
 
 ### 4. Recarga Automática Post-Guardado
 
-```typescript
+\`\`\`typescript
 if (response.ok) {
   // Recargar posts para asegurar sincronización
   await fetchPosts()
   closeEditModal()
   console.log('✅ [Editor] Post guardado y posts recargados')
 }
-```
+\`\`\`
 
 ## 🔄 Flujo de Sincronización
 
 ### 1. **Apertura del Modal**
-```
+\`\`\`
 Usuario hace clic en "Editar" → openEditModal() → Carga datos de BD → setEditContent() → useEffect sincroniza editor
-```
+\`\`\`
 
 ### 2. **Edición de Contenido**
-```
+\`\`\`
 Usuario edita → contentRef.current.innerHTML cambia → Estado se mantiene sincronizado
-```
+\`\`\`
 
 ### 3. **Cambio de Tab**
-```
+\`\`\`
 Usuario cambia tab → Guarda contenido actual → Carga contenido de nueva tab → Sincroniza editor
-```
+\`\`\`
 
 ### 4. **Guardado**
-```
+\`\`\`
 Usuario guarda → Guarda en BD → Recarga posts → Cierra modal → Datos sincronizados
-```
+\`\`\`
 
 ### 5. **Reapertura**
-```
+\`\`\`
 Usuario reabre → Carga datos actualizados de BD → Contenido idéntico al guardado
-```
+\`\`\`
 
 ## 🛡️ Garantías del Sistema
 
@@ -146,11 +146,11 @@ Usuario reabre → Carga datos actualizados de BD → Contenido idéntico al gua
 
 El sistema genera logs detallados para monitoreo:
 
-```
+\`\`\`
 📝 [Editor] Modal abierto con contenido: {postId: "123", contentEs: "...", contentEn: "...", content: "...", initialContent: "..."}
 🔄 [Editor] Contenido sincronizado: <p>Contenido del post...</p>
 ✅ [Editor] Post guardado y posts recargados
-```
+\`\`\`
 
 ## 🧪 Testing
 
@@ -176,12 +176,12 @@ El sistema genera logs detallados para monitoreo:
 
 ### Verificar Logs
 
-```bash
+\`\`\`bash
 # En la consola del navegador
 📝 [Editor] Modal abierto con contenido: {...}
 🔄 [Editor] Contenido sincronizado: ...
 ✅ [Editor] Post guardado y posts recargados
-```
+\`\`\`
 
 ## 🚀 Beneficios
 

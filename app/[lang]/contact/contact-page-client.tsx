@@ -69,4 +69,3 @@ export default function ContactPageClient({ lang, dict }: ContactPageClientProps
     </div>
   )
 }
-

@@ -49,4 +49,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { setupWorkExperienceDatabase }; 
+module.exports = { setupWorkExperienceDatabase };

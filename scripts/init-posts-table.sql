@@ -57,4 +57,4 @@ VALUES
     ('E-commerce', 'ecommerce'),
     ('Conversión', 'conversion'),
     ('Optimización', 'optimizacion')
-ON CONFLICT (slug) DO NOTHING; 
+ON CONFLICT (slug) DO NOTHING;

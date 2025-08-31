@@ -117,4 +117,4 @@ export const AllSizes: Story = {
       <Button size="icon">🔍</Button>
     </div>
   ),
-}; 
+};

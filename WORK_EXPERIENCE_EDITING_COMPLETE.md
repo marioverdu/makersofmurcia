@@ -71,19 +71,19 @@
 ## 🎨 **Estilos de Edición**
 
 ### **Campos de Texto**
-```css
+\`\`\`css
 bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none px-1
-```
+\`\`\`
 
 ### **Textareas**
-```css
+\`\`\`css
 bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none px-1 w-full resize-none
-```
+\`\`\`
 
 ### **Botón "Guardar cambios"**
-```css
+\`\`\`css
 text-xs font-semibold color: #3B82F6
-```
+\`\`\`
 
 ## 🚀 **Flujo de Uso**
 
@@ -113,4 +113,4 @@ text-xs font-semibold color: #3B82F6
 ✅ **Interfaz sin cambios visuales**
 ✅ **Funcionalidad completa de edición**
 
-La funcionalidad de edición está **completamente implementada** y lista para uso en producción. 
+La funcionalidad de edición está **completamente implementada** y lista para uso en producción.

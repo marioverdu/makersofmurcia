@@ -20,7 +20,7 @@
 ## ⚙️ Configuración Requerida
 
 ### Variables de Entorno
-```bash
+\`\`\`bash
 # NextAuth Configuration
 NEXTAUTH_URL=https://marioverdu.com
 NEXTAUTH_SECRET=your-secret-key-here
@@ -31,7 +31,7 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 
 # Admin Configuration
 ADMIN_EMAIL=marioverdugambin@gmail.com
-```
+\`\`\`
 
 ### Configuración en Vercel
 1. Ir al dashboard de Vercel

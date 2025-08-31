@@ -7,7 +7,7 @@ Sistema de edición inline robusto para cards de experiencia laboral, educación
 ## 🏗️ **Arquitectura del Sistema**
 
 ### **1. Tipos TypeScript (`types/work-experience.ts`)**
-```typescript
+\`\`\`typescript
 // Tipos base para todas las cards
 export interface BaseCard {
   id: number;
@@ -41,7 +41,7 @@ export interface EditableField {
 export interface CardEditState {
   [key: string]: EditableField;
 }
-```
+\`\`\`
 
 ### **2. Hook Personalizado (`hooks/use-work-experience.ts`)**
 - ✅ **Estado centralizado** para todos los datos
@@ -83,7 +83,7 @@ export interface CardEditState {
 ## 🚀 **Flujo de Uso**
 
 ### **1. Carga de Datos**
-```
+\`\`\`
 Usuario visita /work-experience
 ↓
 Sistema carga datos desde Neon PostgreSQL
@@ -91,10 +91,10 @@ Sistema carga datos desde Neon PostgreSQL
 Se inicializa el estado de edición
 ↓
 Se muestra la página con las cards
-```
+\`\`\`
 
 ### **2. Activación de Edición**
-```
+\`\`\`
 Usuario → ProfileCard → Menú contextual (3 puntos) → "Editar contenido"
 ↓
 Sistema activa modo de edición global
@@ -102,10 +102,10 @@ Sistema activa modo de edición global
 Todas las cards se expanden automáticamente
 ↓
 Los campos se vuelven editables
-```
+\`\`\`
 
 ### **3. Edición de Contenido**
-```
+\`\`\`
 Usuario → Hace clic en campo editable
 ↓
 Campo se convierte en input con borde azul
@@ -113,10 +113,10 @@ Campo se convierte en input con borde azul
 Usuario edita el contenido
 ↓
 Campo se marca como "con cambios" (azul)
-```
+\`\`\`
 
 ### **4. Guardado**
-```
+\`\`\`
 Usuario → Hace clic en "Guardar cambios" o pierde el foco
 ↓
 Sistema valida los cambios
@@ -128,12 +128,12 @@ Se actualiza la base de datos Neon
 Se recarga el estado local
 ↓
 Se muestra confirmación
-```
+\`\`\`
 
 ## 🔧 **Componentes Principales**
 
 ### **1. `EditableField`**
-```typescript
+\`\`\`typescript
 interface EditableFieldProps {
   value: string;
   isEditing: boolean;
@@ -147,7 +147,7 @@ interface EditableFieldProps {
   rows?: number;
   maxLength?: number;
 }
-```
+\`\`\`
 
 **Características:**
 - ✅ **Auto-focus** al iniciar edición
@@ -157,7 +157,7 @@ interface EditableFieldProps {
 - ✅ **Soporte multilinea** para textareas
 
 ### **2. `WorkExperienceCard`**
-```typescript
+\`\`\`typescript
 interface WorkExperienceCardProps {
   card: WorkExperienceCard;
   index: number;
@@ -168,7 +168,7 @@ interface WorkExperienceCardProps {
   onSave: () => Promise<boolean>;
   onCancel: () => void;
 }
-```
+\`\`\`
 
 **Características:**
 - ✅ **Timeline divider** con posicionamiento dinámico
@@ -178,7 +178,7 @@ interface WorkExperienceCardProps {
 - ✅ **Estados de loading** individuales
 
 ### **3. `useWorkExperience` Hook**
-```typescript
+\`\`\`typescript
 interface UseWorkExperienceReturn {
   data: WorkExperienceData | null;
   loading: boolean;
@@ -192,7 +192,7 @@ interface UseWorkExperienceReturn {
   hasUnsavedChanges: boolean;
   refetch: () => Promise<void>;
 }
-```
+\`\`\`
 
 **Características:**
 - ✅ **Estado centralizado** para todos los datos
@@ -247,15 +247,15 @@ interface UseWorkExperienceReturn {
 ## 🚀 **Cómo Usar**
 
 ### **1. Instalación**
-```bash
+\`\`\`bash
 # El sistema ya está implementado
 npm run dev
-```
+\`\`\`
 
 ### **2. Acceso**
-```
+\`\`\`
 http://localhost:3000/work-experience
-```
+\`\`\`
 
 ### **3. Edición**
 1. Hacer clic en los tres puntos del ProfileCard
@@ -280,4 +280,3 @@ http://localhost:3000/work-experience
 3. **Features** - Añadir drag & drop para reordenar cards
 4. **Analytics** - Implementar tracking de cambios
 5. **Backup** - Sistema de backup automático
-

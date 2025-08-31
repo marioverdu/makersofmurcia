@@ -15,16 +15,16 @@
 ## 🔍 **ANÁLISIS DEL PROBLEMA:**
 
 ### **✅ EN EL EDITOR ADMIN (`/admin/posts`):**
-```html
+\`\`\`html
 <!-- Botones de eliminación SÍ deben aparecer -->
 <button class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600">×</button>
-```
+\`\`\`
 
 ### **❌ EN LA VISTA PÚBLICA (`/es/posts/view/20`):**
-```html
+\`\`\`html
 <!-- Botones de eliminación NO deben aparecer -->
 <button class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600">×</button>
-```
+\`\`\`
 
 ### **🔍 CAUSA RAÍZ:**
 - **HTML generado** en el editor incluye botones de eliminación
@@ -40,7 +40,7 @@
 
 **Archivo**: `lib/advanced-table/sanitize.ts`
 
-```typescript
+\`\`\`typescript
 export function sanitizeAdvancedTableHTML(rawHtml: string): string {
   if (!rawHtml) return rawHtml
 
@@ -68,13 +68,13 @@ export function sanitizeAdvancedTableHTML(rawHtml: string): string {
 
   return html
 }
-```
+\`\`\`
 
 ### **✅ PASO 2: VERIFICAR INTEGRACIÓN**
 
 **Componente**: `components/advanced-table-v2/AdvancedTableV2View.tsx`
 
-```typescript
+\`\`\`typescript
 // Procesar contenido: solo sanitizar para vista pública
 const processedContent = sanitizeAdvancedTableHTML(content)
 
@@ -87,7 +87,7 @@ return (
     <ContextualScrollbar {...scrollbarData} />
   </div>
 )
-```
+\`\`\`
 
 ### **✅ PASO 3: VERIFICAR USO EN VISTAS PÚBLICAS**
 
@@ -101,7 +101,7 @@ return (
 ## 🧪 **VERIFICACIÓN DE LA SOLUCIÓN:**
 
 ### **✅ TEST AUTOMATIZADO:**
-```javascript
+\`\`\`javascript
 // HTML de prueba con botones de eliminación
 const testHTML = `
 <div class="relative inline-block max-w-full">
@@ -116,14 +116,14 @@ const sanitizedHTML = sanitizeAdvancedTableHTML(testHTML)
 // ✅ Event handlers eliminados: true
 // ✅ contenteditable eliminado: true
 // ✅ data-cell-id eliminado: true
-```
+\`\`\`
 
 ### **✅ VERIFICACIÓN EN PRODUCCIÓN:**
-```bash
+\`\`\`bash
 # Verificar que no hay botones de eliminación en vistas públicas
 curl -s http://localhost:3000/es/posts/view/20 | grep -i "bg-red-500\|×"
 # ✅ No se encontraron botones de eliminación
-```
+\`\`\`
 
 ---
 
@@ -149,7 +149,7 @@ curl -s http://localhost:3000/es/posts/view/20 | grep -i "bg-red-500\|×"
 ## 🔧 **ARQUITECTURA TÉCNICA:**
 
 ### **✅ FLUJO DE SANITIZACIÓN:**
-```
+\`\`\`
 1. HTML del Editor (con botones de eliminación)
    ↓
 2. sanitizeAdvancedTableHTML()
@@ -159,7 +159,7 @@ curl -s http://localhost:3000/es/posts/view/20 | grep -i "bg-red-500\|×"
 4. AdvancedTableV2View.render()
    ↓
 5. Vista Pública (solo lectura)
-```
+\`\`\`
 
 ### **✅ COMPONENTES AFECTADOS:**
 - **`lib/advanced-table/sanitize.ts`** - Función de sanitización actualizada
@@ -201,4 +201,3 @@ curl -s http://localhost:3000/es/posts/view/20 | grep -i "bg-red-500\|×"
 ## 🚀 **CONCLUSIÓN:**
 
 La solución implementada **elimina completamente** los botones de eliminación de las tablas AdvancedTableV2 en las vistas públicas de posts, manteniendo la funcionalidad completa en los modales de edición admin. Esto asegura una **experiencia de usuario consistente** y **segura** para ambos contextos.
-

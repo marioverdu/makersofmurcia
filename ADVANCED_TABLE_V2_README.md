@@ -14,9 +14,9 @@ Se ha implementado **"Tabla Avanzada v2"** con un enfoque **mucho más robusto y
 - **Archivo de índice**: `components/advanced-table-v2/index.ts`
 
 ### ✅ **2. DEPENDENCIAS INSTALADAS:**
-```bash
+\`\`\`bash
 npm install @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header @tiptap/react @tiptap/starter-kit
-```
+\`\`\`
 
 ### ✅ **3. INTEGRACIÓN EN EDITOR:**
 - **Botón "Tabla Avanzada v2"** en ambos modales (edición y creación)
@@ -61,7 +61,7 @@ npm install @tiptap/extension-table @tiptap/extension-table-row @tiptap/extensio
 7. **Se muestra notificación** de conversión exitosa
 
 ### ✅ **ESTRUCTURA GENERADA:**
-```html
+\`\`\`html
 <div class="advanced-table-v2-container my-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
   <div class="text-sm text-gray-600 mb-2">📊 Tabla Avanzada v2</div>
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
@@ -80,44 +80,44 @@ npm install @tiptap/extension-table @tiptap/extension-table-row @tiptap/extensio
   </table>
   <div class="text-xs text-gray-500 mt-2">💡 Haz clic en las celdas para editar el contenido</div>
 </div>
-```
+\`\`\`
 
 ---
 
 ## 🚫 **DESINSTALACIÓN COMPLETA**
 
 ### ✅ **PASO 1: REMOVER DEPENDENCIAS**
-```bash
+\`\`\`bash
 npm uninstall @tiptap/extension-table @tiptap/extension-table-row @tiptap/extension-table-cell @tiptap/extension-table-header @tiptap/react @tiptap/starter-kit
-```
+\`\`\`
 
 ### ✅ **PASO 2: ELIMINAR ARCHIVOS**
-```bash
+\`\`\`bash
 rm -rf components/advanced-table-v2/
 rm hooks/use-advanced-table-v2.ts
-```
+\`\`\`
 
 ### ✅ **PASO 3: REMOVER IMPORTS**
-```typescript
+\`\`\`typescript
 // En app/admin/posts/page.tsx, eliminar:
 import { Table2 } from 'lucide-react'
-```
+\`\`\`
 
 ### ✅ **PASO 4: ELIMINAR FUNCIONES**
-```typescript
+\`\`\`typescript
 // En app/admin/posts/page.tsx, eliminar:
 const insertAdvancedTableV2 = () => { ... }
 const insertAdvancedTableV2New = () => { ... }
-```
+\`\`\`
 
 ### ✅ **PASO 5: REMOVER BOTONES**
-```typescript
+\`\`\`typescript
 // En ambos modales, eliminar:
 <Button onClick={insertAdvancedTableV2}>
   <Table2 className="w-4 h-4" />
   Tabla Avanzada v2
 </Button>
-```
+\`\`\`
 
 ---
 

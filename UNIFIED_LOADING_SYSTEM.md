@@ -14,7 +14,7 @@ El sistema de loading ha sido completamente unificado en un solo componente: **U
 - **Material-UI**: CircularProgress oficial de Google
 
 ### **🔄 Componente Principal**
-```tsx
+\`\`\`tsx
 import { UnifiedLoading } from '@/components/ui/unified-loading';
 
 // Uso básico (32px, color accent)
@@ -22,7 +22,7 @@ import { UnifiedLoading } from '@/components/ui/unified-loading';
 
 // Personalización
 <UnifiedLoading size={48} color="#ef4444" />
-```
+\`\`\`
 
 ## 🗂️ Estructura del Sistema
 
@@ -85,7 +85,7 @@ import { UnifiedLoading } from '@/components/ui/unified-loading';
 ## 💡 Casos de Uso
 
 ### **🛡️ Admin System**
-```tsx
+\`\`\`tsx
 // Loading base para admin
 <UnifiedLoading />
 
@@ -94,10 +94,10 @@ import { UnifiedLoading } from '@/components/ui/unified-loading';
 
 // Loading de layout
 <UnifiedLoading />
-```
+\`\`\`
 
 ### **📄 Page Loading (Next.js)**
-```tsx
+\`\`\`tsx
 // En archivos loading.tsx
 export default function PageLoading() {
   return (
@@ -106,17 +106,17 @@ export default function PageLoading() {
     </div>
   );
 }
-```
+\`\`\`
 
 ### **📝 Component States**
-```tsx
+\`\`\`tsx
 // Estados de loading en componentes
 {isLoading && (
   <div className="flex items-center justify-center min-h-[200px]">
     <UnifiedLoading />
   </div>
 )}
-```
+\`\`\`
 
 ## 🔧 Personalización
 
@@ -181,5 +181,3 @@ El sistema de loading ha sido completamente unificado y migrado. Ahora toda la a
 - ✅ **Componente único** para toda la aplicación
 
 El sistema está listo y funcionando correctamente. Para cualquier nuevo loading en el futuro, usar siempre `UnifiedLoading`.
-
-

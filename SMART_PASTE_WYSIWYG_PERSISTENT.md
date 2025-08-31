@@ -1,5 +1,5 @@
 ### **Diálogo de Imágenes Fallidas (Diseño ConfirmableModal):**
-```html
+\`\`\`html
 <div class="fixed inset-0 z-[1000] flex items-center justify-center" aria-modal="true" role="dialog">
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/30"></div>
@@ -20,4 +20,4 @@
     </div>
   </div>
 </div>
-```
+\`\`\`

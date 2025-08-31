@@ -30,7 +30,7 @@ He implementado un **sistema de detección de idioma en 3 niveles**:
 ## 🎯 **Cómo Funciona Ahora**
 
 ### **Primera Visita (Sin Cookies):**
-```
+\`\`\`
 Usuario accede a: http://localhost:3000/
 ↓
 Middleware detecta: NO hay cookies, NO hay Accept-Language
@@ -38,10 +38,10 @@ Middleware detecta: NO hay cookies, NO hay Accept-Language
 Usa idioma por defecto: español
 ↓
 Redirige a: /es/
-```
+\`\`\`
 
 ### **Después de Cambiar Idioma:**
-```
+\`\`\`
 Usuario hace clic en: 🇺🇸 English
 ↓
 Se guarda cookie: locale=en
@@ -51,21 +51,21 @@ Usuario accede a: http://localhost:3000/
 Middleware detecta: cookie locale=en
 ↓
 Redirige a: /en/
-```
+\`\`\`
 
 ### **Siguientes Visitas:**
-```
+\`\`\`
 Usuario accede a: http://localhost:3000/
 ↓
 Middleware detecta: cookie locale=en
 ↓
 Redirige a: /en/
-```
+\`\`\`
 
 ## 🧪 **Pruebas para Verificar**
 
 ### **1. Probar con Curl (Siempre Funciona):**
-```bash
+\`\`\`bash
 # Español
 curl -H "Accept-Language: es-ES,es;q=0.9" http://localhost:3000/
 # Resultado: 307 Redirect → /es/
@@ -73,10 +73,10 @@ curl -H "Accept-Language: es-ES,es;q=0.9" http://localhost:3000/
 # Inglés
 curl -H "Accept-Language: en-US,en;q=0.9" http://localhost:3000/
 # Resultado: 307 Redirect → /en/
-```
+\`\`\`
 
 ### **2. Probar con DuckDuckGo:**
-```
+\`\`\`
 1. Abrir DuckDuckGo
 2. Ir a: http://localhost:3000/
 3. Debería redirigir a: /es/ (idioma por defecto)
@@ -84,28 +84,28 @@ curl -H "Accept-Language: en-US,en;q=0.9" http://localhost:3000/
 5. Debería cambiar a: /en/
 6. Recargar la página
 7. Debería mantener: /en/ (por la cookie)
-```
+\`\`\`
 
 ### **3. Verificar Cookies:**
-```
+\`\`\`
 1. Abrir DevTools (F12)
 2. Ir a: Application/Storage → Cookies
 3. Buscar: localhost:3000
 4. Debería ver: locale=en o locale=es
-```
+\`\`\`
 
 ## 🔍 **Logs de Debugging**
 
 En desarrollo, el middleware muestra logs detallados:
 
-```
+\`\`\`
 🔍 [Middleware] Accept-Language header: NO ENVIADO
 🔍 [Middleware] User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
 🔍 [Middleware] Host: localhost:3000
 🔍 [Middleware] Cookies: locale=en
 🌍 [Middleware] Idioma detectado desde cookies: en
 🌍 [Middleware DEV] Redirecting / to /en/ (browser language detected)
-```
+\`\`\`
 
 ## 🎉 **Resultado Final**
 
@@ -127,9 +127,9 @@ En desarrollo, el middleware muestra logs detallados:
 ## 🚀 **Para Probar Ahora:**
 
 ### **1. Reinicia el servidor:**
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ### **2. Ve a DuckDuckGo:**
 - Accede a: `http://localhost:3000/`
@@ -151,4 +151,3 @@ npm run dev
 - ✅ **Chrome, Firefox, Safari** (Accept-Language)
 - ✅ **DuckDuckGo** (Cookies)
 - ✅ **Cualquier navegador** (Múltiples fallbacks)
-

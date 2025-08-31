@@ -8,4 +8,4 @@ export default function NotionDatabaseTestLayout({
       {children}
     </div>
   )
-} 
+}

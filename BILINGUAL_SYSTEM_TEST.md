@@ -17,7 +17,7 @@
 ## 🧪 **Cómo Probar el Sistema**
 
 ### **1. Verificar APIs:**
-```bash
+\`\`\`bash
 # Post en español
 curl "http://localhost:3000/api/posts/18?lang=es" | jq '.title'
 # Debería mostrar: "prueba de imagenes incrustadas en tabla"
@@ -25,7 +25,7 @@ curl "http://localhost:3000/api/posts/18?lang=es" | jq '.title'
 # Post en inglés
 curl "http://localhost:3000/api/posts/18?lang=en" | jq '.title'
 # Debería mostrar: "Embedded Images in Table Test"
-```
+\`\`\`
 
 ### **2. Probar Panel de Administración:**
 1. Ve a `http://localhost:3000/admin/posts`
@@ -41,7 +41,7 @@ curl "http://localhost:3000/api/posts/18?lang=en" | jq '.title'
 7. Los cambios se guardan independientemente por idioma
 
 ### **3. Verificar Vista de Posts:**
-```
+\`\`\`
 http://localhost:3000/es/posts/view/18
 → Título: "prueba de imagenes incrustadas en tabla"
 → Contenido en español
@@ -49,16 +49,16 @@ http://localhost:3000/es/posts/view/18
 http://localhost:3000/en/posts/view/18
 → Título: "Embedded Images in Table Test"
 → Contenido en inglés
-```
+\`\`\`
 
 ### **4. Verificar Lista de Posts:**
-```
+\`\`\`
 http://localhost:3000/es/posts
 → Todos los posts con títulos en español
 
 http://localhost:3000/en/posts
 → Posts con traducciones en inglés, fallback español para los demás
-```
+\`\`\`
 
 ## 🎯 **Funcionalidades Implementadas**
 
@@ -98,13 +98,13 @@ http://localhost:3000/en/posts
 5. Guarda los cambios
 
 ### **Opción B: Directamente en Base de Datos**
-```sql
+\`\`\`sql
 UPDATE posts SET 
   title_en = 'Your English Title',
   content_en = '<p>Your English content...</p>',
   excerpt_en = 'Your English excerpt'
 WHERE id = [POST_ID];
-```
+\`\`\`
 
 ## 🔧 **Características Técnicas**
 

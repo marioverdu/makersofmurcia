@@ -247,4 +247,4 @@ export async function updateCard(cardType: string, id: number, field: string, va
     console.error(`Error updating ${cardType}:`, error);
     throw error;
   }
-} 
+}

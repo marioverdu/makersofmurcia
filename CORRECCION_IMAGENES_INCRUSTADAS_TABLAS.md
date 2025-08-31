@@ -14,7 +14,7 @@
 ## 🔍 **ANÁLISIS DEL PROBLEMA:**
 
 ### **✅ EN EL EDITOR WYSIWYG:**
-```html
+\`\`\`html
 <td class="...">
   <div class="relative inline-block">
     <img src="https://ejemplo.com/imagen.jpg" class="max-w-full h-auto max-h-32 object-contain" alt="Imagen incrustada">
@@ -23,16 +23,16 @@
   <br>
   <button class="media-add-button ...">+</button>
 </td>
-```
+\`\`\`
 
 ### **❌ EN LA VISTA DEL POST (ANTES):**
-```html
+\`\`\`html
 <td class="...">
   <!-- Solo texto, imágenes perdidas -->
   Dato 1
   <button class="media-add-button ...">+</button>
 </td>
-```
+\`\`\`
 
 ### **🔍 CAUSA RAÍZ:**
 - **Regex de parsing** muy restrictivo: `/<td[^>]*>([^<]*)<\/td>/gi`
@@ -46,27 +46,27 @@
 ### **✅ PASO 1: MODIFICAR REGEX DE PARSING**
 
 **ANTES (incorrecto):**
-```typescript
+\`\`\`typescript
 const cellRegex = /<td[^>]*>([^<]*)<\/td>/gi;
-```
+\`\`\`
 
 **DESPUÉS (correcto):**
-```typescript
+\`\`\`typescript
 const cellRegex = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-```
+\`\`\`
 
 ### **✅ PASO 2: PRESERVAR CONTENIDO HTML COMPLETO**
 
 **ANTES (solo texto):**
-```typescript
+\`\`\`typescript
 cells.push(cellMatch[1].trim());
-```
+\`\`\`
 
 **DESPUÉS (HTML completo):**
-```typescript
+\`\`\`typescript
 // Preservar todo el contenido HTML de la celda, incluyendo imágenes
 cells.push(cellMatch[1]);
-```
+\`\`\`
 
 ---
 
@@ -75,17 +75,17 @@ cells.push(cellMatch[1]);
 ### **✅ REGEX MEJORADO:**
 
 #### **1. Patrón Original (Problemático):**
-```typescript
+\`\`\`typescript
 /<td[^>]*>([^<]*)<\/td>/gi
-```
+\`\`\`
 - **`[^<]*`**: Solo captura caracteres que NO sean `<`
 - **Problema**: Se detiene en el primer `<` encontrado
 - **Resultado**: Imágenes y HTML se pierden
 
 #### **2. Patrón Mejorado (Solución):**
-```typescript
+\`\`\`typescript
 /<td[^>]*>([\s\S]*?)<\/td>/gi
-```
+\`\`\`
 - **`[\s\S]*?`**: Captura TODOS los caracteres (espacios y no-espacios)
 - **`?`**: Hace el matching no-greedy (hasta el primer `</td>`)
 - **Resultado**: Preserva todo el contenido HTML de la celda
@@ -93,7 +93,7 @@ cells.push(cellMatch[1]);
 ### **✅ PRESERVACIÓN DE CONTENIDO:**
 
 #### **1. Contenido Completo Preservado:**
-```html
+\`\`\`html
 <!-- Antes: Solo texto -->
 Dato 1
 
@@ -103,7 +103,7 @@ Dato 1
   <button class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600">×</button>
 </div>
 <br>
-```
+\`\`\`
 
 #### **2. Estructura HTML Mantenida:**
 - **Imágenes** con `src`, `class`, `alt` preservados
@@ -116,7 +116,7 @@ Dato 1
 ## 🎨 **RESULTADO VISUAL:**
 
 ### **✅ ANTES (Imágenes perdidas):**
-```html
+\`\`\`html
 <div class="table-container">
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
     <tbody>
@@ -130,10 +130,10 @@ Dato 1
     </tbody>
   </table>
 </div>
-```
+\`\`\`
 
 ### **✅ DESPUÉS (Imágenes preservadas):**
-```html
+\`\`\`html
 <div class="table-container" data-table-id="table_123">
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
     <tbody>
@@ -151,7 +151,7 @@ Dato 1
     </tbody>
   </table>
 </div>
-```
+\`\`\`
 
 ---
 

@@ -24,12 +24,12 @@ Esta página de test implementa una base de datos estilo Notion con funcionalida
   - Y cualquier editor que soporte tablas markdown
 
 - **Estructura generada**:
-```markdown
+\`\`\`markdown
 | Nombre | Estado | Prioridad | Asignado | Fecha límite | Etiquetas | Progreso |
 | --- | --- | --- | --- | --- | --- | --- |
 | Proyecto de E-commerce | En progreso | Alta | María García | 2024-02-15 | Desarrollo, Frontend | 75% |
 | Rediseño de Landing Page | Completado | Media | Carlos López | 2024-01-30 | Diseño, UI/UX | 100% |
-```
+\`\`\`
 
 ### 🎨 **Diseño Notion-like**
 - **Headers arrastrables**: Reordenamiento horizontal de columnas
@@ -81,13 +81,13 @@ Esta página de test implementa una base de datos estilo Notion con funcionalida
 
 ## 📁 **Estructura de Archivos**
 
-```
+\`\`\`
 app/notion-database-test/
 ├── page.tsx          # Página principal con toda la lógica
 └── layout.tsx        # Layout de la página
 
 NOTION_DATABASE_TEST_README.md  # Esta documentación
-```
+\`\`\`
 
 ## 🛠 **Tecnologías Utilizadas**
 
@@ -115,7 +115,7 @@ El markdown generado es compatible con:
 - **Figma**: Comentarios y documentación
 
 ### 📊 **Formato de Salida**
-```markdown
+\`\`\`markdown
 | Nombre | Estado | Prioridad | Asignado | Fecha límite | Etiquetas | Progreso |
 | --- | --- | --- | --- | --- | --- | --- |
 | Proyecto de E-commerce | En progreso | Alta | María García | 2024-02-15 | Desarrollo, Frontend | 75% |
@@ -123,7 +123,7 @@ El markdown generado es compatible con:
 | Implementación de API | Pendiente | Alta | Ana Martínez | 2024-03-01 | Backend, API | 25% |
 | Optimización de SEO | En progreso | Baja | Luis Rodríguez | 2024-02-28 | SEO, Marketing | 60% |
 | Testing de Usabilidad | Pendiente | Media | Sofia Pérez | 2024-03-10 | Testing, UX | 0% |
-```
+\`\`\`
 
 ## 🎯 **Características Destacadas**
 
@@ -152,4 +152,4 @@ El markdown generado es compatible con:
 - [ ] Temas personalizables
 - [ ] Modo oscuro
 - [ ] Exportar a PDF
-- [ ] Integración con APIs externas 
+- [ ] Integración con APIs externas

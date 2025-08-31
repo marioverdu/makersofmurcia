@@ -9,4 +9,4 @@ export default async function RootPage({ params }: PageProps) {
   const { lang } = await params
   
   return <RootPageClient lang={lang} />
-} 
+}

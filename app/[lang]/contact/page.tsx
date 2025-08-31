@@ -23,4 +23,3 @@ export default async function ContactPage({ params: { lang } }: PageProps) {
   
   return <ContactPageClient lang={lang} dict={dict} />
 }
-

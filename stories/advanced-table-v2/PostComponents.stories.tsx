@@ -460,7 +460,3 @@ Esta composición replica exactamente la estructura y apariencia de \`/posts/vie
     }
   }
 }
-
-
-
-

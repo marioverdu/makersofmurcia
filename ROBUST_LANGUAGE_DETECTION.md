@@ -10,7 +10,7 @@
 
 ### **Sistema de Detección en Capas**
 
-```
+\`\`\`
 ┌─────────────────────────────────────────────────────────────┐
 │                    MIDDLEWARE (Servidor)                   │
 └─────────────────────────────────────────────────────────────┘
@@ -25,21 +25,21 @@
 │ 4. 🏅 Fallbacks inteligentes                              │
 │ 5. 🎯 Idioma por defecto                                  │
 └─────────────────────────────────────────────────────────────┘
-```
+\`\`\`
 
 ## 🔧 **Cómo Funciona**
 
 ### **1. Cookies del Servidor (Prioridad Máxima)**
-```typescript
+\`\`\`typescript
 // Verificar si el usuario ya eligió un idioma
 const cookieMatch = cookies.match(/locale=([a-z]{2})/)
 if (cookieMatch && locales.includes(cookieMatch[1] as Locale)) {
   return cookieMatch[1] as Locale
 }
-```
+\`\`\`
 
 ### **2. Header Accept-Language**
-```typescript
+\`\`\`typescript
 // Parsear con prioridades (q=)
 const languages = acceptLanguage
   .split(',')
@@ -51,10 +51,10 @@ const languages = acceptLanguage
   })
   .filter(lang => locales.includes(lang.code as Locale))
   .sort((a, b) => b.quality - a.quality)
-```
+\`\`\`
 
 ### **3. User-Agent Patterns (Fallback Inteligente)**
-```typescript
+\`\`\`typescript
 // Detectar DuckDuckGo específicamente
 if (userAgentLower.includes('duckduckgo') || userAgentLower.includes('ddg')) {
   // Para DuckDuckGo, usar fallback inteligente
@@ -64,10 +64,10 @@ if (userAgentLower.includes('duckduckgo') || userAgentLower.includes('ddg')) {
   // Sin indicadores específicos, usar inglés por defecto
   return 'en'
 }
-```
+\`\`\`
 
 ### **4. Fallbacks Inteligentes**
-```typescript
+\`\`\`typescript
 // Detectar navegadores móviles
 if (userAgentLower.includes('mobile') || userAgentLower.includes('android')) {
   if (userAgentLower.includes('en')) return 'en'
@@ -78,7 +78,7 @@ if (userAgentLower.includes('mobile') || userAgentLower.includes('android')) {
 if (host.includes('localhost')) {
   return 'en'
 }
-```
+\`\`\`
 
 ## 🚀 **Ventajas de la Solución**
 
@@ -109,41 +109,41 @@ if (host.includes('localhost')) {
 ## 🧪 **Casos de Uso Resueltos**
 
 ### **1. DuckDuckGo (Modo Incógnito)**
-```
+\`\`\`
 ✅ Navegador: DuckDuckGo
 ✅ Modo: Incógnito/Privado
 ✅ Resultado: Detecta inglés por defecto
 ✅ Método: User-Agent + fallback inteligente
-```
+\`\`\`
 
 ### **2. Chrome (Modo Normal)**
-```
+\`\`\`
 ✅ Navegador: Chrome
 ✅ Modo: Normal
 ✅ Resultado: Detecta idioma correctamente
 ✅ Método: Accept-Language + cookies
-```
+\`\`\`
 
 ### **3. Firefox (Modo Privado)**
-```
+\`\`\`
 ✅ Navegador: Firefox
 ✅ Modo: Privado
 ✅ Resultado: Detecta idioma correctamente
 ✅ Método: Accept-Language + User-Agent
-```
+\`\`\`
 
 ### **4. Navegadores Móviles**
-```
+\`\`\`
 ✅ Navegador: Safari iOS / Chrome Android
 ✅ Modo: Normal
 ✅ Resultado: Detecta idioma del sistema
 ✅ Método: User-Agent patterns móviles
-```
+\`\`\`
 
 ## 🔍 **Logs de Debugging**
 
 ### **Ejemplo con DuckDuckGo:**
-```
+\`\`\`
 🔍 [Middleware] Accept-Language header: NO ENVIADO
 🔍 [Middleware] User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) DuckDuckGo/7 Safari/537.36
 🔍 [Middleware] Host: localhost:3000
@@ -151,24 +151,24 @@ if (host.includes('localhost')) {
 🌍 [Middleware] DuckDuckGo detectado, usando fallback inteligente
 🌍 [Middleware] DuckDuckGo sin indicadores específicos, usando inglés por defecto
 🌍 [Middleware DEV] Redirecting / to /en/ (browser language detected)
-```
+\`\`\`
 
 ### **Ejemplo con Chrome:**
-```
+\`\`\`
 🔍 [Middleware] Accept-Language header: en-US,en;q=0.9,es;q=0.8
 🔍 [Middleware] User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 🔍 [Middleware] Host: localhost:3000
 🔍 [Middleware] Cookies: 
 🌍 [Middleware] Idioma detectado desde Accept-Language: en (prioridad: 1)
 🌍 [Middleware DEV] Redirecting / to /en/ (browser language detected)
-```
+\`\`\`
 
 ## 🚀 **Para Probar Ahora**
 
 ### **1. Reinicia el servidor:**
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ### **2. Prueba en DuckDuckGo:**
 - Abre DuckDuckGo
@@ -187,27 +187,27 @@ npm run dev
 ## 🔧 **Configuración Avanzada**
 
 ### **Agregar Nuevos Idiomas:**
-```typescript
+\`\`\`typescript
 // En middleware.ts
 const locales: Locale[] = ['es', 'en', 'fr', 'de', 'it'];
 const defaultLocale: Locale = 'en';
-```
+\`\`\`
 
 ### **Personalizar Fallbacks:**
-```typescript
+\`\`\`typescript
 // En la función getLocale, agregar más patrones
 if (userAgentLower.includes('fr-fr') || userAgentLower.includes('fr;')) {
   return 'fr'
 }
-```
+\`\`\`
 
 ### **Configurar Prioridades:**
-```typescript
+\`\`\`typescript
 // Cambiar el idioma por defecto para localhost
 if (host.includes('localhost')) {
   return 'es' // Cambiar a español si prefieres
 }
-```
+\`\`\`
 
 ## 🎉 **Resultado Final**
 
@@ -223,4 +223,3 @@ if (host.includes('localhost')) {
 - 🚫 **Sin problemas de hidratación** o errores del cliente
 
 **La solución es robusta, confiable y funciona en TODOS los navegadores del mercado, incluyendo DuckDuckGo, modo incógnito, y cualquier otro navegador.** 🚀✨
-

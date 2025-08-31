@@ -7,9 +7,9 @@ Se ha implementado un sistema de loading completamente simplificado y unificado 
 ## Nueva Estructura
 
 ### 1. Archivo Principal de Exportación
-```
+\`\`\`
 components/ui/loading-system/index.ts
-```
+\`\`\`
 - **Un solo import** para todo el sistema
 - Exporta todos los componentes y hooks necesarios
 - Mantiene compatibilidad con el sistema anterior
@@ -81,7 +81,7 @@ components/ui/loading-system/index.ts
 ## Migración desde el Sistema Anterior
 
 ### Antes (Complejo)
-```typescript
+\`\`\`typescript
 import { UnifiedLoading } from '@/components/ui/unified-loading';
 import { AdminLoading } from '@/components/admin/admin-loading';
 import { PostViewLoading } from '@/components/posts/post-view-loading';
@@ -90,38 +90,38 @@ import { PostViewLoading } from '@/components/posts/post-view-loading';
 <UnifiedLoading size={32} />
 <AdminLoading />
 <PostViewLoading />
-```
+\`\`\`
 
 ### Ahora (Simple)
-```typescript
+\`\`\`typescript
 import { AutoLoading } from '@/components/ui/loading-system';
 
 <AutoLoading promise={fetchData} />
 <AutoLoading isLoading={isLoading} type="fullscreen" />
 <AutoLoading type="inline" />
-```
+\`\`\`
 
 ## Uso Recomendado
 
 ### 1. Para Promesas (Recomendado)
-```typescript
+\`\`\`typescript
 <AutoLoading promise={asyncFunction} />
-```
+\`\`\`
 
 ### 2. Para Estados Manuales
-```typescript
+\`\`\`typescript
 <AutoLoading isLoading={isLoading} type="spinner" />
-```
+\`\`\`
 
 ### 3. Para Loading Inline
-```typescript
+\`\`\`typescript
 <button>Guardar <AutoLoading isLoading={saving} type="inline" /></button>
-```
+\`\`\`
 
 ### 4. Para Loading Fullscreen
-```typescript
+\`\`\`typescript
 <AutoLoading isLoading={isLoading} type="fullscreen" />
-```
+\`\`\`
 
 ## Archivos Eliminados
 
@@ -151,5 +151,3 @@ Se han eliminado todos los archivos del sistema anterior:
 ---
 
 **Nota**: El sistema anterior (`UnifiedLoading`) sigue disponible para compatibilidad, pero se recomienda migrar al nuevo sistema (`AutoLoading`) para aprovechar todas las funcionalidades.
-
-

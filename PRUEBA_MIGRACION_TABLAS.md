@@ -8,18 +8,18 @@ Después de la migración, **todas las tablas** deben tener el diseño completo 
 
 Copia y pega esta tabla en el editor de posts (`/admin/posts`):
 
-```markdown
+\`\`\`markdown
 | Modelo | Contraste ANSI real (IT7.215) | Lúmenes | Precio | Notas relevantes |
 | --- | --- | --- | --- | --- |
 | **BenQ TK700STi** | 320:1 | 3000 | $1,299 | DLP, contrastes reportados en tests externos |
 | **Hisense PX1-Pro** | ~210:1 | 2200 | $3,999 | DLP UST rendimiento similar a Samsung |
 | Epson EH-TW9400 | ~500:1 | - | - | 3LCD, gama alta, referencias lab contrastes ANSI |
-```
+\`\`\`
 
 ## ✅ **RESULTADO ESPERADO DESPUÉS DE LA MIGRACIÓN:**
 
 ### **1. HTML Generado (DEBE SER IDÉNTICO a insertAdvancedTableV2New):**
-```html
+\`\`\`html
 <div class="table-container" data-table-id="table_[timestamp]_[random]">
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
     <thead>
@@ -44,7 +44,7 @@ Copia y pega esta tabla en el editor de posts (`/admin/posts`):
     </tbody>
   </table>
 </div>
-```
+\`\`\`
 
 ### **2. Funcionalidades que DEBEN Funcionar:**
 - ✅ **Drag & Drop**: Arrastrar encabezados para reordenar columnas
@@ -63,7 +63,7 @@ Copia y pega esta tabla en el editor de posts (`/admin/posts`):
 ## 🚫 **LO QUE NO DEBE APARECER:**
 
 ### **HTML Básico (ANTES de la migración):**
-```html
+\`\`\`html
 <!-- ❌ ESTO NO DEBE APARECER MÁS -->
 <table>
   <thead>
@@ -80,7 +80,7 @@ Copia y pega esta tabla en el editor de posts (`/admin/posts`):
     </tr>
   </tbody>
 </table>
-```
+\`\`\`
 
 ### **Estilos Básicos:**
 - ❌ Sin `cursor-grab`

@@ -26,7 +26,7 @@ El sistema de loading spinner implementa un efecto visual elegante que muestra u
 
 ### 1. Componente LoadingSpinner
 
-```typescript
+\`\`\`typescript
 interface LoadingSpinnerProps {
   isLoading: boolean;
   message?: string;
@@ -62,11 +62,11 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     </div>
   );
 };
-```
+\`\`\`
 
 ### 2. Uso en Editor de Edición
 
-```typescript
+\`\`\`typescript
 <LoadingSpinner isLoading={isSaving} message="Guardando cambios...">
   <div
     ref={contentRef}
@@ -82,11 +82,11 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     dangerouslySetInnerHTML={{ __html: editContent }}
   />
 </LoadingSpinner>
-```
+\`\`\`
 
 ### 3. Uso en Editor de Creación
 
-```typescript
+\`\`\`typescript
 <LoadingSpinner isLoading={isCreating} message="Creando post...">
   <div
     ref={newContentRef}
@@ -101,7 +101,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     onPaste={(e) => handleSmartPaste(e, newContentRef)}
   />
 </LoadingSpinner>
-```
+\`\`\`
 
 ## 🎨 Diseño Visual
 
@@ -181,7 +181,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
 ### **Verificar Estados**
 
-```typescript
+\`\`\`typescript
 // Estados que activan el spinner
 isSaving: boolean    // Modal de edición
 isCreating: boolean  // Modal de creación
@@ -189,7 +189,7 @@ isCreating: boolean  // Modal de creación
 // Mensajes personalizados
 "Guardando cambios..."  // Para edición
 "Creando post..."       // Para creación
-```
+\`\`\`
 
 ## 📝 Notas Técnicas
 

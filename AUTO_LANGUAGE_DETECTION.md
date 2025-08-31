@@ -36,14 +36,14 @@ Tu aplicación ahora **detecta automáticamente el idioma del navegador** del us
 ### **1. Header `Accept-Language`**
 El navegador envía automáticamente este header con los idiomas preferidos del usuario:
 
-```
+\`\`\`
 Accept-Language: en-US,en;q=0.9,es;q=0.8,fr;q=0.7
-```
+\`\`\`
 
 ### **2. Análisis de Prioridades**
 El sistema analiza y ordena los idiomas por prioridad:
 
-```typescript
+\`\`\`typescript
 // Ejemplo de parsing:
 "en-US,en;q=0.9,es;q=0.8,fr;q=0.7"
 ↓
@@ -53,7 +53,7 @@ El sistema analiza y ordena los idiomas por prioridad:
   { code: "es", quality: 0.8 },    // es
   { code: "fr", quality: 0.7 }     // fr
 ]
-```
+\`\`\`
 
 ### **3. Selección del Idioma**
 - **Si encuentra español**: redirige a `/es/`
@@ -63,7 +63,7 @@ El sistema analiza y ordena los idiomas por prioridad:
 ## 🚀 **Flujo de Funcionamiento**
 
 ### **Escenario 1: Navegador en Inglés**
-```
+\`\`\`
 Usuario va a: /
 ↓
 Middleware detecta: Accept-Language: en-US,en;q=0.9
@@ -71,10 +71,10 @@ Middleware detecta: Accept-Language: en-US,en;q=0.9
 Redirige a: /en/
 ↓
 Página carga en inglés
-```
+\`\`\`
 
 ### **Escenario 2: Navegador en Español**
-```
+\`\`\`
 Usuario va a: /
 ↓
 Middleware detecta: Accept-Language: es-ES,es;q=0.9
@@ -82,10 +82,10 @@ Middleware detecta: Accept-Language: es-ES,es;q=0.9
 Redirige a: /es/
 ↓
 Página carga en español
-```
+\`\`\`
 
 ### **Escenario 3: Navegador en Francés**
-```
+\`\`\`
 Usuario va a: /
 ↓
 Middleware detecta: Accept-Language: fr-FR,fr;q=0.9
@@ -93,12 +93,12 @@ Middleware detecta: Accept-Language: fr-FR,fr;q=0.9
 Redirige a: /en/ (inglés por defecto para idiomas no soportados)
 ↓
 Página carga en inglés
-```
+\`\`\`
 
 ## 🧪 **Pruebas en Desarrollo**
 
 ### **Simular Navegador en Inglés:**
-```bash
+\`\`\`bash
 # Usando curl - funciona en TODAS las páginas
 curl -H "Accept-Language: en-US,en;q=0.9" http://localhost:3000/
 curl -H "Accept-Language: en-US,en;q=0.9" http://localhost:3000/posts
@@ -109,10 +109,10 @@ curl -H "Accept-Language: en-US,en;q=0.9" http://localhost:3000/login
 # Cambiar idioma del navegador a inglés
 # Ir a CUALQUIER página (excepto /admin)
 # Debería redirigir a la versión en inglés
-```
+\`\`\`
 
 ### **Simular Navegador en Español:**
-```bash
+\`\`\`bash
 # Usando curl - funciona en TODAS las páginas
 curl -H "Accept-Language: es-ES,es;q=0.9" http://localhost:3000/
 curl -H "Accept-Language: es-ES,es;q=0.9" http://localhost:3000/posts
@@ -123,38 +123,38 @@ curl -H "Accept-Language: es-ES,es;q=0.9" http://localhost:3000/login
 # Cambiar idioma del navegador a español
 # Ir a CUALQUIER página (excepto /admin)
 # Debería redirigir a la versión en español
-```
+\`\`\`
 
 ## 🔍 **Logs de Debugging**
 
 En desarrollo, el middleware muestra logs cuando detecta idiomas:
 
-```
+\`\`\`
 🌍 [Middleware] Redirecting / to /en/ (browser language detected)
 🌍 [Middleware] Redirecting /posts to /en/posts (browser language detected)
 🌍 [Middleware] Redirecting /work-experience to /es/work-experience (browser language detected)
-```
+\`\`\`
 
 ## ⚙️ **Configuración del Sistema**
 
 ### **Idiomas Soportados:**
-```typescript
+\`\`\`typescript
 const locales: Locale[] = ['es', 'en']
-```
+\`\`\`
 
 ### **Idioma por Defecto:**
-```typescript
+\`\`\`typescript
 const defaultLocale: Locale = 'es'
-```
+\`\`\`
 
 ### **Rutas que Aplican Detección:**
-```typescript
+\`\`\`typescript
 // TODAS las rutas aplican detección automática de idioma
 // Solo se excluyen las rutas que empiecen con /admin
 if (!pathname.startsWith('/admin')) {
   // Aplicar detección de idioma
 }
-```
+\`\`\`
 
 ## 🌐 **Comportamiento en Diferentes Entornos**
 
@@ -197,7 +197,7 @@ if (!pathname.startsWith('/admin')) {
 ## 🔧 **Personalización Avanzada**
 
 ### **Agregar Nuevos Idiomas:**
-```typescript
+\`\`\`typescript
 // En middleware.ts
 const locales: Locale[] = ['es', 'en', 'fr', 'de']
 
@@ -207,19 +207,19 @@ export type Locale = 'es' | 'en' | 'fr' | 'de'
 // Crear diccionarios
 app/dictionaries/fr.json
 app/dictionaries/de.json
-```
+\`\`\`
 
 ### **Cambiar Idioma por Defecto:**
-```typescript
+\`\`\`typescript
 // En middleware.ts
 const defaultLocale: Locale = 'en' // Cambiar de 'es' a 'en'
-```
+\`\`\`
 
 ### **Agregar Más Rutas:**
-```typescript
+\`\`\`typescript
 // En middleware.ts
 const mainRoutes = ['/', '/posts', '/work-experience', '/contact', '/about']
-```
+\`\`\`
 
 ## 🎉 **Resultado Final**
 

@@ -19,7 +19,7 @@ Simplificar el sistema de rutas en el entorno de desarrollo para evitar problema
 - En producción: sistema completo de internacionalización (`/es/posts`, `/en/posts`)
 - Eliminación de importaciones problemáticas
 
-```typescript
+\`\`\`typescript
 // Verificar si estamos en desarrollo
 const isDevelopment = process.env.NODE_ENV === 'development' || 
                      process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' ||
@@ -43,7 +43,7 @@ if (isDevelopment) {
   // Para todas las demás rutas en desarrollo, continuar sin cambios
   return NextResponse.next()
 }
-```
+\`\`\`
 
 ### 2. Páginas Simplificadas para Desarrollo
 
@@ -77,13 +77,13 @@ if (isDevelopment) {
 - En producción: funcionalidad completa de cambio de idioma
 - Indicadores visuales para desarrollo
 
-```typescript
+\`\`\`typescript
 // En desarrollo, no hacer nada (solo mostrar el cambio visual)
 if (isDevelopment) {
   console.log(`[DEV] Language would change to: ${newLang} (no effect in development)`)
   return
 }
-```
+\`\`\`
 
 ### 4. Header Modificado (`components/ui/header/tabs.tsx`)
 
@@ -92,7 +92,7 @@ if (isDevelopment) {
 - En desarrollo: rutas simples (`/posts`, `/work-experience`)
 - En producción: rutas con locales (`/es/posts`, `/en/posts`)
 
-```typescript
+\`\`\`typescript
 // En desarrollo, usar rutas simples
 const getRoutePath = (route: string) => {
   if (isDevelopment) {
@@ -100,7 +100,7 @@ const getRoutePath = (route: string) => {
   }
   return `/${lang}${route}`
 }
-```
+\`\`\`
 
 ## 🎨 Beneficios
 
@@ -134,22 +134,22 @@ const getRoutePath = (route: string) => {
 ## 🔧 Configuración
 
 ### Variables de Entorno:
-```bash
+\`\`\`bash
 # Desarrollo (automático)
 NODE_ENV=development
 
 # Producción
 NODE_ENV=production
 NEXT_PUBLIC_VERCEL_ENV=production
-```
+\`\`\`
 
 ### Detección de Entorno:
-```typescript
+\`\`\`typescript
 const isDevelopment = process.env.NODE_ENV === 'development' || 
                      process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' ||
                      request.headers.get("host")?.includes('localhost') ||
                      request.headers.get("host")?.includes('127.0.0.1')
-```
+\`\`\`
 
 ## 📝 Notas Importantes
 

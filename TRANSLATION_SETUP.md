@@ -12,9 +12,9 @@ El sistema de traducción automática permite traducir automáticamente el conte
 
 Agregar la siguiente variable de entorno en tu archivo `.env.local`:
 
-```bash
+\`\`\`bash
 OPENAI_API_KEY=tu_clave_api_de_openai_aqui
-```
+\`\`\`
 
 #### 2. Obtener API Key de OpenAI
 
@@ -62,25 +62,25 @@ Si no configuras `OPENAI_API_KEY`, el sistema usará automáticamente **LibreTra
 
 ## 📊 Estadísticas de Traducción
 
-```typescript
+\`\`\`typescript
 interface TranslationStats {
   totalLines: number;      // Total de líneas procesadas
   translatedLines: number; // Líneas traducidas exitosamente
   failedLines: number;      // Líneas que fallaron
   failedTexts: string[];   // Lista de textos que fallaron
 }
-```
+\`\`\`
 
 ## 🔍 Logs de Debug
 
 El sistema genera logs detallados en la consola:
 
-```
+\`\`\`
 🔄 [Translation] Iniciando traducción automática...
 📝 [Translation] Textos extraídos: 15
 ✅ [Translation] Traducción completada: {totalLines: 15, translatedLines: 14, failedLines: 1, failedTexts: [...]}
 ✅ [Translation] Contenido traducido y actualizado
-```
+\`\`\`
 
 ## ⚠️ Manejo de Errores
 
@@ -137,21 +137,21 @@ El sistema genera logs detallados en la consola:
 
 ### Modelo de IA
 Cambiar en `lib/translation-service.ts`:
-```typescript
+\`\`\`typescript
 model: 'gpt-3.5-turbo' // Cambiar a gpt-4 para mejor calidad
-```
+\`\`\`
 
 ### Temperatura
 Ajustar creatividad en `lib/translation-service.ts`:
-```typescript
+\`\`\`typescript
 temperature: 0.3 // 0 = más literal, 1 = más creativo
-```
+\`\`\`
 
 ### Pausa entre Traducciones
 Modificar en `lib/translation-service.ts`:
-```typescript
+\`\`\`typescript
 await new Promise(resolve => setTimeout(resolve, 100)); // 100ms
-```
+\`\`\`
 
 ## 📝 Notas Importantes
 

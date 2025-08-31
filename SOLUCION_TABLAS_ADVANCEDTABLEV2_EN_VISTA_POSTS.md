@@ -15,22 +15,22 @@
 ## 🔍 **ANÁLISIS DEL PROBLEMA:**
 
 ### **✅ EN EL EDITOR WYSIWYG:**
-```html
+\`\`\`html
 <!-- Tabla con funcionalidad completa -->
 <td class="...">
   Dato 1
   <button class="media-add-button ...">+</button>
 </td>
-```
+\`\`\`
 
 ### **❌ EN LA VISTA DEL POST:**
-```html
+\`\`\`html
 <!-- Tabla sin funcionalidad -->
 <td class="...">
   Dato 1
   <!-- Botón + faltante -->
 </td>
-```
+\`\`\`
 
 ### **🔍 CAUSA RAÍZ:**
 - **`SimpleTableConverter`** genera HTML estático
@@ -46,7 +46,7 @@
 
 **Archivo**: `lib/table-global-functions.ts`
 
-```typescript
+\`\`\`typescript
 // Funciones globales para AdvancedTableV2 disponibles en toda la aplicación
 export const showMediaButton = (cellId: string) => { /* ... */ }
 export const hideMediaButton = (cellId: string) => { /* ... */ }
@@ -58,13 +58,13 @@ export const handleColumnDrop = (event: DragEvent, tableId: string, targetColumn
 
 // Inicialización automática en window object
 export const initializeTableGlobalFunctions = () => { /* ... */ }
-```
+\`\`\`
 
 ### **✅ PASO 2: MODIFICAR SIMPLETABLECONVERTER**
 
 **Archivo**: `components/advanced-table-v2/SimpleTableConverter.tsx`
 
-```typescript
+\`\`\`typescript
 // Agregar botón + de media en cada celda
 html += `<td class="...">
   ${cell}
@@ -76,20 +76,20 @@ useEffect(() => {
   // ... procesar tablas
   initializeTableGlobalFunctions();
 }, [htmlContent]);
-```
+\`\`\`
 
 ### **✅ PASO 3: INTEGRAR EN POST-VIEW-CLIENT**
 
 **Archivo**: `app/[lang]/posts/view/[id]/post-view-client.tsx`
 
-```typescript
+\`\`\`typescript
 import { initializeTableGlobalFunctions } from "@/lib/table-global-functions"
 
 // Inicializar funciones globales al cargar la página
 useEffect(() => {
   initializeTableGlobalFunctions()
 }, [])
-```
+\`\`\`
 
 ---
 
@@ -114,15 +114,15 @@ useEffect(() => {
 ### **✅ INTEGRACIÓN AUTOMÁTICA:**
 
 #### **1. Inicialización Automática:**
-```typescript
+\`\`\`typescript
 // Se ejecuta automáticamente en:
 // - SimpleTableConverter (al procesar tablas)
 // - PostViewClient (al cargar la página)
 initializeTableGlobalFunctions()
-```
+\`\`\`
 
 #### **2. Disponibilidad Global:**
-```typescript
+\`\`\`typescript
 // Funciones disponibles en window object:
 window.showMediaButton
 window.hideMediaButton
@@ -131,23 +131,23 @@ window.adjustCellHeight
 window.handleColumnDragStart
 window.handleColumnDragOver
 window.handleColumnDrop
-```
+\`\`\`
 
 ---
 
 ## 🎨 **RESULTADO VISUAL:**
 
 ### **✅ ANTES (Tabla estática):**
-```html
+\`\`\`html
 <div class="table-container">
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
     <!-- Tabla sin funcionalidad interactiva -->
   </table>
 </div>
-```
+\`\`\`
 
 ### **✅ DESPUÉS (Tabla interactiva):**
-```html
+\`\`\`html
 <div class="table-container" data-table-id="table_123">
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
     <thead>
@@ -167,7 +167,7 @@ window.handleColumnDrop
     </tbody>
   </table>
 </div>
-```
+\`\`\`
 
 ---
 

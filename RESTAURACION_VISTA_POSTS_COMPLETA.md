@@ -32,13 +32,13 @@
 ## 📱 **CARACTERÍSTICAS RESPONSIVE:**
 
 ### **✅ BREAKPOINTS IMPLEMENTADOS:**
-```css
+\`\`\`css
 @media (min-width: 480px) { /* Mobile landscape */ }
 @media (min-width: 768px) { /* Tablet */ }
 @media (min-width: 1024px) { /* Desktop */ }
 @media (min-width: 1280px) { /* Large desktop */ }
 @media (min-width: 1536px) { /* Extra large */ }
-```
+\`\`\`
 
 ### **✅ ADAPTACIONES AUTOMÁTICAS:**
 - **Padding lateral** se ajusta según el dispositivo
@@ -51,7 +51,7 @@
 ## 🖼️ **THUMBNAILS Y PREVIEWS:**
 
 ### **✅ FEATURED IMAGE:**
-```tsx
+\`\`\`tsx
 {/* Featured Image */}
 {post.featured_image && (
   <div className="mb-6">
@@ -62,17 +62,17 @@
     />
   </div>
 )}
-```
+\`\`\`
 
 ### **✅ EXCERPT DEL POST:**
-```tsx
+\`\`\`tsx
 {/* Excerpt */}
 {post.excerpt && (
   <p className="text-gray-600 text-left mb-6 text-lg leading-relaxed">
     {post.excerpt}
   </p>
 )}
-```
+\`\`\`
 
 ### **✅ METADATA COMPLETA:**
 - **Fecha de publicación** formateada en español
@@ -86,7 +86,7 @@
 ## 📊 **SOPORTE PARA TABLAS ADVANCEDTABLEV2:**
 
 ### **✅ INTEGRACIÓN COMPLETA:**
-```tsx
+\`\`\`tsx
 import { SimpleTableConverter } from "@/components/advanced-table-v2"
 
 {/* Post Content */}
@@ -94,7 +94,7 @@ import { SimpleTableConverter } from "@/components/advanced-table-v2"
   {/* Usar SimpleTableConverter para renderizar contenido con soporte para tablas AdvancedTableV2 */}
   <SimpleTableConverter htmlContent={post.content} />
 </div>
-```
+\`\`\`
 
 ### **✅ FUNCIONALIDADES DISPONIBLES:**
 - **Tablas convertidas** desde Markdown, TSV, HTML, CSV
@@ -140,7 +140,7 @@ import { SimpleTableConverter } from "@/components/advanced-table-v2"
 ## 🎨 **ESTILOS Y CLASES:**
 
 ### **✅ CLASES TAILWIND IMPLEMENTADAS:**
-```tsx
+\`\`\`tsx
 // Layout principal
 "min-h-screen bg-[#F7F8FC]"
 
@@ -153,17 +153,17 @@ import { SimpleTableConverter } from "@/components/advanced-table-v2"
 
 // Glass effect
 "glass-bg" // background: rgba(255,255,255,0.3); backdrop-filter: blur(12px);
-```
+\`\`\`
 
 ### **✅ ESTILOS JSX INLINE:**
-```tsx
+\`\`\`tsx
 // Posicionamiento del profile card
 style={{ marginTop: '56px' }}
 style={{ borderBottom: "1px solid rgba(0, 94, 182, 0.1)" }}
 
 // Header responsive
 style={{ width: '100%', height: '40px', position: 'fixed', top: 0, left: 0, right: 0, background: 'none', zIndex: 1000 }}
-```
+\`\`\`
 
 ---
 
@@ -213,9 +213,9 @@ style={{ width: '100%', height: '40px', position: 'fixed', top: 0, left: 0, righ
 ## 🔍 **VERIFICACIÓN:**
 
 ### **1. NAVEGAR A UN POST:**
-```
+\`\`\`
 http://localhost:3000/es/posts/view/1
-```
+\`\`\`
 
 ### **2. VERIFICAR ELEMENTOS:**
 - ✅ **Header** con avatar y tabs funciona

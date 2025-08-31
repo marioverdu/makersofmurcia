@@ -13,17 +13,17 @@ Storybook es una herramienta de desarrollo que te permite crear, documentar y pr
 
 ### Iniciar Storybook
 
-```bash
+\`\`\`bash
 pnpm run storybook
-```
+\`\`\`
 
 Esto iniciará Storybook en `http://localhost:6006`
 
 ### Construir Storybook para producción
 
-```bash
+\`\`\`bash
 pnpm run build-storybook
-```
+\`\`\`
 
 Esto creará una versión estática en la carpeta `storybook-static/`
 
@@ -35,7 +35,7 @@ Los archivos de stories siguen esta convención:
 
 ### Ejemplo de Story
 
-```typescript
+\`\`\`typescript
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './button';
 
@@ -62,7 +62,7 @@ export const Default: Story = {
     children: 'Button',
   },
 };
-```
+\`\`\`
 
 ## 🎯 Componentes Disponibles
 
@@ -98,7 +98,7 @@ export const Default: Story = {
 
 Storybook incluye integración con Vitest para testing de componentes:
 
-```typescript
+\`\`\`typescript
 import { expect, test } from '@storybook/test';
 import { Button } from './button';
 
@@ -108,7 +108,7 @@ test('Button renders correctly', async ({ canvasElement }) => {
   
   expect(button).toBeInTheDocument();
 });
-```
+\`\`\`
 
 ## 🚨 Consideraciones Importantes
 
@@ -116,19 +116,19 @@ test('Button renders correctly', async ({ canvasElement }) => {
 Los componentes que son Server Components (sin `'use client'`) no se pueden renderizar directamente en Storybook. Para estos casos:
 
 1. **Crear wrappers cliente**:
-```typescript
+\`\`\`typescript
 // ServerComponentWrapper.stories.tsx
 'use client'
 import { ServerComponent } from './server-component';
 
 export const Default = () => <ServerComponent />;
-```
+\`\`\`
 
 2. **Mockear dependencias del servidor**:
-```typescript
+\`\`\`typescript
 // Mock de datos del servidor
 const mockData = { /* datos simulados */ };
-```
+\`\`\`
 
 ### Módulos Nativos de Node.js
 Los siguientes módulos están excluidos del bundle de Storybook:
@@ -150,7 +150,7 @@ Los siguientes módulos están excluidos del bundle de Storybook:
 ### Temas
 Puedes cambiar el tema de fondo en `.storybook/preview.ts`:
 
-```typescript
+\`\`\`typescript
 backgrounds: {
   default: 'light',
   values: [
@@ -158,25 +158,25 @@ backgrounds: {
     { name: 'dark', value: '#1a1a1a' },
   ],
 },
-```
+\`\`\`
 
 ### Layouts
 Configura layouts específicos para tus stories:
 
-```typescript
+\`\`\`typescript
 parameters: {
   layout: 'centered', // o 'padded', 'fullscreen'
 },
-```
+\`\`\`
 
 ## 🚀 Despliegue
 
 Para desplegar Storybook en Vercel:
 
 1. Construir Storybook:
-```bash
+\`\`\`bash
 pnpm run build-storybook
-```
+\`\`\`
 
 2. Configurar Vercel para servir la carpeta `storybook-static/`
 
@@ -184,4 +184,4 @@ pnpm run build-storybook
 
 ---
 
-¡Storybook está listo para usar! 🎉 
+¡Storybook está listo para usar! 🎉

@@ -11,7 +11,7 @@ El **"Work Experience Edit Mode"** (o simplemente **"edit mode"**) es una funcio
 - **Visibilidad**: Solo visible para administradores en desarrollo
 - **Acción**: Activa el modo de edición global
 
-```tsx
+\`\`\`tsx
 <button
   className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-md transition-colors"
   role="menuitem"
@@ -34,12 +34,12 @@ El **"Work Experience Edit Mode"** (o simplemente **"edit mode"**) es una funcio
     <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" />
   </svg>
 </button>
-```
+\`\`\`
 
 ## 🔄 **Flujo de Activación**
 
 ### **1. Evento Personalizado**
-```tsx
+\`\`\`tsx
 const handleEditContent = () => {
   setMenuOpen(false)
   // Disparar evento para activar modo de edición
@@ -47,10 +47,10 @@ const handleEditContent = () => {
     detail: { isEditing: true }
   }))
 }
-```
+\`\`\`
 
 ### **2. Escucha del Evento**
-```tsx
+\`\`\`tsx
 useEffect(() => {
   const handleActivateEdit = (event: CustomEvent) => {
     setIsEditing(event.detail.isEditing)
@@ -61,7 +61,7 @@ useEffect(() => {
     window.removeEventListener("activateWorkExperienceEdit", handleActivateEdit as EventListener)
   }
 }, [])
-```
+\`\`\`
 
 ## 🎨 **Características del Edit Mode**
 
@@ -77,9 +77,9 @@ useEffect(() => {
 - **Contenido detallado** (`detailed_content`) - textarea
 
 ### **3. Estilo "Underline Input"**
-```css
+\`\`\`css
 bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none px-1
-```
+\`\`\`
 
 ### **4. Botón "Guardar cambios"**
 - **Apariencia**: Texto azul, semibold
@@ -147,4 +147,3 @@ bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none px-1
 2. **Mejorar UX**: Indicadores visuales de cambios pendientes
 3. **Validación**: Validación de campos antes de guardar
 4. **Historial**: Historial de cambios y reversión
-

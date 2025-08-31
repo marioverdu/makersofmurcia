@@ -8,24 +8,24 @@ Cuando pegas una tabla markdown en el editor WYSIWYG, se convierte a una "tabla 
 
 He agregado `console.log` en la función `handleSmartPaste` para ver exactamente qué HTML se está generando:
 
-```typescript
+\`\`\`typescript
 if (tableFormat === 'markdown') {
   tableHTML = convertMarkdownToTable(pastedText)
   console.log('🔍 [DEBUG] HTML generado para markdown:', tableHTML)
   // ...
 }
-```
+\`\`\`
 
 ## 📊 **TABLA DE PRUEBA:**
 
 Copia y pega esta tabla en `/admin/posts`:
 
-```markdown
+\`\`\`markdown
 | Modelo | Contraste ANSI real (IT7.215) | Lúmenes | Precio | Notas relevantes |
 | --- | --- | --- | --- | --- |
 | **BenQ TK700STi** | 320:1 | 3000 | $1,299 | DLP, contrastes reportados en tests externos |
 | **Hisense PX1-Pro** | ~210:1 | 2200 | $3,999 | DLP UST rendimiento similar a Samsung |
-```
+\`\`\`
 
 ## 🔧 **PASOS PARA DEBUG:**
 
@@ -40,13 +40,13 @@ Copia y pega esta tabla en `/admin/posts`:
 
 ### **3. Verificar en Consola:**
 Deberías ver algo como:
-```
+\`\`\`
 🔍 [DEBUG] HTML generado para markdown: <div class="table-container" data-table-id="table_...">...
-```
+\`\`\`
 
 ## ✅ **HTML ESPERADO (DEBE SER IDÉNTICO a insertAdvancedTableV2New):**
 
-```html
+\`\`\`html
 <div class="table-container" data-table-id="table_[timestamp]_[random]">
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
     <thead>
@@ -67,11 +67,11 @@ Deberías ver algo como:
     </tbody>
   </table>
 </div>
-```
+\`\`\`
 
 ## 🚫 **HTML INCORRECTO (LO QUE NO DEBE APARECER):**
 
-```html
+\`\`\`html
 <!-- ❌ ESTO NO DEBE APARECER -->
 <table>
   <thead>
@@ -87,7 +87,7 @@ Deberías ver algo como:
     </tr>
   </tbody>
 </table>
-```
+\`\`\`
 
 ## 🔍 **VERIFICACIONES EN CONSOLA:**
 

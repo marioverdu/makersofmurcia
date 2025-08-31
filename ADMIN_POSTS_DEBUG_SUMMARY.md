@@ -29,10 +29,10 @@ El problema es que el JavaScript del cliente no se está ejecutando correctament
 ## 🛠️ Soluciones a Probar
 
 ### 1. Verificar JavaScript del Cliente
-```bash
+\`\`\`bash
 # Verificar si el JavaScript se está cargando
 curl -s "http://localhost:3000/admin/posts" | grep -i "script"
-```
+\`\`\`
 
 ### 2. Verificar Consola del Navegador
 - Abrir las herramientas de desarrollador
@@ -65,4 +65,4 @@ Se agregaron logs de debug al componente:
 - `console.log("🔍 AdminPostsPage: loadPosts iniciado")`
 - `console.log("🔍 AdminPostsPage: Haciendo fetch a /api/posts")`
 
-Estos logs deberían aparecer en la consola del navegador si el JavaScript del cliente funciona correctamente. 
+Estos logs deberían aparecer en la consola del navegador si el JavaScript del cliente funciona correctamente.

@@ -97,5 +97,3 @@ export const ConfirmableModal: React.FC<ConfirmableModalProps> = ({
 }
 
 export default ConfirmableModal
-
-

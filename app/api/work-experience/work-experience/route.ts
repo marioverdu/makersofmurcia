@@ -27,4 +27,4 @@ export async function PUT(request: NextRequest) {
       error: 'Error interno del servidor'
     }, { status: 500 });
   }
-} 
+}
