@@ -1,37 +1,51 @@
-# Archivos de desarrollo
+# Storybook files
+.storybook/
+stories/
+*.stories.tsx
+*.stories.ts
+
+# Development files
+*.backup
+*.original
+*.test.js
+*.test.ts
+scripts/test-*.js
+scripts/debug-*.js
+
+# Package manager conflicts
+pnpm-lock.yaml
+yarn.lock
+
+# Documentation
+*.md
+!README.md
+
+# Cache and logs
+.next/
+node_modules/
+.vercel/
+*.log
+
+# Environment files (keep .env.example)
 .env.local
 .env.development
 .env.test
 
-# Archivos de backup
-*.backup
-package-lock.json.backup
-
-# Archivos de test y debug
-scripts/test-*.js
-scripts/debug-*.js
-scripts/verify-*.js
-
-# Archivos de Storybook (no necesarios en producción)
-.storybook/
-stories/
-
-# Archivos de desarrollo
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Archivos temporales
-.tmp/
-.temp/
-
-# Archivos de IDE
+# IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Archivos de sistema
+# OS files
 .DS_Store
 Thumbs.db
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Testing
+coverage/
+.nyc_output/
