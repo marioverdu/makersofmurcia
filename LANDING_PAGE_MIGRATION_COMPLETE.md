@@ -90,25 +90,25 @@ Se ha completado la migración de la página raíz del proyecto `/Users/mario/Pr
 ## 🚀 Funcionalidades Especiales:
 
 ### **Sistema de Visibilidad:**
-```typescript
+\`\`\`typescript
 // Development: localStorage + API fallback
 // Production: API only
 // Fallback: Todas las rutas visibles
-```
+\`\`\`
 
 ### **Posicionamiento de Avatar:**
-```typescript
+\`\`\`typescript
 // Breakpoints específicos para cada tamaño de pantalla
 // Cálculo dinámico basado en el contenido
 // Transiciones suaves entre estados
-```
+\`\`\`
 
 ### **Sistema de Mantenimiento:**
-```typescript
+\`\`\`typescript
 // Redirección automática a rutas alternativas
 // Página de mantenimiento con información contextual
 // Enlaces de gestión para administradores
-```
+\`\`\`
 
 ## 📱 Responsive Design:
 
@@ -163,4 +163,4 @@ La página raíz ha sido heredada exitosamente del proyecto de origen y está li
 
 **URL de la aplicación:** http://localhost:3000
 
-¡La nueva página raíz está lista! 🚀 
+¡La nueva página raíz está lista! 🚀

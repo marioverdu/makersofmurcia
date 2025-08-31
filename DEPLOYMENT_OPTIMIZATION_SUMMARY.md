@@ -38,7 +38,7 @@
 ## 📁 Archivos de Configuración Creados
 
 ### `vercel.json`
-```json
+\`\`\`json
 {
   "buildCommand": "npm run build",
   "installCommand": "npm install",
@@ -50,10 +50,10 @@
     }
   }
 }
-```
+\`\`\`
 
 ### `.vercelignore`
-```
+\`\`\`
 # Archivos de desarrollo
 .env.local
 .env.development
@@ -63,20 +63,20 @@ scripts/test-*.js
 .storybook/
 stories/
 *.log
-```
+\`\`\`
 
 ### `.npmrc`
-```
+\`\`\`
 save-exact=true
 legacy-peer-deps=true
 audit-level=moderate
 fund=false
-```
+\`\`\`
 
 ## 🎯 Optimizaciones de Performance
 
 ### Scripts de Build Limpios
-```json
+\`\`\`json
 {
   "scripts": {
     "prebuild": "npm run generate-routes",
@@ -87,7 +87,7 @@ fund=false
     "start": "next start"
   }
 }
-```
+\`\`\`
 
 ### Archivos Excluidos del Despliegue
 - Scripts de test y debug
@@ -99,13 +99,13 @@ fund=false
 ## 🚀 Resultado Final
 
 ### ✅ Build Exitoso
-```
+\`\`\`
 ✓ Compiled successfully
 ✓ Collecting page data
 ✓ Generating static pages (72/72)
 ✓ Collecting build traces
 ✓ Finalizing page optimization
-```
+\`\`\`
 
 ### 📈 Métricas Optimizadas
 - **First Load JS**: 100 kB compartido

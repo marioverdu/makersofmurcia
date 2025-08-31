@@ -39,15 +39,15 @@ Storybook ha sido instalado y configurado exitosamente en tu proyecto Next.js co
 ## 🚀 Cómo usar Storybook
 
 ### Iniciar Storybook:
-```bash
+\`\`\`bash
 pnpm run storybook
-```
+\`\`\`
 **URL:** http://localhost:6006
 
 ### Construir para producción:
-```bash
+\`\`\`bash
 pnpm run build-storybook
-```
+\`\`\`
 
 ## 📁 Archivos creados/modificados:
 
@@ -121,10 +121,10 @@ pnpm run build-storybook
 ## 🎨 Personalización:
 
 ### Añadir más addons:
-```bash
+\`\`\`bash
 npx storybook@latest add @storybook/addon-viewport
 npx storybook@latest add @storybook/addon-backgrounds
-```
+\`\`\`
 
 ### Configurar temas personalizados:
 Editar `.storybook/preview.ts` para añadir tus propios temas y fondos.
@@ -137,4 +137,4 @@ Storybook está completamente configurado y funcionando. Puedes empezar a crear 
 
 **URL de Storybook:** http://localhost:6006
 
-¡Disfruta desarrollando con Storybook! 🚀 
+¡Disfruta desarrollando con Storybook! 🚀

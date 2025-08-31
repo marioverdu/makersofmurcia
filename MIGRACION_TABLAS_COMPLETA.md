@@ -31,7 +31,7 @@
 ## 🎨 **DISEÑO UNIFICADO EN TODO EL SISTEMA:**
 
 ### **HTML Generado (IDÉNTICO en todos los casos):**
-```html
+\`\`\`html
 <div class="table-container" data-table-id="${tableId}">
   <table class="min-w-full border-collapse border border-gray-300 bg-white">
     <thead>
@@ -50,7 +50,7 @@
     </tbody>
   </table>
 </div>
-```
+\`\`\`
 
 ### **Funcionalidades UNIFICADAS:**
 - ✅ **Drag & Drop**: `ondragstart="handleColumnDragStart(event, '${tableId}', ${index})"`

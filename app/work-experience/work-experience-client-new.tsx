@@ -330,4 +330,3 @@ export default function WorkExperienceClientNew({ lang = 'es', dict }: WorkExper
     </>
   );
 }
-

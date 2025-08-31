@@ -25,6 +25,3 @@ export function sanitizeAdvancedTableHTML(rawHtml: string): string {
 
   return html
 }
-
-
-

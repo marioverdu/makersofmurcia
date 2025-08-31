@@ -8,23 +8,23 @@ Componente reutilizable que contiene el menú contextual del selector de idioma.
 **Ubicación**: `components/ui/header/header-contextual-menu.tsx`
 
 **Props**:
-```tsx
+\`\`\`tsx
 interface HeaderContextualMenuProps {
   currentLang: Locale          // Idioma actual ('es' | 'en')
   className?: string           // Clases CSS adicionales
   onLanguageChange?: (newLang: Locale) => void  // Callback opcional
 }
-```
+\`\`\`
 
 **Uso**:
-```tsx
+\`\`\`tsx
 import { HeaderContextualMenu } from '@/components/ui/header/header-contextual-menu'
 
 <HeaderContextualMenu 
   currentLang="es" 
   onLanguageChange={(lang) => console.log('Idioma cambiado a:', lang)}
 />
-```
+\`\`\`
 
 ### **2. DefaultHeader** 🏠
 Header principal del Storybook con avatar a la izquierda, tabs centradas y selector de idioma a la derecha.
@@ -32,12 +32,12 @@ Header principal del Storybook con avatar a la izquierda, tabs centradas y selec
 **Ubicación**: `components/ui/header/default-header.tsx`
 
 **Props**:
-```tsx
+\`\`\`tsx
 interface DefaultHeaderProps {
   className?: string
   lang?: Locale  // Por defecto: 'es'
 }
-```
+\`\`\`
 
 ### **3. HeaderTabs** 📱
 Tabs de navegación del header real con selector de idioma integrado.
@@ -45,13 +45,13 @@ Tabs de navegación del header real con selector de idioma integrado.
 **Ubicación**: `components/ui/header/tabs.tsx`
 
 **Props**:
-```tsx
+\`\`\`tsx
 interface HeaderTabsProps {
   className?: string
   pathname?: string  // Ruta actual (opcional)
   lang?: Locale     // Idioma actual (opcional)
 }
-```
+\`\`\`
 
 ### **4. StorybookHeaderTabs** 🎨
 Versión simplificada de las tabs para Storybook (sin selector de idioma).
@@ -61,23 +61,23 @@ Versión simplificada de las tabs para Storybook (sin selector de idioma).
 ## 🚀 **Migración al Nuevo Sistema**
 
 ### **ANTES** (Componentes individuales):
-```tsx
+\`\`\`tsx
 import LanguageSwitcher from '@/components/language-switcher'
 import { HeaderTabs } from '@/components/ui/header/tabs'
 
 // Uso directo
 <LanguageSwitcher currentLang="es" />
 <HeaderTabs currentLang="es" />
-```
+\`\`\`
 
 ### **AHORA** (Sistema unificado):
-```tsx
+\`\`\`tsx
 import { HeaderContextualMenu, HeaderTabs } from '@/components/ui/header'
 
 // Uso unificado
 <HeaderContextualMenu currentLang="es" />
 <HeaderTabs currentLang="es" />
-```
+\`\`\`
 
 ## 🎨 **Características del HeaderContextualMenu**
 
@@ -90,11 +90,11 @@ import { HeaderContextualMenu, HeaderTabs } from '@/components/ui/header'
 - ✅ **Estilos consistentes** con el diseño del header
 
 ### **Estructura Visual**:
-```
+\`\`\`
 ┌─────────────────────────────────────────────────────────┐
 │ [Avatar] ← Izquierda    [Tabs] ← Centro    [🌍] ← Derecha │
 └─────────────────────────────────────────────────────────┘
-```
+\`\`\`
 
 ### **Posicionamiento**:
 - **Avatar**: `position: absolute; left: 0`
@@ -104,29 +104,29 @@ import { HeaderContextualMenu, HeaderTabs } from '@/components/ui/header'
 ## 🔧 **Implementación en Diferentes Contextos**
 
 ### **1. En Storybook**:
-```tsx
+\`\`\`tsx
 // DefaultHeader ya incluye HeaderContextualMenu
 <DefaultHeader lang="es" />
-```
+\`\`\`
 
 ### **2. En Páginas Reales**:
-```tsx
+\`\`\`tsx
 // HeaderTabs ya incluye HeaderContextualMenu
 <HeaderTabs currentLang="es" />
-```
+\`\`\`
 
 ### **3. Uso Independiente**:
-```tsx
+\`\`\`tsx
 // Puedes usar HeaderContextualMenu en cualquier lugar
 <HeaderContextualMenu 
   currentLang="en" 
   onLanguageChange={(lang) => router.push(`/${lang}${pathname}`)}
 />
-```
+\`\`\`
 
 ## 📁 **Estructura de Archivos**
 
-```
+\`\`\`
 components/ui/header/
 ├── index.ts                    # Exportaciones unificadas
 ├── header-contextual-menu.tsx  # 🌟 Componente principal
@@ -134,7 +134,7 @@ components/ui/header/
 ├── tabs.tsx                    # Tabs del header real
 ├── storybook-tabs.tsx          # Tabs simplificadas
 └── README.md                   # Esta documentación
-```
+\`\`\`
 
 ## 🎯 **Beneficios del Nuevo Sistema**
 
@@ -148,4 +148,3 @@ components/ui/header/
 ---
 
 **¡El sistema de header ahora está completamente unificado con `HeaderContextualMenu` como componente principal!** 🚀
-

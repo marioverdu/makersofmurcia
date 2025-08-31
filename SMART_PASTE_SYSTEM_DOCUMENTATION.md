@@ -35,7 +35,7 @@ El **Smart Paste System** es un sistema inteligente de conversión automática q
 
 ### **✅ FLUJO DE DETECCIÓN:**
 
-```typescript
+\`\`\`typescript
 // 1. Usuario pega contenido en una celda
 onpaste="handleCellPaste(event, 'cell_id')"
 
@@ -48,11 +48,11 @@ if (text.match(/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
 } else {
   // Es texto normal - insertar como texto
 }
-```
+\`\`\`
 
 ### **✅ CONVERSIÓN AUTOMÁTICA:**
 
-```typescript
+\`\`\`typescript
 // Crear elemento imagen
 const img = document.createElement('img')
 img.src = imageUrl
@@ -69,7 +69,7 @@ const container = document.createElement('div')
 container.className = 'relative inline-block'
 container.appendChild(img)
 container.appendChild(removeButton)
-```
+\`\`\`
 
 ---
 
@@ -128,9 +128,9 @@ container.appendChild(removeButton)
 ## 🛠️ **IMPLEMENTACIÓN TÉCNICA**
 
 ### **✅ REGEX DE DETECCIÓN:**
-```typescript
+\`\`\`typescript
 const imageUrlRegex = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)$/i
-```
+\`\`\`
 
 **Formatos soportados:**
 - **JPG/JPEG**: `.jpg`, `.jpeg`
@@ -140,7 +140,7 @@ const imageUrlRegex = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)$/i
 - **SVG**: `.svg`
 
 ### **✅ FUNCIONES GLOBALES:**
-```typescript
+\`\`\`typescript
 // Inicialización
 initializeTableGlobalFunctions()
 
@@ -152,10 +152,10 @@ window.handleCellPaste
 window.showMediaButton
 window.hideMediaButton
 window.adjustCellHeight
-```
+\`\`\`
 
 ### **✅ INTEGRACIÓN CON ADVANCEDTABLEV2:**
-```typescript
+\`\`\`typescript
 // En cada celda de tabla
 <td 
   contentEditable="true" 
@@ -164,7 +164,7 @@ window.adjustCellHeight
   onmouseenter="showMediaButton('${cellId}')"
   onmouseleave="hideMediaButton('${cellId}')"
 >
-```
+\`\`\`
 
 ---
 
@@ -187,12 +187,12 @@ window.adjustCellHeight
 ## 🔍 **DEBUGGING Y LOGS**
 
 ### **✅ LOGS DE DEBUG:**
-```typescript
+\`\`\`typescript
 console.log('🔍 [WYSIWYG DEBUG] Texto pegado:', pastedText)
 console.log('✅ [WYSIWYG] Convirtiendo URL a imagen:', pastedText)
 console.log('✅ [WYSIWYG] HTML con imagen detectado')
 console.log('ℹ️ [WYSIWYG] Pega normal permitido')
-```
+\`\`\`
 
 ### **✅ VERIFICACIÓN DE FUNCIONAMIENTO:**
 1. **Abrir DevTools** del navegador

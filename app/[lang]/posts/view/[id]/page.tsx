@@ -59,4 +59,3 @@ export default async function PostViewPage({ params: { lang, id } }: PageProps) 
   
   return <PostViewClient lang={lang} dict={dict} postId={id} />
 }
-

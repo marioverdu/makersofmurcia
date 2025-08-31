@@ -56,4 +56,3 @@ export default async function LocaleLayout({
   const { lang } = await params
   return children
 }
-

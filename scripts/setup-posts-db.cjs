@@ -249,4 +249,4 @@ async function setupPostsDatabase() {
   }
 }
 
-setupPostsDatabase(); 
+setupPostsDatabase();

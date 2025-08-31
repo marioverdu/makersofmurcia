@@ -14,7 +14,7 @@ Copia y pega uno de estos ejemplos en el editor:
 
 ## 📊 **EJEMPLO 1: TABLA MARKDOWN**
 
-```markdown
+\`\`\`markdown
 | Título | Rating | Año | Género | Vista | Extra |
 |--------|--------|-----|--------|-------|-------|
 | The last of us | ⭐⭐⭐ | 2023 | Videojuego | Yes | |
@@ -27,7 +27,7 @@ Copia y pega uno de estos ejemplos en el editor:
 | Mystic river | ⭐⭐⭐ | 2003 | Drama | No | |
 | Ghost in the shell (anime) | ⭐⭐ | 1995 | Animación | No | |
 | Cowboy bebop | ⭐⭐ | 1998 | Animación | No | |
-```
+\`\`\`
 
 **Resultado esperado**: Se convertirá automáticamente en una tabla visual con 6 columnas y 10 filas.
 
@@ -35,7 +35,7 @@ Copia y pega uno de estos ejemplos en el editor:
 
 ## 📊 **EJEMPLO 2: TABLA TSV (TAB SEPARATED VALUES)**
 
-```
+\`\`\`
 Título	Rating	Año	Género	Vista	Extra
 The last of us	⭐⭐⭐	2023	Videojuego	Yes	
 Neon genesis evangelion	⭐⭐⭐	1995	Animación	Yes	
@@ -47,7 +47,7 @@ Devs	⭐⭐⭐	2020	Sci-Fi	Yes
 Mystic river	⭐⭐⭐	2003	Drama	No	
 Ghost in the shell (anime)	⭐⭐	1995	Animación	No	
 Cowboy bebop	⭐⭐	1998	Animación	No	
-```
+\`\`\`
 
 **Resultado esperado**: Se convertirá automáticamente en una tabla visual con 6 columnas y 10 filas.
 
@@ -55,14 +55,14 @@ Cowboy bebop	⭐⭐	1998	Animación	No
 
 ## 📊 **EJEMPLO 3: TABLA SIMPLE MARKDOWN**
 
-```markdown
+\`\`\`markdown
 | Nombre | Edad | Ciudad | Profesión |
 |--------|------|--------|-----------|
 | Juan | 25 | Madrid | Desarrollador |
 | María | 30 | Barcelona | Diseñadora |
 | Carlos | 28 | Valencia | Productor |
 | Ana | 27 | Sevilla | Marketing |
-```
+\`\`\`
 
 **Resultado esperado**: Se convertirá automáticamente en una tabla visual con 4 columnas y 4 filas.
 
@@ -70,13 +70,13 @@ Cowboy bebop	⭐⭐	1998	Animación	No
 
 ## 📊 **EJEMPLO 4: TABLA TSV SIMPLE**
 
-```
+\`\`\`
 Nombre	Edad	Ciudad	Profesión
 Juan	25	Madrid	Desarrollador
 María	30	Barcelona	Diseñadora
 Carlos	28	Valencia	Productor
 Ana	27	Sevilla	Marketing
-```
+\`\`\`
 
 **Resultado esperado**: Se convertirá automáticamente en una tabla visual con 4 columnas y 4 filas.
 

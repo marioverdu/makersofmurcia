@@ -7,7 +7,7 @@ Tu aplicación ahora tiene un **sistema de internacionalización completo** que 
 ## 🏗️ **Arquitectura Implementada**
 
 ### **1. Estructura de Archivos**
-```
+\`\`\`
 app/
 ├── [lang]/                    # 🌟 Directorio dinámico para idiomas
 │   ├── layout.tsx            # Layout con idioma específico
@@ -20,7 +20,7 @@ app/
 │   └── en.json               # Inglés (completo)
 ├── home-page-client.tsx       # ✅ Componente principal con traducciones
 └── globals.css                # Estilos globales
-```
+\`\`\`
 
 ### **2. Archivos Clave Actualizados**
 - **`types/i18n.ts`**: Tipos actualizados con nuevas secciones
@@ -45,7 +45,7 @@ app/
 ## 🌐 **URLs y Rutas Funcionando**
 
 ### **Estructura de URLs**
-```
+\`\`\`
 # Español (idioma por defecto)
 /es/                    → Página principal en español
 /es/posts               → Posts en español
@@ -57,7 +57,7 @@ app/
 /en/posts               → Posts en inglés
 /en/contact             → Contacto en inglés
 /en/work-experience     → Experiencia en inglés
-```
+\`\`\`
 
 ### **Redireccionamiento Automático**
 - **Sin idioma**: `/` → redirige a `/es/` (español por defecto)
@@ -67,7 +67,7 @@ app/
 ## 📚 **Sistema de Diccionarios Actualizado**
 
 ### **Estructura del Diccionario Home**
-```typescript
+\`\`\`typescript
 interface Dictionary {
   home: {
     // ... campos existentes
@@ -99,12 +99,12 @@ interface Dictionary {
     }
   }
 }
-```
+\`\`\`
 
 ### **Traducciones Implementadas**
 
 #### **Español (es.json)**
-```json
+\`\`\`json
 {
   "home": {
     "sections": {
@@ -127,10 +127,10 @@ interface Dictionary {
     }
   }
 }
-```
+\`\`\`
 
 #### **Inglés (en.json)**
-```json
+\`\`\`json
 {
   "home": {
     "sections": {
@@ -153,7 +153,7 @@ interface Dictionary {
     }
   }
 }
-```
+\`\`\`
 
 ## 🎯 **Componente HomePageClient Actualizado**
 
@@ -166,18 +166,18 @@ interface Dictionary {
 - ✅ **Mensaje de mantenimiento** traducido
 
 ### **Ejemplo de Uso**
-```tsx
+\`\`\`tsx
 // Antes (hardcodeado)
 <p>Equivócate rápido</p>
 
 // Ahora (traducido)
 <p>{dict.home.sections.hero.firstText}</p>
-```
+\`\`\`
 
 ## 🔧 **Cómo Agregar Nuevas Traducciones**
 
 ### **Paso 1: Agregar al Diccionario Español**
-```json
+\`\`\`json
 // app/dictionaries/es.json
 {
   "home": {
@@ -189,10 +189,10 @@ interface Dictionary {
     }
   }
 }
-```
+\`\`\`
 
 ### **Paso 2: Agregar al Diccionario Inglés**
-```json
+\`\`\`json
 // app/dictionaries/en.json
 {
   "home": {
@@ -204,10 +204,10 @@ interface Dictionary {
     }
   }
 }
-```
+\`\`\`
 
 ### **Paso 3: Actualizar Tipos**
-```typescript
+\`\`\`typescript
 // types/i18n.ts
 export interface Dictionary {
   home: {
@@ -220,14 +220,14 @@ export interface Dictionary {
     }
   }
 }
-```
+\`\`\`
 
 ### **Paso 4: Usar en el Componente**
-```tsx
+\`\`\`tsx
 // En home-page-client.tsx
 <h2>{dict.home.sections.nuevaSeccion.title}</h2>
 <p>{dict.home.sections.nuevaSeccion.description}</p>
-```
+\`\`\`
 
 ## 🚨 **Copys que Faltan por Traducir**
 

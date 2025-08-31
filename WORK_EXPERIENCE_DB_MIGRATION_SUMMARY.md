@@ -88,14 +88,14 @@ Se ha migrado exitosamente todo el contenido de `/work-experience` desde el cód
 ## 🚀 **Cómo Probar**
 
 ### **1. Ejecutar el Servidor**
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ### **2. Visitar la Página**
-```
+\`\`\`
 http://localhost:3001/work-experience
-```
+\`\`\`
 
 ### **3. Probar la Edición**
 1. Haz clic en los tres puntos junto al botón de contacto
@@ -112,9 +112,9 @@ http://localhost:3001/work-experience
 ## 📝 **Scripts de Migración**
 
 ### **Crear Tablas y Datos Iniciales**
-```bash
+\`\`\`bash
 node scripts/setup-work-experience-db.cjs
-```
+\`\`\`
 
 ### **Archivos SQL**
 - **`scripts/init-work-experience-tables.sql`** - Estructura de tablas y datos iniciales
@@ -133,4 +133,4 @@ node scripts/setup-work-experience-db.cjs
 ✅ **Datos migrados y funcionando correctamente**
 ✅ **Interfaz de usuario sin cambios visuales**
 
-La migración está **completamente funcional** y lista para producción. 
+La migración está **completamente funcional** y lista para producción.

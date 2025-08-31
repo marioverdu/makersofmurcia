@@ -10,7 +10,7 @@
 ## 🔧 **IMPLEMENTACIÓN TÉCNICA:**
 
 ### **✅ 1. DETECCIÓN AUTOMÁTICA DE HTML DE TABLA:**
-```typescript
+\`\`\`typescript
 const detectHTMLTable = (text: string): boolean => {
   // Verificar si contiene etiquetas de tabla HTML
   const hasTableTags = text.includes('<table') && text.includes('</table>')
@@ -23,27 +23,27 @@ const detectHTMLTable = (text: string): boolean => {
   
   return hasTableTags && hasTableStructure && hasCells
 }
-```
+\`\`\`
 
 ### **✅ 2. FUNCIÓN UNIFICADA ACTUALIZADA:**
-```typescript
+\`\`\`typescript
 const detectTableFormat = (text: string): 'markdown' | 'tsv' | 'html' | null => {
   if (detectMarkdownTable(text)) return 'markdown'
   if (detectTSVTable(text)) return 'tsv'
   if (detectHTMLTable(text)) return 'html'  // 🆕 NUEVO
   return null
 }
-```
+\`\`\`
 
 ### **✅ 3. CONVERSIÓN DE HTML A ADVANCEDTABLEV2:**
-```typescript
+\`\`\`typescript
 const convertHTMLTableToAdvancedTable = (htmlText: string): string => {
   // Parsear HTML usando DOM temporal
   // Extraer encabezados y filas
   // Generar HTML IDÉNTICO a insertAdvancedTableV2New()
   // Incluir todas las funcionalidades: drag & drop, media, altura automática
 }
-```
+\`\`\`
 
 ---
 
@@ -64,7 +64,7 @@ const convertHTMLTableToAdvancedTable = (htmlText: string): string => {
 ## 🔄 **FLUJO DE CONVERSIÓN COMPLETO:**
 
 ### **1. USUARIO PEGA CONTENIDO:**
-```
+\`\`\`
 <table>
   <thead>
     <tr>
@@ -81,7 +81,7 @@ const convertHTMLTableToAdvancedTable = (htmlText: string): string => {
     </tr>
   </tbody>
 </table>
-```
+\`\`\`
 
 ### **2. SISTEMA DETECTA AUTOMÁTICAMENTE:**
 - ✅ **Reconoce** que es HTML de tabla
@@ -125,13 +125,13 @@ const convertHTMLTableToAdvancedTable = (htmlText: string): string => {
 ## 🧪 **CASOS DE PRUEBA:**
 
 ### **✅ TABLA HTML SIMPLE:**
-```html
+\`\`\`html
 <table><tr><td>Col1</td><td>Col2</td></tr></table>
-```
+\`\`\`
 **Resultado**: Se convierte a AdvancedTableV2 con 2 columnas
 
 ### **✅ TABLA HTML COMPLEJA:**
-```html
+\`\`\`html
 <table>
   <thead><tr><th>Header1</th><th>Header2</th></tr></thead>
   <tbody>
@@ -139,15 +139,15 @@ const convertHTMLTableToAdvancedTable = (htmlText: string): string => {
     <tr><td>Data3</td><td>Data4</td></tr>
   </tbody>
 </table>
-```
+\`\`\`
 **Resultado**: Se convierte a AdvancedTableV2 con encabezados y 2 filas de datos
 
 ### **✅ TABLA HTML CON ATRIBUTOS:**
-```html
+\`\`\`html
 <table class="my-table" id="table1">
   <tr><td class="cell">Content</td></tr>
 </table>
-```
+\`\`\`
 **Resultado**: Se convierte a AdvancedTableV2 (atributos se ignoran, solo contenido)
 
 ---

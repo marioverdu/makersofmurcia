@@ -18,4 +18,3 @@ export { default as SmartPasteSystem } from './SmartPasteSystem.stories';
 
 // Chat Components
 export { default as ChatTuentiButtonV2 } from './chat-tuenti/ChatTuentiButtonV2.stories';
-

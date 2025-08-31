@@ -2068,4 +2068,4 @@ export default function AdminPostsPage() {
       )}
     </div>
   )
-} 
+}

@@ -10,12 +10,12 @@
 ## 🚨 **CASO PROBLEMÁTICO IDENTIFICADO:**
 
 ### **❌ TABLA CON FILA ASIMÉTRICA:**
-```
+\`\`\`
 | Modelo | Contraste ANSI real (IT7.215) | Lúmenes | Precio | Notas relevantes |
 | --- | --- | --- | --- | --- |
 | **BenQ TK700STi** | 320:1 | 3000 | $1,299 | DLP, contrastes reportados en tests externos |
 | **Hisense PX1-Pro** | ~210:1 | 2200 | $3,999 | DLP UST rendimiento similar a Samsung |
-```
+\`\`\`
 
 **PROBLEMA**: La fila de **Hisense PX1-Pro** tiene **6 celdas** en lugar de **5**, rompiendo la simetría.
 
@@ -24,7 +24,7 @@
 ## 🛡️ **SOLUCIÓN IMPLEMENTADA:**
 
 ### **✅ 1. DETECCIÓN DEL NÚMERO MÁXIMO DE COLUMNAS:**
-```typescript
+\`\`\`typescript
 // 🆕 VALIDACIÓN ROBUSTA: Encontrar el número máximo de columnas
 let maxColumns = 0
 const allRows = []
@@ -38,18 +38,18 @@ lines.forEach((line, lineIndex) => {
   allRows.push(cells)
   maxColumns = Math.max(maxColumns, cells.length)
 })
-```
+\`\`\`
 
 ### **✅ 2. VALIDACIÓN MÍNIMA DE COLUMNAS:**
-```typescript
+\`\`\`typescript
 // 🆕 VALIDACIÓN: Si no hay suficientes columnas, usar mínimo 2
 if (maxColumns < 2) {
   maxColumns = 2
 }
-```
+\`\`\`
 
 ### **✅ 3. GENERACIÓN ROBUSTA DE ENCABEZADOS:**
-```typescript
+\`\`\`typescript
 // 🆕 GENERAR ENCABEZADOS ROBUSTOS
 let headers: string[] = []
 
@@ -68,10 +68,10 @@ if (lines[0] && !lines[0].includes('---')) {
   // Si no hay primera línea válida, generar encabezados genéricos
   headers = Array.from({ length: maxColumns }, (_, i) => `Columna ${i + 1}`)
 }
-```
+\`\`\`
 
 ### **✅ 4. NORMALIZACIÓN DE FILAS:**
-```typescript
+\`\`\`typescript
 // 🆕 NORMALIZAR TODAS LAS FILAS AL MISMO NÚMERO DE COLUMNAS
 const normalizedRows = allRows.map(row => {
   const normalizedRow = [...row]
@@ -88,16 +88,16 @@ const normalizedRows = allRows.map(row => {
   
   return normalizedRow
 })
-```
+\`\`\`
 
 ### **✅ 5. VALIDACIÓN FINAL:**
-```typescript
+\`\`\`typescript
 // 🆕 VALIDACIÓN FINAL: Asegurar que tenemos datos válidos
 if (normalizedRows.length === 0) {
   // Si no hay datos, crear una fila de ejemplo
   normalizedRows.push(Array.from({ length: maxColumns }, () => 'Dato de ejemplo'))
 }
-```
+\`\`\`
 
 ---
 
@@ -131,32 +131,32 @@ if (normalizedRows.length === 0) {
 ## 🎯 **CASOS MANEJADOS:**
 
 ### **✅ 1. FILA CON MÁS COLUMNAS (Hisense PX1-Pro):**
-```
+\`\`\`
 ANTES: | **Hisense PX1-Pro** | ~210:1 | 2200 | $3,999 | DLP UST rendimiento similar a Samsung |
 DESPUÉS: | **Hisense PX1-Pro** | ~210:1 | 2200 | $3,999 | DLP UST rendimiento similar a Samsung |
-```
+\`\`\`
 **Resultado**: Se trunca a 5 columnas, manteniendo solo los datos válidos
 
 ### **✅ 2. FILA CON MENOS COLUMNAS:**
-```
+\`\`\`
 ANTES: | Epson EH-TW9400 | ~500:1 | - |
 DESPUÉS: | Epson EH-TW9400 | ~500:1 | - | | |
-```
+\`\`\`
 **Resultado**: Se rellena con celdas vacías hasta 5 columnas
 
 ### **✅ 3. ENCABEZADOS INCOMPLETOS:**
-```
+\`\`\`
 ANTES: | Modelo | Contraste | (solo 2 columnas)
 DESPUÉS: | Columna 1 | Columna 2 | Columna 3 | Columna 4 | Columna 5 |
-```
+\`\`\`
 **Resultado**: Se generan encabezados genéricos para 5 columnas
 
 ### **✅ 4. SIN DATOS:**
-```
+\`\`\`
 ANTES: (tabla vacía)
 DESPUÉS: | Columna 1 | Columna 2 |
          | Dato de ejemplo | Dato de ejemplo |
-```
+\`\`\`
 **Resultado**: Se crea tabla de ejemplo con 2 columnas
 
 ---
@@ -186,29 +186,29 @@ DESPUÉS: | Columna 1 | Columna 2 |
 ## 🧪 **CASOS DE PRUEBA:**
 
 ### **✅ TABLA PERFECTA (5x5):**
-```
+\`\`\`
 | Modelo | Contraste | Lúmenes | Precio | Notas |
 | --- | --- | --- | --- | --- |
 | BenQ | 320:1 | 3000 | $1,299 | DLP |
-```
+\`\`\`
 **Resultado**: ✅ **Se mantiene perfecta, 5 columnas**
 
 ### **✅ TABLA ASIMÉTRICA (5x5 + 6x5):**
-```
+\`\`\`
 | Modelo | Contraste | Lúmenes | Precio | Notas |
 | --- | --- | --- | --- | --- |
 | BenQ | 320:1 | 3000 | $1,299 | DLP |
 | Hisense | 210:1 | 2200 | $3,999 | DLP UST | Extra |
-```
+\`\`\`
 **Resultado**: ✅ **Se normaliza a 5x5, se trunca la fila extra**
 
 ### **✅ TABLA INCOMPLETA (5x5 + 3x5):**
-```
+\`\`\`
 | Modelo | Contraste | Lúmenes | Precio | Notas |
 | --- | --- | --- | --- | --- |
 | BenQ | 320:1 | 3000 | $1,299 | DLP |
 | Epson | 500:1 | 2500 |
-```
+\`\`\`
 **Resultado**: ✅ **Se normaliza a 5x5, se rellenan celdas vacías**
 
 ---

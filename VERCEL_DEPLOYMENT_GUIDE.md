@@ -11,7 +11,7 @@
 
 ### Scripts de Build Limpios
 
-```json
+\`\`\`json
 {
   "scripts": {
     "prebuild": "npm run generate-routes",
@@ -22,7 +22,7 @@
     "start": "next start"
   }
 }
-```
+\`\`\`
 
 ## 🔧 Optimizaciones Realizadas
 
@@ -49,11 +49,11 @@
 ## 🚀 Pasos para Desplegar
 
 1. **Preparar el repositorio**:
-   ```bash
+   \`\`\`bash
    git add .
    git commit -m "Optimización para despliegue Vercel v0"
    git push origin main
-   ```
+   \`\`\`
 
 2. **Conectar con Vercel**:
    - Ir a [vercel.com](https://vercel.com)

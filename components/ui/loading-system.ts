@@ -45,6 +45,3 @@ export { default as UnifiedLoading } from './unified-loading'
  *    const ComponentWithLoading = withLoading(MyComponent)
  *    <ComponentWithLoading isLoading={isLoading} />
  */
-
-
-

@@ -394,4 +394,3 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
     </div>
   )
 }
-

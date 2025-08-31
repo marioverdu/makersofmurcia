@@ -75,4 +75,4 @@ export const getLogoByUrl = (url: string) => {
 // Función para obtener logo por filename
 export const getLogoByFilename = (filename: string) => {
   return LOGO_LIST.find(logo => logo.filename === filename)
-} 
+}

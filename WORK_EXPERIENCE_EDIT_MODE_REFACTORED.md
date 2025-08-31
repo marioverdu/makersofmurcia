@@ -12,7 +12,7 @@ Se ha **refactorizado completamente** el edit mode de work-experience para hacer
 - **Ubicación anterior**: `fixed bottom-4 left-4 z-50`
 - **Razón**: Confuso para el usuario, no aportaba valor real
 - **Código removido**:
-```tsx
+\`\`\`tsx
 {/* Botón de prueba para forzar detección (solo en modo edición) */}
 {isEditing && !isSaving && (
   <div className="fixed bottom-4 left-4 z-50">
@@ -27,13 +27,13 @@ Se ha **refactorizado completamente** el edit mode de work-experience para hacer
     </button>
   </div>
 )}
-```
+\`\`\`
 
 #### ❌ **Removido: Toast de Cambios Pendientes**
 - **Ubicación anterior**: `fixed bottom-4 right-4 z-50`
 - **Razón**: Interrumpía el flujo de trabajo, mostraba información innecesaria
 - **Código removido**:
-```tsx
+\`\`\`tsx
 {/* Indicador de cambios pendientes (solo cuando no se está guardando) */}
 {isEditing && hasPendingChanges && !isSaving && (
   <div className="fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-lg border border-gray-200 p-4 max-w-sm">
@@ -65,7 +65,7 @@ Se ha **refactorizado completamente** el edit mode de work-experience para hacer
     </div>
   </div>
 )}
-```
+\`\`\`
 
 ### **2. Flujo Simplificado de Guardado**
 
@@ -75,7 +75,7 @@ Se ha **refactorizado completamente** el edit mode de work-experience para hacer
 - **Feedback inmediato**: Solo un indicador de loading mientras se guarda
 
 #### 🔄 **Función Refactorizada: `handleSaveCard`**
-```tsx
+\`\`\`tsx
 const handleSaveCard = async (cardData: any) => {
   if (!cardData.id || !cardData.cardType) {
     console.error('❌ Datos de card incompletos para guardar')
@@ -141,12 +141,12 @@ const handleSaveCard = async (cardData: any) => {
     setIsSaving(false)
   }
 }
-```
+\`\`\`
 
 ### **3. Componentes Simplificados**
 
 #### ✅ **`work-card.tsx` - Eliminada Detección Automática**
-```tsx
+\`\`\`tsx
 // Ya no necesitamos detectar cambios automáticamente
 // Los cambios se guardan directamente cuando se hace clic en "Guardar cambios"
 
@@ -166,10 +166,10 @@ const handleSaveCard = () => {
     onSaveCard(cardData)
   }
 }
-```
+\`\`\`
 
 #### ✅ **`work-experience-section.tsx` - Props Simplificadas**
-```tsx
+\`\`\`tsx
 <WorkCard
   key={workExp.id}
   companyName={workExp.company_name}
@@ -190,12 +190,12 @@ const handleSaveCard = () => {
   onSaveCard={onSaveCard}
   onCardChanged={undefined} // Ya no necesitamos esta prop
 />
-```
+\`\`\`
 
 ### **4. Estados Eliminados**
 
 #### ❌ **Estados Removidos**
-```tsx
+\`\`\`tsx
 // Estado para manejar cambios pendientes en las cards
 const [pendingChanges, setPendingChanges] = useState<Map<number, any>>(new Map())
 const [hasPendingChanges, setHasPendingChanges] = useState(false)
@@ -214,13 +214,13 @@ const [savingProgress, setSavingProgress] = useState<{
   completed: [],
   failed: []
 })
-```
+\`\`\`
 
 #### ✅ **Estado Simplificado**
-```tsx
+\`\`\`tsx
 // Estado para manejar el loading de guardado
 const [isSaving, setIsSaving] = useState(false)
-```
+\`\`\`
 
 ## 🎯 **Beneficios del Refactor**
 
@@ -247,19 +247,19 @@ const [isSaving, setIsSaving] = useState(false)
 ## 🚀 **Flujo de Uso Actualizado**
 
 ### **1. Activar Edición**
-```
+\`\`\`
 Usuario → ProfileCard → Menú Contextual (3 puntos) → "Editar contenido"
-```
+\`\`\`
 
 ### **2. Editar Contenido**
-```
+\`\`\`
 Usuario → Hacer clic en campo editable → Editar contenido → Hacer clic en "Guardar cambios"
-```
+\`\`\`
 
 ### **3. Guardado Directo**
-```
+\`\`\`
 Sistema → Validar datos → Guardar en Neon → Recargar datos → Mostrar confirmación
-```
+\`\`\`
 
 ## ✅ **Resultado Final**
 
@@ -276,4 +276,3 @@ Sistema → Validar datos → Guardar en Neon → Recargar datos → Mostrar con
 3. **Validar la experiencia** de usuario
 4. **Documentar** para el equipo
 5. **Considerar aplicar** el mismo patrón a otras páginas
-

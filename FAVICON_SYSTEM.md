@@ -27,7 +27,7 @@ El sistema de gestión de favicon permite cambiar dinámicamente el favicon del 
 
 ### 1. Widget de Favicon
 
-```typescript
+\`\`\`typescript
 export function FaviconWidget() {
   const [faviconUrl, setFaviconUrl] = useState("")
   const [currentFavicon, setCurrentFavicon] = useState("")
@@ -58,11 +58,11 @@ export function FaviconWidget() {
     }
   }
 }
-```
+\`\`\`
 
 ### 2. API de Favicon
 
-```typescript
+\`\`\`typescript
 // GET - Obtener configuración
 export async function GET() {
   const faviconConfig = await kv.get('favicon_config')
@@ -87,11 +87,11 @@ export async function POST(request: NextRequest) {
   
   return NextResponse.json({ success: true })
 }
-```
+\`\`\`
 
 ### 3. Cargador Dinámico
 
-```typescript
+\`\`\`typescript
 export function FaviconLoader() {
   useEffect(() => {
     const loadFavicon = async () => {
@@ -115,7 +115,7 @@ export function FaviconLoader() {
     document.head.appendChild(link)
   }
 }
-```
+\`\`\`
 
 ## 🎨 Diseño del Widget
 
@@ -141,34 +141,34 @@ export function FaviconLoader() {
 ## 🔄 Flujo de Funcionamiento
 
 ### 1. **Carga Inicial**
-```
+\`\`\`
 Página carga → FaviconLoader → API GET → KV → Cargar favicon en DOM
-```
+\`\`\`
 
 ### 2. **Cambio de Favicon**
-```
+\`\`\`
 Usuario ingresa URL → Validación → API POST → KV → Actualizar DOM → Feedback
-```
+\`\`\`
 
 ### 3. **Persistencia**
-```
+\`\`\`
 Configuración guardada en Vercel KV → Disponible en todos los entornos
-```
+\`\`\`
 
 ## 🛡️ Validaciones y Seguridad
 
 ### **Validación de URL**
-```typescript
+\`\`\`typescript
 try {
   new URL(url)
   return true
 } catch {
   return false
 }
-```
+\`\`\`
 
 ### **Verificación de Imagen**
-```typescript
+\`\`\`typescript
 const imageResponse = await fetch(url, { method: 'HEAD' })
 if (!imageResponse.ok) {
   throw new Error('Imagen no accesible')
@@ -178,7 +178,7 @@ const contentType = imageResponse.headers.get('content-type')
 if (!contentType?.startsWith('image/')) {
   throw new Error('No es una imagen válida')
 }
-```
+\`\`\`
 
 ### **Sanitización**
 - **URL trimming**: Eliminar espacios en blanco

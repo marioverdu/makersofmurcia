@@ -76,4 +76,3 @@ export interface UpdateCardResponse {
   data?: any;
   error?: string;
 }
-

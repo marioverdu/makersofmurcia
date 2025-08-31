@@ -7,22 +7,22 @@ La vista de posts en la ruta `/es/posts/view/16` se había desvirtuado debido a 
 ## 🔍 **ANÁLISIS DEL PROBLEMA:**
 
 ### **ANTES (Versión Funcional 1.29):**
-```tsx
+\`\`\`tsx
 {/* Content */}
 <div className="p-6">
   <div className="prose max-w-none">
     {post.content}
   </div>
 </div>
-```
+\`\`\`
 
 ### **DESPUÉS (Versión Desvirtuada):**
-```tsx
+\`\`\`tsx
 {/* Content */}
 <div className="p-6">
   <SimpleTableConverter htmlContent={post.content} />
 </div>
-```
+\`\`\`
 
 ## ✅ **SOLUCIÓN IMPLEMENTADA:**
 
@@ -97,9 +97,9 @@ La vista de posts en la ruta `/es/posts/view/16` se había desvirtuado debido a 
 ## 🔍 **VERIFICACIÓN:**
 
 ### **1. Navegar a la Vista:**
-```
+\`\`\`
 http://localhost:3000/es/posts/view/16
-```
+\`\`\`
 
 ### **2. Verificar Elementos:**
 - ✅ **Título del post** visible

@@ -3,7 +3,7 @@
 ## 🎯 **OBJETIVO: IDÉNTICO AL BOTÓN "TABLA AVANZADA"**
 
 La tabla convertida debe ser **EXACTAMENTE IGUAL** en diseño y funcionalidades que la creada con el botón:
-```html
+\`\`\`html
 <button class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex items-center gap-1" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table w-4 h-4">
     <path d="M12 3v18"></path>
@@ -13,13 +13,13 @@ La tabla convertida debe ser **EXACTAMENTE IGUAL** en diseño y funcionalidades 
   </svg>
   Tabla Avanzada
 </button>
-```
+\`\`\`
 
 ## 📊 **Tabla de Prueba para Pegar en el Editor**
 
 Copia y pega esta tabla en el editor de posts (`/admin/posts`):
 
-```markdown
+\`\`\`markdown
 | Modelo | Contraste ANSI real (IT7.215) | Lúmenes | Precio | Notas relevantes |
 | --- | --- | --- | --- | --- |
 | **BenQ TK700STi** | 320:1 | 3000 | $1,299 | DLP, contrastes reportados en tests externos |
@@ -27,7 +27,7 @@ Copia y pega esta tabla en el editor de posts (`/admin/posts`):
 | Epson EH-TW9400 | ~500:1 | - | - | 3LCD, gama alta, referencias lab contrastes ANSI |
 | Epson EH-TW9300 | ~470:1 | - | - | Muy similar TW9400 |
 | Epson EH-TW7300/TW7400 | ~450:1 | - | - | Alta gama 3LCD |
-```
+\`\`\`
 
 ## ✅ **Resultado Esperado: IDÉNTICO AL BOTÓN**
 

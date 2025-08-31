@@ -6,13 +6,13 @@ Se han implementado exitosamente todas las historias CMS en Storybook para refle
 
 ## 📁 **Estructura de Historias Creadas**
 
-```
+\`\`\`
 stories/cms/
 ├── CMSCard.stories.tsx          # Historias para CMSCard
 ├── CMSDetail.stories.tsx        # Historias para CMSDetail
 ├── CMS_Overview.mdx             # Documentación general del sistema
 └── index.ts                     # Exportaciones centralizadas
-```
+\`\`\`
 
 ## 🎭 **Historias Implementadas**
 
@@ -73,9 +73,9 @@ stories/cms/
 ## 🚀 **Cómo Usar las Historias**
 
 ### **1. Acceder a Storybook**
-```bash
+\`\`\`bash
 npm run storybook
-```
+\`\`\`
 **URL**: http://localhost:6006
 
 ### **2. Navegar a las Historias CMS**

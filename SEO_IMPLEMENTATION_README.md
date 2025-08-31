@@ -17,7 +17,7 @@ Se ha implementado un sistema completo de SEO para el blog de Mario Verdú utili
 ## **🏗️ ARQUITECTURA IMPLEMENTADA**
 
 ### **1. Configuración Global (`lib/seo-config.ts`)**
-```typescript
+\`\`\`typescript
 // Configuración SEO global para todo el sitio
 export const defaultSEOConfig: DefaultSeoProps = {
   titleTemplate: '%s | Mario Verdú - Blog',
@@ -25,23 +25,23 @@ export const defaultSEOConfig: DefaultSeoProps = {
   description: 'Blog personal de Mario Verdú...',
   // Open Graph, Twitter Cards, meta tags adicionales
 }
-```
+\`\`\`
 
 ### **2. SEO para Posts Individuales (`components/seo/post-seo.tsx`)**
-```typescript
+\`\`\`typescript
 // Componente que genera SEO específico para cada post
 <PostSEO post={post} />
 // Incluye: Meta tags, Open Graph, Twitter Cards, JSON-LD
-```
+\`\`\`
 
 ### **3. SEO para Listas de Posts (`components/seo/posts-list-seo.tsx`)**
-```typescript
+\`\`\`typescript
 // Componente para páginas de listado de posts
 <PostsListSEO currentPage={1} totalPosts={10} />
-```
+\`\`\`
 
 ### **4. Fragmentos Enriquecidos (`lib/rich-snippets-config.ts`)**
-```typescript
+\`\`\`typescript
 // Configuración para Rich Snippets de Google
 export const richSnippetsConfig = {
   blogPosting: (post) => ({ /* Schema.org BlogPosting */ }),
@@ -50,7 +50,7 @@ export const richSnippetsConfig = {
   person: { /* Schema.org Person */ },
   website: { /* Schema.org WebSite */ }
 }
-```
+\`\`\`
 
 ---
 
@@ -80,7 +80,7 @@ export const richSnippetsConfig = {
 - **twitter:site**: `@marioverdu`
 
 ### **✅ JSON-LD Schema.org**
-```json
+\`\`\`json
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -100,7 +100,7 @@ export const richSnippetsConfig = {
   "articleSection": "Blog",
   "keywords": "desarrollo web, tecnología, blog"
 }
-```
+\`\`\`
 
 ### **✅ Sitemap Dinámico**
 - **URLs estáticas**: Home, Posts, Work Experience, Contact
@@ -109,7 +109,7 @@ export const richSnippetsConfig = {
 - **Frecuencia de cambio**: Home/Posts (daily), Work Experience (weekly)
 
 ### **✅ Robots.txt Optimizado**
-```txt
+\`\`\`txt
 User-agent: *
 Allow: /, /posts, /posts/*, /work-experience, /contact
 Disallow: /admin/*, /api/admin/*, /_next/*, /debug/*
@@ -119,14 +119,14 @@ Allow: /
 Crawl-delay: 1
 
 Sitemap: https://marioverdu.com/sitemap.xml
-```
+\`\`\`
 
 ---
 
 ## **🔧 IMPLEMENTACIÓN TÉCNICA**
 
 ### **1. Layout Principal (`app/layout.tsx`)**
-```typescript
+\`\`\`typescript
 import { DefaultSeo } from 'next-seo'
 import { defaultSEOConfig } from '@/lib/seo-config'
 
@@ -140,10 +140,10 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
-```
+\`\`\`
 
 ### **2. Página de Post Individual (`app/posts/view/[id]/page.tsx`)**
-```typescript
+\`\`\`typescript
 import PostSEO from "@/components/seo/post-seo"
 
 export default function PostViewPage() {
@@ -154,10 +154,10 @@ export default function PostViewPage() {
     </>
   )
 }
-```
+\`\`\`
 
 ### **3. Página de Lista de Posts (`app/posts/page.tsx`)**
-```typescript
+\`\`\`typescript
 import PostsListSEO from "@/components/seo/posts-list-seo"
 
 export default function PostsPage() {
@@ -168,7 +168,7 @@ export default function PostsPage() {
     </>
   )
 }
-```
+\`\`\`
 
 ---
 

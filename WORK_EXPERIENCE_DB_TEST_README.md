@@ -41,11 +41,11 @@ Este test recrea completamente el proceso de lectura, edición y guardado de car
 ## 🏗️ **Arquitectura del Test**
 
 ### **Estructura de Archivos**
-```
+\`\`\`
 app/work-experience-db-test/
 ├── page.tsx                           # Página principal del test
 └── work-experience-db-test-client.tsx # Componente cliente con toda la lógica
-```
+\`\`\`
 
 ### **Componentes Principales**
 
@@ -59,7 +59,7 @@ app/work-experience-db-test/
   - `addTestResult()`: Registra resultados de test
 
 #### **2. Interfaces de Datos**
-```typescript
+\`\`\`typescript
 interface TestResult {
   id: string
   step: string
@@ -76,7 +76,7 @@ interface EditState {
     hasChanges: boolean
   }
 }
-```
+\`\`\`
 
 ## 🔄 **Flujo de Test Completo**
 
@@ -142,9 +142,9 @@ interface EditState {
 ## 🚀 **Uso del Test**
 
 ### **Acceso**
-```
+\`\`\`
 http://localhost:3000/work-experience-db-test
-```
+\`\`\`
 
 ### **Pasos de Uso**
 1. **Abrir la página**: Navegar a la URL del test

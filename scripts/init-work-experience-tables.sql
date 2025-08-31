@@ -128,4 +128,4 @@ ON CONFLICT (id) DO NOTHING;
 -- Crear índices para mejorar el rendimiento
 CREATE INDEX IF NOT EXISTS idx_work_experience_order ON work_experience(order_index);
 CREATE INDEX IF NOT EXISTS idx_portfolio_projects_order ON portfolio_projects(order_index);
-CREATE INDEX IF NOT EXISTS idx_education_order ON education(order_index); 
+CREATE INDEX IF NOT EXISTS idx_education_order ON education(order_index);

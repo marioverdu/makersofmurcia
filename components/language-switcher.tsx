@@ -107,4 +107,3 @@ export default function LanguageSwitcher({ currentLang, className = "" }: Langua
     </>
   )
 }
-

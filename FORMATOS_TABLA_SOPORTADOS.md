@@ -10,58 +10,58 @@
 ## 📊 **FORMATOS SOPORTADOS:**
 
 ### **✅ 1. MARKDOWN (GitHub, Notion, etc.):**
-```
+\`\`\`
 | Modelo | Contraste ANSI | Lúmenes | Precio |
 |--------|----------------|---------|---------|
 | BenQ   | 320:1         | 3000    | $1,299 |
 | Epson  | 500:1         | 2500    | €800   |
-```
+\`\`\`
 **Detección**: `|` al inicio y final + separadores `---`
 **Conversión**: ✅ **Automática a AdvancedTableV2**
 
 ### **✅ 2. TSV (Notion, Excel, etc.):**
-```
+\`\`\`
 Modelo	Contraste ANSI	Lúmenes	Precio
 BenQ	320:1	3000	$1,299
 Epson	500:1	2500	€800
-```
+\`\`\`
 **Detección**: Tabs (`\t`) entre columnas
 **Conversión**: ✅ **Automática a AdvancedTableV2**
 
 ### **✅ 3. HTML DE TABLA (Web, copiado desde navegador):**
-```html
+\`\`\`html
 <table>
   <tr><th>Modelo</th><th>Contraste</th></tr>
   <tr><td>BenQ</td><td>320:1</td></tr>
 </table>
-```
+\`\`\`
 **Detección**: Etiquetas `<table>`, `<tr>`, `<td>`, `<th>`
 **Conversión**: ✅ **Automática a AdvancedTableV2**
 
 ### **✅ 4. CSV (Excel, Google Sheets, etc.):**
-```
+\`\`\`
 Modelo,Contraste ANSI,Lúmenes,Precio
 BenQ,320:1,3000,$1,299
 Epson,500:1,2500,€800
-```
+\`\`\`
 **Detección**: Comas (`,`) entre columnas
 **Conversión**: ✅ **Automática a AdvancedTableV2**
 
 ### **✅ 5. ESPACIOS MÚLTIPLES (Formato web común):**
-```
+\`\`\`
 Modelo          Contraste ANSI    Lúmenes    Precio
 BenQ            320:1            3000        $1,299
 Epson           500:1            2500        €800
-```
+\`\`\`
 **Detección**: Múltiples espacios (`  `) entre columnas
 **Conversión**: ✅ **Automática a AdvancedTableV2**
 
 ### **✅ 6. GUIONES (Formato web común):**
-```
+\`\`\`
 Modelo - Contraste ANSI - Lúmenes - Precio
 BenQ - 320:1 - 3000 - $1,299
 Epson - 500:1 - 2500 - €800
-```
+\`\`\`
 **Detección**: Guiones (` - `) entre columnas
 **Conversión**: ✅ **Automática a AdvancedTableV2**
 
@@ -70,7 +70,7 @@ Epson - 500:1 - 2500 - €800
 ## 🔧 **IMPLEMENTACIÓN TÉCNICA:**
 
 ### **✅ DETECCIÓN INTELIGENTE:**
-```typescript
+\`\`\`typescript
 const detectTableFormat = (text: string): 'markdown' | 'tsv' | 'html' | 'csv' | 'space' | 'dash' | null => {
   if (detectMarkdownTable(text)) return 'markdown'
   if (detectTSVTable(text)) return 'tsv'
@@ -80,7 +80,7 @@ const detectTableFormat = (text: string): 'markdown' | 'tsv' | 'html' | 'csv' | 
   if (detectDashSeparatedTable(text)) return 'dash'
   return null
 }
-```
+\`\`\`
 
 ### **✅ CONVERSIÓN UNIFICADA:**
 - **Todas las funciones** generan HTML **IDÉNTICO** a `insertAdvancedTableV2New()`
@@ -111,36 +111,36 @@ const detectTableFormat = (text: string): 'markdown' | 'tsv' | 'html' | 'csv' | 
 ## 🧪 **CASOS DE PRUEBA COMPLETOS:**
 
 ### **✅ TABLA DE PROYECTORES (Markdown):**
-```
+\`\`\`
 | Modelo | Contraste ANSI real (IT7.215) | Lúmenes | Precio | Notas relevantes |
 | --- | --- | --- | --- | --- |
 | **BenQ TK700STi** | 320:1 | 3000 | $1,299 | DLP, contrastes reportados en tests externos |
 | **Hisense PX1-Pro** | ~210:1 | 2200 | $3,999 | DLP UST rendimiento similar a Samsung |
-```
+\`\`\`
 **Resultado**: ✅ **Auto-convertido a AdvancedTableV2 con 5 columnas**
 
 ### **✅ TABLA CSV DESDE EXCEL:**
-```
+\`\`\`
 Producto,Precio,Stock,Categoría
 Laptop,1200,15,Electrónicos
 Mouse,25,100,Accesorios
-```
+\`\`\`
 **Resultado**: ✅ **Auto-convertido a AdvancedTableV2 con 4 columnas**
 
 ### **✅ TABLA CON ESPACIOS DESDE WEB:**
-```
+\`\`\`
 Producto          Precio    Stock    Categoría
 Laptop            1200      15       Electrónicos
 Mouse             25        100      Accesorios
-```
+\`\`\`
 **Resultado**: ✅ **Auto-convertido a AdvancedTableV2 con 4 columnas**
 
 ### **✅ TABLA CON GUIONES DESDE WEB:**
-```
+\`\`\`
 Producto - Precio - Stock - Categoría
 Laptop - 1200 - 15 - Electrónicos
 Mouse - 25 - 100 - Accesorios
-```
+\`\`\`
 **Resultado**: ✅ **Auto-convertido a AdvancedTableV2 con 4 columnas**
 
 ---

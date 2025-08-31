@@ -2186,4 +2186,4 @@ export default function AdminPostsPage() {
       {/* La funcionalidad WYSIWYG de pegar URLs de imagen reemplaza esta funcionalidad */}
     </div>
   )
-} 
+}

@@ -50,7 +50,7 @@ Se ha implementado exitosamente un **sistema de edición inline robusto** para l
 ## 🚀 **Flujo de Uso Implementado**
 
 ### **1. Carga de Datos**
-```
+\`\`\`
 Usuario visita /work-experience
 ↓
 Sistema carga datos desde Neon PostgreSQL
@@ -58,10 +58,10 @@ Sistema carga datos desde Neon PostgreSQL
 Se inicializa el estado de edición
 ↓
 Se muestra la página con las cards
-```
+\`\`\`
 
 ### **2. Activación de Edición**
-```
+\`\`\`
 Usuario → ProfileCard → Menú contextual (3 puntos) → "Editar contenido"
 ↓
 Sistema activa modo de edición global
@@ -69,10 +69,10 @@ Sistema activa modo de edición global
 Todas las cards se expanden automáticamente
 ↓
 Los campos se vuelven editables
-```
+\`\`\`
 
 ### **3. Edición de Contenido**
-```
+\`\`\`
 Usuario → Hace clic en campo editable
 ↓
 Campo se convierte en input con borde azul
@@ -80,10 +80,10 @@ Campo se convierte en input con borde azul
 Usuario edita el contenido
 ↓
 Campo se marca como "con cambios" (azul)
-```
+\`\`\`
 
 ### **4. Guardado**
-```
+\`\`\`
 Usuario → Hace clic en "Guardar cambios" o pierde el foco
 ↓
 Sistema valida los cambios
@@ -95,7 +95,7 @@ Se actualiza la base de datos Neon
 Se recarga el estado local
 ↓
 Se muestra confirmación
-```
+\`\`\`
 
 ## 🔧 **Componentes Principales**
 
@@ -166,15 +166,15 @@ Se muestra confirmación
 ## 🚀 **Cómo Usar**
 
 ### **1. Instalación**
-```bash
+\`\`\`bash
 # El sistema ya está implementado
 npm run dev
-```
+\`\`\`
 
 ### **2. Acceso**
-```
+\`\`\`
 http://localhost:3000/work-experience
-```
+\`\`\`
 
 ### **3. Edición**
 1. Hacer clic en los tres puntos del ProfileCard
@@ -236,4 +236,3 @@ El sistema de work-experience está **completamente implementado** y **listo par
 - ✅ **Base de datos** conectada y funcional
 
 **¡El sistema está listo para usar!** 🚀
-

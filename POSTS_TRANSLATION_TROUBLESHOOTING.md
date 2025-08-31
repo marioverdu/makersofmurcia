@@ -24,22 +24,22 @@ La API `/api/posts` está devolviendo error 500 con el mensaje "Failed to fetch 
 
 Necesitas crear un archivo `.env.local` en la raíz del proyecto con:
 
-```bash
+\`\`\`bash
 # .env.local
 POSTGRES_URL="postgres://neondb_owner:npg_DjTA32wLyFPg@ep-weathered-cake-ad2ijk3r-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require"
-```
+\`\`\`
 
 ### **2. Reiniciar el Servidor de Desarrollo**
 
-```bash
+\`\`\`bash
 # Detener el servidor actual (Ctrl+C)
 # Luego reiniciar:
 npm run dev
-```
+\`\`\`
 
 ### **3. Verificar que Funciona**
 
-```bash
+\`\`\`bash
 # Probar la API directamente:
 curl "http://localhost:3000/api/posts" | jq '.[] | {id, title}'
 
@@ -48,25 +48,25 @@ curl "http://localhost:3000/api/posts" | jq '.[] | {id, title}'
 #   "id": 18,
 #   "title": "prueba de imagenes incrustadas en tabla"
 # }
-```
+\`\`\`
 
 ### **4. Habilitar Traducciones**
 
 Una vez que la API funcione, puedes habilitar las traducciones actualizando el componente:
 
-```typescript
+\`\`\`typescript
 // En app/[lang]/posts/posts-page-client.tsx, cambiar:
 const response = await fetch(`/api/posts`)
 
 // Por:
 const response = await fetch(`/api/posts?lang=${lang}`)
-```
+\`\`\`
 
 ## 🌍 **Cómo Funcionará el Sistema Completo**
 
 ### **URLs y Contenido Esperado:**
 
-```
+\`\`\`
 http://localhost:3000/es/posts/view/18
 → Título: "prueba de imagenes incrustadas en tabla"
 → Contenido en español
@@ -74,21 +74,21 @@ http://localhost:3000/es/posts/view/18
 http://localhost:3000/en/posts/view/18  
 → Título: "Embedded Images in Table Test"
 → Contenido en inglés
-```
+\`\`\`
 
 ### **Lista de Posts:**
 
-```
+\`\`\`
 http://localhost:3000/es/posts
 → Todos los posts con títulos en español
 
 http://localhost:3000/en/posts
 → Posts con traducciones en inglés, fallback español para los demás
-```
+\`\`\`
 
 ## 🔧 **Scripts de Verificación Disponibles**
 
-```bash
+\`\`\`bash
 # Verificar migración de base de datos:
 node scripts/validate-posts-migration.js
 
@@ -97,7 +97,7 @@ node scripts/final-validation.js
 
 # Agregar más traducciones de ejemplo:
 psql $POSTGRES_URL -f scripts/add-sample-translations.sql
-```
+\`\`\`
 
 ## 📊 **Estado Actual de los Posts**
 
@@ -118,7 +118,7 @@ psql $POSTGRES_URL -f scripts/add-sample-translations.sql
 
 ## 💡 **Comando Rápido para Todo**
 
-```bash
+\`\`\`bash
 # 1. Crear .env.local (manual)
 echo 'POSTGRES_URL="postgres://neondb_owner:npg_DjTA32wLyFPg@ep-weathered-cake-ad2ijk3r-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require"' > .env.local
 
@@ -127,7 +127,7 @@ npm run dev
 
 # 3. Probar API
 curl "http://localhost:3000/api/posts" | head -20
-```
+\`\`\`
 
 ---
 

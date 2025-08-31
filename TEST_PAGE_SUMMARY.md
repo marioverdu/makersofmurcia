@@ -3,9 +3,9 @@
 ## ✅ **Página de Test Creada**
 
 ### **URL de Acceso**
-```
+\`\`\`
 http://localhost:3000/work-experience-test
-```
+\`\`\`
 
 ## 🎯 **Características de la Página de Test**
 
@@ -36,9 +36,9 @@ http://localhost:3000/work-experience-test
 ## 🚀 **Cómo Usar la Página de Test**
 
 ### **1. Acceso**
-```
+\`\`\`
 http://localhost:3000/work-experience-test
-```
+\`\`\`
 
 ### **2. Verificación Inicial**
 1. **Cargar datos** - La página carga automáticamente los datos
@@ -143,9 +143,8 @@ http://localhost:3000/work-experience-test
 **¡La página de test está lista para usar!** 🚀
 
 ### **Acceso Rápido**
-```
+\`\`\`
 http://localhost:3000/work-experience-test
-```
+\`\`\`
 
 Esta página te permitirá verificar paso a paso que el sistema de work-experience funciona correctamente, desde la carga de datos hasta el guardado de cambios en la base de datos.
-

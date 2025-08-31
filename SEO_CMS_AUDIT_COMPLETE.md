@@ -19,13 +19,13 @@ Se ha realizado una auditoría completa de nuestro sistema CMS contra las **espe
 ### **🌐 URLs Amigables y Permanentes**
 - **✅ CUMPLE**: Estructura de URLs limpia y semántica
 - **📍 Evidencia**:
-  ```
+  \`\`\`
   ✅ /es/posts/view/1 (localizada)
   ✅ /en/posts/view/1 (localizada)
   ✅ /posts/view/1 (no localizada)
   ✅ Sin parámetros innecesarios
   ✅ Sin IDs autogenerados en URL
-  ```
+  \`\`\`
 - **🏆 Estado**: **COMPLETO**
 
 ### **📎 Etiquetas Canonical**
