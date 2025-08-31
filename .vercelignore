@@ -10,19 +10,19 @@ stories/
 *.backup
 *.original
 package-lock.json.backup
-app/admin/posts/page.tsx.backup
-app/home-page-client.tsx.backup
-app/posts/page.tsx.backup
+pnpm-lock.yaml
+yarn.lock
 
 # Test and debug files
 scripts/test-*.js
 scripts/debug-*.js
 scripts/test-*.cjs
 scripts/debug-*.cjs
+vitest.config.ts
+vitest.shims.d.ts
 
 # Package manager conflicts
-pnpm-lock.yaml
-yarn.lock
+# No changes needed here
 
 # Documentation (keep README.md)
 *.md
@@ -32,15 +32,19 @@ yarn.lock
 .next/
 node_modules/
 .vercel/
+.cache/
+dist/
+build/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment files (keep .env.example)
+# Environment files (keep only .env.example)
 .env.local
-.env.development
-.env.test
+.env.development.local
+.env.test.local
+.env.production.local
 
 # IDE files
 .vscode/
@@ -50,22 +54,18 @@ yarn-error.log*
 
 # OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
 # Build artifacts
-dist/
-build/
-out/
+# No changes needed here
 
 # Testing
-coverage/
-.nyc_output/
-__tests__/
-*.test.js
-*.test.ts
-*.spec.js
-*.spec.ts
+# No changes needed here
 
 # Temporary files
-.tmp/
-.temp/
+# No changes needed here
