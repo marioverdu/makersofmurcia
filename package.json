@@ -14,7 +14,7 @@
     "build-storybook": "storybook build",
     "vercel-build": "npm run generate-routes && next build",
     "verify-env": "npx tsx scripts/verify-env.ts",
-    "vercel-setup": "node scripts/vercel-env-setup.js",
+    "vercel-setup": "node scripts/vercel-env-setup.cjs",
     "deploy": "npm run vercel-setup && vercel --prod"
   },
   "dependencies": {
