@@ -24,6 +24,10 @@ const ALLOWED_PATHS = [
   '/admin',          // Panel admin (protegido por NextAuth)
   '/login',          // Página de login ⚠️ CRÍTICO para acceso
   '/signup',         // Página de registro
+  '/es/login',       // Login localizado español
+  '/en/login',       // Login localizado inglés
+  '/es/signup',      // Signup localizado español
+  '/en/signup',      // Signup localizado inglés
 ]
 
 // Extraer el locale de la URL
