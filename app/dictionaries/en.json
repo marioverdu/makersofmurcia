@@ -30,7 +30,6 @@
     "home": "Home",
     "posts": "Blog",
     "workExperience": "Work Experience",
-    "contact": "Contact",
     "admin": "Admin",
     "login": "Login",
     "logout": "Logout"
@@ -135,22 +134,6 @@
     "location": "Location",
     "description": "Description"
   },
-  "contact": {
-    "title": "Contact",
-    "subtitle": "Have a project in mind? Let's talk",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "send": "Send message",
-    "sending": "Sending...",
-    "sent": "Message sent",
-    "error": "Error sending message",
-    "phone": "Phone",
-    "subject": "Subject",
-    "required": "Required field",
-    "invalidEmail": "Invalid email",
-    "success": "Thank you for your message! I'll get back to you soon."
-  },
   "admin": {
     "title": "Administration",
     "dashboard": "Configuration",
@@ -167,7 +150,6 @@
   "footer": {
     "copyright": "© 2024 Mario Verdú. All rights reserved.",
     "privacy": "Privacy",
-    "terms": "Terms",
-    "contact": "Contact"
+    "terms": "Terms"
   }
 }

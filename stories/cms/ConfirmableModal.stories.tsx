@@ -18,7 +18,7 @@ const DemoForm = () => {
 }
 
 const meta: Meta<typeof ConfirmableModal> = {
-  title: 'Creation - Edition Post Modal/Confirmation Dialog',
+  title: 'CreationEditionPostModalConfirmationDialog',
   component: ConfirmableModal,
   parameters: {
     layout: 'fullscreen',
@@ -32,13 +32,13 @@ const meta: Meta<typeof ConfirmableModal> = {
 export default meta;
 type Story = StoryObj<typeof ConfirmableModal>;
 
-export const UnsavedChanges: Story = {
+export const Default: Story = {
   args: {
     isOpen: true,
     title: 'Editar Post',
     onClose: () => {},
   },
-  name: 'Unsaved changes',
+  name: 'Default',
   render: (args) => (
     <div style={{ width: '100vw', height: '100vh', background: '#F7F8FC', padding: 24 }}>
       <ConfirmableModal {...args}>

@@ -11,7 +11,8 @@ import { SystemInfoBubbleMaster, UserBubbleMaster } from "@/components/chat-tuen
 import { TypingIndicator } from "@/components/chat-tuenti/components/typing-indicator"
 import { useProposalNotifications } from "./hooks/use-proposal-notifications" // Keep this if it's used for notifications
 import { ChatInput } from "@/components/chat-tuenti/components/chat-input"
-import { ChatHeader } from "./chat-header"
+import { useChatTranslations } from "@/hooks/use-chat-translations"
+
 
 interface QuickReplyOption {
   id: string
@@ -49,6 +50,7 @@ export default function ChatTuentiMaster({
   customStyles,
   isMobile = false,
 }: ChatTuentiMasterProps) {
+  const t = useChatTranslations()
   const [messages, setMessages] = useState<Message[]>([])
   const [flowState, setFlowState] = useState<FlowState>({
     step: "initial",
@@ -263,15 +265,15 @@ export default function ChatTuentiMaster({
         // Si no se cargó ninguna conversación, establecer el mensaje inicial
         const initialMsg: Message = {
           id: "initial_msg",
-          content: initialMessage || "👋 ¡Hola! Soy el asistente virtual de Mario Verdú. ¿En qué puedo ayudarte hoy?",
+          content: initialMessage || t.initialMessage,
           sender: "bot",
           timestamp: new Date().toISOString(),
           type: "quick-reply",
           conversation_id: getConversationId(),
           metadata: {
             options: [
-              { id: "explorar_servicios_v2", text: "Explorar servicios v2", action: "explorar-servicios-v2" },
-              { id: "hablar_con_mario", text: "Contactar con Mario", action: "contactarConMario" },
+              { id: "explorar_servicios_v2", text: t.exploreServices, action: "explorar-servicios-v2" },
+              { id: "hablar_con_mario", text: t.contactMario, action: "contactarConMario" },
             ],
           },
         }
@@ -1604,8 +1606,44 @@ export default function ChatTuentiMaster({
               ...customStyles,
             }}
           >
-            {/* ChatHeader y otros componentes */}
-            <ChatHeader robustToggleChat={toggleChat} />
+            {/* Header del chat */}
+            <div 
+              className="flex items-center justify-between p-3 border-b border-[#efefef] bg-[#F9FCFF] rounded-t-xl w-full overflow-hidden box-border flex-shrink-0 flex-grow-0" 
+              role="banner" 
+              style={{ height: 38, maxHeight: 38 }}
+            >
+              <div className="flex items-center gap-2 min-w-0 overflow-hidden">
+                <img 
+                  alt="Status" 
+                  className="w-[9px] h-[9px] flex-shrink-0" 
+                  src="https://assets.marioverdu.com/bg/icon/chat/tuenti-status.svg"
+                />
+                <span className="font-medium text-[#333333] truncate">marietsBot</span>
+              </div>
+              <div className="flex items-center gap-1 flex-shrink-0 ml-2">
+                <button 
+                  className="p-1 hover:bg-[#f5f5f5] rounded-sm transition-colors" 
+                  aria-label="Close chat"
+                  onClick={toggleChat}
+                >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="lucide lucide-x w-4 h-4 text-[#cccccc]"
+                  >
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
 
             <div
               ref={messagesContainerRef}
@@ -1692,9 +1730,44 @@ export default function ChatTuentiMaster({
               ...customStyles,
             }}
           >
-            {/* ChatHeader y otros componentes */}
-            <ChatHeader robustToggleChat={toggleChat} />
-
+            {/* Header del chat */}
+            <div 
+              className="flex items-center justify-between p-3 border-b border-[#efefef] bg-[#F9FCFF] rounded-t-xl w-full overflow-hidden box-border flex-shrink-0 flex-grow-0" 
+              role="banner" 
+              style={{ height: 38, maxHeight: 38 }}
+            >
+              <div className="flex items-center gap-2 min-w-0 overflow-hidden">
+                <img 
+                  alt="Status" 
+                  className="w-[9px] h-[9px] flex-shrink-0" 
+                  src="https://assets.marioverdu.com/bg/icon/chat/tuenti-status.svg"
+                />
+                <span className="font-medium text-[#333333] truncate">marietsBot</span>
+              </div>
+              <div className="flex items-center gap-1 flex-shrink-0 ml-2">
+                <button 
+                  className="p-1 hover:bg-[#f5f5f5] rounded-sm transition-colors" 
+                  aria-label="Close chat"
+                  onClick={toggleChat}
+                >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="lucide lucide-x w-4 h-4 text-[#cccccc]"
+                  >
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
             <div
               ref={messagesContainerRef}
               className="flex-1 overflow-y-auto overflow-x-hidden p-4 pb-0 pt-3 bg-[#F9FCFF] chat-messages"

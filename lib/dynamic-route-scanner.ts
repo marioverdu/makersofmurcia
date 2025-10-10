@@ -42,8 +42,18 @@ export class DynamicRouteScanner {
         }
       }
 
-      console.log(`📋 DynamicRouteScanner: Found ${routes.length} routes`)
-      return routes.sort((a, b) => a.path.localeCompare(b.path))
+      // Deduplicar rutas por path (puede haber múltiples page.tsx, layout.tsx para la misma ruta)
+      const uniqueRoutes = Array.from(
+        new Map(routes.map(r => [r.path, r])).values()
+      )
+      
+      const duplicatesFound = routes.length - uniqueRoutes.length
+      if (duplicatesFound > 0) {
+        console.log(`🔄 DynamicRouteScanner: Removed ${duplicatesFound} duplicate routes`)
+      }
+      
+      console.log(`📋 DynamicRouteScanner: Found ${uniqueRoutes.length} unique routes`)
+      return uniqueRoutes.sort((a, b) => a.path.localeCompare(b.path))
     } catch (error) {
       console.error("❌ Error scanning routes:", error)
       return []

@@ -56,39 +56,26 @@ export class RouteVisibilityManager {
       // Intentar obtener desde KV store
       try {
         const record = await kv.get<RouteVisibilityRecord>(key)
-        const visibility = record?.isVisible ?? true
+        const visibility = record?.isVisible
+        console.log(`🔍 [KV] Record for "${path}":`, record)
         console.log(`🔍 [${this.isProduction() ? "PROD" : "DEV"}] KV visibility for ${path}: ${visibility}`)
+        // FAIL-CLOSED: si no hay registro (undefined) → false
+        if (visibility === undefined) {
+          console.log(`🔒 No record for ${path}, returning false (fail-closed)`)
+          return false
+        }
         return visibility
       } catch (kvError) {
-        console.warn(`⚠️ [${this.isProduction() ? "PROD" : "DEV"}] KV failed for ${path}:`, kvError)
+        console.error(`❌ [${this.isProduction() ? "PROD" : "DEV"}] KV ERROR for ${path}:`, kvError)
 
-        // En production, si KV falla, devolver true (fail-safe)
-        if (this.isProduction()) {
-          console.log(`🔒 [PROD] KV failed, defaulting to visible for ${path}`)
-          return true
-        }
-
-        // En development, intentar localStorage como fallback
-        if (typeof window !== "undefined") {
-          try {
-            const localData = localStorage.getItem("routesVisibility")
-            if (localData) {
-              const visibility = JSON.parse(localData)
-              const localVisibility = visibility[path] ?? true
-              console.log(`📱 [DEV] localStorage fallback for ${path}: ${localVisibility}`)
-              return localVisibility
-            }
-          } catch (localError) {
-            console.warn(`⚠️ [DEV] localStorage fallback failed:`, localError)
-          }
-        }
-
-        // Último recurso: devolver true
-        return true
+        // FAIL-CLOSED: si KV falla → false (404)
+        console.log(`🔒 KV failed for ${path}, returning false (fail-closed)`)
+        return false
       }
     } catch (error) {
-      console.warn(`⚠️ Error obteniendo visibilidad para ${path}:`, error)
-      return true // fail-safe
+      console.error(`❌ UNEXPECTED ERROR for ${path}:`, error)
+      console.log(`🔒 Returning false (fail-closed) for ${path}`)
+      return false
     }
   }
 
@@ -112,26 +99,8 @@ export class RouteVisibilityManager {
     } catch (kvError) {
       console.error(`❌ [${this.isProduction() ? "PROD" : "DEV"}] KV save failed for ${path}:`, kvError)
 
-      // En production, si KV falla, lanzar error
-      if (this.isProduction()) {
-        throw new Error(`Failed to save route visibility in production: ${kvError.message}`)
-      }
-
-      // En development, usar localStorage como fallback
-      console.warn(`⚠️ [DEV] Using localStorage fallback for ${path}`)
-    }
-
-    // En development, también actualizar localStorage (siempre, como backup)
-    if (!this.isProduction() && typeof window !== "undefined") {
-      try {
-        const localData = localStorage.getItem("routesVisibility") || "{}"
-        const visibility = JSON.parse(localData)
-        visibility[path] = isVisible
-        localStorage.setItem("routesVisibility", JSON.stringify(visibility))
-        console.log(`📱 [DEV] localStorage updated: ${path} -> ${isVisible}`)
-      } catch (localError) {
-        console.warn(`⚠️ [DEV] localStorage update failed:`, localError)
-      }
+      // Siempre lanzar error si falla guardar (prod y dev)
+      throw new Error(`Failed to save route visibility: ${kvError.message}`)
     }
   }
 
@@ -155,28 +124,6 @@ export class RouteVisibilityManager {
       return validRecords
     } catch (error) {
       console.error(`❌ [${this.isProduction() ? "PROD" : "DEV"}] Error getting all visibilities from KV:`, error)
-
-      // En development, intentar localStorage como fallback
-      if (!this.isProduction() && typeof window !== "undefined") {
-        console.warn("⚠️ [DEV] KV failed, trying localStorage fallback")
-        try {
-          const localData = localStorage.getItem("routesVisibility")
-          if (localData) {
-            const visibility = JSON.parse(localData)
-            const records = Object.entries(visibility).map(([path, isVisible]) => ({
-              path,
-              isVisible: isVisible as boolean,
-              lastModified: new Date().toISOString(),
-              modifiedBy: "localStorage-fallback",
-            }))
-            console.log(`📱 [DEV] localStorage fallback returned ${records.length} records`)
-            return records
-          }
-        } catch (localError) {
-          console.error("❌ [DEV] localStorage fallback also failed:", localError)
-        }
-      }
-
       return []
     }
   }

@@ -94,7 +94,7 @@ export function FaviconWidget() {
 
         toast({
           title: "✅ Favicon actualizado",
-          description: "El favicon se ha actualizado correctamente",
+          description: "El favicon se ha actualizado correctamente. Los archivos estáticos también se han actualizado para los buscadores.",
         })
 
         console.log(`✅ [${isProduction ? "PROD" : "DEV"}] Favicon updated successfully`)
@@ -182,14 +182,20 @@ export function FaviconWidget() {
         {/* Current Favicon Preview */}
         <div className="flex items-center gap-3">
           <div className="flex-shrink-0">
-            <img 
-              src={currentFavicon} 
-              alt="Favicon actual"
-              className="w-8 h-8 rounded border border-gray-200"
-              onError={(e) => {
-                e.currentTarget.src = "/favicon.ico"
-              }}
-            />
+            {currentFavicon ? (
+              <img 
+                src={currentFavicon} 
+                alt="Favicon actual"
+                className="w-8 h-8 rounded border border-gray-200"
+                onError={(e) => {
+                  e.currentTarget.src = "/favicon.ico"
+                }}
+              />
+            ) : (
+              <div className="w-8 h-8 rounded border border-gray-200 bg-gray-100 flex items-center justify-center text-xs text-gray-400">
+                ?
+              </div>
+            )}
           </div>
           <div className="flex-1 min-w-0">
             <div className="text-xs font-medium text-gray-800 truncate">
@@ -238,11 +244,7 @@ export function FaviconWidget() {
           </Button>
         </div>
 
-        {/* Environment Info */}
-        <div className="flex items-center justify-between text-xs text-gray-500">
-          <span>Entorno: {isProduction ? "Producción" : "Desarrollo"}</span>
-          <span>DB: ✅</span>
-        </div>
+        {/* Secciones informativas eliminadas para un widget más compacto */}
       </CardContent>
     </Card>
   )

@@ -3,11 +3,13 @@
 import { useState, useEffect, useRef } from "react"
 import type { Locale } from "@/types/i18n"
 import { HeaderTabs } from "@/components/ui/header/tabs"
-import { HeaderContextualMenu } from "@/components/ui/header/header-contextual-menu"
-import ChatTuentiButtonMaster from "@/components/chat-tuenti/chat-tuenti-button-master"
-import ChatTuentiMaster from "@/components/chat-tuenti/chat-tuenti-master"
+import { useGlobalChat } from "@/contexts/global-chat-context"
+import { useLanguage } from "@/contexts/language-context"
+import { UnifiedPageLoading } from "@/components/ui/unified-page-loading"
 import { VideoCover } from "@/components/video-cover"
 import { MasterStackedImages } from "@/components/master-stacked-images"
+import { RobustLayout } from "@/components/layout/robust-layout"
+import { useRouteRedirection } from "@/hooks/use-route-redirection"
 
 // HeaderV2: Header transparente con paddings laterales turquesa según breakpoint
 function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang: Locale }) {
@@ -43,7 +45,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
           </div>
           {/* Tabs centradas absolutamente */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" />
+            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" lang={lang} />
           </div>
           {/* Selector de idioma al extremo derecho */}
           <div 
@@ -61,7 +63,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
               justifyContent: 'flex-end'
             }}
           >
-            <HeaderContextualMenu currentLang={lang} hidden={true} />
+
           </div>
         </div>
         {/* Padding derecho transparente */}
@@ -149,16 +151,31 @@ interface RootPageClientProps {
 
 export default function RootPageClient({ lang }: RootPageClientProps) {
   const [isAvatarInHeader, setIsAvatarInHeader] = useState(false)
-  const [isChatOpen, setIsChatOpen] = useState(false)
-  const [randomText, setRandomText] = useState("")
+  const { openChatWithMessage } = useGlobalChat()
+  const { currentLanguage, isLoading: languageLoading } = useLanguage()
+  
+  // Usar el idioma del contexto si está disponible, sino el prop
+  const displayLanguage = languageLoading ? lang : (currentLanguage || lang)
+  
+  console.log('🌍 [RootPageClient] Language detection:', {
+    lang,
+    currentLanguage,
+    languageLoading,
+    displayLanguage
+  })
+  
   const [hasAnimated, setHasAnimated] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isHydrated, setIsHydrated] = useState(false)
   const pageRef = useRef<HTMLDivElement>(null)
   const avatarRef = useRef<HTMLDivElement>(null)
   const isMobileRef = useRef(false)
+  
+  // Hook de redirección centralizado (nota: Server Component ya protege, esto es redundante pero no afecta)
+  const { isChecking: checkingVisibility, showMaintenance: maintenance } = useRouteRedirection('/[lang]', lang)
 
-  // Avatar position state
-  const [avatarLeftPosition, setAvatarLeftPosition] = useState({
+  // Avatar position state - static values to prevent layout shift
+  const avatarLeftPosition = {
     xs: 16,
     sm: 24,
     md: 32,
@@ -167,64 +184,21 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
     xxl: 56,
     mobile: 16,
     desktop: 40,
-  })
+  }
 
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen)
   }
 
   useEffect(() => {
+    // Set hydrated immediately after mount to prevent layout shift
+    setIsHydrated(true)
+    
     // Animation logic for text transition
     const timer = setTimeout(() => {
       setHasAnimated(true)
       setIsTransitioning(true)
     }, 2000)
-
-    // Calculate avatar position based on breakpoint
-    const calculateAvatarPosition = () => {
-      if (!avatarRef.current) return
-
-      const rect = avatarRef.current.getBoundingClientRect()
-      const windowWidth = window.innerWidth
-
-      // Get the main content section to extract its padding
-      const mainContentSection = document.querySelector(".flex.flex-col.items-start.relative.z-10")
-      const mainSectionPadding = { left: 16, right: 16 } // Default fallback values
-
-      if (mainContentSection) {
-        const computedStyle = window.getComputedStyle(mainContentSection)
-        const paddingLeft = Number.parseInt(computedStyle.paddingLeft, 10)
-        const paddingRight = Number.parseInt(computedStyle.paddingRight, 10)
-
-        if (!isNaN(paddingLeft)) mainSectionPadding.left = paddingLeft
-        if (!isNaN(paddingRight)) mainSectionPadding.right = paddingRight
-      }
-
-      // Determine breakpoint and set position
-      const newPositions = { ...avatarLeftPosition }
-
-      if (windowWidth < 480) {
-        newPositions.xs = mainSectionPadding.left
-        newPositions.mobile = mainSectionPadding.left
-      } else if (windowWidth < 640) {
-        newPositions.sm = mainSectionPadding.left
-        newPositions.mobile = mainSectionPadding.left
-      } else if (windowWidth < 768) {
-        newPositions.md = mainSectionPadding.left
-        newPositions.mobile = mainSectionPadding.left
-      } else if (windowWidth < 1024) {
-        newPositions.lg = mainSectionPadding.left
-        newPositions.desktop = mainSectionPadding.left
-      } else if (windowWidth < 1280) {
-        newPositions.xl = mainSectionPadding.left
-        newPositions.desktop = mainSectionPadding.left
-      } else {
-        newPositions.xxl = mainSectionPadding.left
-        newPositions.desktop = mainSectionPadding.left
-      }
-
-      setAvatarLeftPosition(newPositions)
-    }
 
     // Detectar si es un dispositivo móvil
     const checkIfMobile = () => {
@@ -239,12 +213,10 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
 
     // Initialize everything
     checkIfMobile()
-    setTimeout(calculateAvatarPosition, 100)
 
     // Add event listeners
     window.addEventListener("resize", () => {
       checkIfMobile()
-      calculateAvatarPosition()
     })
     window.addEventListener("scroll", handleScroll)
 
@@ -253,16 +225,10 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", () => {
         checkIfMobile()
-        calculateAvatarPosition()
       })
     }
   }, [])
 
-  useEffect(() => {
-    const texts = ["Construyamos tu negocio", '"Menos pero mejor" ―Dieter Rams']
-    const randomIndex = Math.floor(Math.random() * texts.length)
-    setRandomText(texts[randomIndex])
-  }, [])
 
   const getBreakpointPadding = () => {
     const windowWidth = typeof window !== "undefined" ? window.innerWidth : 0
@@ -275,19 +241,30 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
     return avatarLeftPosition.xxl
   }
 
+  // Show loading while not hydrated or checking visibility
+  if (!isHydrated || checkingVisibility) {
+    return <UnifiedPageLoading />
+  }
+
+  // Show maintenance if all routes are disabled
+  if (maintenance) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Sitio en mantenimiento</h1>
+          <p className="text-gray-600">Estamos trabajando para mejorar tu experiencia. Vuelve pronto.</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div
-      ref={pageRef}
-      className="min-h-screen w-full overflow-x-hidden pt-[40px]"
-      style={{
-        backgroundImage: "url('https://assets.marioverdu.com/bg/root-site.min.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+    <RobustLayout
+      className="pt-[40px]"
+      backgroundImage="https://assets.marioverdu.com/bg/root-site.min.png"
     >
       {/* Header */}
-      <HeaderV2 isAvatarInHeader={isAvatarInHeader} lang={lang} />
+      <HeaderV2 isAvatarInHeader={isAvatarInHeader} lang={displayLanguage} />
 
       {/* Claim section */}
       <div
@@ -304,10 +281,6 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
       >
         <div
           className="claim flex flex-col items-center md:items-center lg:items-start relative z-10 gap-[12px] md:gap-[16px] xl:gap-[24px] px-4 md:px-[60px] w-full max-w-[1092px] py-[60px]"
-          style={{
-            paddingLeft: `${getBreakpointPadding()}px`,
-            paddingRight: `${getBreakpointPadding()}px`,
-          }}
         >
           {/* Avatar image - fixed size 28x28px */}
           <div
@@ -327,7 +300,7 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
             {/* Primer texto - Se desvanece hacia arriba */}
             {!hasAnimated && (
               <p className="text-center md:text-center lg:text-left text-[16px] md:text-[20px] xl:text-[24px] absolute top-0 left-0 right-0 transition-all duration-800 ease-in-out translate-y-0 opacity-90 text-[hsl(var(--color-text))] font-thin">
-                Equivócate rápido
+                {displayLanguage === 'es' ? 'Equivócate rápido' : 'Fail fast'}
               </p>
             )}
 
@@ -337,15 +310,15 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
                 isTransitioning ? "translate-y-0 opacity-90" : "translate-y-full opacity-0"
               }`}
             >
-              Trabaja inteligentemente no más
+              {displayLanguage === 'es' ? 'Trabaja inteligentemente no más' : 'Work smart, not hard'}
             </p>
           </div>
           <div className="text-text leading-tight w-full text-center md:text-center lg:text-left">
             <p className="text-center md:text-center lg:text-left text-[24px] md:text-[32px] xl:text-[44px] font-medium text-[hsl(var(--color-text))]">
-              Diseño de producto digital
+              {displayLanguage === 'es' ? 'Diseño de producto digital' : 'Digital product design'}
             </p>
             <p className="text-center md:text-center lg:text-left text-[24px] md:text-[32px] xl:text-[44px] font-medium text-[hsl(var(--color-text))]">
-              enfocado en tu visión de negocio
+              {displayLanguage === 'es' ? 'enfocado en tu visión de negocio' : 'focused on your business vision'}
             </p>
           </div>
 
@@ -360,12 +333,13 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
             <div className="flex flex-col gap-[8px] md:gap-[12px] xl:gap-[16px] order-1 md:order-1">
               <span className="inline-block w-[16px] h-[20px] py-1 bg-[#E4F6F5] text-[hsl(206,1%,27%)] text-[12px] font-medium rounded-[6px] border border-[#c5e0df]"></span>
               <h2 className="text-[hsl(206,1%,27%)] leading-tight text-left text-[20px] md:text-[28px] xl:text-[28px]">
-                Comprendo a tu usuario
+                {displayLanguage === 'es' ? 'Comprendo a tu usuario' : 'I understand your user'}
               </h2>
               <p className="text-[#6C727F] text-left text-[15.2px] font-normal">
-                Exploro las necesidades de mi cliente, recopilo la documentación cuantitativa y cualitativa disponible,
-                documento cada fase del proceso y alineo las necesidades del usuario y del cliente con ayuda de
-                herramienas intelectuales (Análisis competitivo, bocetaje, flujos de usuario, etc)
+                {displayLanguage === 'es' 
+                  ? 'Exploro las necesidades de mi cliente, recopilo la documentación cuantitativa y cualitativa disponible, documento cada fase del proceso y alineo las necesidades del usuario y del cliente con ayuda de herramienas intelectuales (Análisis competitivo, bocetaje, flujos de usuario, etc)'
+                  : 'I explore my client\'s needs, gather available quantitative and qualitative documentation, document each phase of the process and align user and client needs with the help of intellectual tools (competitive analysis, sketching, user flows, etc)'
+                }
               </p>
             </div>
 
@@ -389,12 +363,13 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
             <div className="flex flex-col gap-[8px] md:gap-[12px] xl:gap-[16px] order-1 md:order-2">
               <span className="inline-block w-[16px] h-[20px] py-1 bg-[#eff0ff] text-[hsl(206,1%,27%)] text-[12px] font-medium rounded-[6px] border border-[#D8D9F2]"></span>
               <h2 className="text-[hsl(206,1%,27%)] leading-tight text-left text-[20px] md:text-[28px] xl:text-[28px]">
-                Defino y diseño soluciones
+                {displayLanguage === 'es' ? 'Defino y diseño soluciones' : 'I define and design solutions'}
               </h2>
               <p className="text-[#6C727F] text-left text-[15.2px] font-normal">
-                Itero en comunicación continua y planteo un MVP componentizado en Diseño o código. Puesta en común de
-                las debilidades y oportunidades del proyecto así como el enfoque estratégico a seguir en cuanto al
-                alcance los entregables.
+                {displayLanguage === 'es' 
+                  ? 'Itero en comunicación continua y planteo un MVP componentizado en Diseño o código. Puesta en común de las debilidades y oportunidades del proyecto así como el enfoque estratégico a seguir en cuanto al alcance los entregables.'
+                  : 'I iterate in continuous communication and propose a componentized MVP in Design or code. Sharing of project weaknesses and opportunities as well as the strategic approach to follow regarding the scope of deliverables.'
+                }
               </p>
             </div>
           </div>
@@ -409,11 +384,13 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
             <div className="flex flex-col gap-[8px] md:gap-[12px] xl:gap-[16px] order-1 md:order-1">
               <span className="inline-block w-[16px] h-[20px] py-1 bg-[#ffebdc] text-[hsl(206,1%,27%)] text-[12px] font-medium rounded-[6px] border border-[#F2E4D8]"></span>
               <h2 className="text-[hsl(206,1%,27%)] leading-tight text-left text-[20px] md:text-[28px] xl:text-[28px]">
-                Pruebo, optimizo y lanzo
+                {displayLanguage === 'es' ? 'Pruebo, optimizo y lanzo' : 'I test, optimize and launch'}
               </h2>
               <p className="text-[#6C727F] text-left text-[15.2px] font-normal">
-                Reviso, componetizo y prototipo. Recopilación de feedback y refinamiento de las soluciones. Entrega del
-                proyecto y de la documentación técnica, actualización de las librerías con las mejoras validadas.
+                {displayLanguage === 'es' 
+                  ? 'Reviso, componetizo y prototipo. Recopilación de feedback y refinamiento de las soluciones. Entrega del proyecto y de la documentación técnica, actualización de las librerías con las mejoras validadas.'
+                  : 'I review, componentize and prototype. Feedback collection and solution refinement. Project delivery and technical documentation, library updates with validated improvements.'
+                }
               </p>
             </div>
 
@@ -434,70 +411,28 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
           <div 
             className="flex justify-between items-center relative py-[24px] px-6 xl:py-[24px] xl:px-6 rounded-[12px] backdrop-blur-md border border-white/40 w-full cursor-pointer bg-[rgba(242,248,255,0.7)]"
             onClick={(e) => {
-              // Create and dispatch a custom event to open the chat
-              const event = new CustomEvent("openChatTuenti", {
-                detail: {
-                  message: "Contactar con Mario",
-                  action: "contactv2",
-                },
-              })
-              window.dispatchEvent(event)
-
-              // Also set localStorage values to ensure the chat opens
-              localStorage.setItem("openChatTuenti", "true")
-              localStorage.setItem("chatTuentiMessage", "Contactar con Mario")
-              localStorage.setItem("chatTuentiAction", "contactv2")
-
-              // Force a refresh of the chat component
-              const chatRefreshEvent = new Event("refreshChatTuenti")
-              window.dispatchEvent(chatRefreshEvent)
+              // Usar el contexto global para abrir el chat con mensaje
+              openChatWithMessage(displayLanguage === 'es' ? "Contactar con Mario" : "Contact Mario")
             }}
           >
             <div className="absolute inset-0 rounded-[12px] overflow-hidden -z-10 pointer-events-none bg-[rgba(255,255,255,0.3)] backdrop-blur-md border border-[rgba(0,94,182,0.1)] shadow-[rgba(0,0,0,0.05)_0px_1px_3px]"></div>
             <h2 className="text-[hsl(206,1%,27%)] text-xl font-medium">
-              ¿List@ para empezar?
+              {displayLanguage === 'es' ? '¿List@ para empezar?' : 'Ready to get started?'}
             </h2>
             <button 
               onClick={(e) => {
-                e.stopPropagation() // Prevent parent onClick from firing
-                // Create and dispatch a custom event to open the chat
-                const event = new CustomEvent("openChatTuenti", {
-                  detail: {
-                    message: "Contactar con Mario",
-                    action: "contactv2",
-                  },
-                })
-                window.dispatchEvent(event)
-
-                // Also set localStorage values to ensure the chat opens
-                localStorage.setItem("openChatTuenti", "true")
-                localStorage.setItem("chatTuentiMessage", "Contactar con Mario")
-                localStorage.setItem("chatTuentiAction", "contactv2")
-
-                // Force a refresh of the chat component
-                const chatRefreshEvent = new Event("refreshChatTuenti")
-                window.dispatchEvent(chatRefreshEvent)
+                e.stopPropagation()
+                // Usar el contexto global para abrir el chat con mensaje
+                openChatWithMessage(displayLanguage === 'es' ? "Contactar con Mario" : "Contact Mario")
               }}
               className="flex items-center justify-center bg-transparent border-none cursor-pointer p-0 hover:opacity-80 transition-opacity" 
-              aria-label="Contactar con Mario"
+              aria-label={displayLanguage === 'es' ? "Contactar con Mario" : "Contact Mario"}
             >
               <img src="https://assets.marioverdu.com/icon/go-to.svg" alt="Go to icon" width="16" height="16" />
             </button>
           </div>
         </div>
       </div>
-
-      {/* Chat Components */}
-      <ChatTuentiButtonMaster
-        isOpen={isChatOpen}
-        onToggle={toggleChat}
-        isMobile={isMobileRef.current}
-      />
-      <ChatTuentiMaster
-        isOpen={isChatOpen}
-        toggleChat={toggleChat}
-        isMobile={isMobileRef.current}
-      />
 
       <style jsx>{`
         .header-blue-padding {
@@ -564,6 +499,6 @@ export default function RootPageClient({ lang }: RootPageClientProps) {
           }
         }
       `}</style>
-    </div>
+    </RobustLayout>
   )
 }

@@ -30,9 +30,17 @@ interface Post {
   excerpt: string
   content: string
   featuredImage?: string
+  featured_image?: string
+  contentType?: string
   createdAt: string
   updatedAt: string
   status: 'draft' | 'published'
+  title_es?: string
+  title_en?: string
+  content_es?: string
+  content_en?: string
+  excerpt_es?: string
+  excerpt_en?: string
 }
 
 // Interfaz MediaItem - DESINSTALADA
@@ -52,6 +60,7 @@ export default function AdminPostsPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState<'all' | 'draft' | 'published'>('all')
+  const [activeType, setActiveType] = useState<'all' | 'post' | 'post+' | 'photo' | 'quote' | 'video-player' | 'music-player' | 'portfolio' | 'debug'>('all')
   
   // Modal de edición
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -60,6 +69,7 @@ export default function AdminPostsPage() {
   const [editExcerpt, setEditExcerpt] = useState('')
   const [editFeaturedImage, setEditFeaturedImage] = useState('')
   const [editContent, setEditContent] = useState('')
+  const [editContentType, setEditContentType] = useState('post')
   const [isSaving, setIsSaving] = useState(false)
   
   // Estado para edición bilingüe
@@ -71,16 +81,12 @@ export default function AdminPostsPage() {
   const [editContentEs, setEditContentEs] = useState('')
   const [editContentEn, setEditContentEn] = useState('')
   
-  // Modal de creación
+  // Modal unificado (edición/creación)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
-  const [newTitle, setNewTitle] = useState('')
-  const [newExcerpt, setNewExcerpt] = useState('')
-  const [newFeaturedImage, setNewFeaturedImage] = useState('')
   const [isCreating, setIsCreating] = useState(false)
   
   // Referencias
   const contentRef = useRef<HTMLDivElement>(null)
-  const newContentRef = useRef<HTMLDivElement>(null)
   
   // Estado para media y tablas avanzadas - DESINSTALADO
   // const [isMediaModalOpen, setIsMediaModalOpen] = useState(false)
@@ -186,6 +192,7 @@ export default function AdminPostsPage() {
     setEditTitle(post.title)
     setEditExcerpt(post.excerpt || '')
     setEditFeaturedImage(post.featured_image || '')
+    setEditContentType(post.contentType || 'post')
     
     // Cargar datos bilingües
     setEditTitleEs(post.title_es || post.title || '')
@@ -219,6 +226,7 @@ export default function AdminPostsPage() {
     setEditExcerpt('')
     setEditFeaturedImage('')
     setEditContent('')
+    setEditContentType('post')
     
     // Limpiar estados bilingües
     setEditTitleEs('')
@@ -320,18 +328,38 @@ export default function AdminPostsPage() {
   }
 
   const openCreateModal = () => {
+    // Limpiar todos los campos para crear un nuevo post
+    setEditingPost(null)
+    setEditTitle('')
+    setEditExcerpt('')
+    setEditFeaturedImage('')
+    setEditContent('')
+    setEditContentType('post')
+    
+    // Limpiar estados bilingües
+    setEditTitleEs('')
+    setEditTitleEn('')
+    setEditExcerptEs('')
+    setEditExcerptEn('')
+    setEditContentEs('')
+    setEditContentEn('')
+    setActiveLanguageTab('es')
+    
     setIsCreateModalOpen(true)
   }
 
   const closeCreateModal = () => {
     setIsCreateModalOpen(false)
-    setNewTitle('')
-    setNewExcerpt('')
-    setNewFeaturedImage('')
+    // Los campos se limpian en openCreateModal
   }
 
   const handleSaveEdit = async () => {
     if (!editingPost) return
+    
+    if (!editFeaturedImage.trim()) {
+      alert("La imagen destacada es obligatoria para publicar")
+      return
+    }
     
     // Siempre proceder con el guardado, pero mostrar diálogo si hay imágenes fallidas
     await performSaveEdit()
@@ -376,6 +404,7 @@ export default function AdminPostsPage() {
       const updateData = {
         // Campos comunes
         featured_image: editFeaturedImage,
+        contentType: editContentType,
         
         // Campos específicos por idioma
         title_es: editTitleEs,
@@ -425,8 +454,13 @@ export default function AdminPostsPage() {
   }
 
   const handleSaveNewPost = async () => {
-    if (!newTitle.trim()) {
+    if (!(editTitle?.trim() || editTitleEs?.trim() || editTitleEn?.trim())) {
       alert("El título es obligatorio")
+      return
+    }
+
+    if (!editFeaturedImage.trim()) {
+      alert("La imagen destacada es obligatoria para publicar")
       return
     }
 
@@ -446,7 +480,7 @@ export default function AdminPostsPage() {
     }
 
     // Verificar si hay traducciones fallidas en el contenido nuevo
-    const content = newContentRef.current?.innerHTML || ''
+    const content = contentRef.current?.innerHTML || ''
     if (content) {
       try {
         const { extractTextFromHTML, translateMultipleLines } = await import('@/lib/translation-service')
@@ -467,21 +501,22 @@ export default function AdminPostsPage() {
     
     try {
       // Obtener el contenido del editor
-      const content = newContentRef.current?.innerHTML || ''
+      const content = contentRef.current?.innerHTML || ''
 
       // Generar slug automáticamente
-      const slug = newTitle
+      const slug = editTitle
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '')
 
       // Debug: mostrar qué se está enviando
       console.log('📤 Enviando datos al crear post:', {
-        title: newTitle,
+        title: editTitle,
         slug: slug,
-        excerpt: newExcerpt,
+        excerpt: editExcerpt,
         content: content,
-        featured_image: newFeaturedImage,
+        featured_image: editFeaturedImage,
+        contentType: editContentType,
         published: true,
         status: 'published',
         author: 'Mario Verdú'
@@ -491,11 +526,12 @@ export default function AdminPostsPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title: newTitle,
+          title: editTitle,
           slug: slug,
-          excerpt: newExcerpt,
+          excerpt: editExcerpt,
           content: content,
-          featured_image: newFeaturedImage,
+          featured_image: editFeaturedImage,
+          contentType: editContentType,
           published: true,
           status: 'published',
           author: 'Mario Verdú'
@@ -1744,7 +1780,8 @@ export default function AdminPostsPage() {
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesStatus = filterStatus === 'all' || post.status === filterStatus
-    return matchesSearch && matchesStatus
+    const matchesType = activeType === 'all' || (post.contentType || 'post') === activeType
+    return matchesSearch && matchesStatus && matchesType
   })
 
   if (isLoading) {
@@ -1788,6 +1825,31 @@ export default function AdminPostsPage() {
           <option value="draft">Borradores</option>
           <option value="published">Publicados</option>
         </select>
+      </div>
+
+      {/* Category Tabs por tipo de contenido */}
+      <div className="flex items-center justify-start mb-6">
+        <div className="flex space-x-4">
+          {[
+            { key: 'all', label: 'Todos' },
+            { key: 'post', label: 'Post' },
+            { key: 'post+', label: 'Post+' },
+            { key: 'photo', label: 'Photo' },
+            { key: 'quote', label: 'Quote' },
+            { key: 'video-player', label: 'Video Player' },
+            { key: 'music-player', label: 'Music Player' },
+            { key: 'portfolio', label: 'Portfolio' },
+          { key: 'debug', label: 'Debug' },
+          ].map((t: any) => (
+            <button
+              key={t.key}
+              className={`text-[#333] whitespace-nowrap ${activeType === t.key ? '' : 'opacity-50'}`}
+              onClick={() => setActiveType(t.key)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Lista de posts */}
@@ -1842,8 +1904,12 @@ export default function AdminPostsPage() {
         ))}
       </div>
 
-      {/* Modal de Edición */}
-      <ConfirmableModal isOpen={isEditModalOpen} onClose={closeEditModal} title="Editar Post">
+      {/* Modal Unificado (Edición/Creación) */}
+      <ConfirmableModal 
+        isOpen={isEditModalOpen || isCreateModalOpen} 
+        onClose={editingPost ? closeEditModal : closeCreateModal} 
+        title={editingPost ? "Editar Post" : "Crear Nuevo Post"}
+      >
             
             {/* Tabs de idioma */}
             <div className="flex border-b border-gray-200 mb-6">
@@ -1880,10 +1946,15 @@ export default function AdminPostsPage() {
                   type="text"
                   value={activeLanguageTab === 'es' ? editTitleEs : editTitleEn}
                   onChange={(e) => {
+                    const v = e.target.value
                     if (activeLanguageTab === 'es') {
-                      setEditTitleEs(e.target.value)
+                      setEditTitleEs(v)
+                      // Sincronizar título base con ES
+                      setEditTitle(v)
                     } else {
-                      setEditTitleEn(e.target.value)
+                      setEditTitleEn(v)
+                      // Si no hay título base aún, usar EN
+                      if (!editTitle) setEditTitle(v)
                     }
                   }}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white"
@@ -1908,6 +1979,29 @@ export default function AdminPostsPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white"
                   placeholder={activeLanguageTab === 'es' ? 'Breve descripción del post en español' : 'Brief description of the post in English'}
                 />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  Tipo de Contenido
+                </label>
+                <select
+                  value={editContentType || 'post'}
+                  onChange={(e) => setEditContentType(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white"
+                >
+                  <option value="post">Post</option>
+                  <option value="post+">Post+</option>
+                  <option value="photo">Photo</option>
+                  <option value="quote">Quote</option>
+                  <option value="video-player">Video Player</option>
+                  <option value="music-player">Music Player</option>
+                  <option value="portfolio">Portfolio</option>
+                  <option value="debug">Debug</option>
+                </select>
+                <p className="text-sm text-gray-500 mt-1">
+                  Selecciona el tipo de contenido para este post
+                </p>
               </div>
               
               <div>
@@ -1983,7 +2077,7 @@ export default function AdminPostsPage() {
                       className="flex items-center gap-1"
                     >
                       <Type className="w-4 h-4" />
-                      Cita
+                      Quote
                     </Button>
                     <Button
                       type="button"
@@ -2018,168 +2112,19 @@ export default function AdminPostsPage() {
             </div>
             
             <div className="flex justify-end gap-2 mt-6">
-              <Button variant="outline" onClick={closeEditModal}>
+              <Button variant="outline" onClick={editingPost ? closeEditModal : closeCreateModal}>
                 Cancelar
               </Button>
               <Button 
-                onClick={handleSaveEdit} 
-                disabled={isSaving}
+                onClick={editingPost ? handleSaveEdit : handleSaveNewPost} 
+                disabled={isSaving || isCreating}
                 className="bg-primary hover:bg-primary/90"
               >
-                {isSaving ? 'Guardando...' : 'Guardar Cambios'}
+                {isSaving ? 'Guardando...' : isCreating ? 'Creando...' : editingPost ? 'Guardar Cambios' : 'Crear Post'}
               </Button>
             </div>
       </ConfirmableModal>
 
-      {/* Modal de Creación */}
-      <ConfirmableModal isOpen={isCreateModalOpen} onClose={closeCreateModal} title="Crear Nuevo Post">
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Título *
-                </label>
-                <input
-                  type="text"
-                  value={newTitle}
-                  onChange={(e) => setNewTitle(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white"
-                  placeholder="Título del post"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Extracto
-                </label>
-                <textarea
-                  value={newExcerpt}
-                  onChange={(e) => setNewExcerpt(e.target.value)}
-                  rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white"
-                  placeholder="Breve descripción del post"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Imagen Destacada (URL)
-                </label>
-                <input
-                  type="url"
-                  value={newFeaturedImage}
-                  onChange={(e) => setNewFeaturedImage(e.target.value)}
-                  placeholder="https://ejemplo.com/imagen.jpg"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white"
-                />
-                <p className="text-sm text-gray-500 mt-1">
-                  URL de la imagen que se mostrará como thumbnail del post
-                </p>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Contenido
-                </label>
-                
-                {/* Barra de herramientas de formato */}
-                <div className="flex items-center gap-2 mb-2 p-2 bg-gray-50 rounded-md border">
-                  <span className="text-sm text-gray-600 mr-2">Formato:</span>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => formatText('bold')}
-                    className="flex items-center gap-1"
-                  >
-                    <Bold className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => formatText('italic')}
-                    className="flex items-center gap-1"
-                  >
-                    <Italic className="w-4 h-4" />
-                  </Button>
-                  
-                  <div className="ml-4 border-l border-gray-300 pl-4">
-                    <span className="text-sm text-gray-600 mr-2">Insertar:</span>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={insertAdvancedTableV2New}
-                      className="flex items-center gap-1"
-                    >
-                      <Table className="w-4 h-4" />
-                      Tabla Avanzada
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={insertAsciiArt}
-                      className="flex items-center gap-1"
-                    >
-                      <Code className="w-4 h-4" />
-                      ASCII Art
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={insertQuote}
-                      className="flex items-center gap-1"
-                    >
-                      <Type className="w-4 h-4" />
-                      Cita
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={insertSeparator}
-                      className="flex items-center gap-1"
-                    >
-                      <Minus className="w-4 h-4" />
-                      Separador
-                    </Button>
-                  </div>
-                </div>
-                
-                {/* Editor WYSIWYG real */}
-                <LoadingSpinner isLoading={isCreating} message="Creando post...">
-                  <div
-                    ref={newContentRef}
-                    contentEditable
-                    className="w-full min-h-[500px] px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-white text-gray-800 overflow-y-auto prose max-w-none"
-                    style={{ 
-                      whiteSpace: 'pre-wrap',
-                      wordWrap: 'break-word',
-                      lineHeight: '1.6'
-                    }}
-                    placeholder="Escribe el contenido del post aquí... Usa los botones de arriba para insertar elementos especiales."
-                    onPaste={(e) => handleSmartPaste(e, newContentRef)}
-                  />
-                </LoadingSpinner>
-              </div>
-            </div>
-            
-            <div className="flex justify-end gap-2 mt-6">
-              <Button variant="outline" onClick={closeCreateModal}>
-                Cancelar
-              </Button>
-              <Button 
-                onClick={handleSaveNewPost} 
-                disabled={isCreating}
-                className="bg-primary hover:bg-primary/90"
-              >
-                {isCreating ? 'Creando...' : 'Crear Post'}
-              </Button>
-            </div>
-      </ConfirmableModal>
 
       {/* Modal de Media - DESINSTALADO */}
       {/* Ya no necesitamos este modal porque es más intuitivo pegar URLs directamente */}

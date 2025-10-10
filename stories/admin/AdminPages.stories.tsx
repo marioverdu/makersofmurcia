@@ -102,27 +102,7 @@ type Story = StoryObj<typeof RealRouteFrame>;
 
 // Historias por cada ruta admin detectada. El nombre visible es exactamente el path.
 
-export const AdminRoot: Story = {
+export const Default: Story = {
   name: '/admin',
   args: { path: '/admin' },
-};
-
-export const AdminRoutes: Story = {
-  name: '/admin/routes',
-  args: { path: '/admin/routes' },
-};
-
-export const AdminBooking: Story = {
-  name: '/admin/booking',
-  args: { path: '/admin/booking' },
-};
-
-export const AdminAnalytics: Story = {
-  name: '/admin/analytics',
-  args: { path: '/admin/analytics' },
-};
-
-export const AdminPosts: Story = {
-  name: '/admin/posts',
-  args: { path: '/admin/posts' },
 };

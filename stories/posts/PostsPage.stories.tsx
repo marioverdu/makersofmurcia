@@ -103,7 +103,7 @@ const PostsPageReal = ({ lang, dict }: { lang: 'es' | 'en', dict: any }) => {
 };
 
 const meta: Meta<typeof PostsPageReal> = {
-  title: 'Posts/Posts Page Real',
+  title: 'PostsPageReal',
   component: PostsPageReal,
   parameters: {
     layout: 'fullscreen',
@@ -175,7 +175,7 @@ const mockDictEN = {
 };
 
 // Página real en español
-export const SpanishWithPosts: Story = {
+/* export const SpanishWithPosts: Story = {
   args: {
     lang: 'es',
     dict: mockDictES,
@@ -187,10 +187,10 @@ export const SpanishWithPosts: Story = {
       },
     },
   },
-};
+}; */
 
 // Página real en inglés
-export const EnglishWithPosts: Story = {
+/* export const EnglishWithPosts: Story = {
   args: {
     lang: 'en',
     dict: mockDictEN,
@@ -202,4 +202,4 @@ export const EnglishWithPosts: Story = {
       },
     },
   },
-};
+}; */

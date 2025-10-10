@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { DynamicRouteScanner } from "@/lib/dynamic-route-scanner"
 import { RouteManagementService } from "@/lib/route-management-service"
+import { RouteVisibilityManager } from "@/lib/route-visibility"
 
 export async function GET(request: NextRequest) {
   const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production" || process.env.NODE_ENV === "production"
@@ -48,6 +49,7 @@ export async function GET(request: NextRequest) {
         modifiedBy: routeSetting?.modified_by,
         accessCount: routeSetting?.access_count || 0,
         lastAccessed: routeSetting?.last_accessed,
+        redirectTo: routeSetting?.redirect_to || null,
       }
     })
 
@@ -138,8 +140,11 @@ export async function POST(request: NextRequest) {
     }
 
     try {
+      // 1) Persistencia en SQL
       await RouteManagementService.setRouteVisibility(path, isVisible, modifiedBy || "anonymous")
-      console.log(`✅ [${isProduction ? "PROD" : "DEV"}] API: Route visibility updated successfully`)
+      // 2) Replicación inmediata en KV para enforcement en el borde
+      await RouteVisibilityManager.setRouteVisibility(path, isVisible, modifiedBy || "admin-panel")
+      console.log(`✅ [${isProduction ? "PROD" : "DEV"}] API: Route visibility updated (SQL + KV) successfully`)
     } catch (routeError) {
       console.error(`❌ [${isProduction ? "PROD" : "DEV"}] Error guardando configuración:`, routeError)
 

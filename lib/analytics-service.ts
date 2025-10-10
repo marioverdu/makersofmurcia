@@ -82,6 +82,21 @@ export class AnalyticsService {
     }
   }
 
+  // Obtener el número total de vistas por ruta
+  static async getPageViewCount(page_path: string): Promise<number> {
+    try {
+      if (!page_path) return 0
+      const result = await sql`
+        SELECT COUNT(*) as count FROM page_events WHERE page_path = ${page_path}
+      `
+      const count = parseInt(result[0]?.count || '0')
+      return isNaN(count) ? 0 : count
+    } catch (error) {
+      console.error('Error getting page view count:', error)
+      return 0
+    }
+  }
+
   // Registrar evento personalizado
   static async trackCustomEvent(data: {
     event_name: string

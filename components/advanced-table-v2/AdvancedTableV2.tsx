@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { Table } from '@tiptap/extension-table';
-import { TableRow } from '@tiptap/extension-table-row';
-import { TableCell } from '@tiptap/extension-table-cell';
-import { TableHeader } from '@tiptap/extension-table-header';
+import dynamic from 'next/dynamic';
 import { useAdvancedTableV2 } from '../../hooks/use-advanced-table-v2';
 import { MediaModal } from './MediaModal';
 import { SmartTableCell } from './SmartTableCell';
+
+// Importar TipTap de forma dinámica solo en el cliente
+const TipTapEditor = dynamic(() => import('./TipTapEditor'), {
+  ssr: false,
+  loading: () => <div className="w-full h-32 bg-gray-100 animate-pulse rounded"></div>
+});
 
 interface AdvancedTableV2Props {
   initialContent?: string;
@@ -45,29 +46,6 @@ export const AdvancedTableV2: React.FC<AdvancedTableV2Props> = ({
     getMediaForCell
   } = useAdvancedTableV2();
 
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Table.configure({
-        resizable: true,
-        handleWidth: 5,
-        cellMinWidth: 92,
-      }),
-      TableRow,
-      TableHeader,
-      TableCell,
-    ],
-    content: initialContent,
-    onUpdate: ({ editor }) => {
-      onChange?.(editor.getHTML());
-    },
-    editorProps: {
-      attributes: {
-        class: 'prose max-w-none focus:outline-none',
-      },
-    },
-  });
-
   // Cerrar menú al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -76,69 +54,51 @@ export const AdvancedTableV2: React.FC<AdvancedTableV2Props> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    if (typeof document !== 'undefined') {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
   }, []);
 
   const insertTable = () => {
-    if (editor) {
-      editor.chain().focus().insertTable({ rows: tableRows, cols: tableCols }).run();
-      setIsTableMenuOpen(false);
-    }
+    // Esta función se manejará en el componente TipTapEditor
+    setIsTableMenuOpen(false);
   };
 
   const addColumnBefore = () => {
-    if (editor) {
-      editor.chain().focus().addColumnBefore().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const addColumnAfter = () => {
-    if (editor) {
-      editor.chain().focus().addColumnAfter().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const deleteColumn = () => {
-    if (editor) {
-      editor.chain().focus().deleteColumn().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const addRowBefore = () => {
-    if (editor) {
-      editor.chain().focus().addRowBefore().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const addRowAfter = () => {
-    if (editor) {
-      editor.chain().focus().addRowAfter().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const deleteRow = () => {
-    if (editor) {
-      editor.chain().focus().deleteRow().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const deleteTable = () => {
-    if (editor) {
-      editor.chain().focus().deleteTable().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const toggleHeaderRow = () => {
-    if (editor) {
-      editor.chain().focus().toggleHeaderRow().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   const toggleHeaderColumn = () => {
-    if (editor) {
-      editor.chain().focus().toggleHeaderColumn().run();
-    }
+    // Esta función se manejará en el componente TipTapEditor
   };
 
   // Función para manejar la adición de media
@@ -291,8 +251,10 @@ export const AdvancedTableV2: React.FC<AdvancedTableV2Props> = ({
 
       {/* Editor de contenido */}
       <div className="border border-gray-300 rounded-lg">
-        <EditorContent 
-          editor={editor} 
+        <TipTapEditor 
+          initialContent={initialContent}
+          onChange={onChange}
+          placeholder={placeholder}
           className="min-h-[400px] p-4 focus:outline-none"
         />
       </div>

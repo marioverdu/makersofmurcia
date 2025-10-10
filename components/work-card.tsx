@@ -16,6 +16,7 @@ export interface WorkCardProps {
   logoSrc: string
   showHeaderBox?: boolean // Nuevo prop opcional
   hideExpandButton?: boolean // Nuevo prop para ocultar el botón expandir
+  customBadge?: string // Nuevo prop para badges personalizados
 }
 
 export function WexpNestedCard({ companyName, jobTitle, year, logoSrc }: { companyName: string, jobTitle: string, year: string, logoSrc: string }) {
@@ -49,6 +50,7 @@ export function WorkCard({
   logoSrc,
   showHeaderBox = false,
   hideExpandButton = false,
+  customBadge,
 }: WorkCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const imageRef = useRef<HTMLDivElement>(null)
@@ -59,7 +61,10 @@ export function WorkCard({
     companyName === "Publicidad y RRPP" ||
     companyName === "Instituto de Artes Visuales" ||
     companyName === "Example University" ||
-    companyName === "Autoescuela Nueva Cosmos"
+    companyName === "Autoescuela Nueva Cosmos" ||
+    // Añadir nombres en inglés
+    companyName === "Advertising and PR" ||
+    companyName === "Driving license"
 
   const isMarioVerduLogo = logoSrc === "https://assets.marioverdu.com/logo/empty.png"
 
@@ -102,19 +107,21 @@ export function WorkCard({
                           ? "Example University"
                         : companyName === "Autoescuela Nueva Cosmos"
                           ? jobTitle
-                          : "UMU"
+                        : companyName === "Driving license"
+                          ? jobTitle
+                        : "UMU"
                       : jobTitle}
                   </span>
                   <span className="font-normal text-gray-500"> | {companyName}</span>
                 </h3>
 
-                {isWebUXUICard || isEducationCard ? null : (
+                {(isWebUXUICard || isEducationCard) && !customBadge ? null : (
                   <div className="mt-[3px] inline-flex items-center justify-center h-[15px] px-1 bg-[#FAFCFD] rounded-[99999px] border border-[hsl(var(--primary))]/10">
                     <span
                       className="text-[0.6rem] font-medium text-gray-600 leading-none"
                       style={{ paddingTop: "1px" }}
                     >
-                      {companyName === "Desarrollador Full stack• CEO" ? "En desarrollo" : "NDA"}
+                      {customBadge || (companyName === "Desarrollador Full stack• CEO" ? "En desarrollo" : "NDA")}
                     </span>
                   </div>
                 )}

@@ -35,8 +35,12 @@ export const ContextualScrollbar: React.FC<ContextualScrollbarProps> = ({
   const scrollableWidth = Math.max(0, tableWidth - containerWidth)
   const thumbRatio = containerWidth / tableWidth
   const thumbWidth = Math.max(20, Math.min(containerWidth * 0.8, containerWidth * thumbRatio))
-  const scrollbarTrackWidth = containerWidth - thumbWidth // Usar containerWidth para el track
-  const thumbLeft = scrollableWidth > 0 ? (scrollLeft / scrollableWidth) * scrollbarTrackWidth : 0
+  const scrollbarTrackWidth = containerWidth - thumbWidth // Ancho disponible para el track
+  
+  // Calcular la posición del thumb - debe poder llegar hasta el borde derecho
+  const thumbLeft = scrollableWidth > 0 
+    ? (scrollLeft / scrollableWidth) * scrollbarTrackWidth 
+    : (containerWidth - thumbWidth) / 2 // Centrar cuando no hay scroll
 
   // Manejar el inicio del drag
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
@@ -58,7 +62,7 @@ export const ContextualScrollbar: React.FC<ContextualScrollbarProps> = ({
       if (!isDragging.current) return
 
       const deltaX = moveEvent.clientX - dragStartX.current
-      // Mapear el movimiento del mouse 1:1 sobre el track visible
+      // Mapear el movimiento del mouse sobre el track disponible
       const newThumbLeft = Math.max(0, Math.min(scrollbarTrackWidth, (dragStartScrollLeft.current / scrollableWidth) * scrollbarTrackWidth + deltaX))
       const newScrollLeft = (newThumbLeft / scrollbarTrackWidth) * scrollableWidth
       
@@ -71,9 +75,8 @@ export const ContextualScrollbar: React.FC<ContextualScrollbarProps> = ({
       isDragging.current = false
       document.body.style.userSelect = ''
       
-      if (thumbRef.current) {
-        thumbRef.current.style.background = '#cbd5e0'
-      }
+      // No cambiar manualmente el estilo del thumb - dejar que CSS maneje todo
+      // El cursor volverá automáticamente a 'grab' cuando se suelte el botón
 
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseup', handleMouseUp)
@@ -92,14 +95,15 @@ export const ContextualScrollbar: React.FC<ContextualScrollbarProps> = ({
 
     const rect = scrollbarRef.current.getBoundingClientRect()
     const clickX = e.clientX - rect.left
-    // Centrar el thumb en el punto clicado y mapear a scrollLeft
-    const targetScrollRatio = Math.max(0, Math.min(1, (clickX - thumbWidth / 2) / scrollbarTrackWidth))
-    const targetScrollLeft = targetScrollRatio * scrollableWidth
+    
+    // Calcular la posición del click relativa al track disponible
+    const clickRatio = Math.max(0, Math.min(1, clickX / containerWidth))
+    const targetScrollLeft = clickRatio * scrollableWidth
 
     const clampedScrollLeft = Math.max(0, Math.min(scrollableWidth, targetScrollLeft))
     
     onScrollChange(clampedScrollLeft)
-  }, [scrollableWidth, thumbWidth, scrollbarTrackWidth, onScrollChange])
+  }, [scrollableWidth, containerWidth, onScrollChange])
 
   // Si no hay overflow o no es visible, no renderizar
   if (!hasHorizontalOverflow || !isVisible) {
@@ -108,38 +112,36 @@ export const ContextualScrollbar: React.FC<ContextualScrollbarProps> = ({
 
   const scrollbarStyle: React.CSSProperties = {
     position: 'absolute',
-    // Posicionar alineado con el área visible de la tabla (compensar scrollLeft)
-    left: `${Math.max(0, tableLeft - scrollLeft)}px`,
-    top: `${lastVisibleRowBottom}px`,
-    width: `${containerWidth}px`, // Ancho del contenedor visible, no de la tabla completa
-    height: '16px',
-    background: 'rgba(241, 245, 249, 0.9)',
-    border: '1px solid rgba(203, 213, 224, 0.3)',
-    borderRadius: '8px',
+    left: `${tableLeft}px`, // Alinear perfectamente con el contenedor
+    top: `${lastVisibleRowBottom + 12}px`, // Posicionar debajo de la tabla con 12px de separación
+    width: `${containerWidth}px`, // EXACTAMENTE el mismo ancho que el contenedor
+    height: '8px', // Scrollbar más delgada estilo Google
+    background: 'transparent', // Fondo transparente
+    borderRadius: '4px', // Bordes más suaves
     zIndex: 10,
     cursor: 'pointer',
-    transition: 'top 0.1s ease-out, opacity 0.15s ease',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     opacity: isVisible ? 1 : 0,
     transform: 'translateZ(0)',
     willChange: 'top, opacity'
   }
 
+  // Calcular dimensiones para centrado perfecto
+  const scrollbarHeight = 8
+  const thumbHeight = 6
+  const thumbTop = (scrollbarHeight - thumbHeight) / 2 // 1px para centrar verticalmente
+
   const thumbStyle: React.CSSProperties = {
     position: 'absolute',
     left: `${thumbLeft}px`,
-    top: '3px',
+    top: `${thumbTop}px`, // Centrado verticalmente: (8px - 6px) / 2 = 1px
     width: `${thumbWidth}px`,
-    height: '10px',
-    background: isDragging.current ? '#3D5B6A' : '#5A7A8A',
-    borderRadius: '5px',
-    cursor: isDragging.current ? 'grabbing' : 'grab',
-    transition: isDragging.current ? 'none' : 'background-color 0.1s ease',
+    height: `${thumbHeight}px`,
+    background: '#9AA0A6', // Color fijo, sin cambios basados en isDragging
+    borderRadius: '3px', // Bordes redondeados estilo Google
+    cursor: 'grab', // Cursor fijo, sin cambios basados en isDragging
     transform: 'translateZ(0)',
     willChange: 'left, background-color',
-    boxShadow: isDragging.current 
-      ? '0 2px 6px rgba(0, 0, 0, 0.3)' 
-      : '0 1px 3px rgba(0, 0, 0, 0.2)'
+    opacity: 0.8, // Semi-transparente por defecto
   }
 
   return (
@@ -159,44 +161,31 @@ export const ContextualScrollbar: React.FC<ContextualScrollbarProps> = ({
       {/* Estilos adicionales para hover y estados */}
       <style jsx>{`
         .contextual-scrollbar {
-          transition: top 0.1s ease-out, opacity 0.15s ease;
           will-change: top, opacity;
+          background: rgba(0, 0, 0, 0.1); /* Track sutil estilo Google */
         }
         
         .contextual-scrollbar:hover {
-          background: rgba(247, 250, 252, 0.98);
+          background: rgba(0, 0, 0, 0.15); /* Track más visible en hover */
         }
         
         .contextual-scrollbar-thumb {
-          transition: background-color 0.1s ease;
-          will-change: background-color;
+          will-change: background-color, opacity;
+          border-radius: 3px; /* Bordes redondeados estilo Google */
+          cursor: grab; /* Cursor fijo: siempre grab */
+          opacity: 0.8; /* Semi-transparente por defecto */
         }
         
         .contextual-scrollbar-thumb:hover {
-          background: #4A6B7A !important;
-          transform: scale(1.05) translateZ(0);
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+          background: #5F6368 !important; /* Color más oscuro en hover */
+          opacity: 1; /* Completamente visible en hover */
+          cursor: grab; /* Mantener grab en hover */
         }
         
         .contextual-scrollbar-thumb:active {
-          background: #3D5B6A !important;
-          cursor: grabbing;
-          transform: scale(0.98) translateZ(0);
-        }
-
-        .contextual-scrollbar {
-          animation: quickFadeIn 0.2s ease-out;
-        }
-
-        @keyframes quickFadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(5px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          background: #5F6368 !important; /* Color oscuro cuando está activo */
+          cursor: grabbing; /* Solo grabbing mientras está activo (pulsado) */
+          opacity: 1; /* Completamente visible cuando está activo */
         }
 
         .contextual-scrollbar,

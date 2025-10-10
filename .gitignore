@@ -24,6 +24,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -35,5 +36,16 @@ next-env.d.ts
 # data
 /data
 
+# storybook
 *storybook.log
 storybook-static
+
+# backups and temp files
+*.backup
+*.tmp
+*.temp
+*.old
+*.log
+
+# cache
+/cache

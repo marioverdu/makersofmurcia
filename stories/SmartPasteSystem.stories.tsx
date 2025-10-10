@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'Next.js/Smart Paste System',
+  title: 'SmartPasteSystem',
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -908,7 +908,7 @@ El **Smart Paste System** es un sistema robusto y elegante que mejora significat
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SmartPasteSystemDoc: Story = {
+export const Default: Story = {
   render: () => (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto">

@@ -45,7 +45,7 @@ http://localhost:3000/admin/analytics
 
 ### Producción:
 \`\`\`
-https://aaa23444.vercel.app/admin/analytics
+https://marioverdu.com/admin/analytics
 \`\`\`
 
 ## 📈 Métricas Disponibles

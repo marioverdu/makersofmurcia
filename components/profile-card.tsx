@@ -2,11 +2,27 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
 import ReactDOM from "react-dom"
+import { ContextualMenu } from "@/components/ui/contextual-menu"
+import { ContextualMenuLoading } from "@/components/ui/contextual-menu-loading"
+import { useLanguage } from "@/contexts/language-context"
 
-export function ProfileCardWidescreens() {
+interface ProfileCardWidescreensProps {
+  lang?: string
+}
+
+export function ProfileCardWidescreens({ lang }: ProfileCardWidescreensProps = {}) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
+  const { currentLanguage } = useLanguage()
+  const displayLanguage = lang || currentLanguage || 'es'
+  
+  console.log('🌍 [ProfileCardWidescreens] Language detection:', {
+    lang,
+    currentLanguage,
+    displayLanguage
+  })
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -20,14 +36,64 @@ export function ProfileCardWidescreens() {
         setMenuOpen(false)
       }
     }
+    const handleScroll = () => {
+      setMenuOpen(false)
+    }
     document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [menuOpen])
 
-  const handleDownloadPDF = () => {
-    setMenuOpen(false)
-    // Aquí puedes poner la lógica real de descarga de PDF
-    window.open("/cv-mario-verdu.pdf", "_blank")
+  const handleDownloadPDF = async () => {
+    setIsGeneratingPDF(true)
+    // No cerrar el menú inmediatamente para mostrar el estado de carga
+    
+    try {
+      console.log('📄 [ProfileCard] Generating PDF...')
+      
+      // Obtener la URL actual
+      const currentUrl = window.location.href
+      
+      // Llamar a la API para generar el PDF
+      const response = await fetch('/api/generate-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url: currentUrl,
+          lang: displayLanguage
+        })
+      })
+      
+      if (!response.ok) {
+        throw new Error('Error generating PDF')
+      }
+      
+      // Crear blob y descargar
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'cv-mario-verdu.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
+      
+      console.log('✅ [ProfileCard] PDF downloaded successfully')
+      
+    } catch (error) {
+      console.error('❌ [ProfileCard] Error downloading PDF:', error)
+      // Fallback al PDF estático si hay error
+      window.open("/api/cv", "_blank")
+    } finally {
+      setIsGeneratingPDF(false)
+      setMenuOpen(false) // Cerrar el menú al finalizar la generación
+    }
   }
 
   return (
@@ -40,7 +106,13 @@ export function ProfileCardWidescreens() {
             </div>
             <div className="flex flex-col">
               <span className="text-base font-medium text-[hsl(var(--color-text))]">Mario Verdú</span>
-              <span className="text-sm font-normal text-gray-500">Frontend Developer (Next.js / React)</span>
+              <div className="text-sm font-normal text-gray-500">
+                <div className="md:hidden">
+                  <div>Frontend Developer</div>
+                  <div>(Next.js / React)</div>
+                </div>
+                <span className="hidden md:block">Frontend Developer (Next.js / React)</span>
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -94,23 +166,20 @@ export function ProfileCardWidescreens() {
               {menuOpen && (
                 <div
                   ref={menuRef}
-                  className="absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 animate-fadeIn"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="options-menu"
+                  className="absolute right-0 mt-2 z-50"
                 >
-                  <div className="py-1" role="none">
-                  <button
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-md transition-colors"
-                    role="menuitem"
-                    onClick={handleDownloadPDF}
-                  >
-                      Descargar en PDF
-                      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#3D5B6A" className="ml-2" aria-hidden="true">
-                        <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"></path>
-                      </svg>
-                  </button>
-                  </div>
+                  {isGeneratingPDF ? (
+                    <ContextualMenuLoading 
+                      ref={menuRef}
+                      onDownloadPDF={handleDownloadPDF}
+                    />
+                  ) : (
+                    <ContextualMenu 
+                      ref={menuRef}
+                      onDownloadPDF={handleDownloadPDF}
+                      lang={displayLanguage}
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -126,6 +195,9 @@ export function ProfileCardPhone() {
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [isClient, setIsClient] = useState(false)
+  const { currentLanguage } = useLanguage()
+  const displayLanguage = currentLanguage || 'es'
+  
   useEffect(() => { setIsClient(true) }, [])
 
   // Estado para la posición Y del menú contextual en móvil
@@ -135,7 +207,9 @@ export function ProfileCardPhone() {
   useEffect(() => {
     if (menuOpen && buttonRef.current && window.innerWidth < 768) {
       const rect = buttonRef.current.getBoundingClientRect();
-      setMenuY(rect.bottom + window.scrollY + 8); // 8px de separación
+      // Para absolute positioning, necesitamos la posición relativa al documento
+      // Subir 70px hacia arriba desde la posición original (20px + 50px)
+      setMenuY(rect.bottom + window.scrollY - 70); // 70px hacia arriba
     }
   }, [menuOpen])
 
@@ -155,34 +229,54 @@ export function ProfileCardPhone() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [menuOpen])
 
-  const handleDownloadPDF = () => {
-    setMenuOpen(false)
-    window.open("/cv-mario-verdu.pdf", "_blank")
+  const handleDownloadPDF = async () => {
+    setIsGeneratingPDF(true)
+    // No cerrar el menú inmediatamente para mostrar el estado de carga
+    
+    try {
+      console.log('📄 [ProfileCard] Generating PDF...')
+      
+      // Obtener la URL actual
+      const currentUrl = window.location.href
+      
+      // Llamar a la API para generar el PDF
+      const response = await fetch('/api/generate-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url: currentUrl,
+          lang: displayLanguage
+        })
+      })
+      
+      if (!response.ok) {
+        throw new Error('Error generating PDF')
+      }
+      
+      // Crear blob y descargar
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'cv-mario-verdu.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
+      
+      console.log('✅ [ProfileCard] PDF downloaded successfully')
+      
+    } catch (error) {
+      console.error('❌ [ProfileCard] Error downloading PDF:', error)
+      // Fallback al PDF estático si hay error
+      window.open("/api/cv", "_blank")
+    } finally {
+      setIsGeneratingPDF(false)
+      setMenuOpen(false) // Cerrar el menú al finalizar la generación
+    }
   }
-
-  // Renderizado condicional del menú contextual
-  const menuContent = (
-    <div
-      ref={menuRef}
-      className="w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 animate-fadeIn"
-      role="menu"
-      aria-orientation="vertical"
-      aria-labelledby="options-menu"
-    >
-      <div className="flex justify-center sm:justify-start py-1" role="none">
-        <button
-          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-md transition-colors"
-          role="menuitem"
-          onClick={handleDownloadPDF}
-        >
-          Descargar en PDF
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#3D5B6A" className="ml-2" aria-hidden="true">
-            <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  )
 
   return (
     <section className="mt-[40px]">
@@ -193,7 +287,13 @@ export function ProfileCardPhone() {
           </div>
           <div className="flex flex-col items-center text-center">
             <span className="text-base font-medium text-[hsl(var(--color-text))]">Mario Verdú</span>
-            <span className="text-sm font-normal text-gray-500">Frontend Developer (Next.js / React)</span>
+            <div className="text-sm font-normal text-gray-500">
+              <div className="md:hidden">
+                <div>Frontend Developer</div>
+                <div>(Next.js / React)</div>
+              </div>
+              <span className="hidden md:block">Frontend Developer (Next.js / React)</span>
+            </div>
           </div>
           <div className="flex items-center gap-2 w-full justify-center">
             <div
@@ -246,23 +346,20 @@ export function ProfileCardPhone() {
               {menuOpen && (
                 <div
                   ref={menuRef}
-                  className="absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 animate-fadeIn"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="options-menu"
+                  className="absolute right-0 mt-2 z-50"
                 >
-                    <div className="py-1" role="none">
-                  <button
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-md transition-colors"
-                    role="menuitem"
-                    onClick={handleDownloadPDF}
-                  >
-                        Descargar en PDF
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#3D5B6A" className="ml-2" aria-hidden="true">
-                          <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"></path>
-                        </svg>
-                  </button>
-                    </div>
+                  {isGeneratingPDF ? (
+                    <ContextualMenuLoading 
+                      ref={menuRef}
+                      onDownloadPDF={handleDownloadPDF}
+                    />
+                  ) : (
+                    <ContextualMenu 
+                      ref={menuRef}
+                      onDownloadPDF={handleDownloadPDF}
+                      lang={displayLanguage}
+                    />
+                  )}
                 </div>
               )}
               </div>
@@ -270,12 +367,26 @@ export function ProfileCardPhone() {
           </div>
         </div>
         {/* Menú contextual centrado en xs/sm (fuera del botón, pero a la misma altura Y) */}
-        {isClient && menuOpen && menuY !== null && (
+        {isClient && menuOpen && (
           <div
-            className="fixed left-1/2 -translate-x-1/2 z-[9999] md:hidden"
-            style={{ top: menuY, pointerEvents: 'auto' }}
+            className="absolute left-1/2 -translate-x-1/2 z-[9999] md:hidden"
+            style={{ 
+              top: menuY !== null ? `${menuY}px` : '50%',
+              pointerEvents: 'auto' 
+            }}
           >
-            {menuContent}
+            {isGeneratingPDF ? (
+              <ContextualMenuLoading 
+                ref={menuRef}
+                onDownloadPDF={handleDownloadPDF}
+              />
+            ) : (
+              <ContextualMenu 
+                ref={menuRef}
+                onDownloadPDF={handleDownloadPDF}
+                lang={displayLanguage}
+              />
+            )}
           </div>
         )}
       </div>

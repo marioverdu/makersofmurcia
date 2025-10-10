@@ -30,7 +30,6 @@
     "home": "Inicio",
     "posts": "Blog",
     "workExperience": "Experiencia Laboral",
-    "contact": "Contacto",
     "admin": "Administración",
     "login": "Iniciar Sesión",
     "logout": "Cerrar Sesión"
@@ -135,22 +134,6 @@
     "location": "Ubicación",
     "description": "Descripción"
   },
-  "contact": {
-    "title": "Contacto",
-    "subtitle": "¿Tienes un proyecto en mente? Hablemos",
-    "name": "Nombre",
-    "email": "Email",
-    "message": "Mensaje",
-    "send": "Enviar mensaje",
-    "sending": "Enviando...",
-    "sent": "Mensaje enviado",
-    "error": "Error al enviar mensaje",
-    "phone": "Teléfono",
-    "subject": "Asunto",
-    "required": "Campo requerido",
-    "invalidEmail": "Email inválido",
-    "success": "¡Gracias por tu mensaje! Te responderé pronto."
-  },
   "admin": {
     "title": "Administración",
     "dashboard": "Panel de control",
@@ -167,7 +150,6 @@
   "footer": {
     "copyright": "© 2024 Mario Verdú. Todos los derechos reservados.",
     "privacy": "Privacidad",
-    "terms": "Términos",
-    "contact": "Contacto"
+    "terms": "Términos"
   }
 }

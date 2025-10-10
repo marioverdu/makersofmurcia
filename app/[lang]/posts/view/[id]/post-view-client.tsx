@@ -2,11 +2,13 @@
 
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
+import CategoryTabs from "@/components/ui/category-tabs"
 import { HeaderTabs } from "@/components/ui/header/tabs"
-import { HeaderContextualMenu } from "@/components/ui/header/header-contextual-menu"
+
 import ChatTuentiButtonMaster from "@/components/chat-tuenti/chat-tuenti-button-master"
 import ChatTuentiMaster from "@/components/chat-tuenti/chat-tuenti-master"
 import AdvancedTableV2View from "@/components/advanced-table-v2/AdvancedTableV2View"
+import FeaturedImage from "@/components/ui/featured-image"
 import { enhanceContentForSEO } from "@/lib/content-enhancer"
 import PostSEO from "@/components/seo/post-seo"
 import { UnifiedLoading } from "@/components/ui/unified-loading"
@@ -53,7 +55,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
           </div>
           {/* Tabs centradas absolutamente */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" />
+            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" lang={lang} />
           </div>
           {/* Selector de idioma al extremo derecho */}
           <div 
@@ -71,7 +73,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
               justifyContent: 'flex-end'
             }}
           >
-            <HeaderContextualMenu currentLang={lang} hidden={true} />
+
           </div>
         </div>
         {/* Padding derecho transparente */}
@@ -133,9 +135,13 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
   const [post, setPost] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [pageViews, setPageViews] = useState<number>(0)
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [isAvatarInHeader, setIsAvatarInHeader] = useState(false)
   const [selectedTab, setSelectedTab] = useState<"posts" | "about">("posts")
+  const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production" || process.env.NODE_ENV === "production"
+  
+  // Nota: La protección de rutas se maneja en el Server Component (page.tsx)
 
   const toggleChat = () => setIsChatOpen((prev) => !prev)
 
@@ -171,6 +177,26 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
     }
   }, [postId, lang])
 
+  // Obtener contador real de vistas vía engine de analytics
+  useEffect(() => {
+    const fetchViews = async () => {
+      try {
+        // page_path debe coincidir con lo que trackea AnalyticsTracker
+        const pagePath = `/${lang}/posts/view/${postId}`
+        const res = await fetch(`/api/analytics/page-views?page_path=${encodeURIComponent(pagePath)}`)
+        if (!res.ok) return
+        const data = await res.json()
+        if (typeof data?.views === 'number') setPageViews(data.views)
+      } catch (_) {
+        // Silencioso: no bloquear la UI por métricas
+      }
+    }
+
+    if (postId) {
+      fetchViews()
+    }
+  }, [postId, lang])
+
             // Mostrar avatar en header después de scroll
           useEffect(() => {
             const handleScroll = () => {
@@ -183,6 +209,7 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
 
           // En vista pública NO inicializamos funciones globales de edición
 
+  // Show loading while loading post
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F7F8FC]">
@@ -246,26 +273,28 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
 
           <h2 className="text-base font-medium text-[hsl(var(--color-text))]">Mario Verdú</h2>
 
-          <p className="line-clamp-2 text-sm font-normal text-gray-500 mb-6">
-            {dict.posts.uiDeveloper}
-          </p>
+          <div 
+            className="text-sm font-normal text-gray-500 mb-6 text-center mx-auto" 
+            style={{ width: '200px' }}
+          >
+            <div>Frontend Developer</div>
+            <div>(Next.js / React)</div>
+          </div>
 
           <div className="flex justify-center">
             <div className="w-full">
-              <div className="flex space-x-4 justify-center">
-                <button
-                  className={`text-[#333] ${selectedTab === "posts" ? "" : "opacity-50"}`}
-                  onClick={() => setSelectedTab("posts")}
-                >
-                  {dict.posts.posts}
-                </button>
-                <button
-                  className={`text-[#333] ${selectedTab === "about" ? "" : "opacity-50"}`}
-                  onClick={() => setSelectedTab("about")}
-                >
-                  {dict.posts.aboutMe}
-                </button>
-              </div>
+              <CategoryTabs
+                selected={(selectedTab === 'posts' ? 'concept' : 'about') as any}
+                onChange={(next) => setSelectedTab(next === 'about' ? 'about' : 'posts')}
+                onNavigate={(next) => {
+                  if (next === 'concept' || next === 'portfolio' || next === 'about') {
+                    // Navegar a la página de lista con la pestaña deseada
+                    const params = new URLSearchParams({ tab: next }).toString()
+                    window.location.href = `/${lang}/posts?${params}`
+                  }
+                }}
+                labels={{ posts: dict.posts.posts, about: dict.posts.aboutMe, portfolio: 'Portfolio' }}
+              />
             </div>
           </div>
         </div>
@@ -301,13 +330,9 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
               </div>
 
               {/* Featured Image */}
-              {post.featured_image && (
+              {post.featured_image && ((post.contentType || '').toLowerCase() === 'portfolio' || (post.category || '').toLowerCase() === 'portfolio') && (
                 <div className="mb-6">
-                  <img
-                    src={post.featured_image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
+                  <FeaturedImage src={post.featured_image} alt={post.title} />
                 </div>
               )}
             </div>
@@ -322,7 +347,7 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
             {/* SEO adicional para el post */}
             <PostSEO 
               post={post} 
-              canonicalUrl={`https://marioverdu.com/${lang}/posts/view/${postId}`}
+              canonicalUrl={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://marioverdu.com'}/${lang}/posts/view/${postId}`}
               lang={lang}
             />
 
@@ -344,7 +369,7 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
 
               {/* Views and Updated */}
               <div className="flex items-center justify-between text-sm text-gray-500">
-                <span>{post.views || 0} {dict.posts.views || 'views'}</span>
+                <span><span>{pageViews || 0}</span> {dict.posts.views || 'views'}</span>
                 <span>{dict.posts.updatedOn || 'Updated'}: {formatDate(post.updated_at)}</span>
               </div>
                          </div>
@@ -354,19 +379,37 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
           /* About Me Content */
           <div className="bg-white/30 backdrop-blur-md border border-gray-100 rounded-lg shadow-sm w-full md:w-[658px] xl:w-[800px] mb-0" style={{ borderBottom: "1px solid rgba(0, 94, 182, 0.1)" }}>
             <article className="pt-6 px-4 pb-6 overflow-hidden">
-              <h2 className="text-xl text-left mb-2 font-['Arial_Medium',_Arial,_sans-serif] font-normal">Sobre mi</h2>
+              <h2 className="text-xl text-left mb-2 font-['Arial_Medium',_Arial,_sans-serif] font-normal">
+                {lang === 'es' ? 'Sobre mi' : 'About me'}
+              </h2>
               <div className="my-4 prose max-w-none">
                 <div>
-                  <p>Soy Mario Verdú, Frontend Developer (Next.js / React) con más de 6 años de experiencia en Diseño de productos digitales.</p>
-                  <br />
-                  <p>Diseño, valido, itero y prototipo productos diferenciales siempre comprometido con el desarrollo de sistemas de diseño limpios, vibrantes y funcionales 🌱</p>
-                  <br />
-                  <p>Trabajo con equipos que entienden la comunicación como una experiencia transversal que impacta en todos los recovecos del negocio 🚀</p>
-                  <br />
-                  <p><a href="mailto:contact@marioverdu.com" className="text-primary hover:underline font-medium">¿Hablamos?</a></p>
+                  {lang === 'es' ? (
+                    <>
+                      <p>Soy Mario Verdú, Frontend Developer (Next.js / React) con más de 6 años de experiencia en Diseño de productos digitales.</p>
+                      <br />
+                      <p>Diseño, valido, itero y prototipo productos diferenciales siempre comprometido con el desarrollo de sistemas de diseño limpios, vibrantes y funcionales 🌱</p>
+                      <br />
+                      <p>Trabajo con equipos que entienden la comunicación como una experiencia transversal que impacta en todos los recovecos del negocio 🚀</p>
+                      <br />
+                      <p><a href="mailto:contact@marioverdu.com" className="text-primary hover:underline font-medium">¿Hablamos?</a></p>
+                    </>
+                  ) : (
+                    <>
+                      <p>I am Mario Verdú, Frontend Developer (Next.js / React) with over 6 years of experience in digital product design.</p>
+                      <br />
+                      <p>I design, validate, iterate, and prototype unique products, always committed to developing clean, vibrant, and functional design systems 🌱</p>
+                      <br />
+                      <p>I work with teams that understand communication as a cross-cutting experience that impacts every corner of the business 🚀</p>
+                      <br />
+                      <p><a href="mailto:contact@marioverdu.com" className="text-primary hover:underline font-medium">Shall we talk?</a></p>
+                    </>
+                  )}
                 </div>
               </div>
-              <time datetime="2025-08-30T17:36:12.268Z" className="block text-sm text-gray-500 mt-4 underline decoration-gray-300">30 de agosto de 2025</time>
+              <time dateTime="2025-08-30T17:36:12.268Z" className="block text-sm text-gray-500 mt-4 underline decoration-gray-300">
+                {lang === 'es' ? '30 de agosto de 2025' : 'August 30, 2025'}
+              </time>
             </article>
           </div>
         )}

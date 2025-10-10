@@ -5,9 +5,9 @@ if (!process.env.DATABASE_URL) {
   console.error("❌ DATABASE_URL no está configurado en las variables de entorno")
   console.error("Variables de entorno disponibles:", Object.keys(process.env).filter(key => key.includes('DATABASE') || key.includes('POSTGRES')))
   
-  // En desarrollo o build time, no lanzar error fatal
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
-    console.warn("⚠️ Continuando sin base de datos - las variables se configurarán en runtime")
+  // En desarrollo, no lanzar error fatal
+  if (process.env.NODE_ENV === 'development') {
+    console.warn("⚠️ Continuando en modo desarrollo sin base de datos")
   } else {
     throw new Error("DATABASE_URL no está configurado. Verifica tu archivo .env.local")
   }

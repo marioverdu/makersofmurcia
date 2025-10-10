@@ -38,7 +38,7 @@ export const useContextualScrollbar = ({
 
   // Cálculo optimizado sin throttling excesivo
   const calculateScrollbarPosition = useCallback(() => {
-    if (!containerRef.current || !enabled) {
+    if (!containerRef.current || !enabled || typeof window === 'undefined') {
       return
     }
 
@@ -157,7 +157,7 @@ export const useContextualScrollbar = ({
   }, [handleScroll])
 
   useEffect(() => {
-    if (!enabled || !containerRef.current) {
+    if (!enabled || !containerRef.current || typeof window === 'undefined') {
       return
     }
 

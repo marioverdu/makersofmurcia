@@ -17,6 +17,7 @@ export interface RouteRecord {
   priority: number
   last_accessed?: string
   access_count: number
+  redirect_to?: string | null
 }
 
 export interface RouteAccessLog {

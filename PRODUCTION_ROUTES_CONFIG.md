@@ -136,7 +136,7 @@ Este script:
 
 ### Configuración del Script
 \`\`\`javascript
-const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://aaa23444.vercel.app';
+const PRODUCTION_URL = process.env.PRODUCTION_URL || 'https://marioverdu.com';
 \`\`\`
 
 ## Panel de Administración

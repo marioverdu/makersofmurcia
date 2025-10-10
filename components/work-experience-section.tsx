@@ -1,26 +1,30 @@
 "use client"
 import { WorkCard } from "./work-card"
 import { WexpNestedCard } from "./work-card"
+import type { Locale } from "@/types/i18n"
+import { useWorkExperienceTranslations } from "@/hooks/use-work-experience-translations"
 
 export interface WorkExperienceSectionProps {
   className?: string
+  lang?: Locale
 }
 
-export function WorkExperienceSection({ className = "" }: WorkExperienceSectionProps) {
+export function WorkExperienceSection({ className = "", lang = "es" }: WorkExperienceSectionProps) {
+  const t = useWorkExperienceTranslations(lang)
   return (
     <div className={`flex flex-col w-full work-experience-section ${className}`}>
-      <h2 className="text-sm font-medium text-[hsl(var(--color-text))] mb-2 mt-0">Experiencia laboral</h2>
+      <h2 className="text-sm font-medium text-[hsl(var(--color-text))] mb-2 mt-0">{t.workExperience}</h2>
       <div className="relative w-full">
         {/* Work experience cards */}
         <div className="relative w-full">
           {/* Nueva tarjeta Lorem Ipsum */}
           <WorkCard
             companyName="????"
-            jobTitle="Desarrollador Full stack"
+            jobTitle={t.fullStackDeveloper}
             year="2025"
             description={
               <>
-                Gestor de contenidos <strong>SaaS</strong> que digitaliza, que te asiste en la digitalización de tu negocio como <strong>freelance</strong> con una <strong>curva de aprendizaje mínima</strong> y construido bajo su propio <strong>sistema de diseño propio mantenible en el tiempo</strong>.
+                {t.simpleCMSDescription}
               </>
             }
             detailedContent={null}
@@ -32,31 +36,28 @@ export function WorkExperienceSection({ className = "" }: WorkExperienceSectionP
           {/* Proqio */}
           <WorkCard
             companyName="Proqio"
-            jobTitle="Diseñador UX/UI"
+            jobTitle={t.uxuiDesigner}
             year="2023"
-            description="En Proqio, trabajé en mejorar la arquitectura de información y homogeneizar patrones de diseño para su CRM y gestor de sensores."
+            description={t.proqioDescription}
             detailedContent={
               <ul className="space-y-2 list-disc pl-5">
                 <li>
-                  <strong>Mejora de Arquitectura de Información</strong> - Detalles sobre reestructuración de
-                  arquitectura de información
+                  {t.proqioInfoArchitecture}
                 </li>
                 <li>
-                  <strong>Investigación de Componentes</strong> - Investigación sobre componentes esenciales
+                  {t.proqioComponentResearch}
                 </li>
                 <li>
-                  <strong>Rediseño del Sistema de Diseño</strong> - Mejora de consistencia y usabilidad
+                  {t.proqioDesignSystemRedesign}
                 </li>
                 <li>
-                  <strong>Definición de Componentes</strong> - Desarrollo de componentes escalables
+                  {t.proqioComponentDefinition}
                 </li>
                 <li>
-                  <strong>Mejora de Flujo de Usuario y Arquitectura de Información</strong> - Abordaje de puntos de
-                  dolor
+                  {t.proqioUserFlowImprovement}
                 </li>
                 <li>
-                  <strong>Traducción de Bibliotecas TailwindUI a Sistema de Diseño</strong> - Aceleración de
-                  consistencia en desarrollo
+                  {t.proqioTailwindUITranslation}
                 </li>
               </ul>
             }
@@ -67,42 +68,39 @@ export function WorkExperienceSection({ className = "" }: WorkExperienceSectionP
           {/* Status Pilot */}
           <WorkCard
             companyName="Status Pilot"
-            jobTitle="Diseñador UX/UI"
+            jobTitle={t.uxuiDesigner}
             year="2022"
-            description="En este MVP, tuve la oportunidad de diseñar de forma asíncrona según los requisitos de comportamiento de sus usuarios y los comportamientos de uso de su categoría de producto. Fue una experiencia excelente trabajando estrechamente con Brad Adams."
+            description={t.statusPilotDescription}
             detailedContent={
               <>
-                <p className="mb-2">
-                  <strong>Requisitos:</strong>
-                </p>
+                <p className="mb-2">{t.requirements}</p>
                 <ul className="space-y-2 list-disc pl-5">
                   <li>
-                    <strong>Recopilación de Requisitos</strong> - Análisis de fortalezas y debilidades
+                    {t.requirementsGathering}
                   </li>
                   <li>
-                    <strong>Wireframing</strong> - Creación de pantallas de baja y alta fidelidad
+                    {t.wireframing}
                   </li>
                   <li>
-                    <strong>Definición de Flujo de Usuario y Comportamiento</strong> - Establecimiento de flujos de
-                    usuario
+                    {t.userFlowDefinition}
                   </li>
                   <li>
-                    <strong>Prototipo Interactivo en Figma</strong> - Desarrollo de prototipo interactivo
+                    {t.interactivePrototype}
                   </li>
                   <li>
-                    <strong>Guía de Estilo Exportable</strong> - Creación de guía de estilo
+                    {t.exportableStyleGuide}
                   </li>
                   <li>
-                    <strong>Definición de Sistema de Diseño y Guía de Marca</strong> - Definición del sistema de diseño
+                    {t.designSystemDefinition}
                   </li>
                   <li>
-                    <strong>Componentización de Pantallas</strong> - Estilización y componentización de pantallas
+                    {t.screenComponentization}
                   </li>
                   <li>
-                    <strong>Dimensiones, Espaciado y Revisión</strong> - Especificación de tamaños y espaciado
+                    {t.dimensionsSpacingReview}
                   </li>
                   <li>
-                    <strong>Documentación Accesible</strong> - Producción de documentación organizada
+                    {t.accessibleDocumentation}
                   </li>
                 </ul>
               </>
@@ -114,31 +112,31 @@ export function WorkExperienceSection({ className = "" }: WorkExperienceSectionP
           {/* Leverade */}
           <WorkCard
             companyName="Leverade"
-            jobTitle="Diseñador UX/UI"
+            jobTitle={t.uxuiDesigner}
             year="2022"
-            description="En Leverade, diseñé soluciones de interfaz, visuales y de experiencia de usuario para sus diferentes líneas de productos, adaptándome al stack existente según las oportunidades que surgían entre los equipos de negocio, desarrollo y soporte."
+            description={t.leveradeDescription}
             detailedContent={
               <ul className="space-y-2 list-disc pl-5">
                 <li>
-                  <strong>Investigación de Mercado y Competencia</strong> - Análisis de mercado
+                  {t.marketResearch}
                 </li>
                 <li>
-                  <strong>Validación Continua de Requisitos</strong> - Documentación de referencias visuales
+                  {t.continuousValidation}
                 </li>
                 <li>
-                  <strong>Homogeneización de Assets de Marca</strong> - Estandarización de assets de marca
+                  {t.brandAssetsHomogenization}
                 </li>
                 <li>
-                  <strong>Diseño UX/UI</strong> - Flujos de usuario y prototipos
+                  {t.uxuiDesign}
                 </li>
                 <li>
-                  <strong>Definición de Sistema de Diseño UI</strong> - Definición de sistemas de diseño escalables
+                  {t.designSystemUIDefinition}
                 </li>
                 <li>
-                  <strong>Control de Versiones y Mantenimiento del Sistema de Diseño</strong> - Control de versiones
+                  {t.versionControl}
                 </li>
                 <li>
-                  <strong>Generación de Guía de Estilo y Assets</strong> - Atributos de marca
+                  {t.styleGuideGeneration}
                 </li>
               </ul>
             }
@@ -149,34 +147,34 @@ export function WorkExperienceSection({ className = "" }: WorkExperienceSectionP
           {/* Digio Soluciones */}
           <WorkCard
             companyName="Digio Soluciones"
-            jobTitle="Diseñador UX/UI"
+            jobTitle={t.uxuiDesigner}
             year="2020"
-            description="Propuse 9 soluciones de interfaz y experiencia adaptadas a los requisitos de cada cliente. En Digio, pude involucrarme en todas las fases del proceso de diseño de producto ya que traté con clientes con necesidades y tecnologías diversas."
+            description={t.digioDescription}
             detailedContent={
               <ul className="space-y-2 list-disc pl-5">
                 <li>
-                  <strong>Comunicación de Requisitos</strong> - Recopilación de requisitos
+                  {t.requirementsCommunication}
                 </li>
                 <li>
-                  <strong>Documentación y Arquitectura de Información</strong> - Arquitectura de información
+                  {t.documentationInfoArchitecture}
                 </li>
                 <li>
-                  <strong>Diseño UX</strong> - Procesos de experiencia de usuario
+                  {t.uxDesign}
                 </li>
                 <li>
-                  <strong>Diseño UI</strong> - Sistemas de diseño escalables
+                  {t.uiDesign}
                 </li>
                 <li>
-                  <strong>Mantenimiento del Sistema de Diseño</strong> - Convenciones de nomenclatura
+                  {t.designSystemMaintenance}
                 </li>
                 <li>
-                  <strong>Generación de Guía de Estilo y Assets</strong> - Atributos de marca
+                  {t.styleGuideAssetsGeneration}
                 </li>
                 <li>
-                  <strong>Prototipado de Alta y Baja Fidelidad</strong> - Prototipos interactivos
+                  {t.highLowFidelityPrototyping}
                 </li>
                 <li>
-                  <strong>Pruebas, Reporte de Bugs y Soporte</strong> - Pruebas y reporte de errores
+                  {t.testingBugReporting}
                 </li>
               </ul>
             }
@@ -187,22 +185,22 @@ export function WorkExperienceSection({ className = "" }: WorkExperienceSectionP
           {/* marioverdu.com */}
                 <WorkCard
             companyName="marioverdu.com"
-            jobTitle="Diseñador UX/UI"
+            jobTitle={t.uxuiDesigner}
             year="2018-2024"
             description=""
             detailedContent={
               <>
-                <p className="mb-4">Portafolio de proyectos seleccionados a lo largo de diferentes años.</p>
-                <WexpNestedCard companyName="Daily Wine, UX/UI" jobTitle="Diseñador UX/UI" year="2024" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="Rediseño de portafolio, UX/UI." jobTitle="Diseñador UX/UI" year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="Dainapp, Rediseño." jobTitle="Diseñador UX/UI" year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="Savetech, UI, Prueba técnica" jobTitle="Diseñador UX/UI" year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="Read.Cv Fork, UI." jobTitle="Diseñador UX/UI" year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="Vape Shop, UI" jobTitle="Diseñador UX/UI" year="2028" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="Youflix, UI, Concepto" jobTitle="Diseñador UX/UI" year="2017" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="NameUp, Concepto." jobTitle="Diseñador gráfico" year="2016" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="Newsbot, UI, Concepto" jobTitle="Diseñador UX/UI" year="" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
-                <WexpNestedCard companyName="App Universitaria, UI, Concepto" jobTitle="Diseñador UX/UI" year="" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <p className="mb-4">{t.portfolioIntro}</p>
+                <WexpNestedCard companyName={t.dailyWine} jobTitle={t.uxuiDesigner} year="2024" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.portfolioRedesign} jobTitle={t.uxuiDesigner} year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.dainappRedesign} jobTitle={t.uxuiDesigner} year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.savetechUITest} jobTitle={t.uxuiDesigner} year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.readCvForkUI} jobTitle={t.uxuiDesigner} year="2021" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.vapeShopUI} jobTitle={t.uxuiDesigner} year="2028" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.youflixUIConcept} jobTitle={t.uxuiDesigner} year="2017" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.nameUpConcept} jobTitle={t.graphicDesigner} year="2016" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.newsbotUIConcept} jobTitle={t.uxuiDesigner} year="" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
+                <WexpNestedCard companyName={t.universityAppUIConcept} jobTitle={t.uxuiDesigner} year="" logoSrc="https://assets.marioverdu.com/logo/empty.png" />
               </>
             }
             timelineType="end"

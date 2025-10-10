@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ChatTuentiButtonV2 from '../../components/chat-tuenti/chat-tuenti-button-master';
 
 const meta: Meta<typeof ChatTuentiButtonV2> = {
-  title: 'Components/Chat/ChatTuentiButtonV2',
+  title: 'ChatTuentiButtonV2',
   component: ChatTuentiButtonV2,
   parameters: {
     layout: 'fullscreen',
@@ -12,7 +12,6 @@ const meta: Meta<typeof ChatTuentiButtonV2> = {
       },
     },
   },
-  tags: ['autodocs'],
   argTypes: {
     position: {
       control: { type: 'select' },
@@ -53,159 +52,6 @@ export const Default: Story = {
       description: {
         story: 'Botón por defecto con posición bottom-right, tamaño 36px y padding de 14px. Réplica exacta del botón real.',
       },
-    },
-  },
-};
-
-// Estado abierto del botón
-export const Open: Story = {
-  args: {
-    isBlinking: false,
-    ariaLabel: 'Close chat',
-    isOpen: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Botón en estado abierto mostrando el ícono de cerrar (X).',
-      },
-    },
-  },
-};
-
-// Diferentes posiciones
-export const BottomLeft: Story = {
-  args: {
-    position: 'bottom-left',
-    size: 36,
-    isBlinking: false,
-    ariaLabel: 'Open chat',
-    isOpen: false,
-    padding: {
-      bottom: 14,
-      left: 14,
-    },
-    colors: {
-      background: 'transparent',
-      backgroundHover: 'transparent',
-      icon: 'currentColor',
-    },
-  },
-};
-
-export const TopRight: Story = {
-  args: {
-    position: 'top-right',
-    size: 36,
-    isBlinking: false,
-    ariaLabel: 'Open chat',
-    isOpen: false,
-    padding: {
-      top: 14,
-      right: 14,
-    },
-    colors: {
-      background: 'transparent',
-      backgroundHover: 'transparent',
-      icon: 'currentColor',
-    },
-  },
-};
-
-export const TopLeft: Story = {
-  args: {
-    position: 'top-left',
-    size: 36,
-    isBlinking: false,
-    ariaLabel: 'Open chat',
-    isOpen: false,
-    padding: {
-      top: 14,
-      left: 14,
-    },
-    colors: {
-      background: 'transparent',
-      backgroundHover: 'transparent',
-      icon: 'currentColor',
-    },
-  },
-};
-
-// Tamaños diferentes
-export const Large: Story = {
-  args: {
-    position: 'bottom-right',
-    size: 48,
-    isBlinking: false,
-    ariaLabel: 'Open chat',
-    isOpen: false,
-    padding: {
-      bottom: 14,
-      right: 14,
-    },
-    colors: {
-      background: 'transparent',
-      backgroundHover: 'transparent',
-      icon: 'currentColor',
-    },
-  },
-};
-
-export const Small: Story = {
-  args: {
-    position: 'bottom-right',
-    size: 28,
-    isBlinking: false,
-    ariaLabel: 'Open chat',
-    isOpen: false,
-    padding: {
-      bottom: 14,
-      right: 14,
-    },
-    colors: {
-      background: 'transparent',
-      backgroundHover: 'transparent',
-      icon: 'currentColor',
-    },
-  },
-};
-
-// Efectos especiales
-export const Blinking: Story = {
-  args: {
-    position: 'bottom-right',
-    size: 36,
-    isBlinking: true,
-    ariaLabel: 'Open chat',
-    isOpen: false,
-    padding: {
-      bottom: 14,
-      right: 14,
-    },
-    colors: {
-      background: 'transparent',
-      backgroundHover: 'transparent',
-      icon: 'currentColor',
-    },
-  },
-};
-
-// Con colores personalizados
-export const CustomColors: Story = {
-  args: {
-    position: 'bottom-right',
-    size: 36,
-    isBlinking: false,
-    ariaLabel: 'Open chat',
-    isOpen: false,
-    padding: {
-      bottom: 14,
-      right: 14,
-    },
-    colors: {
-      background: '#ff6b6b',
-      backgroundHover: '#ff5252',
-      icon: '#ffffff',
     },
   },
 };

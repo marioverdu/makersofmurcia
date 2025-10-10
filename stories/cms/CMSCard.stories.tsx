@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CMSCard } from '@/components/cms/CMSCard';
 
 const meta: Meta<typeof CMSCard> = {
-  title: 'CMS/Card',
+  title: 'CMSCard',
   component: CMSCard,
   parameters: {
     layout: 'centered',
@@ -12,7 +12,6 @@ const meta: Meta<typeof CMSCard> = {
       }
     }
   },
-  tags: ['autodocs'],
   argTypes: {
     title: {
       control: 'text',
@@ -55,7 +54,7 @@ export const Default: Story = {
   }
 };
 
-export const LongTitle: Story = {
+/* export const LongTitle: Story = {
   args: {
     title: 'Este es un título muy largo que podría causar problemas de diseño en la tarjeta del post del blog',
     excerpt: 'Extracto normal del post...',
@@ -64,9 +63,9 @@ export const LongTitle: Story = {
     views: 15,
     featuredImage: 'https://via.placeholder.com/400x200'
   }
-};
+}; */
 
-export const NoImage: Story = {
+/* export const NoImage: Story = {
   args: {
     title: 'Post sin imagen destacada',
     excerpt: 'Este post no tiene imagen destacada configurada',
@@ -74,9 +73,9 @@ export const NoImage: Story = {
     author: 'Mario Verdú',
     views: 8
   }
-};
+}; */
 
-export const HighViews: Story = {
+/* export const HighViews: Story = {
   args: {
     title: 'Post muy popular',
     excerpt: 'Este post ha tenido muchas visitas y es muy popular entre los lectores',
@@ -85,9 +84,9 @@ export const HighViews: Story = {
     views: 1250,
     featuredImage: 'https://via.placeholder.com/400x200'
   }
-};
+}; */
 
-export const RecentPost: Story = {
+/* export const RecentPost: Story = {
   args: {
     title: 'Post reciente',
     excerpt: 'Este post fue publicado hace muy poco tiempo',
@@ -96,4 +95,4 @@ export const RecentPost: Story = {
     views: 0,
     featuredImage: 'https://via.placeholder.com/400x200'
   }
-};
+}; */

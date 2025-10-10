@@ -7,6 +7,8 @@ export const envConfig = {
   // NextAuth
   NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'https://marioverdu.com',
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  // Site URL (public)
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://marioverdu.com',
   
   // Google OAuth
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
@@ -97,5 +99,12 @@ export function getNextAuthConfig() {
     googleClientSecret: envConfig.GOOGLE_CLIENT_SECRET,
     adminEmail: envConfig.ADMIN_EMAIL,
   }
+}
+
+/**
+ * Devuelve la URL pública del sitio (para canónicos, OG, sitemaps, redirecciones absolutas)
+ */
+export function getSiteUrl() {
+  return envConfig.NEXT_PUBLIC_SITE_URL || 'https://marioverdu.com'
 }
 

@@ -15,6 +15,7 @@ export interface Post {
   tags?: string[]
   created_at: string
   updated_at: string
+  contentType?: string
   // Campos de traducción
   title_es?: string
   title_en?: string
@@ -35,6 +36,7 @@ export interface CreatePostData {
   author?: string
   category?: string
   tags?: string[]
+  contentType?: string
   // Campos de traducción
   title_es?: string
   title_en?: string
@@ -55,6 +57,7 @@ export interface UpdatePostData {
   author?: string
   category?: string
   tags?: string[]
+  contentType?: string
   // Campos de traducción
   title_es?: string
   title_en?: string
@@ -70,7 +73,7 @@ export async function getPosts(): Promise<Post[]> {
     const result = await sql`
       SELECT 
         id, title, slug, content, excerpt, featured_image, 
-        published, status, author, views, category, tags,
+        published, status, author, views, category, tags, content_type,
         created_at, updated_at,
         title_es, title_en, content_es, content_en, excerpt_es, excerpt_en
       FROM posts 
@@ -79,6 +82,7 @@ export async function getPosts(): Promise<Post[]> {
     
     return result.rows.map(row => ({
       ...row,
+      contentType: row.content_type,
       tags: row.tags || []
     }))
   } catch (error) {
@@ -93,7 +97,7 @@ export async function getPublishedPosts(): Promise<Post[]> {
     const result = await sql`
       SELECT 
         id, title, slug, content, excerpt, featured_image, 
-        published, status, author, views, category, tags,
+        published, status, author, views, category, tags, content_type,
         created_at, updated_at,
         title_es, title_en, content_es, content_en, excerpt_es, excerpt_en
       FROM posts 
@@ -103,6 +107,7 @@ export async function getPublishedPosts(): Promise<Post[]> {
     
     return result.rows.map(row => ({
       ...row,
+      contentType: row.content_type,
       tags: row.tags || []
     }))
   } catch (error) {
@@ -117,7 +122,7 @@ export async function getPostById(id: number): Promise<Post | null> {
     const result = await sql`
       SELECT 
         id, title, slug, content, excerpt, featured_image, 
-        published, status, author, views, category, tags,
+        published, status, author, views, category, tags, content_type,
         created_at, updated_at,
         title_es, title_en, content_es, content_en, excerpt_es, excerpt_en
       FROM posts 
@@ -131,6 +136,7 @@ export async function getPostById(id: number): Promise<Post | null> {
     const row = result.rows[0]
     return {
       ...row,
+      contentType: row.content_type,
       tags: row.tags || []
     }
   } catch (error) {
@@ -145,7 +151,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     const result = await sql`
       SELECT 
         id, title, slug, content, excerpt, featured_image, 
-        published, status, author, views, category, tags,
+        published, status, author, views, category, tags, content_type,
         created_at, updated_at,
         title_es, title_en, content_es, content_en, excerpt_es, excerpt_en
       FROM posts 
@@ -159,6 +165,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     const row = result.rows[0]
     return {
       ...row,
+      contentType: row.content_type,
       tags: row.tags || []
     }
   } catch (error) {
@@ -173,12 +180,12 @@ export async function createPost(data: CreatePostData): Promise<Post> {
     const result = await sql`
       INSERT INTO posts (
         title, slug, content, excerpt, featured_image, 
-        published, status, author, category, tags,
+        published, status, author, category, tags, content_type,
         title_es, title_en, content_es, content_en, excerpt_es, excerpt_en
       ) VALUES (
         ${data.title}, ${data.slug}, ${data.content}, ${data.excerpt}, ${data.featured_image},
         ${data.published ?? true}, ${data.status ?? 'draft'}, ${data.author ?? 'Mario Verdú'}, 
-        ${data.category}, ${data.tags},
+        ${data.category}, ${data.tags}, ${data.contentType},
         ${data.title_es}, ${data.title_en}, ${data.content_es}, ${data.content_en}, ${data.excerpt_es}, ${data.excerpt_en}
       ) RETURNING *
     `
@@ -186,6 +193,7 @@ export async function createPost(data: CreatePostData): Promise<Post> {
     const row = result.rows[0]
     return {
       ...row,
+      contentType: row.content_type,
       tags: row.tags || []
     }
   } catch (error) {
@@ -209,6 +217,7 @@ export async function updatePost(id: number, data: UpdatePostData): Promise<Post
         author = COALESCE(${data.author}, author),
         category = COALESCE(${data.category}, category),
         tags = COALESCE(${data.tags}, tags),
+        content_type = COALESCE(${data.contentType}, content_type),
         title_es = COALESCE(${data.title_es}, title_es),
         title_en = COALESCE(${data.title_en}, title_en),
         content_es = COALESCE(${data.content_es}, content_es),
@@ -227,6 +236,7 @@ export async function updatePost(id: number, data: UpdatePostData): Promise<Post
     const row = result.rows[0]
     return {
       ...row,
+      contentType: row.content_type,
       tags: row.tags || []
     }
   } catch (error) {

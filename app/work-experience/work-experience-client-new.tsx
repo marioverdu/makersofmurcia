@@ -7,7 +7,7 @@ import { useWorkExperience } from '@/hooks/use-work-experience';
 import { WorkExperienceCard } from '@/components/work-experience-card';
 import { EditableField } from '@/components/editable-field';
 import { HeaderTabs } from '@/components/ui/header/tabs';
-import { HeaderContextualMenu } from '@/components/ui/header/header-contextual-menu';
+
 import { Footer } from '@/components/footer';
 import { ProfileCardWidescreens, ProfileCardPhone } from '@/components/profile-card';
 import ChatTuentiButtonMaster from '@/components/chat-tuenti/chat-tuenti-button-master';
@@ -45,7 +45,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
             />
           </div>
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" />
+            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" lang={lang} />
           </div>
           {/* Selector de idioma al extremo derecho */}
           <div 
@@ -63,7 +63,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
               justifyContent: 'flex-end'
             }}
           >
-            <HeaderContextualMenu currentLang={lang} hidden={true} />
+    
           </div>
         </div>
         <div className="bg-transparent header-blue-padding" />

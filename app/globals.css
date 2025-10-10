@@ -73,9 +73,67 @@ h6[id]:hover::before {
   --background-rgb: 243, 246, 246;
 }
 
+/* Prevent layout shift - Critical for all pages */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  /* Prevent horizontal scrollbar flash */
+  overflow-x: hidden;
+  /* Prevent layout shift during hydration */
+  min-height: 100vh;
+  /* Ensure consistent font loading */
+  font-display: swap;
+}
+
+/* Prevent layout shift during component mounting */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure consistent spacing during hydration */
+.claim,
+.flex.flex-col.items-start.relative.z-10,
+.flex.justify-center.items-center.w-full.relative {
+  /* Prevent layout shift by ensuring consistent padding */
+  padding-left: 1rem; /* 16px */
+  padding-right: 1rem; /* 16px */
+}
+
+@media (min-width: 768px) {
+  .claim,
+  .flex.flex-col.items-start.relative.z-10,
+  .flex.justify-center.items-center.w-full.relative {
+    padding-left: 3.75rem; /* 60px */
+    padding-right: 3.75rem; /* 60px */
+  }
+}
+
+/* Prevent avatar position shift */
+.w-\[28px\].h-\[28px\].rounded-full {
+  /* Ensure consistent positioning */
+  position: relative;
+  z-index: 1;
+}
+
+/* Prevent header layout shift */
+.custom-header-padding {
+  /* Ensure consistent padding from the start */
+  padding: 0 8px 2px 8px;
+  transition: none; /* Disable transitions during initial load */
+}
+
+/* Disable transitions during hydration to prevent layout shift */
+* {
+  transition: none;
+}
+
+/* Re-enable transitions after hydration */
+.hydrated * {
+  transition: all 0.3s ease;
 }
 
 body {

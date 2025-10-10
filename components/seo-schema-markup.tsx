@@ -37,11 +37,13 @@ export function SchemaMarkup({ schema, id = 'schema-markup' }: SchemaMarkupProps
 // Componentes específicos para diferentes tipos de schema
 export function PersonSchemaMarkup() {
   const { seoEngine } = require('@/lib/seo-engine')
+  const { getSiteUrl } = require('@/lib/env-config')
+  const siteUrl = getSiteUrl()
   
   const schema = seoEngine.generatePersonSchema({
     name: 'Mario Verdú',
     jobTitle: 'UX/UI Designer',
-    url: 'https://marioverdu.com',
+    url: siteUrl,
     address: {
       locality: 'Valencia',
       country: 'ES'
@@ -55,14 +57,16 @@ export function PersonSchemaMarkup() {
 
 export function WebsiteSchemaMarkup() {
   const { seoEngine } = require('@/lib/seo-engine')
+  const { getSiteUrl } = require('@/lib/env-config')
+  const siteUrl = getSiteUrl()
   
   const schema = seoEngine.generateWebsiteSchema({
     name: 'Mario Verdú - UX/UI Designer',
-    url: 'https://marioverdu.com',
+    url: siteUrl,
     description: 'Portfolio y servicios de UX/UI Design de Mario Verdú',
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://marioverdu.com/search?q={search_term_string}",
+      target: `${siteUrl}/search?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   })

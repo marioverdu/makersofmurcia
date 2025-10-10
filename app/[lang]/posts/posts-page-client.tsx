@@ -6,11 +6,14 @@ import { Trophy } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { PortfolioCard } from "@/components/portfolio-card"
+import { Badge } from "@/components/ui/badge"
+import FeaturedImage from "@/components/ui/featured-image"
+import CategoryTabs from "@/components/ui/category-tabs"
 import { HeaderTabs } from "@/components/ui/header/tabs"
-import { HeaderContextualMenu } from "@/components/ui/header/header-contextual-menu"
+
 import ChatTuentiButtonMaster from "@/components/chat-tuenti/chat-tuenti-button-master"
 import ChatTuentiMaster from "@/components/chat-tuenti/chat-tuenti-master"
+import { useRouteRedirection } from "@/hooks/use-route-redirection"
 import { UnifiedLoading } from "@/components/ui/unified-loading"
 import type { Locale, Dictionary } from "@/types/i18n"
 import { usePathname } from "next/navigation"
@@ -49,7 +52,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
           </div>
           {/* Tabs centradas absolutamente */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" />
+            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" lang={lang} />
           </div>
           {/* Selector de idioma al extremo derecho */}
           <div 
@@ -67,7 +70,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
               justifyContent: 'flex-end'
             }}
           >
-            <HeaderContextualMenu currentLang={lang} hidden={true} />
+
           </div>
         </div>
         {/* Padding derecho transparente */}
@@ -178,17 +181,18 @@ interface PostsPageClientProps {
 
 export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
   const router = useRouter()
-  const [checkingVisibility, setCheckingVisibility] = useState(false)
-  const [maintenance, setMaintenance] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
+  
+  // Hook de redirección centralizado (nota: Server Component ya protege, esto es redundante pero no afecta)
+  const { isChecking: checkingVisibility, showMaintenance: maintenance } = useRouteRedirection('/[lang]/posts', lang)
 
   const [posts, setPosts] = useState<Post[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   const [showTooltip, setShowTooltip] = useState(false)
   const [clickCount, setClickCount] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState<"posts" | "about">(
-    "posts",
+  const [selectedCategory, setSelectedCategory] = useState<"posts" | "about" | "concept" | "portfolio">(
+    "concept",
   )
   const [avatarClickCount, setAvatarClickCount] = useState(0)
   const [showMusicTab, setShowMusicTab] = useState(false)
@@ -293,6 +297,16 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
     loadPosts()
   }, [])
 
+  // Leer ?tab= de la URL para seleccionar pestaña inicial
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const tab = params.get('tab') as any
+    if (tab === 'concept' || tab === 'about' || tab === 'portfolio') {
+      setSelectedCategory(tab)
+    }
+  }, [])
+
   // Check mobile
   useEffect(() => {
     const checkMobile = () => {
@@ -315,77 +329,37 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Check visibility
-  useEffect(() => {
-    const checkVisibility = async () => {
-      console.log(`🔄 [${isProduction ? "PROD" : "DEV"}] PostsPage: Checking route visibility...`)
-
-      let visibility: { [key: string]: boolean } = {}
-
-      // En development, primero intentar localStorage
-      if (!isProduction && typeof window !== "undefined") {
-        const localVisibilityRaw = localStorage.getItem("routesVisibility")
-        if (localVisibilityRaw) {
-          try {
-            visibility = JSON.parse(localVisibilityRaw)
-            console.log(`📱 [DEV] PostsPage: Using localStorage visibility:`, visibility)
-          } catch (error) {
-            console.warn(`⚠️ [DEV] PostsPage: localStorage parse error:`, error)
-            visibility = {}
-          }
-        }
-      }
-
-      // Si no hay localStorage o estamos en production, consultar la API
-      if (Object.keys(visibility).length === 0) {
-        try {
-          console.log(`🌐 [${isProduction ? "PROD" : "DEV"}] PostsPage: Fetching from API...`)
-          const res = await fetch("/api/admin/routes")
-          const data = await res.json()
-          if (data && data.data && data.data.routes) {
-            data.data.routes.forEach((route: any) => {
-              visibility[route.path] = route.isVisible
-            })
-            console.log(`✅ [${isProduction ? "PROD" : "DEV"}] PostsPage: API visibility loaded:`, visibility)
-          }
-        } catch (error) {
-          console.error(`❌ [${isProduction ? "PROD" : "DEV"}] PostsPage: API error:`, error)
-          // Si falla la API, asume todo visible
-          visibility = { "/": true, "/work-experience": true, "/posts": true }
-        }
-      }
-
-      // Lógica de redirección y mantenimiento
-      const priorities = ["/", "/work-experience", "/posts"]
-      const current = "/posts"
-
-      if (visibility[current] === false) {
-        console.log(`🚫 [${isProduction ? "PROD" : "DEV"}] PostsPage: Current route is hidden, finding alternative...`)
-
-        // Buscar la siguiente ruta prioritaria activa
-        const next = priorities.find((r) => r !== current && visibility[r])
-        if (next) {
-          console.log(`🔄 [${isProduction ? "PROD" : "DEV"}] PostsPage: Redirecting to ${next}`)
-          router.replace(`/${lang}${next}`)
-          return
-        } else {
-          console.log(`🚧 [${isProduction ? "PROD" : "DEV"}] PostsPage: No active routes, showing maintenance`)
-          setMaintenance(true)
-        }
-      } else {
-        console.log(`✅ [${isProduction ? "PROD" : "DEV"}] PostsPage: Route is visible, proceeding`)
-      }
-    }
-
-    checkVisibility()
-  }, [isProduction, router, lang])
 
   // Filter posts based on selected category
   const filteredPosts = useMemo(() => {
-    if (selectedCategory === "posts") {
-      return posts.filter(post => post.category !== "about")
-    } else if (selectedCategory === "about") {
+    const isProd = isProduction
+    if (selectedCategory === "about") {
       return posts.filter(post => post.category === "about")
+    } else if (selectedCategory === "concept") {
+      // Posts (antes Postsv2): excluye portfolio y debug (en producción), incluye debug sólo en dev
+      return posts.filter(post => {
+        const ct = (post.contentType || '').toLowerCase()
+        const isDebug = ct === 'debug'
+        if (isProd && isDebug) return false
+        const isPortfolio = ct === 'portfolio' || post.category === 'portfolio'
+        return post.category === "postsv2" && !isPortfolio
+      })
+    } else if (selectedCategory === "portfolio") {
+      // Portfolio - por contentType 'portfolio' (fallback por category). Nunca mostrar debug aquí
+      return posts.filter(post => {
+        const ct = (post.contentType || '').toLowerCase()
+        if (ct === 'debug') return false
+        return ct === 'portfolio' || post.category === 'portfolio'
+      })
+    } else if (selectedCategory === "posts") {
+      // Postsv0 (tab oculta): excluye about, postsv2, portfolio; excluye debug en prod
+      return posts.filter(post => {
+        const ct = (post.contentType || '').toLowerCase()
+        const isDebug = ct === 'debug'
+        if (isProd && isDebug) return false
+        const isPortfolio = ct === 'portfolio' || post.category === 'portfolio'
+        return post.category !== "about" && post.category !== "postsv2" && !isPortfolio
+      })
     }
     return posts
   }, [posts, selectedCategory])
@@ -408,6 +382,11 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
       created_at: new Date().toISOString()
     }
   }, [posts, lang, dict.posts.aboutMe])
+
+  // Posts (antes Postsv2) - posts de categoría postsv2
+  const postsv2Posts = useMemo(() => {
+    return posts.filter(post => post.category === "postsv2")
+  }, [posts])
 
   // Format date function
   function formatDate(dateString: string) {
@@ -502,32 +481,18 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
 
           <h2 className="text-base font-medium text-[hsl(var(--color-text))]">Mario Verdú</h2>
 
-          <div 
-            className="text-sm font-normal text-gray-500 mb-6 text-center mx-auto" 
-            style={{ 
-              width: '200px'
-            }}
-          >
+          <div className="text-sm font-normal text-gray-500 mb-6 text-center mx-auto" style={{ width: '200px' }}>
             <div>Frontend Developer</div>
             <div>(Next.js / React)</div>
           </div>
 
           <div className="flex justify-center">
             <div className="w-full">
-              <div className="flex space-x-4 justify-center">
-                <button
-                  className={`text-[#333] ${selectedCategory === "posts" ? "" : "opacity-50"}`}
-                  onClick={() => setSelectedCategory("posts")}
-                >
-                  {dict.posts.posts}
-                </button>
-                <button
-                  className={`text-[#333] ${selectedCategory === "about" ? "" : "opacity-50"}`}
-                  onClick={() => setSelectedCategory("about")}
-                >
-                  {dict.posts.aboutMe}
-                </button>
-              </div>
+              <CategoryTabs
+                selected={selectedCategory as any}
+                onChange={(next) => setSelectedCategory(next as any)}
+                labels={{ posts: dict.posts.posts, about: dict.posts.aboutMe, portfolio: 'Portfolio' }}
+              />
             </div>
           </div>
         </div>
@@ -589,6 +554,85 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
                 {formatDate(aboutTabPost.created_at)}
               </time>
             </article>
+          </div>
+        ) : selectedCategory === "concept" ? (
+          // Mostrar Posts (antes Postsv2)
+          <div className="w-full md:w-[658px] xl:w-[800px] mb-0">
+            <div className="p-0 overflow-hidden">
+              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-max">
+                {filteredPosts.map((post) => (
+                  <a
+                    key={post.id}
+                    href={`/${lang}/posts/view/${post.id}`}
+                    className="relative overflow-hidden rounded-xl bg-transparent aspect-[3/4] block"
+                  >
+                    <div className="absolute inset-0">
+                      <FeaturedImage
+                        src={post.featured_image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      {(!isProduction && (post.contentType || '').toLowerCase() === 'debug') && (
+                        <div className="absolute top-2 left-2">
+                          <Badge className="filter hue-rotate-60">DEBUG</Badge>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="relative h-full flex flex-col justify-end p-6">
+                      <h3 className="font-semibold leading-tight mb-2 text-white text-base">
+                        {lang === 'es' ? (post.title_es || post.title) : (post.title_en || post.title)}
+                      </h3>
+                      
+                      {post.excerpt && (
+                        <p className="text-sm line-clamp-2 mb-3 text-white/90">
+                          {lang === 'es' ? (post.excerpt_es || post.excerpt) : (post.excerpt_en || post.excerpt)}
+                        </p>
+                      )}
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs px-2 py-1 rounded-full text-white">
+                          {post.tags?.[0] || 'Post'}
+                        </span>
+                        
+                        <time className="text-xs text-white/80">
+                          {formatDate(post.created_at)}
+                        </time>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : selectedCategory === "portfolio" ? (
+          // Mostrar Portfolio (diseño vertical)
+          <div className="w-full md:w-[658px] xl:w-[800px] mb-0">
+            <div className="p-0 overflow-hidden">
+              <div className="flex flex-col gap-4">
+                {filteredPosts.map((post) => (
+                  <a
+                    key={post.id}
+                    href={`/${lang}/posts/view/${post.id}`}
+                    className="relative overflow-hidden rounded-xl bg-transparent block aspect-[16/9]"
+                  >
+                    <div className="absolute inset-0">
+                      <FeaturedImage
+                        src={post.featured_image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                      {(!isProduction && (post.contentType || '').toLowerCase() === 'debug') && (
+                        <div className="absolute top-2 left-2">
+                          <Badge className="filter hue-rotate-60">DEBUG</Badge>
+                        </div>
+                      )}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         ) : filteredPosts.length === 0 ? (
           <div

@@ -6,9 +6,10 @@ import { useEffect, useState } from "react"
 
 interface HeaderTabsProps {
   className?: string
+  lang?: 'es' | 'en' // Idioma para el copy, no afecta el diseño
 }
 
-export function HeaderTabs({ className = "" }: HeaderTabsProps) {
+export function HeaderTabs({ className = "", lang = 'es' }: HeaderTabsProps) {
   const pathname = usePathname()
   
   // Debug: Log the current state
@@ -117,9 +118,20 @@ export function HeaderTabs({ className = "" }: HeaderTabsProps) {
     return () => window.removeEventListener('resize', checkTiny)
   }, [])
 
-  // Check if we're on the posts page
-  const isPostsPage = pathname.startsWith("/posts")
-  const isRootPage = pathname === "/" || pathname === "/en" || pathname === "/es" || pathname.match(/^\/[a-z]{2}$/)
+  // Check if we're on the posts page - independiente del idioma
+  const isPostsPage = pathname.startsWith("/posts") || 
+                     pathname === "/posts" || 
+                     pathname.startsWith("/es/posts") || 
+                     pathname.startsWith("/en/posts") ||
+                     pathname.match(/^\/[a-z]{2}\/posts/)
+  
+  // Check if we're on the root page - independiente del idioma
+  const isRootPage = pathname === "/" || 
+                    pathname === "/en" || 
+                    pathname === "/es" || 
+                    pathname.match(/^\/[a-z]{2}$/)
+  
+  // Check if we're on the work experience page - independiente del idioma
   const isWorkExperiencePage = pathname === "/work-experience" || 
                               pathname === "/work-experience-fix" || 
                               pathname.startsWith("/work-experience-fix") ||
@@ -144,39 +156,66 @@ export function HeaderTabs({ className = "" }: HeaderTabsProps) {
 
   console.log(`🎯 [${isProduction ? "PROD" : "DEV"}] HeaderTabs: Rendering with visibility:`, routesVisibility)
 
+  // Textos independientes del idioma - no afectan el diseño
+  const tabTexts = {
+    es: {
+      home: "Inicio",
+      posts: "Posts", 
+      experience: "Experiencia"
+    },
+    en: {
+      home: "Home",
+      posts: "Posts",
+      experience: "Experience"
+    }
+  }
+
+  const texts = tabTexts[lang]
+
+  // Verificar visibilidad de cada tab
+  const isHomeVisible = routesVisibility["/"] !== false
+  const isPostsVisible = routesVisibility["/posts"] !== false
+  const isWorkExperienceVisible = routesVisibility["/work-experience"] !== false
+
   return (
     <div className={`flex gap-[16px] h-[40px] mx-auto md:mx-0 justify-center md:justify-start ${className}`}>
-      {/* Mostrar siempre las tabs principales */}
-      <Link
-        href="/"
-        className={`text-sm font-medium h-[40px] flex items-center px-1 border-b-2 ${
-          isRootPage
-            ? "text-[#3D5B6A] border-[#3D5B6A]"
-            : "text-gray-500 font-normal border-transparent hover:border-[#3D5B6A] hover:text-[#3D5B6A]"
-        } transition-colors`}
-      >
-        Inicio
-      </Link>
-      <Link
-        href="/posts"
-        className={`text-sm font-medium h-[40px] flex items-center px-1 border-b-2 ${
-          isPostsPage
-            ? "text-[#3D5B6A] border-[#3D5B6A]"
-            : "text-gray-500 font-normal border-transparent hover:border-[#3D5B6A] hover:text-[#3D5B6A]"
-        } transition-colors`}
-      >
-        Posts
-      </Link>
+      {/* Mostrar tabs solo si están visibles */}
+      {isHomeVisible && (
         <Link
-    href="/work-experience"
-    className={`text-sm font-medium h-[40px] flex items-center px-1 border-b-2 ${
-      isWorkExperiencePage
-        ? "text-[#3D5B6A] border-[#3D5B6A]"
-        : "text-gray-500 font-normal border-transparent hover:border-[#3D5B6A] hover:text-[#3D5B6A]"
-    } transition-colors`}
-  >
-    Experiencia
-  </Link>
+          href={`/${lang}`}
+          className={`text-sm font-medium h-[40px] flex items-center px-1 border-b-2 ${
+            isRootPage
+              ? "text-[#3D5B6A] border-[#3D5B6A]"
+              : "text-gray-500 font-normal border-transparent hover:border-[#3D5B6A] hover:text-[#3D5B6A]"
+          } transition-colors`}
+        >
+          {texts.home}
+        </Link>
+      )}
+      {isPostsVisible && (
+        <Link
+          href={`/${lang}/posts`}
+          className={`text-sm font-medium h-[40px] flex items-center px-1 border-b-2 ${
+            isPostsPage
+              ? "text-[#3D5B6A] border-[#3D5B6A] !important"
+              : "text-gray-500 font-normal border-transparent hover:border-[#3D5B6A] hover:text-[#3D5B6A]"
+          } transition-colors`}
+        >
+          {texts.posts}
+        </Link>
+      )}
+      {isWorkExperienceVisible && (
+        <Link
+          href={`/${lang}/work-experience`}
+          className={`text-sm font-medium h-[40px] flex items-center px-1 border-b-2 ${
+            isWorkExperiencePage
+              ? "text-[#3D5B6A] border-[#3D5B6A] !important"
+              : "text-gray-500 font-normal border-transparent hover:border-[#3D5B6A] hover:text-[#3D5B6A]"
+          } transition-colors`}
+        >
+          {texts.experience}
+        </Link>
+      )}
     </div>
   )
 }

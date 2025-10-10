@@ -1,13 +1,13 @@
 "use client"
 
-import Header from "@/components/header"
+import { HeaderTabs } from "@/components/ui/header/tabs"
 import { PriceEstimatorV4 } from "@/components/price-estimator/price-estimator-v4"
 
 export default function PriceEstimatorPage() {
   return (
     <div className="min-h-screen w-full bg-[#F7F8FC] overflow-x-hidden pt-[40px]">
       {/* Sticky Header */}
-      <Header />
+      <HeaderTabs />
 
       {/* Main content */}
       <main className="flex justify-center w-full px-4 md:px-[60px] py-[40px]">

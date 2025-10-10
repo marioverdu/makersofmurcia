@@ -8,6 +8,9 @@ export function useIsMobile() {
   const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined)
 
   useEffect(() => {
+    // Verificar que estamos en el navegador
+    if (typeof window === 'undefined') return
+
     const checkDevice = () => {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     }

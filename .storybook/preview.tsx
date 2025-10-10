@@ -12,8 +12,9 @@ const preview: Preview = {
     a11y: {
       test: 'todo'
     },
+    // Docs deshabilitado por defecto según /.cursor/rules
     docs: {
-      autodocs: true,
+      autodocs: false,
     },
     viewport: {
       viewports: {
@@ -34,6 +35,11 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+  },
+  // Ajustes React: evitar strict mode y usar API legacy para compatibilidad de act
+  react: {
+    strictMode: false,
+    legacyRootApi: true,
   },
 };
 

@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useRef, useEffect } from "react"
+import { useChatTranslations } from "@/hooks/use-chat-translations"
 
 interface ChatInputProps {
   value: string
@@ -13,6 +14,7 @@ interface ChatInputProps {
 
 export function ChatInput({ value, onChange, onSubmit, onFocus, disabled }: ChatInputProps) {
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  const t = useChatTranslations()
 
   useEffect(() => {
     if (inputRef.current) {
@@ -69,10 +71,10 @@ export function ChatInput({ value, onChange, onSubmit, onFocus, disabled }: Chat
           }}
           className="w-full pr-20 border border-gray-300 focus:outline-none focus:ring-0 focus:border-primary resize-none min-h-[40px] px-4 py-2 bg-white text-black overflow-hidden"
           style={{ borderRadius: "20px", transition: "border-radius 0.3s ease" }}
-          placeholder="Escribe tu mensaje..."
+          placeholder={t.writeMessage}
           autoFocus={false}
           rows={1}
-          aria-label="Type a message"
+          aria-label={t.writeMessage}
           disabled={disabled}
         />
 
@@ -80,7 +82,7 @@ export function ChatInput({ value, onChange, onSubmit, onFocus, disabled }: Chat
           type="button"
           disabled
           className="absolute right-12 top-1/2 -translate-y-1/2 rounded-full border-gray-300 h-8 w-8 flex items-center justify-center p-[1px] transition-transform active:scale-95 bg-transparent hover:bg-gray-100 opacity-50 cursor-not-allowed"
-          aria-label="Insert emoji"
+          aria-label={t.insertEmoji}
           style={{ top: "calc(50% - 4px)" }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888888" strokeWidth="2">
@@ -95,7 +97,7 @@ export function ChatInput({ value, onChange, onSubmit, onFocus, disabled }: Chat
           type="submit"
           disabled={!value.trim() || disabled}
           className="absolute right-2 top-[50%] -translate-y-1/2 rounded-full bg-[#3D5B6A] hover:bg-[#3D5B6A] h-8 w-8 flex items-center justify-center p-[1px] transition-transform active:scale-95 disabled:cursor-not-allowed text-white opacity-100"
-          aria-label="Send message"
+          aria-label={t.sendMessage}
           style={{ top: "calc(50% - 4px)" }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

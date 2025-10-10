@@ -19,7 +19,7 @@ const nextConfig = {
   
   // Configuración de imágenes
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'assets.marioverdu.com', 'marioverdu.com'],
     unoptimized: true,
   },
   

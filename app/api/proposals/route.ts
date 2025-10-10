@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createProposal, getProposalsByStatus } from "@/lib/proposals-db"
 import { getAllFlaggedUsers, updateUserFlags } from "@/lib/user-flagging-service"
+import { sendProposalNotificationEmail } from "@/lib/proposal-email-service"
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,6 +31,35 @@ export async function POST(request: NextRequest) {
 
     // Update user flags after creating proposal
     await updateUserFlags(ipAddress, userAgent)
+
+    // Enviar email de notificación para propuesta pendiente
+    try {
+      const emailResult = await sendProposalNotificationEmail({
+        proposalId: result.proposalId,
+        planName: data.planName,
+        price: data.price,
+        service: data.service,
+        projectType: data.projectType,
+        productType: data.productType,
+        screens: data.screens,
+        payment: data.payment,
+        budget: data.budget,
+        ipAddress,
+        userAgent,
+        url: referer,
+        createdAt: new Date().toISOString(),
+        conversationData: data.conversationData,
+      })
+
+      if (emailResult.success) {
+        console.log("✅ Email de notificación enviado:", emailResult.emailId)
+      } else {
+        console.warn("⚠️ Error enviando email de notificación:", emailResult.error)
+      }
+    } catch (emailError) {
+      console.warn("⚠️ Error enviando email de notificación:", emailError)
+      // No fallar la creación de la propuesta si falla el email
+    }
 
     return NextResponse.json({
       success: true,

@@ -1,6 +1,6 @@
 // Este archivo es generado automáticamente durante el build
 // No editar manualmente - se sobrescribirá en el próximo build
-// Generado el: 2025-08-31T03:21:33.944Z
+// Generado el: 2025-09-28T19:58:24.288Z
 
 export const GENERATED_ROUTES = [
   {
@@ -25,13 +25,6 @@ export const GENERATED_ROUTES = [
     "isDynamic": true
   },
   {
-    "path": "/[lang]/contact",
-    "type": "page",
-    "filePath": "app/[lang]/contact/page.tsx",
-    "isProtected": false,
-    "isDynamic": true
-  },
-  {
     "path": "/[lang]/delete-pls",
     "type": "page",
     "filePath": "app/[lang]/delete-pls/page.tsx",
@@ -42,6 +35,13 @@ export const GENERATED_ROUTES = [
     "path": "/[lang]/hover-test",
     "type": "page",
     "filePath": "app/[lang]/hover-test/page.tsx",
+    "isProtected": false,
+    "isDynamic": true
+  },
+  {
+    "path": "/[lang]/opengraph-image",
+    "type": "api",
+    "filePath": "app/[lang]/opengraph-image/route.ts",
     "isProtected": false,
     "isDynamic": true
   },
@@ -98,6 +98,13 @@ export const GENERATED_ROUTES = [
     "path": "/admin",
     "type": "page",
     "filePath": "app/admin/page.tsx",
+    "isProtected": true,
+    "isDynamic": false
+  },
+  {
+    "path": "/admin/analytics",
+    "type": "loading",
+    "filePath": "app/admin/analytics/loading.tsx",
     "isProtected": true,
     "isDynamic": false
   },
@@ -249,9 +256,23 @@ export const GENERATED_ROUTES = [
     "isDynamic": false
   },
   {
+    "path": "/api/cv",
+    "type": "api",
+    "filePath": "app/api/cv/route.ts",
+    "isProtected": false,
+    "isDynamic": false
+  },
+  {
     "path": "/api/debug/database",
     "type": "api",
     "filePath": "app/api/debug/database/route.ts",
+    "isProtected": false,
+    "isDynamic": false
+  },
+  {
+    "path": "/api/generate-pdf",
+    "type": "api",
+    "filePath": "app/api/generate-pdf/route.ts",
     "isProtected": false,
     "isDynamic": false
   },
@@ -438,13 +459,6 @@ export const GENERATED_ROUTES = [
     "isDynamic": false
   },
   {
-    "path": "/contact",
-    "type": "page",
-    "filePath": "app/contact/page.tsx",
-    "isProtected": false,
-    "isDynamic": false
-  },
-  {
     "path": "/cookie-widget-demo",
     "type": "page",
     "filePath": "app/cookie-widget-demo/page.tsx",
@@ -529,9 +543,9 @@ export const GENERATED_ROUTES = [
     "isDynamic": false
   },
   {
-    "path": "/posts",
-    "type": "layout",
-    "filePath": "app/posts/layout.tsx",
+    "path": "/opengraph-image",
+    "type": "api",
+    "filePath": "app/opengraph-image/route.ts",
     "isProtected": false,
     "isDynamic": false
   },
@@ -548,27 +562,6 @@ export const GENERATED_ROUTES = [
     "filePath": "app/posts/page.tsx",
     "isProtected": false,
     "isDynamic": false
-  },
-  {
-    "path": "/posts/admin",
-    "type": "page",
-    "filePath": "app/posts/admin/page.tsx",
-    "isProtected": false,
-    "isDynamic": false
-  },
-  {
-    "path": "/posts/view/[id]",
-    "type": "loading",
-    "filePath": "app/posts/view/[id]/loading.tsx",
-    "isProtected": false,
-    "isDynamic": true
-  },
-  {
-    "path": "/posts/view/[id]",
-    "type": "page",
-    "filePath": "app/posts/view/[id]/page.tsx",
-    "isProtected": false,
-    "isDynamic": true
   },
   {
     "path": "/price-estimator",
@@ -672,13 +665,6 @@ export const GENERATED_ROUTES = [
     "path": "/work-experience",
     "type": "loading",
     "filePath": "app/work-experience/loading.tsx",
-    "isProtected": false,
-    "isDynamic": false
-  },
-  {
-    "path": "/work-experience",
-    "type": "page",
-    "filePath": "app/work-experience/page.tsx",
     "isProtected": false,
     "isDynamic": false
   },

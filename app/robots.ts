@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
+import { getSiteUrl } from '@/lib/env-config'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://marioverdu.com'
+  const baseUrl = getSiteUrl()
 
   return {
     rules: [

@@ -63,10 +63,24 @@ export async function POST(request: NextRequest) {
   try {
     const body: CreatePostData = await request.json()
     
-    // Validar campos requeridos
-    if (!body.title || !body.slug || !body.content) {
+    // Normalizar: generar slug si falta
+    if (!body.slug && body.title) {
+      body.slug = body.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '')
+    }
+
+    // Permitir contenido vacío para portfolio; para el resto, exigir content definido
+    const isPortfolio = (body as any).contentType === 'portfolio' || body.category === 'portfolio'
+    if (isPortfolio && (body.content == null)) {
+      body.content = ''
+    }
+
+    // Validación mínima
+    if (!body.title || !body.slug || (body.content == null && !isPortfolio)) {
       return NextResponse.json(
-        { error: 'Title, slug, and content are required' },
+        { error: 'Title and slug are required. Content is required unless contentType=portfolio.' },
         { status: 400 }
       )
     }

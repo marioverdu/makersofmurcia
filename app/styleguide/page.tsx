@@ -4,7 +4,8 @@ import Image from "next/image"
 import { CARD_EDUCATION_SECTION_DEFAULT_CLASSES, CARD_EDUCATION_SECTION_DEFAULT_STYLE } from "@/lib/design-tokens"
 import MouseScrollIndicator from "@/components/mouse-scroll-indicator"
 import { MasterStackedImages } from "@/components/master-stacked-images"
-import Header from "@/components/header"
+import { HeaderTabs } from "@/components/ui/header/tabs"
+
 import { useState } from "react"
 import ChatTuentiButtonMaster from "@/components/chat-tuenti/chat-tuenti-button-master"
 
@@ -134,56 +135,7 @@ export default function StyleguidePage() {
             <div className="mb-10">
               <MasterStackedImages />
             </div>
-            {/* Header master demo */}
-            {/* Header master fijo como en producción */}
-            <div className="w-full mb-10 relative" style={{ minHeight: 60 }}>
-              <Header staticMode={true} pathname="/">
-                <div className="absolute top-1/2 -translate-y-1/2 h-[28px] w-[28px] overflow-hidden rounded-full transition-all duration-300 ease-in-out left-0">
-                  <img
-                    src="https://assets.marioverdu.com/avatar/avatar-2.webp"
-                    alt="Avatar"
-                    width={28}
-                    height={28}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              </Header>
-            </div>
-            {/* Sustituyo los copys de las variantes de header por los nombres de enrutado y tab seleccionada */}
-            <div className="w-full text-left mb-2">components/ui/header.tsx — Tab seleccionada: Posts</div>
-            <div className="w-full mb-10 relative" style={{ minHeight: 60 }}>
-              <Header staticMode={true} className="bg-[#F7F8FC]" avatarPosition={{ mobile: 60, desktop: 60 }} pathname="/posts">
-                <div className="absolute top-1/2 -translate-y-1/2 h-[28px] w-[28px] overflow-hidden rounded-full transition-all duration-300 ease-in-out left-0">
-                  <img
-                    src="https://assets.marioverdu.com/avatar/avatar-2.webp"
-                    alt="Avatar"
-                    width={28}
-                    height={28}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                {/* Simulación botón búsqueda */}
-                <div className="absolute flex items-center" style={{ left: 100 }}>
-                  <button className="flex items-center justify-center h-[28px] w-[28px] transition-all duration-300 hover:bg-gray-100 rounded-full" aria-label="Buscar posts">
-                    <svg className="h-4 w-4 text-gray-500 hover:text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                  </button>
-                </div>
-              </Header>
-            </div>
-            <div className="w-full text-left mb-2">components/ui/header.tsx — Tab seleccionada: Experiencia</div>
-            <div className="w-full mb-10 relative" style={{ minHeight: 60 }}>
-              <Header staticMode={true} className="bg-white" avatarPosition={{ mobile: 60, desktop: 60 }} pathname="/work-experience">
-                <div className="absolute top-1/2 -translate-y-1/2 h-[28px] w-[28px] overflow-hidden rounded-full transition-all duration-300 ease-in-out left-0">
-                  <img
-                    src="https://assets.marioverdu.com/avatar/avatar-2.webp"
-                    alt="Avatar"
-                    width={28}
-                    height={28}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              </Header>
-            </div>
+
             {/* Demo: ChatTuentiButtonMaster */}
             <div className="w-full text-left mb-2">
               ChatTuentiButtonMaster (botón flotante de chat Tuenti)

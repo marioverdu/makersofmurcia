@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { getSiteUrl } from '@/lib/env-config'
 
 export interface SEOConfig {
   title: string
@@ -37,7 +38,7 @@ export class SEOEngine {
   private baseUrl: string
   private defaultConfig: Partial<SEOConfig>
 
-  constructor(baseUrl: string = 'https://marioverdu.com', defaultConfig: Partial<SEOConfig> = {}) {
+  constructor(baseUrl: string = getSiteUrl(), defaultConfig: Partial<SEOConfig> = {}) {
     this.baseUrl = baseUrl
     this.defaultConfig = {
       author: 'Mario Verdú',
@@ -51,7 +52,7 @@ export class SEOEngine {
   /**
    * Genera metadata completa para una página
    */
-  generateMetadata(config: SEOConfig): Metadata {
+  async generateMetadata(config: SEOConfig): Promise<Metadata> {
     const fullConfig = { ...this.defaultConfig, ...config }
     const canonicalUrl = fullConfig.canonical 
       ? `${this.baseUrl}${fullConfig.canonical}`
@@ -76,8 +77,8 @@ export class SEOEngine {
           follow: !fullConfig.noFollow,
         },
       },
-      openGraph: this.generateOpenGraph(fullConfig),
-      twitter: this.generateTwitterCard(fullConfig),
+      openGraph: await this.generateOpenGraph(fullConfig),
+      twitter: await this.generateTwitterCard(fullConfig),
       verification: this.generateVerification(fullConfig),
     }
 
@@ -87,8 +88,20 @@ export class SEOEngine {
   /**
    * Genera Open Graph tags
    */
-  private generateOpenGraph(config: SEOConfig) {
-    const imageUrl = config.image?.url || `${this.baseUrl}/og-image.jpg`
+  private async getOgUrlWithBust(): Promise<string> {
+    try {
+      const { kv } = await import('@vercel/kv')
+      const last = (await kv.get<string>('og_image_last_updated')) || ''
+      // usar endpoint dinámico estable
+      return `${this.baseUrl}/opengraph-image${last ? `?v=${encodeURIComponent(last)}` : ''}`
+    } catch {
+      return `${this.baseUrl}/opengraph-image`
+    }
+  }
+
+  private async generateOpenGraph(config: SEOConfig) {
+    const fallback = await this.getOgUrlWithBust()
+    const imageUrl = config.image?.url || fallback
     
     return {
       title: config.title,
@@ -115,8 +128,9 @@ export class SEOEngine {
   /**
    * Genera Twitter Card tags
    */
-  private generateTwitterCard(config: SEOConfig) {
-    const imageUrl = config.image?.url || `${this.baseUrl}/og-image.jpg`
+  private async generateTwitterCard(config: SEOConfig) {
+    const fallback = await this.getOgUrlWithBust()
+    const imageUrl = config.image?.url || fallback
     
     return {
       card: 'summary_large_image',
@@ -275,7 +289,7 @@ Sitemap: ${sitemapUrl || `${this.baseUrl}/sitemap.xml`}`
 }
 
 // Instancia global del motor SEO
-export const seoEngine = new SEOEngine('https://marioverdu.com', {
+export const seoEngine = new SEOEngine(getSiteUrl(), {
   author: 'Mario Verdú',
   creator: 'Mario Verdú',
   locale: 'es_ES',
@@ -288,9 +302,9 @@ export const seoConfigs = {
     title: 'Mario Verdú | UX/UI Designer Valencia',
     description: 'Mario Verdú, UX/UI Designer especializado en soluciones de experiencia e interfaz centradas en el usuario. Portfolio y servicios de diseño web en Valencia.',
     keywords: ['Mario Verdú', 'UX Designer', 'UI Designer', 'Valencia', 'Diseño Web', 'Portfolio'],
-    url: 'https://marioverdu.com',
+    url: getSiteUrl(),
     image: {
-      url: 'https://marioverdu.com/og-image.jpg',
+      url: `${getSiteUrl()}/og-image.jpg`,
       width: 1200,
       height: 630,
       alt: 'Mario Verdú - UX/UI Designer en Valencia'
@@ -300,21 +314,16 @@ export const seoConfigs = {
     title: 'Experiencia Laboral | Mario Verdú - UX/UI Designer',
     description: 'Descubre la experiencia laboral y trayectoria profesional de Mario Verdú como UX/UI Designer. Proyectos, empresas y logros en diseño de productos digitales.',
     keywords: ['Mario Verdú', 'Experiencia Laboral', 'UX Designer', 'UI Designer', 'Portfolio', 'Trayectoria Profesional'],
-    url: 'https://marioverdu.com/work-experience',
-    image: {
-      url: 'https://marioverdu.com/og-work-experience.jpg',
-      width: 1200,
-      height: 630,
-      alt: 'Experiencia Laboral - Mario Verdú UX/UI Designer'
-    }
+    url: `${getSiteUrl()}/work-experience`,
+    // Sin image específica para usar el endpoint dinámico
   },
   posts: {
     title: 'Blog | Mario Verdú - UX/UI Designer',
     description: 'Artículos y reflexiones sobre UX/UI Design, diseño de productos digitales y tendencias en la industria del diseño.',
     keywords: ['Blog', 'UX Design', 'UI Design', 'Diseño Digital', 'Mario Verdú', 'Artículos'],
-    url: 'https://marioverdu.com/posts',
+    url: `${getSiteUrl()}/posts`,
     image: {
-      url: 'https://marioverdu.com/og-blog.jpg',
+      url: `${getSiteUrl()}/og-blog.jpg`,
       width: 1200,
       height: 630,
       alt: 'Blog - Mario Verdú UX/UI Designer'

@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useState } from 'react';
+import type { Locale } from '@/types/i18n'
+import { useWorkExperienceTranslations } from '@/hooks/use-work-experience-translations'
 import { EditableField } from './editable-field';
 import type { WorkExperienceCard, CardEditState } from '@/types/work-experience';
 
@@ -13,6 +15,7 @@ interface WorkExperienceCardProps {
   onUpdateField: (field: string, value: string) => void;
   onSave: () => Promise<boolean>;
   onCancel: () => void;
+  lang?: Locale;
 }
 
 export function WorkExperienceCard({
@@ -23,8 +26,10 @@ export function WorkExperienceCard({
   editState,
   onUpdateField,
   onSave,
-  onCancel
+  onCancel,
+  lang = 'es'
 }: WorkExperienceCardProps) {
+  const t = useWorkExperienceTranslations(lang)
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const imageRef = React.useRef<HTMLDivElement>(null);
@@ -121,7 +126,7 @@ export function WorkExperienceCard({
                 onSave={handleSave}
                 onCancel={onCancel}
                 className="text-xs font-medium text-gray-500"
-                placeholder="Año"
+                placeholder={lang === 'en' ? 'Year' : 'Año'}
                 maxLength={4}
               />
             </div>
@@ -138,7 +143,7 @@ export function WorkExperienceCard({
             onSave={handleSave}
             onCancel={onCancel}
             className="text-sm font-normal leading-tight pr-6"
-            placeholder="Descripción..."
+            placeholder={lang === 'en' ? 'Description...' : 'Descripción...'}
             multiline
             rows={2}
           />
@@ -155,7 +160,7 @@ export function WorkExperienceCard({
               onSave={handleSave}
               onCancel={onCancel}
               className="text-sm font-normal text-gray-600"
-              placeholder="Contenido detallado..."
+              placeholder={lang === 'en' ? 'Detailed content...' : 'Contenido detallado...'}
               multiline
               rows={4}
             />
@@ -172,7 +177,7 @@ export function WorkExperienceCard({
                 className="text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ color: "#3B82F6" }}
               >
-                {isSaving ? 'Guardando...' : 'Guardar cambios'}
+                {isSaving ? (lang === 'en' ? 'Saving...' : 'Guardando...') : (lang === 'en' ? 'Save changes' : 'Guardar cambios')}
               </button>
             ) : (
               <button 
@@ -180,7 +185,7 @@ export function WorkExperienceCard({
                 className="text-xs" 
                 style={{ color: "#6C727F" }}
               >
-                {isExpanded ? "Ver menos" : "Ver más"}
+                {isExpanded ? (lang === 'en' ? 'See less' : 'Ver menos') : (lang === 'en' ? 'See more' : 'Ver más')}
               </button>
             )}
           </div>

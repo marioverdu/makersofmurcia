@@ -3,6 +3,7 @@
 import { useRouter, usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import type { Locale } from "@/types/i18n"
+import { useLanguage } from "@/contexts/language-context"
 
 interface LanguageSwitcherProps {
   currentLang: Locale
@@ -13,7 +14,7 @@ export default function LanguageSwitcher({ currentLang, className = "" }: Langua
   const router = useRouter()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedLang, setSelectedLang] = useState<Locale>(currentLang)
+  const { currentLanguage, setLanguage, isLoading } = useLanguage()
 
   // Detectar si estamos en desarrollo
   const isDevelopment = process.env.NODE_ENV === 'development' || 
@@ -21,8 +22,13 @@ export default function LanguageSwitcher({ currentLang, className = "" }: Langua
 
   // Sincronizar el estado local cuando cambie el prop currentLang
   useEffect(() => {
-    setSelectedLang(currentLang)
-  }, [currentLang])
+    if (!isLoading && currentLanguage !== currentLang) {
+      // Si el contexto tiene un idioma diferente al de la URL, actualizar la URL
+      const pathWithoutLocale = pathname.replace(`/${currentLang}`, '') || '/'
+      const newPath = `/${currentLanguage}${pathWithoutLocale}`
+      router.push(newPath)
+    }
+  }, [currentLanguage, currentLang, pathname, router, isLoading])
 
   const languages = [
     { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -31,35 +37,12 @@ export default function LanguageSwitcher({ currentLang, className = "" }: Langua
 
   const handleLanguageChange = (newLang: Locale) => {
     setIsOpen(false)
-    setSelectedLang(newLang)
     
-    // Guardar preferencia en cookies
-    document.cookie = `locale=${newLang}; path=/; max-age=31536000` // 1 año
-    
-    // En desarrollo, también cambiar el idioma
-    if (isDevelopment) {
-      // Remover el locale actual de la ruta
-      const pathWithoutLocale = pathname.replace(`/${currentLang}`, '') || '/'
-      
-      // Construir la nueva ruta con el nuevo locale
-      const newPath = `/${newLang}${pathWithoutLocale}`
-      
-      console.log(`[DEV] Changing language to: ${newLang}, path: ${newPath}`)
-      router.push(newPath)
-      return
-    }
-    
-    // En producción, cambiar el idioma
-    // Remover el locale actual de la ruta
-    const pathWithoutLocale = pathname.replace(`/${currentLang}`, '') || '/'
-    
-    // Construir la nueva ruta con el nuevo locale
-    const newPath = `/${newLang}${pathWithoutLocale}`
-    
-    router.push(newPath)
+    // Usar el contexto para cambiar el idioma
+    setLanguage(newLang)
   }
 
-  const currentLanguage = languages.find(lang => lang.code === selectedLang)
+  const currentLanguageInfo = languages.find(lang => lang.code === currentLanguage)
 
   return (
     <>
@@ -68,7 +51,7 @@ export default function LanguageSwitcher({ currentLang, className = "" }: Langua
         className={`flex items-center justify-center px-3 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 mb-0.5 ${className}`}
         title="Change language"
       >
-        <span>{currentLanguage?.flag}</span>
+        <span>{currentLanguageInfo?.flag}</span>
         <svg
           className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"

@@ -246,7 +246,7 @@ const PostCardHoverDemo = () => {
 };
 
 const meta: Meta<typeof PostCardHoverDemo> = {
-  title: 'Posts/Post Card Hover - Outline Stroke Negro',
+  title: 'PostCardHoverOutlineStrokeNegro',
   component: PostCardHoverDemo,
   parameters: {
     layout: 'fullscreen',
@@ -269,7 +269,7 @@ export default meta;
 type Story = StoryObj<typeof PostCardHoverDemo>;
 
 // Historia principal - UNA SOLA ENTRADA
-export const PostCardHover: Story = {
+export const Default: Story = {
   render: () => <PostCardHoverDemo />,
   parameters: {
     docs: {

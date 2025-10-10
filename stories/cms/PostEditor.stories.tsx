@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PostEditor } from '@/components/post-management/post-editor';
 
 const meta: Meta<typeof PostEditor> = {
-  title: 'CMS/PostEditor',
+  title: 'PostEditor',
   component: PostEditor,
   parameters: {
     layout: 'padded',
@@ -12,7 +12,6 @@ const meta: Meta<typeof PostEditor> = {
       }
     }
   },
-  tags: ['autodocs'],
   argTypes: {
     formData: {
       control: 'object',
@@ -118,7 +117,7 @@ export const Default: Story = {
   }
 };
 
-export const NewPost: Story = {
+/* export const NewPost: Story = {
   args: {
     formData: {
       title: '',
@@ -135,9 +134,9 @@ export const NewPost: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */
 
-export const WithErrors: Story = {
+/* export const WithErrors: Story = {
   args: {
     formData: mockFormData,
     selectedPost: mockSelectedPost,
@@ -150,9 +149,9 @@ export const WithErrors: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */
 
-export const Loading: Story = {
+/* export const Loading: Story = {
   args: {
     formData: mockFormData,
     selectedPost: mockSelectedPost,
@@ -161,9 +160,9 @@ export const Loading: Story = {
     isLoading: true,
     isSaving: false
   }
-};
+}; */
 
-export const Saving: Story = {
+/* export const Saving: Story = {
   args: {
     formData: mockFormData,
     selectedPost: mockSelectedPost,
@@ -172,9 +171,9 @@ export const Saving: Story = {
     isLoading: false,
     isSaving: true
   }
-};
+}; */
 
-export const PhotoPost: Story = {
+/* export const PhotoPost: Story = {
   args: {
     formData: {
       ...mockFormData,
@@ -194,9 +193,9 @@ export const PhotoPost: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */
 
-export const QuotePost: Story = {
+/* export const QuotePost: Story = {
   args: {
     formData: {
       ...mockFormData,
@@ -216,9 +215,9 @@ export const QuotePost: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */
 
-export const MusicPlayerPost: Story = {
+/* export const MusicPlayerPost: Story = {
   args: {
     formData: {
       ...mockFormData,
@@ -238,9 +237,9 @@ export const MusicPlayerPost: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */
 
-export const VideoPlayerPost: Story = {
+/* export const VideoPlayerPost: Story = {
   args: {
     formData: {
       ...mockFormData,
@@ -260,9 +259,9 @@ export const VideoPlayerPost: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */
 
-export const AsciiArtPost: Story = {
+/* export const AsciiArtPost: Story = {
   args: {
     formData: {
       ...mockFormData,
@@ -287,9 +286,9 @@ export const AsciiArtPost: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */
 
-export const PostPlus: Story = {
+/* export const PostPlus: Story = {
   args: {
     formData: {
       ...mockFormData,
@@ -309,4 +308,4 @@ export const PostPlus: Story = {
     isLoading: false,
     isSaving: false
   }
-};
+}; */

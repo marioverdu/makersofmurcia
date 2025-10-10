@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
+import { getSiteUrl } from '@/lib/env-config'
 import type { Locale } from '@/types/i18n'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://marioverdu.com'
+  const baseUrl = getSiteUrl()
   const locales: Locale[] = ['es', 'en']
   
   // URLs estáticas del sitio para cada idioma
@@ -28,12 +29,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
-      },
-      {
-        url: `${baseUrl}/${locale}/contact`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
       }
     )
   })

@@ -11,7 +11,8 @@ import ChatTuentiButtonMaster from "@/components/chat-tuenti/chat-tueni-button-m
 import ChatTuentiMaster from "@/components/chat-tuenti/chat-tuenti-master"
 import { ProfileCardWidescreens, ProfileCardPhone } from "@/components/profile-card"
 import { HeaderTabs } from "@/components/ui/header/tabs"
-import { HeaderContextualMenu } from "@/components/ui/header/header-contextual-menu"
+import { UnifiedLoading } from '@/components/ui/unified-loading'
+
 import type { Locale } from "@/types/i18n"
 
 
@@ -128,7 +129,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
           </div>
           {/* Tabs centradas absolutamente */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" />
+            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" lang="es" />
           </div>
           {/* Selector de idioma al extremo derecho */}
           <div 
@@ -146,7 +147,7 @@ function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang:
               justifyContent: 'flex-end'
             }}
           >
-            <HeaderContextualMenu currentLang={lang} hidden={true} />
+
           </div>
         </div>
         {/* Padding derecho transparente */}
@@ -362,7 +363,9 @@ export default function WorkExperienceFixPage() {
   if (typeof window !== "undefined" && checkingVisibility) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-gray-800" style={{ width: 64, height: 64 }} />
+        <div className="text-center">
+          <UnifiedLoading size={32} />
+        </div>
       </div>
     )
   }

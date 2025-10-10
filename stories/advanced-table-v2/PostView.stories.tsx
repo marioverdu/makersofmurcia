@@ -266,7 +266,7 @@ const FullPostView = ({ post }: { post: typeof SAMPLE_POST_DATA }) => (
 )
 
 const meta: Meta<typeof AdvancedTableV2View> = {
-  title: 'Components/AdvancedTableV2/PostView',
+  title: 'PostView',
   component: AdvancedTableV2View,
   parameters: {
     layout: 'fullscreen',
@@ -351,7 +351,7 @@ export default meta
 type Story = StoryObj<typeof AdvancedTableV2View>
 
 // Historia 1: Post completo como aparece en /posts/view/20
-export const FullPostLayout: Story = {
+export const Default: Story = {
   render: () => (
     <div className="min-h-screen bg-[#F7F8FC] py-8">
       <div className="pt-[140px] pb-[72px] w-full px-4 sm:w-[83.33%] sm:px-0 max-w-[1000px] mx-auto flex flex-col items-center gap-6">
@@ -520,84 +520,8 @@ const TABLE_ONLY = `
 </table>
 `
 
-// (Eliminada historia de AdvancedTableV2View - Tabla solo)
+// (Se eliminan historias extra para cumplir 1 componente = 1 story Default)
 
 // ContextualScrollbar sola (componente interno) dentro de PostView
 // Nota: se renderiza a través de AdvancedTableV2View porque la scrollbar depende de una tabla y contenedor.
-export const ContextualScrollbar_Only: Story = {
-  render: () => {
-    const trackStyle: React.CSSProperties = {
-      position: 'relative',
-      width: '862px',
-      height: '16px',
-      background: 'rgba(241, 245, 249, 0.9)',
-      border: '1px solid rgba(203, 213, 224, 0.3)',
-      borderRadius: '8px',
-      cursor: 'pointer',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      transform: 'translateZ(0)',
-    }
-    const thumbStyle: React.CSSProperties = {
-      position: 'absolute',
-      left: '0px',
-      top: '3px',
-      width: '200px',
-      height: '10px',
-      background: '#94a3b8',
-      borderRadius: '5px',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
-      transform: 'translateZ(0)'
-    }
-    return (
-      <div className="min-h-screen bg-[#F7F8FC] py-12">
-        <div className="max-w-4xl mx-auto p-6">
-          <div style={trackStyle} className="contextual-scrollbar">
-            <div style={thumbStyle} className="contextual-scrollbar-thumb" />
-          </div>
-        </div>
-      </div>
-    )
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-### ContextualScrollbar (componente interno)
-
-Nombre interno: \`ContextualScrollbar\`.
-
-Se muestra aislada como DOM puro (sin tabla detrás) para visualizar estilos/base:
-- Posicionamiento dentro de la tabla
-- Drag del thumb con mapeo 1:1 a scroll
-- Click en track centrando el thumb
-- Ancho limitado al área visible (containerWidth)
-        `
-      }
-    }
-  }
-}
-
-// AdvancedTableV2View (componente interno) - solo la tabla
-export const AdvancedTableV2View_Only: Story = {
-  name: 'AdvancedTableV2View Only',
-  render: () => (
-    <div className="min-h-screen bg-[#F7F8FC] py-12">
-      <div className="max-w-4xl mx-auto p-6">
-        <AdvancedTableV2View content={TABLE_ONLY} className="prose max-w-none" />
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: `
-### AdvancedTableV2View (componente interno)
-
-Nombre interno: \`AdvancedTableV2View\`.
-
-Entrada con solo el componente de tabla dentro de PostView, incluyendo la \`ContextualScrollbar\` integrada.
-        `
-      }
-    }
-  }
-}
+// Stories eliminadas para cumplir 1 componente = 1 story Default

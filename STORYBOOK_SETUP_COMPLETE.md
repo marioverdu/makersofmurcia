@@ -1,5 +1,7 @@
 # ✅ Storybook - Instalación Completada
 
+> Nota: Las reglas operativas de Storybook están definidas en `/.cursor/rules` y prevalecen sobre cualquier ejemplo previo.
+
 ## 🎉 ¡Storybook está listo para usar!
 
 Storybook ha sido instalado y configurado exitosamente en tu proyecto Next.js con React 19.
@@ -57,9 +59,8 @@ pnpm run build-storybook
 - `.storybook/vitest.setup.ts` - Setup de Vitest
 
 ### Stories:
-- `components/ui/button.stories.tsx`
-- `components/portfolio-card.stories.tsx`
-- `components/deploy-button.stories.tsx`
+- Cada story debe usar título plano (`title: 'ComponentName'`) y una sola `Default`.
+- Evitar `tags: ['autodocs']` y múltiples variantes en un mismo archivo.
 
 ### Documentación:
 - `STORYBOOK_README.md` - Guía completa de uso
@@ -113,10 +114,11 @@ pnpm run build-storybook
 ## 📚 Próximos pasos recomendados:
 
 1. **Explorar Storybook** en http://localhost:6006
-2. **Crear más stories** para otros componentes
+2. **Crear más stories** (una `Default` por componente, título plano)
 3. **Configurar testing** con Vitest si es necesario
 4. **Personalizar temas** según tu diseño
 5. **Configurar CI/CD** para Storybook si es necesario
+6. Revisar `/.cursor/rules` para cumplir auditoría automática de stories
 
 ## 🎨 Personalización:
 

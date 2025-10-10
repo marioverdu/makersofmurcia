@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PostManagement } from '@/components/post-management';
 
 const meta: Meta<typeof PostManagement> = {
-  title: 'CMS/PostManagement',
+  title: 'PostManagement',
   component: PostManagement,
   parameters: {
     layout: 'fullscreen',
@@ -12,7 +12,6 @@ const meta: Meta<typeof PostManagement> = {
       }
     }
   },
-  tags: ['autodocs'],
   argTypes: {
     posts: {
       control: 'object',
@@ -135,103 +134,3 @@ export const Default: Story = {
   }
 };
 
-export const Loading: Story = {
-  args: {
-    posts: [],
-    selectedPost: null,
-    formData: {},
-    date: undefined,
-    errors: {},
-    isLoading: true,
-    isSaving: false
-  }
-};
-
-export const Saving: Story = {
-  args: {
-    posts: mockPosts,
-    selectedPost: mockPosts[0],
-    formData: mockFormData,
-    date: new Date('2025-01-17T10:00:00Z'),
-    errors: {},
-    isLoading: false,
-    isSaving: true
-  }
-};
-
-export const WithErrors: Story = {
-  args: {
-    posts: mockPosts,
-    selectedPost: mockPosts[0],
-    formData: mockFormData,
-    date: new Date('2025-01-17T10:00:00Z'),
-    errors: {
-      title: 'El título es requerido',
-      content: 'El contenido no puede estar vacío'
-    },
-    isLoading: false,
-    isSaving: false
-  }
-};
-
-export const NoPosts: Story = {
-  args: {
-    posts: [],
-    selectedPost: null,
-    formData: {},
-    date: undefined,
-    errors: {},
-    isLoading: false,
-    isSaving: false
-  }
-};
-
-export const NoSelectedPost: Story = {
-  args: {
-    posts: mockPosts,
-    selectedPost: null,
-    formData: {},
-    date: undefined,
-    errors: {},
-    isLoading: false,
-    isSaving: false
-  }
-};
-
-export const ManyPosts: Story = {
-  args: {
-    posts: [
-      ...mockPosts,
-      {
-        id: '4',
-        title: 'Post adicional 1',
-        excerpt: 'Extracto del post adicional...',
-        content: 'Contenido del post adicional...',
-        contentType: 'post',
-        coverImage: 'https://via.placeholder.com/400x500',
-        date: '2025-01-16T10:00:00Z',
-        tags: ['adicional'],
-        created_at: '2025-01-16T10:00:00Z',
-        updated_at: '2025-01-16T10:00:00Z'
-      },
-      {
-        id: '5',
-        title: 'Post adicional 2',
-        excerpt: 'Extracto del segundo post adicional...',
-        content: 'Contenido del segundo post adicional...',
-        contentType: 'post+',
-        coverImage: 'https://via.placeholder.com/400x500',
-        date: '2025-01-15T10:00:00Z',
-        tags: ['adicional', 'premium'],
-        created_at: '2025-01-15T10:00:00Z',
-        updated_at: '2025-01-15T10:00:00Z'
-      }
-    ],
-    selectedPost: mockPosts[0],
-    formData: mockFormData,
-    date: new Date('2025-01-17T10:00:00Z'),
-    errors: {},
-    isLoading: false,
-    isSaving: false
-  }
-};

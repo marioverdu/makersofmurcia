@@ -11,6 +11,7 @@ import ChatTuentiButtonMaster from "@/components/chat-tuenti/chat-tueni-button-m
 import ChatTuentiMaster from "@/components/chat-tuenti/chat-tuenti-master"
 import { ProfileCardWidescreens, ProfileCardPhone } from "@/components/profile-card"
 import { HeaderTabs } from "@/components/ui/header/tabs"
+import { UnifiedLoading } from '@/components/ui/unified-loading'
 
 // Componente mejorado para el divisor de línea de tiempo
 function TimelineDivider({
@@ -92,7 +93,7 @@ function TimelineDivider({
 }
 
 // HeaderV2: Header transparente con paddings laterales turquesa según breakpoint
-function HeaderV2({ isAvatarInHeader }: { isAvatarInHeader: boolean }) {
+function HeaderV2({ isAvatarInHeader, lang }: { isAvatarInHeader: boolean; lang: Locale }) {
   const pathname = usePathname()
   return (
     <div
@@ -126,7 +127,7 @@ function HeaderV2({ isAvatarInHeader }: { isAvatarInHeader: boolean }) {
           </div>
           {/* Tabs centradas absolutamente */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" pathname={pathname} />
+            <HeaderTabs className="mx-auto md:mx-0 justify-center md:justify-start" pathname={pathname} lang={lang} />
           </div>
         </div>
         {/* Padding derecho turquesa */}
@@ -320,7 +321,9 @@ export default function WorkExperienceFixPage() {
   if (typeof window !== "undefined" && checkingVisibility) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-gray-800" style={{ width: 64, height: 64 }} />
+        <div className="text-center">
+          <UnifiedLoading size={32} />
+        </div>
       </div>
     )
   }
@@ -335,7 +338,7 @@ export default function WorkExperienceFixPage() {
 
   return (
     <>
-      <HeaderV2 isAvatarInHeader={isAvatarInHeader} />
+      <HeaderV2 isAvatarInHeader={isAvatarInHeader} lang={lang} />
       <div
         className="min-h-screen flex flex-col"
         style={{

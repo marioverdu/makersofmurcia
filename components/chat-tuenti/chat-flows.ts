@@ -1,5 +1,6 @@
 import type { ChatFlow } from "./types"
 
+// Este archivo se mantiene para compatibilidad, pero las traducciones se manejan en el hook
 export const chatFlows: Record<string, ChatFlow> = {
   "initial-message": {
     initial: "👋 ¡Hola! Soy el asistente virtual de Mario Verdú. ¿En qué puedo ayudarte hoy?",

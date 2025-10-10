@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PostContentRenderer } from '@/components/post-content-renderer';
 
 const meta: Meta<typeof PostContentRenderer> = {
-  title: 'CMS/PostContentRenderer',
+  title: 'PostContentRenderer',
   component: PostContentRenderer,
   parameters: {
     layout: 'padded',
@@ -12,7 +12,6 @@ const meta: Meta<typeof PostContentRenderer> = {
       }
     }
   },
-  tags: ['autodocs'],
   argTypes: {
     post: {
       control: 'object',
@@ -73,7 +72,7 @@ export const Default: Story = {
   }
 };
 
-export const AsciiArt: Story = {
+/* export const AsciiArt: Story = {
   args: {
     post: {
       ...mockPost,
@@ -89,9 +88,9 @@ export const AsciiArt: Story = {
     },
     className: ''
   }
-};
+}; */
 
-export const Quote: Story = {
+/* export const Quote: Story = {
   args: {
     post: {
       ...mockPost,
@@ -102,9 +101,9 @@ export const Quote: Story = {
     },
     className: ''
   }
-};
+}; */
 
-export const MusicPlayer: Story = {
+/* export const MusicPlayer: Story = {
   args: {
     post: {
       ...mockPost,
@@ -115,9 +114,9 @@ export const MusicPlayer: Story = {
     },
     className: ''
   }
-};
+}; */
 
-export const VideoPlayer: Story = {
+/* export const VideoPlayer: Story = {
   args: {
     post: {
       ...mockPost,
@@ -128,9 +127,9 @@ export const VideoPlayer: Story = {
     },
     className: ''
   }
-};
+}; */
 
-export const Photo: Story = {
+/* export const Photo: Story = {
   args: {
     post: {
       ...mockPost,
@@ -143,9 +142,9 @@ export const Photo: Story = {
     },
     className: ''
   }
-};
+}; */
 
-export const PostPlus: Story = {
+/* export const PostPlus: Story = {
   args: {
     post: {
       ...mockPost,
@@ -177,9 +176,9 @@ npm install @premium-package
     },
     className: ''
   }
-};
+}; */
 
-export const LongContent: Story = {
+/* export const LongContent: Story = {
   args: {
     post: {
       ...mockPost,
@@ -234,9 +233,9 @@ Este post extenso demuestra la capacidad del renderizador para manejar contenido
     },
     className: ''
   }
-};
+}; */
 
-export const NoContent: Story = {
+/* export const NoContent: Story = {
   args: {
     post: {
       ...mockPost,
@@ -247,11 +246,11 @@ export const NoContent: Story = {
     },
     className: ''
   }
-};
+}; */
 
-export const CustomClassName: Story = {
+/* export const CustomClassName: Story = {
   args: {
     post: mockPost,
     className: 'border-2 border-cyan-500 p-4 rounded-lg'
   }
-};
+}; */

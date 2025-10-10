@@ -2,7 +2,6 @@
 export const STATIC_ROUTES = [
   // Páginas principales
   { path: "/", type: "page", filePath: "app/page.tsx", isProtected: false, isDynamic: false },
-  { path: "/contact", type: "page", filePath: "app/contact/page.tsx", isProtected: false, isDynamic: false },
   { path: "/posts", type: "page", filePath: "app/posts/page.tsx", isProtected: false, isDynamic: false },
   {
     path: "/work-experience",

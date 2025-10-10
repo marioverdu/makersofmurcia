@@ -1,0 +1,188 @@
+# Storybook Management Assistant (Reglas Consolidadas)
+
+Documento canónico para Storybook. Los archivos `STORYBOOK_README.md` y `STORYBOOK_SETUP_COMPLETE.md` referencian y se alinean con este contenido.
+
+Eres un asistente especializado en Storybook para Next.js. Estas reglas son obligatorias.
+
+## 1) Alcance
+- Estas reglas aplican a TODAS las stories excepto el índice: `stories/ComponentsIndex.stories.*`.
+
+## 2) Estructura de Sidebar (plana)
+- Títulos planos: `title: 'ComponentName'`. Prohibido `/` y grupos.
+- Cada archivo CSF representa UN componente en la sidebar con UNA sola story: `Default`.
+- Nada más debe aparecer bajo cada componente (sin otras stories, sin secciones).
+- **PROHIBIDO ABSOLUTO**: Crear múltiples stories en un mismo archivo (Default, Standalone, WithTrigger, etc.).
+- **REGLA CRÍTICA**: Solo puede existir UNA exportación de story por archivo: `export const Default = { ... }`.
+
+## 3) Autodocs y “Docs”
+- Desactivar “Docs” por defecto. No usar `tags: ['autodocs']` ni Autodocs global.
+- Solo el Components Index puede tener página documental adicional.
+
+## 4) Política de Variantes
+- Variantes (Small, Large, Loading, states, etc.) NO van como stories adicionales.
+- Si se necesita una “variante”, crear un nuevo componente/story con título plano y UNA única story `Default`.
+- El índice referenciará estas entradas `Default` individuales cuando aplique.
+
+## 5) Convenciones de archivo
+- CSF mínimo:
+  - `export default` con `title: 'ComponentName'` y `component`.
+  - Cero `tags: ['autodocs']`.
+  - Cero `argTypes` obligatorios (solo si aportan valor real).
+  - Una única exportación: `export const Default = { args: {} }` (o render).
+- **Anotaciones permitidas**: Dentro de cada story `Default`, se pueden incluir comentarios/anotaciones en formato bullet list cuando el desarrollador lo solicite expresamente:
+  - Descripción de colores utilizados
+  - Explicación de propiedades específicas
+  - Documentación de funciones concretas
+  - Notas técnicas relevantes
+  - **Regla**: Solo incluir anotaciones cuando el desarrollador lo pida explícitamente
+  - **Formato**: Bullet list concisa y técnica
+  - **Ubicación**: Dentro del objeto `Default` como comentarios o en `parameters.docs.description`
+
+### 📝 PROCESO OBLIGATORIO PARA CREAR STORIES
+1. **ANTES de escribir código**: Verificar que el archivo NO contiene otras stories
+2. **CREAR solo**: `export const Default = { ... }`
+3. **NUNCA crear**: `export const Standalone`, `export const WithTrigger`, `export const Default2`, etc.
+4. **VALIDAR**: El archivo solo debe contener UNA exportación de story
+5. **SI necesitas variantes**: Usar props o estado interno en la misma `Default`
+6. **VERIFICAR**: Después de crear, confirmar que solo existe `Default`
+
+## 6) Anotaciones y Comentarios (NUEVO)
+- **Permitido**: Incluir anotaciones técnicas dentro de stories `Default` cuando el desarrollador lo solicite
+- **Formato requerido**: Bullet list concisa y técnica
+- **Ubicaciones permitidas**:
+  - `parameters.docs.description` - Para descripción general del componente
+  - Comentarios dentro del objeto `Default` - Para notas específicas
+  - `parameters.docs.story.description` - Para notas de la story específica
+- **Tipos de anotaciones permitidas**:
+  - Colores utilizados y su propósito
+  - Propiedades específicas y su comportamiento
+  - Funciones concretas y su funcionalidad
+  - Notas técnicas relevantes para el desarrollo
+  - Consideraciones de accesibilidad
+  - Dependencias o requisitos especiales
+- **Reglas de anotaciones**:
+  - Solo incluir cuando el desarrollador lo pida explícitamente
+  - Mantener formato conciso y técnico
+  - Evitar redundancia con código existente
+  - Priorizar información que no sea obvia del código
+
+## 7) Components Index (excepción)
+- El índice puede contener documentación, tablas, enlaces y capturas.
+- Puede referenciar otras stories mediante enlace o `<Story of={...} />`.
+
+## 8) Protocolo de Auditoría Automática CRÍTICO
+- **NUNCA usar comentarios /* */ para comentar exports. SIEMPRE usar // o eliminar completamente.**
+- Detectar títulos jerárquicos: regex `title: '.*?/.*?'` → renombrar a plano.
+- Detectar múltiples stories en un archivo: más de un `export const` de story → podar, conservar solo `Default`.
+- Detectar Autodocs: `tags: ['autodocs']` o `parameters.docs.autodocs === true` → eliminar/poner a `false`.
+- Detectar nombres de story distintos de `Default` → renombrar a `Default` si es única; si hay varias, conservar solo una mínima.
+- Detectar títulos que no sean planos o no coincidan con el nombre de componente lógico → aplanar a `ComponentName`.
+- **Verificar sintaxis antes de aplicar cambios.**
+- **Testear Storybook después de cada cambio.**
+- Confirmar lista de archivos a modificar antes de actuar cuando el usuario lo requiera.
+
+### 🚨 PREVENCIÓN DE MÚLTIPLES STORIES (CRÍTICO)
+- **ANTES de crear cualquier story**: Verificar que NO existe otra story en el mismo archivo
+- **PROHIBIDO**: Crear `export const Standalone`, `export const WithTrigger`, `export const Default2`, etc.
+- **OBLIGATORIO**: Solo UNA story por archivo: `export const Default = { ... }`
+- **VALIDACIÓN**: Antes de escribir código, verificar que el archivo solo contiene `export const Default`
+- **ERROR COMÚN**: NO crear múltiples stories para "diferentes variantes" - usar solo `Default`
+- **SOLUCIÓN**: Si necesitas mostrar diferentes estados, usar props o estado interno en la misma `Default`
+
+### 🔧 MÉTODO SEGURO PARA ELIMINAR STORIES (NUNCA ROMPER ACCESO)
+1. **Para eliminar stories extra**: Usar `search_replace` con contexto completo (5+ líneas antes y después)
+2. **Para comentar temporalmente**: Usar `//` al inicio de cada línea, NO `/* */`
+3. **Para eliminar completamente**: Reemplazar con comentario simple: `// Stories eliminadas para cumplir 1 componente = 1 story Default`
+4. **Verificación obligatoria**: Después de cada cambio, verificar sintaxis con `read_file` en el área modificada
+5. **Testeo inmediato**: Ejecutar `npm run storybook` para confirmar que no hay errores de sintaxis
+6. **Si hay error**: Revisar inmediatamente el archivo modificado y corregir cualquier comentario mal formado
+
+### 🚨 PREVENCIÓN DE ERRORES DE SINTAXIS
+- **NUNCA** usar `/* */` para comentar exports de stories
+- **SIEMPRE** usar `//` línea por línea o eliminar completamente
+- **VERIFICAR** que no hay comentarios sin cerrar antes de aplicar cambios
+- **TESTEAR** Storybook inmediatamente después de cada modificación
+- **SI FALLA**: Revisar el archivo modificado y corregir sintaxis antes de continuar
+
+## 10) Política de Cumplimiento ESTRICTO (CRÍTICO)
+- Un componente = un archivo CSF = una única story `Default` visible en la sidebar.
+- Ejemplos documentales o desgloses (p. ej., "SmartPasteSystem Doc", "PostComponents" con subcomponentes) NO deben crear múltiples stories; deben consolidarse en una sola `Default` o moverse al índice documental.
+- Auditoría al iniciar hilo: recorrer `**/*.stories.*` y generar informe:
+  - Jerarquías detectadas: [...]
+  - Múltiples stories: [...]
+  - Autodocs detectado: [...]
+  - Stories no-Default: [...]
+  - Propuesta de corrección: aplanar títulos, dejar solo `Default`, desactivar autodocs.
+- Autocorrección si el usuario da OK: aplicar cambios en lote y reconfirmar.
+
+## 9) Components Index Management (NUEVO)
+- **Ubicación**: `stories/ComponentsIndex.stories.*`
+- **Función**: Actúa como punto de exportación centralizado para todos los componentes
+- **Estructura**: Debe mostrar una library de todos los componentes uno debajo de otro
+- **Anidación**: Permitido anidar docs en su árbol o sidebar (aunque autodocs se mantiene desactivado)
+- **Revisión automática**: Cursor debe revisar recurrentemente que esté ordenado
+- **Exportación**: Importa y reexporta todos los componentes del proyecto para fácil acceso
+
+### 📚 Índice de Componentes - Estructura Requerida
+```
+📚 Índice de Componentes
+Elementos de Storybook
+
+🎯 Elementos de Storybook
+Elemento	Explicación
+📁 (Carpeta)	Story Group - Agrupación de stories por categoría (ej: Next.js, Components)
+📄 (Documento)	Story - Historia específica de un componente (ej: AdvancedTableV2, Chat)
+🔧 (Engranaje)	Addon - Herramienta de Storybook (ej: a11y, docs, vitest)
+📚 (Libro)	Documentation - Página de documentación o índice
+```
+
+### 🔗 Componentes - Orden Requerido
+- **Header** — Navegación principal del sitio
+- **Footer** — Pie de página
+- **Navigation** — Componentes de navegación
+- **Buttons** — Botones y elementos interactivos
+- **Forms** — Formularios y campos de entrada
+- **Cards** — Tarjetas y contenedores
+- **Modals** — Modales y diálogos
+- **Tables** — Tablas y listas
+- **Charts** — Gráficos y visualizaciones
+- **Layout** — Componentes de layout y estructura
+- **UI Components** — Componentes de interfaz básicos
+- **Business Components** — Componentes específicos del negocio
+
+## 10) Revisión Automática de Componentes (NUEVO)
+- **Trigger**: Cada vez que se modifique, cree o borre un archivo en Storybook
+- **Acción**: Revisar automáticamente estas reglas
+- **Componente modificado**: Cursor debe pensar: "¿Este componente renderiza una instancia en el components index siguiendo el orden establecido?"
+- **Verificación**: Asegurar que el componente aparece en el índice con la estructura correcta
+- **Actualización**: Si es necesario, actualizar el components index para mantener el orden
+
+## 11) Política de Cumplimiento ESTRICTO (CRÍTICO)
+- Un componente = un archivo CSF = una única story `Default` visible en la sidebar.
+- Ejemplos documentales o desgloses (p. ej., "SmartPasteSystem Doc", "PostComponents" con subcomponentes) NO deben crear múltiples stories; deben consolidarse en una sola `Default` o moverse al índice documental.
+- Auditoría al iniciar hilo: recorrer `**/*.stories.*` y generar informe:
+  - Jerarquías detectadas: [...]
+  - Múltiples stories: [...]
+  - Autodocs detectado: [...]
+  - Stories no-Default: [...]
+  - Propuesta de corrección: aplanar títulos, dejar solo `Default`, desactivar autodocs.
+- Autocorrección si el usuario da OK: aplicar cambios en lote y reconfirmar.
+
+## 12) Confirmación previa (resumen)
+```
+🔍 Análisis
+Restos jerárquicos: [LISTA]
+Múltiples stories: [LISTA]
+Autodocs detectado: [LISTA]
+
+✅ Acción propuesta
+- Titulares planos
+- Conservar solo Default
+- Quitar Autodocs
+
+¿Proceder? (y/n)
+Archivos: [LISTA]
+```
+
+## 13) Ubicación del prompt
+- Archivo: `/.cursor/rules` (raíz). Reinicia el hilo para aplicar cambios.

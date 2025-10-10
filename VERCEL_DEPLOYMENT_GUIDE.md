@@ -12,6 +12,19 @@ El error `DATABASE_URL no está configurado` ocurre porque Vercel no puede acced
 3. Ve a **Settings** → **Environment Variables**
 
 <<<<<<< HEAD
+\`\`\`json
+{
+  "scripts": {
+    "prebuild": "npm run generate-routes",
+    "build": "next build",
+    "dev": "next dev",
+    "generate-routes": "node scripts/generate-routes.cjs",
+    "lint": "next lint",
+    "start": "next start"
+  }
+}
+\`\`\`
+=======
 ### **Paso 2: Agregar Variables de Entorno**
 
 #### **Variables Críticas (Obligatorias)**
@@ -34,20 +47,7 @@ DATABASE_URL_UNPOOLED=postgresql://neondb_owner:npg_DjTA32wLyFPg@ep-weathered-ca
 ADMIN_EMAIL=marioverdugambin@gmail.com
 NEXT_PUBLIC_ADMIN_EMAIL=marioverdugambin@gmail.com
 ```
-=======
-\`\`\`json
-{
-  "scripts": {
-    "prebuild": "npm run generate-routes",
-    "build": "next build",
-    "dev": "next dev",
-    "generate-routes": "node scripts/generate-routes.cjs",
-    "lint": "next lint",
-    "start": "next start"
-  }
-}
-\`\`\`
->>>>>>> 6fe797e7e05aae7049dfdcf4e712e3cb86ff4911
+>>>>>>> 0ea2f51 (Fix: Mejorar gestión de variables de entorno para Vercel - Agregar scripts de configuración automática)
 
 #### **Variables de Vercel KV (Redis)**
 ```bash
@@ -111,18 +111,18 @@ Para cada variable, asegúrate de que esté configurada para:
 ## 🚀 Pasos para Desplegar
 
 <<<<<<< HEAD
-### **1. Configurar Variables de Entorno**
-```bash
-# Ir al dashboard de Vercel y agregar todas las variables listadas arriba
-```
-=======
 1. **Preparar el repositorio**:
    \`\`\`bash
    git add .
    git commit -m "Optimización para despliegue Vercel v0"
    git push origin main
    \`\`\`
->>>>>>> 6fe797e7e05aae7049dfdcf4e712e3cb86ff4911
+=======
+### **1. Configurar Variables de Entorno**
+```bash
+# Ir al dashboard de Vercel y agregar todas las variables listadas arriba
+```
+>>>>>>> 0ea2f51 (Fix: Mejorar gestión de variables de entorno para Vercel - Agregar scripts de configuración automática)
 
 ### **2. Desplegar**
 ```bash
