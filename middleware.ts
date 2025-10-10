@@ -13,14 +13,17 @@ import type { NextRequest } from 'next/server'
 
 const isProduction = process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
 
-// Rutas que NUNCA deben ser bloqueadas
+// Rutas que NUNCA deben ser bloqueadas por el middleware
+// Estas rutas tienen su propia protección (NextAuth, etc.)
 const ALLOWED_PATHS = [
-  '/api/',           // Todas las APIs
+  '/api/',           // Todas las APIs (incluye /api/auth/*)
   '/_next/',         // Assets de Next.js
   '/favicon.ico',    // Favicon
   '/robots.txt',     // SEO
   '/sitemap.xml',    // SEO
-  '/admin',          // Panel admin (tiene su propia protección)
+  '/admin',          // Panel admin (protegido por NextAuth)
+  '/login',          // Página de login ⚠️ CRÍTICO para acceso
+  '/signup',         // Página de registro
 ]
 
 // Extraer el locale de la URL
