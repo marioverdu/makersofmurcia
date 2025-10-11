@@ -191,14 +191,19 @@ export async function createPost(data: CreatePostData): Promise<Post> {
     `
     
     const row = result.rows[0]
+    console.log('✅ [DB] Post created successfully:', { id: row.id, title: row.title })
     return {
       ...row,
       contentType: row.content_type,
       tags: row.tags || []
     }
   } catch (error) {
-    console.error('Error creating post:', error)
-    throw new Error('Failed to create post')
+    console.error('❌ [DB] Error creating post:', error)
+    console.error('❌ [DB] Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      data: data
+    })
+    throw new Error(`Failed to create post: ${error instanceof Error ? error.message : 'Unknown error'}`)
   }
 }
 

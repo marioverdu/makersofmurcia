@@ -79,8 +79,9 @@ export async function POST(request: NextRequest) {
     const isVideoPlayer = contentType === 'video-player' || contentType === 'video player'
     const allowEmptyContent = isPortfolio || isMusicPlayer || isVideoPlayer
     
-    if (allowEmptyContent && (body.content == null)) {
-      body.content = ''
+    // Si el content está vacío o null para tipos que lo permiten, usar un placeholder
+    if (allowEmptyContent && (body.content == null || body.content === '')) {
+      body.content = '<p></p>' // Placeholder mínimo válido para HTML
     }
 
     // Validación mínima
@@ -111,9 +112,17 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json(post, { status: 201 })
   } catch (error) {
-    console.error('Error in POST /api/posts:', error)
+    console.error('❌ [API] Error in POST /api/posts:', error)
+    console.error('❌ [API] Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      body: body
+    })
     return NextResponse.json(
-      { error: 'Failed to create post' },
+      { 
+        error: 'Failed to create post',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     )
   }
