@@ -75,14 +75,15 @@ export async function middleware(request: NextRequest) {
     const route = data.route
     console.log(`✅ [Middleware] Found config:`, route)
     
-    // PRIORIDAD 1: Redirección personalizada (si está activa Y tiene redirectTo)
-    if (route.is_active && route.redirect_to) {
+    // PRIORIDAD 1: Redirección personalizada (INDEPENDIENTE de is_active)
+    // Si hay redirect_to configurado, redirigir SIEMPRE
+    if (route.redirect_to) {
       const redirectUrl = new URL(`/${locale}${route.redirect_to}`, request.url)
       console.log(`🔀 [Middleware] Redirecting ${pathname} to ${redirectUrl.pathname}`)
       return NextResponse.redirect(redirectUrl)
     }
     
-    // PRIORIDAD 2: Bloquear si está inactiva
+    // PRIORIDAD 2: Bloquear si está inactiva (solo si NO hay redirect_to)
     if (!route.is_active) {
       console.log(`🚫 [Middleware] Route ${pathname} is inactive, blocking`)
       
