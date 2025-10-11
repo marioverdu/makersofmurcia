@@ -370,8 +370,8 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
 
               {/* Views and Updated */}
               <div className="flex items-center justify-between text-sm text-gray-500">
-                <span><span>{pageViews || 0}</span> {dict.posts.views || 'views'}</span>
-                <span>{dict.posts.updatedOn || 'Updated'}: {formatDate(post.updated_at)}</span>
+                <span>{pageViews || 0} {dict.posts.views}</span>
+                <span>{dict.posts.updatedOn}: {formatDate(post.updated_at)}</span>
               </div>
                          </div>
            </article>
