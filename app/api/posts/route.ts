@@ -72,16 +72,21 @@ export async function POST(request: NextRequest) {
         .replace(/(^-|-$)/g, '')
     }
 
-    // Permitir contenido vacío para portfolio; para el resto, exigir content definido
-    const isPortfolio = (body as any).contentType === 'portfolio' || body.category === 'portfolio'
-    if (isPortfolio && (body.content == null)) {
+    // Permitir contenido vacío para portfolio y players (music-player, video-player)
+    const contentType = (body as any).contentType?.toLowerCase() || ''
+    const isPortfolio = contentType === 'portfolio' || body.category === 'portfolio'
+    const isMusicPlayer = contentType === 'music-player' || contentType === 'music player'
+    const isVideoPlayer = contentType === 'video-player' || contentType === 'video player'
+    const allowEmptyContent = isPortfolio || isMusicPlayer || isVideoPlayer
+    
+    if (allowEmptyContent && (body.content == null)) {
       body.content = ''
     }
 
     // Validación mínima
-    if (!body.title || !body.slug || (body.content == null && !isPortfolio)) {
+    if (!body.title || !body.slug || (body.content == null && !allowEmptyContent)) {
       return NextResponse.json(
-        { error: 'Title and slug are required. Content is required unless contentType=portfolio.' },
+        { error: 'Title and slug are required. Content is required unless contentType is portfolio, music-player, or video-player.' },
         { status: 400 }
       )
     }
