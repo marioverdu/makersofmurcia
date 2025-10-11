@@ -37,7 +37,27 @@ export async function GET(request: NextRequest) {
         }
       }
       
+      // 🔄 HERENCIA DE PERMISOS: Si no se encuentra, buscar rutas padre
+      const parentRoutes = getParentRoutes(path)
+      for (const parentPath of parentRoutes) {
+        const parentRoute = await RouteManagementService.getRoute(parentPath)
+        if (parentRoute) {
+          console.log(`✅ [RouteCheck] Found parent route for ${path}: ${parentPath} (active: ${parentRoute.is_active})`)
+          return NextResponse.json({
+            found: true,
+            route: {
+              path: parentRoute.path,
+              is_active: parentRoute.is_active,
+              redirect_to: parentRoute.redirect_to || null,
+              priority: parentRoute.priority,
+              inherited: true // Indicar que es heredado
+            }
+          })
+        }
+      }
+      
       // No se encontró ninguna configuración
+      console.log(`⚠️ [RouteCheck] No route config found for ${path} (allowing access by default)`)
       return NextResponse.json({ found: false })
     }
     
@@ -53,7 +73,7 @@ export async function GET(request: NextRequest) {
     })
     
   } catch (error) {
-    console.error('Error checking route:', error)
+    console.error('❌ [RouteCheck] Error checking route:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -84,4 +104,23 @@ function generatePatterns(path: string): string[] {
   
   return [...new Set(patterns)]
 }
+
+// 🔄 Obtener rutas padre para herencia de permisos
+// Ejemplo: /posts/view/42 → ['/posts/view', '/posts']
+function getParentRoutes(path: string): string[] {
+  const parents: string[] = []
+  const segments = path.split('/').filter(Boolean) // ['posts', 'view', '42']
+  
+  // Construir rutas padre de más específica a menos específica
+  for (let i = segments.length - 1; i > 0; i--) {
+    const parentPath = '/' + segments.slice(0, i).join('/')
+    parents.push(parentPath)
+  }
+  
+  return parents
+}
+
+// Ejemplo:
+// getParentRoutes('/posts/view/42') → ['/posts/view', '/posts']
+// getParentRoutes('/work-experience/detail/5') → ['/work-experience/detail', '/work-experience']
 
