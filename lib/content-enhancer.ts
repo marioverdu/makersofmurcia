@@ -113,7 +113,16 @@ export function enhanceBlockquotes(htmlContent: string): string {
 export function preserveLineBreaks(htmlContent: string): string {
   if (!htmlContent) return htmlContent
 
-  // Convertir saltos de línea en <br> tags
+  // NO convertir saltos de línea si el contenido es principalmente HTML (tiene iframes, divs, etc.)
+  // Esto evita romper estructuras HTML como iframes de YouTube
+  const hasHTMLStructure = /<(iframe|div|video|embed|object)[^>]*>/i.test(htmlContent)
+  
+  if (hasHTMLStructure) {
+    // Si hay estructura HTML, no tocar los saltos de línea
+    return htmlContent
+  }
+
+  // Solo para contenido de texto plano, convertir saltos de línea en <br> tags
   return htmlContent.replace(/\n/g, '<br>')
 }
 
