@@ -91,20 +91,29 @@ export function generateYouTubeEmbedUrl(
 
   // Si hay playlist, usar el formato de playlist
   if (parsed.playlistId) {
-    let url = `https://www.youtube.com/embed/videoseries?list=${parsed.playlistId}`
-    
-    // Si también hay videoId, agregarlo
+    // Para playlists, siempre usar el formato con video específico si está disponible
     if (parsed.videoId) {
-      url = `https://www.youtube.com/embed/${parsed.videoId}?list=${parsed.playlistId}`
+      // Formato: /embed/VIDEO_ID?list=PLAYLIST_ID
+      let url = `https://www.youtube.com/embed/${parsed.videoId}?list=${parsed.playlistId}`
+      
+      // Agregar índice si existe (aunque el videoId ya define cuál video mostrar)
+      if (parsed.startIndex) {
+        params.set('index', parsed.startIndex.toString())
+      }
+      
+      const paramString = params.toString()
+      return paramString ? `${url}&${paramString}` : url
+    } else {
+      // Si solo hay playlist sin videoId específico, usar videoseries
+      let url = `https://www.youtube.com/embed/videoseries?list=${parsed.playlistId}`
+      
+      if (parsed.startIndex) {
+        params.set('index', parsed.startIndex.toString())
+      }
+      
+      const paramString = params.toString()
+      return paramString ? `${url}&${paramString}` : url
     }
-    
-    // Agregar índice si existe
-    if (parsed.startIndex) {
-      params.set('index', parsed.startIndex.toString())
-    }
-    
-    const paramString = params.toString()
-    return paramString ? `${url}&${paramString}` : url
   }
   
   // Si solo hay videoId
@@ -134,11 +143,10 @@ export function generateYouTubeIframe(
   return `<div class="youtube-embed-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1.5rem 0;">
   <iframe 
     src="${embedUrl}" 
-    style="position: absolute; top: 0; left: 0; width: ${width}; height: ${height};" 
-    frameborder="0" 
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     allowfullscreen
-    loading="lazy"
+    title="YouTube video player"
   ></iframe>
 </div>`
 }
