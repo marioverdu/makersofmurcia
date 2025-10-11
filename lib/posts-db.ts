@@ -177,18 +177,36 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 // Crear un nuevo post
 export async function createPost(data: CreatePostData): Promise<Post> {
   try {
+    // Convertir undefined a null para PostgreSQL
     const result = await sql`
       INSERT INTO posts (
         title, slug, content, excerpt, featured_image, 
         published, status, author, category, tags, content_type,
         title_es, title_en, content_es, content_en, excerpt_es, excerpt_en
       ) VALUES (
-        ${data.title}, ${data.slug}, ${data.content}, ${data.excerpt}, ${data.featured_image},
-        ${data.published ?? true}, ${data.status ?? 'draft'}, ${data.author ?? 'Mario Verdú'}, 
-        ${data.category}, ${data.tags}, ${data.contentType},
-        ${data.title_es}, ${data.title_en}, ${data.content_es}, ${data.content_en}, ${data.excerpt_es}, ${data.excerpt_en}
+        ${data.title}, 
+        ${data.slug}, 
+        ${data.content}, 
+        ${data.excerpt ?? null}, 
+        ${data.featured_image ?? null},
+        ${data.published ?? true}, 
+        ${data.status ?? 'published'}, 
+        ${data.author ?? 'Mario Verdú'}, 
+        ${data.category ?? null}, 
+        ${data.tags ?? null}, 
+        ${data.contentType ?? null},
+        ${data.title_es ?? null}, 
+        ${data.title_en ?? null}, 
+        ${data.content_es ?? null}, 
+        ${data.content_en ?? null}, 
+        ${data.excerpt_es ?? null}, 
+        ${data.excerpt_en ?? null}
       ) RETURNING *
     `
+    
+    if (!result.rows || result.rows.length === 0) {
+      throw new Error('Post created but no data returned from database')
+    }
     
     const row = result.rows[0]
     console.log('✅ [DB] Post created successfully:', { id: row.id, title: row.title })
