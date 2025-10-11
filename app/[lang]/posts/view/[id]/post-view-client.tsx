@@ -13,6 +13,7 @@ import { enhanceContentForSEO } from "@/lib/content-enhancer"
 import PostSEO from "@/components/seo/post-seo"
 import { UnifiedLoading } from "@/components/ui/unified-loading"
 import { PrimaryButton } from "@/components/ui/primary-button"
+import { convertYouTubeUrlsToEmbeds } from "@/lib/youtube-embed-converter"
 import type { Locale, Dictionary } from "@/types/i18n"
 
 interface PostViewClientProps {
@@ -340,7 +341,7 @@ export default function PostViewClient({ lang, dict, postId }: PostViewClientPro
             {/* Post Content */}
             {/* Usar AdvancedTableV2View para renderizar contenido con scrollbar contextual */}
             <AdvancedTableV2View 
-              content={enhanceContentForSEO(post.content)} 
+              content={convertYouTubeUrlsToEmbeds(enhanceContentForSEO(post.content))} 
               className="prose max-w-none"
             />
             

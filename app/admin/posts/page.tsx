@@ -635,6 +635,17 @@ export default function AdminPostsPage() {
     console.log('🔍 [WYSIWYG DEBUG] Texto pegado:', pastedText)
     console.log('🔍 [WYSIWYG DEBUG] HTML pegado:', pastedHTML.substring(0, 200))
     
+    // Verificar si es una URL de YouTube
+    if (isYouTubeUrl(pastedText)) {
+      event.preventDefault()
+      const cell = document.querySelector(`[data-cell-id="${cellId}"]`) as HTMLElement
+      if (cell) {
+        console.log('✅ [WYSIWYG] Convirtiendo URL de YouTube a embed:', pastedText)
+        insertYouTubeEmbedIntoCell(cell, pastedText)
+      }
+      return
+    }
+    
     // Verificar si es una URL de imagen
     if (isImageUrl(pastedText)) {
       event.preventDefault()
@@ -660,7 +671,7 @@ export default function AdminPostsPage() {
       return
     }
     
-    // Si no es imagen, permitir el pegado normal
+    // Si no es imagen ni YouTube, permitir el pegado normal
     console.log('ℹ️ [WYSIWYG] Pega normal permitido')
   }
 
@@ -740,6 +751,85 @@ export default function AdminPostsPage() {
     }
     
     return false
+  }
+
+  const isYouTubeUrl = (url: string): boolean => {
+    // Detectar URLs de YouTube
+    const youtubeRegex = /(https?:\/\/)?(www\.|m\.)?(youtube\.com\/(watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)[a-zA-Z0-9_-]+/i
+    return youtubeRegex.test(url)
+  }
+
+  const insertYouTubeEmbedIntoCell = (cell: HTMLElement, url: string) => {
+    // Parsear la URL de YouTube
+    const parseYouTubeUrl = (url: string) => {
+      try {
+        const cleanUrl = url.replace(/&amp;/g, '&')
+        let urlObj: URL
+        try {
+          urlObj = new URL(cleanUrl)
+        } catch {
+          urlObj = new URL(`https://${cleanUrl}`)
+        }
+
+        let videoId: string | null = null
+        let playlistId: string | null = null
+        let startIndex: number | undefined = undefined
+
+        if (urlObj.hostname.includes('youtube.com') && urlObj.pathname === '/watch') {
+          videoId = urlObj.searchParams.get('v')
+          playlistId = urlObj.searchParams.get('list')
+          const index = urlObj.searchParams.get('index')
+          if (index) startIndex = parseInt(index, 10)
+        } else if (urlObj.hostname.includes('youtu.be')) {
+          videoId = urlObj.pathname.slice(1)
+          playlistId = urlObj.searchParams.get('list')
+          const index = urlObj.searchParams.get('index')
+          if (index) startIndex = parseInt(index, 10)
+        }
+
+        return { videoId, playlistId, startIndex }
+      } catch (error) {
+        console.error('Error parsing YouTube URL:', error)
+        return null
+      }
+    }
+
+    const parsed = parseYouTubeUrl(url)
+    if (!parsed) {
+      console.error('No se pudo parsear la URL de YouTube')
+      return
+    }
+
+    // Generar URL de embed
+    let embedUrl = ''
+    if (parsed.playlistId) {
+      embedUrl = `https://www.youtube.com/embed/videoseries?list=${parsed.playlistId}`
+      if (parsed.videoId) {
+        embedUrl = `https://www.youtube.com/embed/${parsed.videoId}?list=${parsed.playlistId}`
+      }
+      if (parsed.startIndex) {
+        embedUrl += `&index=${parsed.startIndex}`
+      }
+    } else if (parsed.videoId) {
+      embedUrl = `https://www.youtube.com/embed/${parsed.videoId}`
+    }
+
+    // Generar el iframe
+    const iframeHTML = `<div class="youtube-embed-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1.5rem 0;">
+      <iframe 
+        src="${embedUrl}" 
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>`
+
+    // Insertar en la celda
+    cell.innerHTML = iframeHTML
+    adjustCellHeight(cell)
+    updateContentState()
   }
 
   const insertImageIntoCell = (cell: HTMLElement, imageUrl: string) => {
