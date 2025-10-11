@@ -7,10 +7,10 @@ config({ path: envPath })
 
 const { sql } = await import('../lib/db.js')
 
-// HTML en UNA SOLA LÍNEA para evitar conversión a <br>
-const newHTML = `<div class="youtube-embed-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1.5rem 0;"><iframe src="https://www.youtube.com/embed/08blkt7SvEE?list=PLinjGYAZZR4DFmfio3zoBFzqikVJAWss0&index=2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="YouTube video player"></iframe></div>`
+// HTML en UNA SOLA LÍNEA con border-radius para coincidir con el contenedor del post
+const newHTML = `<div class="youtube-embed-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1.5rem 0; border-radius: 0.5rem;"><iframe src="https://www.youtube.com/embed/08blkt7SvEE?list=PLinjGYAZZR4DFmfio3zoBFzqikVJAWss0&index=2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 0.5rem;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="YouTube video player"></iframe></div>`
 
-console.log('🔄 Actualizando post 42 con iframe en una sola línea...\n')
+console.log('🔄 Actualizando post 42 con iframe con border-radius...\n')
 
 await sql`
   UPDATE posts 
