@@ -614,15 +614,14 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
             </div>
           </div>
         ) : selectedCategory === "portfolio" ? (
-          // Mostrar Portfolio (diseño vertical)
+          // Mostrar Portfolio (diseño vertical) - NO CLICKEABLE, solo visual
           <div className="w-full md:w-[658px] xl:w-[800px] mb-0">
             <div className="p-0 overflow-hidden">
               <div className="flex flex-col gap-4">
                 {filteredPosts.map((post) => (
-                  <a
+                  <div
                     key={post.id}
-                    href={`/${lang}/posts/view/${post.id}`}
-                    className="relative overflow-hidden rounded-xl bg-transparent block aspect-[16/9]"
+                    className="relative overflow-hidden rounded-xl bg-transparent block aspect-[16/9] cursor-default"
                   >
                     <div className="absolute inset-0">
                       <FeaturedImage
@@ -636,7 +635,7 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
                         </div>
                       )}
                     </div>
-                  </a>
+                  </div>
                 ))}
               </div>
             </div>
