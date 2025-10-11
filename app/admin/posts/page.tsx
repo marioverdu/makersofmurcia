@@ -532,6 +532,7 @@ export default function AdminPostsPage() {
           content: content,
           featured_image: editFeaturedImage,
           contentType: editContentType,
+          category: 'postsv2', // ✅ Agregar categoría para que aparezca en /posts
           published: true,
           status: 'published',
           author: 'Mario Verdú'

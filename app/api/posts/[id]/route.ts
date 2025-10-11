@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPostById, updatePost, deletePost } from '@/lib/posts-db'
 import type { Locale } from '@/types/i18n'
+import { RouteManagementService } from '@/lib/route-management-service'
 
 // Función de localización inline
 function getLocalizedPostContent(post: any, lang: Locale) {
@@ -116,10 +117,42 @@ export async function PUT(
       if (body.slug !== undefined) updateData.slug = body.slug
 
       const post = await updatePost(id, updateData)
+      
+      // 🔄 Actualizar visibilidad de ruta si cambió el estado de publicación
+      if (updateData.published !== undefined || updateData.status !== undefined) {
+        try {
+          const isPublished = updateData.published ?? (updateData.status === 'published')
+          await RouteManagementService.registerPostRoute(
+            id, 
+            post.slug, 
+            isPublished
+          )
+          console.log(`✅ Post route visibility updated for post ${id}: ${isPublished}`)
+        } catch (routeError) {
+          console.error('⚠️ Error updating post route visibility:', routeError)
+        }
+      }
+      
       return NextResponse.json(post)
     } else {
       // Sin parámetro de idioma, usar el comportamiento original
       const post = await updatePost(id, body)
+      
+      // 🔄 Actualizar visibilidad de ruta si cambió el estado de publicación
+      if (body.published !== undefined || body.status !== undefined) {
+        try {
+          const isPublished = body.published ?? (body.status === 'published')
+          await RouteManagementService.registerPostRoute(
+            id, 
+            post.slug, 
+            isPublished
+          )
+          console.log(`✅ Post route visibility updated for post ${id}: ${isPublished}`)
+        } catch (routeError) {
+          console.error('⚠️ Error updating post route visibility:', routeError)
+        }
+      }
+      
       return NextResponse.json(post)
     }
   } catch (error) {

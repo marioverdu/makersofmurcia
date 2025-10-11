@@ -653,6 +653,106 @@ export class RouteManagementService {
       '/work-experience', // Experiencia de trabajo
     ]
   }
+
+  // Registrar ruta de post dinámico cuando se publica
+  static async registerPostRoute(postId: number, slug: string, isPublished: boolean = true): Promise<void> {
+    if (!this.isDatabaseAvailable()) {
+      console.log(`⚠️ [${this.isProduction() ? "PROD" : "DEV"}] No database available, skipping post route registration`)
+      return
+    }
+
+    const isProduction = this.isProduction()
+    
+    try {
+      // Generar los paths para español e inglés
+      const paths = [
+        `/es/posts/view/${postId}`,
+        `/en/posts/view/${postId}`
+      ]
+      
+      const category = 'content'
+      const priority = 7 // Prioridad media-baja para posts individuales
+      
+      console.log(`🔄 [${isProduction ? "PROD" : "DEV"}] Registering post route for post ${postId} (${slug}), published: ${isPublished}`)
+      
+      for (const path of paths) {
+        try {
+          // Verificar si ya existe la ruta
+          const existingRoute = await this.getRoute(path)
+          
+          if (existingRoute) {
+            // Si existe, actualizar su estado de visibilidad
+            await sql`
+              UPDATE route_management 
+              SET 
+                is_active = ${isPublished},
+                is_indexable = ${isPublished},
+                robots_allow = ${isPublished},
+                sitemap_include = ${isPublished},
+                updated_at = CURRENT_TIMESTAMP,
+                modified_by = 'post-system',
+                seo_title = ${`Post: ${slug}`},
+                seo_description = ${`View post: ${slug}`}
+              WHERE path = ${path}
+            `
+            console.log(`✅ [${isProduction ? "PROD" : "DEV"}] Updated post route: ${path} (visible: ${isPublished})`)
+          } else {
+            // Si no existe, crearla
+            await sql`
+              INSERT INTO route_management (
+                path, 
+                is_active, 
+                is_indexable, 
+                robots_allow,
+                sitemap_include,
+                category, 
+                priority, 
+                modified_by,
+                seo_title,
+                seo_description
+              )
+              VALUES (
+                ${path}, 
+                ${isPublished}, 
+                ${isPublished}, 
+                ${isPublished},
+                ${isPublished},
+                ${category}, 
+                ${priority}, 
+                'post-system',
+                ${`Post: ${slug}`},
+                ${`View post: ${slug}`}
+              )
+            `
+            console.log(`✅ [${isProduction ? "PROD" : "DEV"}] Created post route: ${path} (visible: ${isPublished})`)
+          }
+          
+          // Sincronizar con KV para enforcement en el borde (Vercel Edge)
+          try {
+            const { RouteVisibilityManager } = await import('@/lib/route-visibility')
+            await RouteVisibilityManager.setRouteVisibility(path, isPublished, 'post-system')
+            console.log(`✅ [${isProduction ? "PROD" : "DEV"}] Post route synced to KV: ${path}`)
+          } catch (kvError) {
+            console.warn(`⚠️ [${isProduction ? "PROD" : "DEV"}] Could not sync to KV (non-critical):`, kvError)
+            // Continuar aunque falle KV - no es crítico
+          }
+        } catch (pathError) {
+          console.error(`❌ [${isProduction ? "PROD" : "DEV"}] Error processing path ${path}:`, pathError)
+          // Continuar con el siguiente path aunque falle uno
+        }
+      }
+      
+      console.log(`✅ [${isProduction ? "PROD" : "DEV"}] Post route registration completed for post ${postId}`)
+    } catch (error) {
+      console.error(`❌ [${isProduction ? "PROD" : "DEV"}] Error registering post route for post ${postId}:`, error)
+      // Log detallado del error
+      if (error instanceof Error) {
+        console.error(`   Error message: ${error.message}`)
+        console.error(`   Error stack: ${error.stack}`)
+      }
+      // No lanzar error para no afectar la creación del post
+    }
+  }
 }
 
 // Alias para compatibilidad con el sistema anterior

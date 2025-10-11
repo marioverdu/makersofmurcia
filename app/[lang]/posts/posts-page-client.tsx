@@ -336,20 +336,27 @@ export default function PostsPageClient({ lang, dict }: PostsPageClientProps) {
     if (selectedCategory === "about") {
       return posts.filter(post => post.category === "about")
     } else if (selectedCategory === "concept") {
-      // Posts (antes Postsv2): excluye portfolio y debug (en producción), incluye debug sólo en dev
+      // Posts (antes Postsv2): SOLO posts con category="postsv2", excluye portfolio y debug (en producción)
       return posts.filter(post => {
         const ct = (post.contentType || '').toLowerCase()
         const isDebug = ct === 'debug'
         if (isProd && isDebug) return false
+        
+        // Excluir explícitamente portfolio
         const isPortfolio = ct === 'portfolio' || post.category === 'portfolio'
-        return post.category === "postsv2" && !isPortfolio
+        if (isPortfolio) return false
+        
+        // SOLO mostrar posts con category="postsv2"
+        return post.category === "postsv2"
       })
     } else if (selectedCategory === "portfolio") {
-      // Portfolio - por contentType 'portfolio' (fallback por category). Nunca mostrar debug aquí
+      // Portfolio - SOLO posts con category="portfolio" o contentType="portfolio". Nunca mostrar debug aquí
       return posts.filter(post => {
         const ct = (post.contentType || '').toLowerCase()
         if (ct === 'debug') return false
-        return ct === 'portfolio' || post.category === 'portfolio'
+        
+        // Mostrar SOLO si es portfolio por category O por contentType
+        return post.category === 'portfolio' || ct === 'portfolio'
       })
     } else if (selectedCategory === "posts") {
       // Postsv0 (tab oculta): excluye about, postsv2, portfolio; excluye debug en prod

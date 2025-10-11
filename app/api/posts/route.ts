@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPosts, getPublishedPosts, createPost, CreatePostData } from '@/lib/posts-db'
 import type { Locale } from '@/types/i18n'
+import { RouteManagementService } from '@/lib/route-management-service'
 
 // Función de localización inline para evitar problemas de import
 function getLocalizedPostContent(post: any, lang: Locale) {
@@ -87,6 +88,21 @@ export async function POST(request: NextRequest) {
     
     // Crear el post
     const post = await createPost(body)
+    
+    // 🔄 Registrar automáticamente la ruta en el sistema de gestión
+    // Esto permite que el widget de rutas muestre el post y sea accesible
+    try {
+      const isPublished = body.published || body.status === 'published'
+      await RouteManagementService.registerPostRoute(
+        post.id, 
+        body.slug, 
+        isPublished
+      )
+      console.log(`✅ Post route registered automatically for post ${post.id}`)
+    } catch (routeError) {
+      console.error('⚠️ Error registering post route (post created successfully):', routeError)
+      // No fallar la creación del post si hay error en el registro de ruta
+    }
     
     return NextResponse.json(post, { status: 201 })
   } catch (error) {

@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Database, Route, RefreshCw, AlertTriangle } from "lucide-react"
+import { Database, Route, RefreshCw, AlertTriangle, FileText } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 interface Route {
@@ -73,6 +73,7 @@ export function RoutesWidget() {
   const [retryCount, setRetryCount] = useState(0)
   const { toast } = useToast()
   const [activeTab, setActiveTab] = useState<string>('__ALL__')
+  const [syncingPosts, setSyncingPosts] = useState(false)
 
   // Texto con desplazamiento horizontal en hover si hay overflow
   function RoutePathText({ text }: { text: string }) {
@@ -327,6 +328,46 @@ export function RoutesWidget() {
     }
   }
 
+  // Sincronizar rutas de posts
+  const syncPostsRoutes = async () => {
+    setSyncingPosts(true)
+    
+    try {
+      console.log(`🔄 [${isProduction ? "PROD" : "DEV"}] Sincronizando rutas de posts...`)
+      
+      const response = await fetch("/api/admin/posts/sync-routes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      
+      const result = await response.json()
+      
+      if (result.success) {
+        toast({
+          title: "✅ Sincronización completada",
+          description: result.message,
+        })
+        
+        // Recargar rutas después de sincronizar
+        await loadRoutes(true)
+      } else {
+        throw new Error(result.error || "Error desconocido")
+      }
+    } catch (error) {
+      console.error(`❌ [${isProduction ? "PROD" : "DEV"}] Error sincronizando posts:`, error)
+      
+      toast({
+        title: "❌ Error",
+        description: `Error al sincronizar rutas de posts`,
+        variant: "destructive",
+      })
+    } finally {
+      setSyncingPosts(false)
+    }
+  }
+
   // Rewrites deshabilitados
 
   useEffect(() => {
@@ -468,9 +509,20 @@ export function RoutesWidget() {
           <Button
             variant="ghost"
             size="sm"
+            onClick={syncPostsRoutes}
+            disabled={syncingPosts || loading}
+            className="h-6 w-6 p-0"
+            title="Sincronizar rutas de posts"
+          >
+            <FileText className={`h-3 w-3 ${syncingPosts ? 'animate-pulse' : ''}`} />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => loadRoutes(true)}
             disabled={loading}
             className="h-6 w-6 p-0"
+            title="Recargar rutas"
           >
             <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
           </Button>

@@ -20,7 +20,8 @@
     "kill-3000": "./kill-port-3000.sh",
     "clean-start": "./kill-port-3000.sh && npm run start",
     "dev-clean": "./kill-port-3000.sh && npm run dev",
-    "cleanup-cache": "npx tsx scripts/cleanup-pdf-cache.ts"
+    "cleanup-cache": "npx tsx scripts/cleanup-pdf-cache.ts",
+    "register-posts-routes": "npx tsx scripts/register-existing-posts-routes.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "0.0.66",
