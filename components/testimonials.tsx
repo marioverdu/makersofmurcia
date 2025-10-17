@@ -72,15 +72,18 @@ export default function Testimonials() {
 
         <div className="relative">
           <Card className="bg-primary text-primary-foreground border-4 border-secondary p-8 md:p-12 lg:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden -rotate-1">
+            {/* Giant quotation mark */}
             <div className="absolute -top-8 -left-4 text-[180px] md:text-[240px] opacity-20 leading-none select-none font-serif">
               "
             </div>
 
             <div className="absolute inset-0 opacity-10 halftone-bg" />
 
+            {/* Geometric decorations */}
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary transform rotate-45 translate-x-12 -translate-y-12" />
             <div className="absolute bottom-0 left-0 w-20 h-20 bg-accent transform rotate-45 -translate-x-10 translate-y-10" />
 
+            {/* Diagonal stripes */}
             <div
               className="absolute top-0 left-0 w-full h-full opacity-5"
               style={{
@@ -154,5 +157,3 @@ export default function Testimonials() {
     </section>
   )
 }
-
-

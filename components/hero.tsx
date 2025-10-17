@@ -63,6 +63,7 @@ export default function Hero() {
           </p>
         </div>
       </div>
+      {/* </CHANGE> */}
 
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0 halftone-bg" />
@@ -79,11 +80,14 @@ export default function Hero() {
           }}
         />
       </div>
+      {/* </CHANGE> */}
 
       <div className="absolute top-20 left-1/4 w-40 h-40 border-8 border-secondary rotate-45 opacity-20" />
       <div className="absolute bottom-32 right-1/3 w-32 h-32 bg-accent opacity-30 -rotate-12" />
       <div className="absolute top-1/3 right-20 w-24 h-24 border-8 border-accent rotate-12 opacity-20" />
+      {/* </CHANGE> */}
 
+      {/* Parallax text */}
       <div className="relative z-10 flex flex-wrap justify-center items-center gap-2 md:gap-4 px-4 mb-12">
         {text.split("").map((char, index) => (
           <span
@@ -126,14 +130,14 @@ export default function Hero() {
           <p className="text-background text-sm md:text-base font-bold">☎ LLAMA: 900-XXX-XXX</p>
         </div>
       </div>
+      {/* </CHANGE> */}
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
         <div className="w-8 h-12 border-4 border-background bg-secondary/50 flex items-start justify-center p-2">
           <div className="w-2 h-4 bg-background animate-bounce" />
         </div>
       </div>
+      {/* </CHANGE> */}
     </section>
   )
 }
-
-

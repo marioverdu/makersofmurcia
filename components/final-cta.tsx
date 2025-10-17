@@ -22,11 +22,13 @@ export default function FinalCTA() {
         }}
       />
       <div className="absolute inset-0 opacity-10 halftone-bg" />
+      {/* </CHANGE> */}
 
       <div className="absolute top-10 left-10 w-40 h-40 border-8 border-primary rotate-45 opacity-40" />
       <div className="absolute bottom-10 right-10 w-48 h-48 border-8 border-accent rotate-12 opacity-40" />
       <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-primary opacity-20 -rotate-12" />
       <div className="absolute top-1/4 left-1/3 w-40 h-40 bg-accent opacity-20 rotate-12" />
+      {/* </CHANGE> */}
 
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         <h2
@@ -61,6 +63,7 @@ export default function FinalCTA() {
             MOVIMIENTO
           </span>
         </h2>
+        {/* </CHANGE> */}
 
         <div className="inline-block bg-background border-4 border-background p-6 mb-12 rotate-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <p
@@ -72,6 +75,7 @@ export default function FinalCTA() {
             SÉ PARTE DEL CAMBIO
           </p>
         </div>
+        {/* </CHANGE> */}
 
         <Button
           size="lg"
@@ -83,6 +87,7 @@ export default function FinalCTA() {
           <span className="absolute -bottom-4 -left-4 w-8 h-8 bg-primary border-2 border-background rotate-45 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" />
         </Button>
 
+        {/* Contact info block */}
         <div className="mt-12 inline-block bg-secondary border-4 border-background p-4 -rotate-1 shadow-[6px_6px_0px_0px_rgba(255,0,0,0.6)]">
           <p
             className="text-background text-lg md:text-xl font-bold uppercase"
@@ -91,9 +96,8 @@ export default function FinalCTA() {
             ☎ LLAMA: 900-XXX-XXX
           </p>
         </div>
+        {/* </CHANGE> */}
       </div>
     </section>
   )
 }
-
-

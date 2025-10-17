@@ -135,11 +135,13 @@ export default function MasonrySection() {
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none halftone-bg" />
 
+              {/* Ripped edge effect on top */}
               {index % 3 === 0 && (
                 <div className="absolute top-0 left-0 right-0 h-2 bg-secondary opacity-50 ripped-edge" />
               )}
 
               <div className="relative z-10">
+                {/* Icon with sticker effect */}
                 <div className="inline-block mb-4 p-4 bg-background border-4 border-secondary rotate-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:rotate-0 transition-transform">
                   <div className="text-5xl">{card.icon}</div>
                 </div>
@@ -153,20 +155,22 @@ export default function MasonrySection() {
                 <p className="text-base md:text-lg font-bold leading-relaxed">{card.description}</p>
               </div>
 
+              {/* Geometric corner decorations */}
               <div className="absolute top-0 right-0 w-16 h-16 bg-secondary transform rotate-45 translate-x-8 -translate-y-8" />
               <div className="absolute bottom-0 left-0 w-12 h-12 bg-primary transform rotate-45 -translate-x-6 translate-y-6" />
 
+              {/* Tape effect */}
               {index % 2 === 0 && (
                 <div className="absolute -top-3 right-12 w-24 h-8 bg-accent/40 border-2 border-accent/60 rotate-12 shadow-[2px_2px_4px_rgba(0,0,0,0.3)]" />
               )}
 
+              {/* Star decorations */}
               {index % 3 === 1 && <div className="absolute bottom-4 right-4 text-2xl opacity-60">★</div>}
             </Card>
+            {/* </CHANGE> */}
           </div>
         ))}
       </div>
     </section>
   )
 }
-
-

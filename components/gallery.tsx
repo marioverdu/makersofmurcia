@@ -96,6 +96,7 @@ export default function Gallery() {
             <ChevronRight className="w-8 h-8" />
           </Button>
 
+          {/* Gallery grid */}
           <div
             ref={scrollRef}
             className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4"
@@ -115,18 +116,21 @@ export default function Gallery() {
                   style={{ transform: `rotate(${image.rotation})` }}
                 >
                   <Image
-                    src="/placeholder.jpg"
+                    src={`/.jpg?height=600&width=800&query=${encodeURIComponent(image.query)}`}
                     alt={`Event ${image.id}`}
                     fill
                     className="object-cover"
                     style={{ filter: "contrast(1.3) saturate(1.4) brightness(0.9)" }}
                   />
 
+                  {/* Halftone overlay on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-50 transition-opacity duration-300 halftone-bg" />
 
+                  {/* Tape decorations */}
                   <div className="absolute -top-3 left-12 w-20 h-8 bg-accent/50 border-2 border-accent/70 rotate-12 shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
                   <div className="absolute -bottom-3 right-12 w-20 h-8 bg-accent/50 border-2 border-accent/70 -rotate-12 shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
 
+                  {/* Corner triangles */}
                   <div className="absolute top-0 left-0 w-0 h-0 border-t-[30px] border-t-primary border-r-[30px] border-r-transparent" />
                   <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[30px] border-b-primary border-l-[30px] border-l-transparent" />
                 </div>
@@ -138,5 +142,3 @@ export default function Gallery() {
     </section>
   )
 }
-
-
