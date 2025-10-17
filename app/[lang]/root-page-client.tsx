@@ -1,11 +1,11 @@
 "use client"
 
-import SimpleHero from "@/components/simple-hero"
-
 export default function RootPageClient() {
   return (
-    <main className="min-h-screen">
-      <SimpleHero />
-    </main>
+    <div className="min-h-screen flex items-center justify-center bg-primary">
+      <h1 className="text-6xl font-bold text-white">
+        DESPIERTA
+      </h1>
+    </div>
   )
 }
