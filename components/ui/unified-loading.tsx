@@ -1,5 +1,4 @@
 import React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
 
 interface UnifiedLoadingProps {
   size?: number;
@@ -20,12 +19,27 @@ export const UnifiedLoading: React.FC<UnifiedLoadingProps> = ({
   className = "",
   color = "#3D5B6A"
 }) => {
+  const borderWidth = Math.max(2, Math.round(size / 12));
+  const spinnerStyle: React.CSSProperties = {
+    width: size,
+    height: size,
+    borderWidth,
+    borderStyle: 'solid',
+    borderColor: `${color}33`, // 20% opacity track
+    borderTopColor: color,
+    borderRadius: '50%',
+    animation: 'mum-spin 0.8s linear infinite'
+  };
+
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <CircularProgress 
-        size={size} 
-        sx={{ color }} 
-      />
+      <span style={spinnerStyle} aria-label="Cargando" />
+      <style jsx>{`
+        @keyframes mum-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 };
