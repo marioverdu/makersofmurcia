@@ -1,0 +1,139 @@
+"use client"
+
+import { useEffect, useRef } from "react"
+import { Button } from "@/components/ui/button"
+
+export default function Hero() {
+  const heroRef = useRef<HTMLDivElement>(null)
+  const lettersRef = useRef<HTMLSpanElement[]>([])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return
+
+      const scrollY = window.scrollY
+      const heroHeight = heroRef.current.offsetHeight
+      const scrollProgress = Math.min(scrollY / heroHeight, 1)
+
+      lettersRef.current.forEach((letter, index) => {
+        if (!letter) return
+
+        const speed = (index % 4) + 1.5
+        const direction = index % 2 === 0 ? 1 : -1
+        const translateY = scrollProgress * speed * 150 * direction
+        const translateX = scrollProgress * speed * 50 * (index % 3 === 0 ? 1 : -1)
+        const rotate = scrollProgress * speed * 8 * direction
+        const scale = 1 - scrollProgress * 0.3
+        const opacity = 1 - scrollProgress * 1.2
+
+        letter.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`
+        letter.style.opacity = opacity.toString()
+      })
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const text = "DESPIERTA"
+
+  return (
+    <section
+      ref={heroRef}
+      className="relative min-h-screen flex flex-col items-center justify-center bg-primary overflow-hidden"
+    >
+      <div className="absolute top-0 left-0 w-32 md:w-48 h-full bg-secondary border-r-8 border-background opacity-90">
+        <div className="sticky top-20 p-4 md:p-6">
+          <p
+            className="text-background text-sm md:text-base font-bold uppercase [writing-mode:vertical-lr] rotate-180 tracking-wider"
+            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+          >
+            ASOCIACIÓN SIN ÁNIMO DE LUCRO
+          </p>
+        </div>
+      </div>
+
+      <div className="absolute top-0 right-0 w-24 md:w-32 h-full bg-secondary border-l-8 border-background opacity-90">
+        <div className="sticky top-32 p-3 md:p-4">
+          <p
+            className="text-background text-xs md:text-sm font-bold uppercase [writing-mode:vertical-lr] rotate-180 tracking-wider"
+            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+          >
+            EVENTOS • CULTURA • COMUNIDAD
+          </p>
+        </div>
+      </div>
+
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 halftone-bg" />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 5px,
+            black 5px,
+            black 6px
+          )`,
+          }}
+        />
+      </div>
+
+      <div className="absolute top-20 left-1/4 w-40 h-40 border-8 border-secondary rotate-45 opacity-20" />
+      <div className="absolute bottom-32 right-1/3 w-32 h-32 bg-accent opacity-30 -rotate-12" />
+      <div className="absolute top-1/3 right-20 w-24 h-24 border-8 border-accent rotate-12 opacity-20" />
+
+      <div className="relative z-10 flex flex-wrap justify-center items-center gap-2 md:gap-4 px-4 mb-12">
+        {text.split("").map((char, index) => (
+          <span
+            key={index}
+            ref={(el) => {
+              if (el) lettersRef.current[index] = el
+            }}
+            className="text-[12vw] md:text-[15vw] lg:text-[20vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
+            style={{
+              fontFamily: "var(--font-anton), Impact, sans-serif",
+              willChange: "transform, opacity",
+              filter: `drop-shadow(${index * 2}px ${index * 2}px 0px rgba(0,0,0,0.3))`,
+            }}
+          >
+            {char}
+          </span>
+        ))}
+      </div>
+
+      <div className="relative z-20 flex flex-col items-center gap-6">
+        <div className="bg-background border-4 border-secondary p-4 rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <p
+            className="text-secondary text-lg md:text-xl font-bold uppercase tracking-wider"
+            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+          >
+            ★ ÚNETE AL MOVIMIENTO ★
+          </p>
+        </div>
+
+        <Button
+          size="lg"
+          className="relative bg-accent text-secondary hover:bg-accent/90 text-xl md:text-2xl font-bold uppercase px-8 md:px-16 py-6 md:py-8 border-4 border-secondary shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 -rotate-1"
+          style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+        >
+          DESPIERTA YA
+          <span className="absolute -top-3 -right-3 w-8 h-8 bg-primary border-2 border-secondary rotate-45" />
+        </Button>
+
+        <div className="bg-secondary border-4 border-background p-3 -rotate-3 shadow-[6px_6px_0px_0px_rgba(255,0,0,0.5)]">
+          <p className="text-background text-sm md:text-base font-bold">☎ LLAMA: 900-XXX-XXX</p>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+        <div className="w-8 h-12 border-4 border-background bg-secondary/50 flex items-start justify-center p-2">
+          <div className="w-2 h-4 bg-background animate-bounce" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+

@@ -144,6 +144,27 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .halftone-bg {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 8px 8px;
+    color: rgba(0,0,0,0.9);
+  }
+  .text-stroke {
+    -webkit-text-stroke: 4px #000;
+    color: transparent;
+  }
+  .text-stroke-red {
+    -webkit-text-stroke: 4px #000;
+    color: #ff1a1a;
+  }
+  .text-stroke-double {
+    text-shadow:
+      2px 2px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000;
+    color: #fff;
+  }
 }
 
 @layer base {
