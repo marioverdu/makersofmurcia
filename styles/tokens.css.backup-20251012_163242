@@ -1,0 +1,171 @@
+/**
+ * 🎨 Design System Tokens - CSS Variables OPTIMIZADO
+ * Sistema centralizado de tokens con mínima redundancia
+ * Solo tokens USADOS en páginas públicas
+ */
+
+:root {
+  /* ============================================ */
+  /* 📐 SPACING - Base Scale (16 tokens) */
+  /* ============================================ */
+  
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;    /* = avatar */
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;   /* = header-height */
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;   /* = avatar-hero */
+  
+  /* Semantic Aliases (referencian base scale) */
+  --spacing-avatar: var(--spacing-7);
+  --spacing-avatar-hero: var(--spacing-20);
+  --spacing-header-height: var(--spacing-10);
+  
+  /* Layout Specific */
+  --spacing-content-max-width: 1092px;
+  --spacing-post-cards-max-width: 800px;
+  --spacing-posts-max-width: 1000px;
+  --spacing-posts-container-top: 140px;
+  --spacing-posts-container-bottom: 72px;
+  --spacing-profile-card-height: 204px;
+  
+  /* ============================================ */
+  /* 🎨 COLORS - Minimal Palette */
+  /* ============================================ */
+  
+  /* Gray Scale (10 tokens - BASE) */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  
+  /* Primary Blue (minimal) */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-500: #005eb6;
+  
+  /* Red Palette (minimal) */
+  --color-red-50: #FEF2F2;
+  --color-red-200: #FECACA;
+  --color-red-500: #EF4444;
+  --color-red-600: #DC2626;
+  --color-red-700: #B91C1C;
+  
+  /* Green Palette (minimal) */
+  --color-green-500: #10B981;
+  --color-green-600: #047857;
+  
+  /* Badge Colors (solo para root page) */
+  --color-badge-teal-bg: #E4F6F5;
+  --color-badge-teal-border: #c5e0df;
+  --color-badge-purple-bg: #eff0ff;
+  --color-badge-purple-border: #D8D9F2;
+  --color-badge-orange-bg: #ffebdc;
+  --color-badge-orange-border: #F2E4D8;
+  
+  /* Semantic Colors (minimal) */
+  --color-semantic-success: var(--color-green-500);
+  --color-semantic-warning: #F97316;
+  --color-semantic-error: var(--color-red-500);
+  
+  /* Backgrounds */
+  --color-background-primary: #F7F8FC;
+  --color-background-secondary: #FFFFFF;
+  --color-background-tertiary: var(--color-gray-50);
+  
+  /* Borders */
+  --color-border-default: var(--color-gray-200);
+  --color-border-light: var(--color-gray-100);
+  --color-border-primary: rgba(0, 94, 182, 0.1);
+  --color-border-accent: #3D5B6A;
+  
+  /* Text */
+  --color-text: hsl(206, 1%, 27%);
+  --color-text-primary: var(--color-text);
+  --color-text-secondary: var(--color-gray-500);
+  --color-text-muted: var(--color-gray-400);
+  
+  /* Surface */
+  --color-surface-glass: rgba(255, 255, 255, 0.3);
+  
+  /* Toast */
+  --color-toast-bg: rgba(30, 30, 30, 0.9);
+  
+  /* ============================================ */
+  /* 📝 TYPOGRAPHY */
+  /* ============================================ */
+  
+  /* Font Sizes - Unificados de páginas públicas */
+  --font-size-xs: 12px;      /* Badges, tags | text-xs */
+  --font-size-sm: 14px;      /* Body small, captions | text-sm */
+  --font-size-base: 15.2px;  /* Body text principal root page */
+  --font-size-md: 16px;      /* Body large | text-base */
+  --font-size-lg: 18px;      /* Subtitles, errors | text-lg */
+  --font-size-xl: 20px;      /* Section titles | text-xl */
+  --font-size-2xl: 24px;     /* Page titles (mobile) | text-2xl, text-[24px] */
+  --font-size-3xl: 30px;     /* Headings tablet | text-3xl */
+  --font-size-4xl: 32px;     /* Page titles (tablet) | text-[32px] */
+  --font-size-5xl: 44px;     /* Page titles (desktop) | text-[44px] */
+
+  /* Font Weights */
+  --font-weight-thin: 100;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ============================================ */
+  /* 🔧 EFFECTS - Minimal Set */
+  /* ============================================ */
+  
+  /* Border Radius (solo usados) */
+  --border-radius-base: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-full: 9999px;
+  
+  /* Shadows (solo usados) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Z-Index (solo usados) */
+  --z-index-0: 0;
+  --z-index-50: 50;
+  --z-index-header: 1000;
+  
+  /* Blur (solo usados) */
+  --blur-md: 12px;
+  
+  /* Transitions (solo usados) */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  
+  /* ============================================ */
+  /* 🌐 ASSETS */
+  /* ============================================ */
+  
+  --asset-bg-landing: url('https://assets.marioverdu.com/bg/landing-bg.png');
+  --asset-bg-work-experience: url('https://assets.marioverdu.com/bg/work-experience-bg.min.png');
+}
+

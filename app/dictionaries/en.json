@@ -103,6 +103,7 @@
     "uiDeveloper": "Frontend Developer (Next.js / React)",
     "hey": "Hey!",
     "musicUnlocked": "Music unlocked!",
+    "views": "views",
     "developmentMode": "Development mode: Using sample posts",
     "productionInfo": "In production, this page will load posts from the Neon database.",
     "notice": "Notice:",

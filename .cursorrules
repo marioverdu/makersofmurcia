@@ -1,0 +1,146 @@
+# 🎯 REGLAS DEL PROYECTO - SingularCMS
+
+## 📚 FUENTE ÚNICA DE VERDAD: STORYBOOK
+
+**IMPORTANTE:** El Design System SOLO existe en Storybook.
+
+### ✅ REGLA #1: Design System
+
+**NUNCA crear archivos MD para Design System.**
+
+- ❌ **NO CREAR:** `DESIGN_SYSTEM_*.md`, `TOKENS_*.md`, `*_AUDIT.md`
+- ✅ **USAR SIEMPRE:** `stories/DesignSystem.stories.tsx`
+
+**Cualquier documentación, auditoría, plan o análisis del Design System debe ir directamente en:**
+```
+stories/DesignSystem.stories.tsx
+```
+
+**Antes de crear un MD, pregúntate:**
+- ¿Es sobre Design System, tokens, estilos, colores, spacing?
+- → **SÍ:** Editar `stories/DesignSystem.stories.tsx`
+- → **NO:** Solo entonces considerar MD
+
+### ✅ REGLA #2: Tokens
+
+**Los tokens SOLO se definen en:**
+```
+styles/tokens.css
+```
+
+**Los tokens SOLO se documentan en:**
+```
+stories/DesignSystem.stories.tsx
+```
+
+**Storybook lee tokens dinámicamente con `getCSSVar()`:**
+```tsx
+const getCSSVar = (varName: string) => {
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue(varName).trim();
+};
+```
+
+### ✅ REGLA #3: Auditorías y Planes (SIN MÉTRICAS)
+
+**Toda auditoría, análisis u optimización del Design System:**
+- ❌ NO crear MD temporal
+- ❌ NO incluir métricas numéricas (140 tokens, 49 usados, 35%, etc.)
+- ✅ Integrar directamente en Storybook como nueva sección o subsección
+- ✅ Usar descripciones cualitativas
+
+**Ejemplo CORRECTO:**
+```tsx
+// Agregar sección "Auditoría" en DesignSystem.stories.tsx
+<section>
+  <h2>📊 Auditoría de Tokens</h2>
+  <p>Muchos tokens están definidos pero no se usan...</p>
+</section>
+```
+
+**Ejemplo INCORRECTO:**
+```tsx
+// ❌ NO hacer esto:
+<div>140 Tokens Definidos</div>
+<div>49 Tokens Usados</div>
+<div>35% Utilización</div>
+```
+
+### ✅ REGLA #4: MDs Existentes
+
+**Los MDs existentes del Design System son PROXIES:**
+```
+DESIGN_SYSTEM_README.md → Proxy a Storybook
+DESIGN_SYSTEM_COLORS_UPDATE.md → Proxy a Storybook
+DESIGN_SYSTEM_MIGRATION.md → Proxy a Storybook
+```
+
+**NO editar estos proxies. Son solo referencias.**
+
+### ✅ REGLA #5: Workflow
+
+**Cuando necesites documentar algo del Design System:**
+
+1. Abrir `stories/DesignSystem.stories.tsx`
+2. Agregar contenido como nueva sección o actualizar existente
+3. Usar `getCSSVar()` para valores dinámicos
+4. Guardar y verificar en Storybook
+
+**NUNCA:**
+- Crear `DESIGN_SYSTEM_*.md`
+- Crear `TOKENS_*.md`
+- Crear `*_OPTIMIZATION_*.md`
+- Crear auditorías en MD
+
+---
+
+## 📋 OTRAS REGLAS DEL PROYECTO
+
+### Commits
+- NO commits automáticos sin permiso explícito del usuario
+- NO force push a main/master
+- NO skip hooks
+
+### Git
+- NO modificar git config
+- NO destructive operations sin confirmación
+
+### Español
+- Siempre responder en español
+- Documentación en español cuando sea posible
+
+---
+
+## 🎨 ESTRUCTURA DEL DESIGN SYSTEM
+
+```
+styles/
+  ├── tokens.css          # Definición de tokens (fuente de verdad)
+  └── utilities.css       # Utility classes
+
+stories/
+  └── DesignSystem.stories.tsx  # Documentación completa (fuente única)
+
+app/layout.tsx            # Imports de tokens y utilities
+```
+
+**Flujo:**
+```
+tokens.css → Storybook (getCSSVar) → Documentación actualizada
+```
+
+---
+
+## ⚠️ RECORDATORIO
+
+**Antes de crear cualquier archivo relacionado con Design System:**
+
+1. ¿Es sobre tokens, colores, spacing, estilos?
+2. → **SÍ:** Editar `stories/DesignSystem.stories.tsx`
+3. → **NO:** Continuar
+
+**Storybook es la fuente única de verdad para el Design System.**
+
+---
+
+**Última actualización:** 12 Octubre 2025

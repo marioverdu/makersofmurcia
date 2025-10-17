@@ -1,30 +1,124 @@
-# Complex cms 0.1
+# 🚀 Light CMS Template
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Una versión extremadamente ligera del proyecto original, optimizada para desarrollo de componentes con Design System completo y Storybook integrado.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/marioverdus-projects/v0-fork-of-complex-cms-master-0-011-stable-deployed)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/IZ8SMSRfU3V)
+## ✨ Características
 
-## Overview
+- **🎨 Design System Completo**: Tokens CSS, componentes UI base y guías de estilo
+- **📚 Storybook Integrado**: Documentación interactiva de componentes
+- **🔐 Autenticación**: NextAuth.js con Google OAuth configurado
+- **⚡ Next.js 15**: App Router con React 19 y TypeScript
+- **🎯 Tailwind CSS**: Sistema de estilos con tokens personalizados
+- **🧩 Componentes UI**: Biblioteca completa de componentes Radix UI
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## 🛠️ Instalación
 
-## Deployment
+```bash
+# Instalar dependencias
+npm install
 
-Your project is live at:
+# Iniciar servidor de desarrollo
+npm run dev
 
-**[https://vercel.com/marioverdus-projects/v0-fork-of-complex-cms-master-0-011-stable-deployed](https://vercel.com/marioverdus-projects/v0-fork-of-complex-cms-master-0-011-stable-deployed)**
+# Iniciar Storybook
+npm run storybook
+```
 
-## Build your app
+## 📁 Estructura del Proyecto
 
-Continue building your app on:
+```
+├── app/
+│   ├── [lang]/           # Página raíz con internacionalización
+│   ├── login/            # Sistema de autenticación
+│   ├── api/auth/         # APIs de autenticación
+│   └── layout.tsx        # Layout principal
+├── components/
+│   ├── ui/               # Componentes UI base (Radix + shadcn)
+│   ├── auth/             # Componentes de autenticación
+│   └── design-system/    # Componentes del Design System
+├── styles/
+│   ├── tokens.css        # Tokens CSS del Design System
+│   ├── utilities.css     # Clases utilitarias
+│   └── globals.css       # Estilos globales
+├── stories/
+│   ├── DesignSystem.stories.tsx  # Documentación del Design System
+│   └── ui/               # Stories de componentes UI
+└── lib/                  # Utilidades y configuración
+```
 
-**[https://v0.dev/chat/projects/IZ8SMSRfU3V](https://v0.dev/chat/projects/IZ8SMSRfU3V)**
+## 🎨 Design System
 
-## How It Works
+El Design System está completamente integrado en Storybook y se basa en:
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- **Tokens CSS**: Variables CSS dinámicas en `styles/tokens.css`
+- **Componentes Base**: Biblioteca completa de componentes Radix UI
+- **Documentación**: Storybook como fuente única de verdad
+
+### Ver Design System
+
+```bash
+npm run storybook
+```
+
+Accede a `http://localhost:6006` para ver la documentación completa.
+
+## 🔐 Autenticación
+
+Sistema de autenticación configurado con NextAuth.js:
+
+- **Desarrollo**: Acceso directo sin autenticación
+- **Producción**: Google OAuth obligatorio
+- **Rutas protegidas**: `/admin` requiere autenticación
+
+### Configuración
+
+Las variables de entorno necesarias están documentadas en el archivo de configuración de NextAuth.
+
+## 🚀 Desarrollo
+
+### Comandos Disponibles
+
+```bash
+npm run dev          # Servidor de desarrollo
+npm run build        # Build de producción
+npm run start        # Servidor de producción
+npm run storybook    # Storybook
+npm run lint         # Linting
+```
+
+### Agregar Nuevos Componentes
+
+1. Crear componente en `components/ui/`
+2. Agregar story en `stories/ui/`
+3. Documentar en Storybook si es parte del Design System
+
+## 📦 Dependencias Principales
+
+- **Next.js 15**: Framework React
+- **React 19**: Biblioteca de UI
+- **TypeScript**: Tipado estático
+- **Tailwind CSS**: Sistema de estilos
+- **Radix UI**: Componentes accesibles
+- **NextAuth.js**: Autenticación
+- **Storybook**: Documentación de componentes
+
+## 🎯 Objetivo
+
+Este template está diseñado para ser una base ligera y funcional que permita:
+
+- Desarrollo rápido de nuevos componentes
+- Documentación automática con Storybook
+- Sistema de autenticación listo para usar
+- Design System escalable y mantenible
+
+## 📝 Notas
+
+- Se eliminaron todas las funcionalidades específicas del proyecto original
+- Se mantuvieron solo los elementos esenciales para desarrollo
+- El Design System sigue las reglas del proyecto original (solo en Storybook)
+- La autenticación está configurada para desarrollo y producción
+
+---
+
+**Versión**: 0.1.0  
+**Última actualización**: Octubre 2024

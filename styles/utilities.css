@@ -1,0 +1,100 @@
+/**
+ * 🎨 Design System Utilities
+ * Clases compartidas que usan tokens
+ */
+
+/* ============================================ */
+/* GLASSMORPHISM */
+/* ============================================ */
+
+.glass-bg {
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border-primary);
+}
+
+.glass-card {
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--color-border-default);
+  border-bottom: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================ */
+/* HEADER */
+/* ============================================ */
+
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--spacing-header-height);
+  background: transparent;
+  z-index: var(--z-index-header);
+}
+
+.header-padding {
+  width: var(--spacing-3);
+}
+
+@media (min-width: 480px) {
+  .header-padding {
+    width: var(--spacing-8);
+  }
+}
+
+/* ============================================ */
+/* GRADIENTS */
+/* ============================================ */
+
+.card-overlay-gradient {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, transparent);
+}
+
+/* ============================================ */
+/* TOAST */
+/* ============================================ */
+
+.toast-bg {
+  background: var(--color-toast-bg);
+}
+
+.toast-container {
+  position: fixed;
+  bottom: var(--spacing-4);
+  right: var(--spacing-4);
+  z-index: var(--z-index-50);
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-gray-200);
+  padding: var(--spacing-4);
+  max-width: var(--spacing-post-cards-max-width);
+}
+
+/* ============================================ */
+/* ANIMATIONS */
+/* ============================================ */
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn var(--transition-fast) ease-out forwards;
+}
+

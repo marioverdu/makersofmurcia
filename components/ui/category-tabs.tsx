@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useRef } from 'react'
 
 type CategoryKey = "concept" | "portfolio" | "about"
 
@@ -17,31 +17,61 @@ interface CategoryTabsProps {
 }
 
 export const CategoryTabs: React.FC<CategoryTabsProps> = ({ selected, onChange, onNavigate, labels, className = "" }) => {
-  const handle = (next: CategoryKey) => {
+  const conceptRef = useRef<HTMLButtonElement>(null)
+  const portfolioRef = useRef<HTMLButtonElement>(null)
+  const aboutRef = useRef<HTMLButtonElement>(null)
+
+  const handle = (next: CategoryKey, ref: React.RefObject<HTMLButtonElement>) => {
     onChange?.(next)
     onNavigate?.(next)
+    
+    // Centrar el botón seleccionado inmediatamente sin transición
+    if (ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'auto', // Sin transición suave
+        block: 'nearest',
+        inline: 'center'
+      })
+    }
   }
+
   return (
-    <div className={`flex space-x-4 justify-center ${className}`}>
-      <button
-        className={`text-[#333] whitespace-nowrap ${selected === "concept" ? "" : "opacity-50"}`}
-        onClick={() => handle("concept")}
-      >
-        {labels.posts}
-      </button>
-      <button
-        className={`text-[#333] whitespace-nowrap ${selected === "portfolio" ? "" : "opacity-50"}`}
-        onClick={() => handle("portfolio")}
-      >
-        {labels.portfolio ?? 'Portfolio'}
-      </button>
-      <button
-        className={`text-[#333] whitespace-nowrap ${selected === "about" ? "" : "opacity-50"}`}
-        onClick={() => handle("about")}
-      >
-        {labels.about}
-      </button>
-    </div>
+    <>
+      <div className={`overflow-x-auto overflow-y-hidden scrollbar-hide ${className}`}>
+        <div className="flex space-x-4 justify-center min-w-max px-2">
+          <button
+            ref={conceptRef}
+            className={`text-[#333] whitespace-nowrap ${selected === "concept" ? "" : "opacity-50"} transition-opacity`}
+            onClick={() => handle("concept", conceptRef)}
+          >
+            {labels.posts}
+          </button>
+          <button
+            ref={portfolioRef}
+            className={`text-[#333] whitespace-nowrap ${selected === "portfolio" ? "" : "opacity-50"} transition-opacity`}
+            onClick={() => handle("portfolio", portfolioRef)}
+          >
+            {labels.portfolio ?? 'Portfolio'}
+          </button>
+          <button
+            ref={aboutRef}
+            className={`text-[#333] whitespace-nowrap ${selected === "about" ? "" : "opacity-50"} transition-opacity`}
+            onClick={() => handle("about", aboutRef)}
+          >
+            {labels.about}
+          </button>
+        </div>
+      </div>
+      <style jsx>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+    </>
   )
 }
 

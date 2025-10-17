@@ -1,15 +1,12 @@
 import type React from "react"
-import { getSiteUrl } from "@/lib/env-config"
 import type { Metadata } from "next"
 import { Nunito } from "next/font/google"
 import "./globals.css"
+import "@/styles/tokens.css"
+import "@/styles/utilities.css"
 import SessionProvider from "@/components/auth/session-provider"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
-import { FaviconLoader } from "@/components/favicon-loader"
-import { GlobalChatProvider } from "@/contexts/global-chat-context"
-import { LanguageProviderWrapper } from "@/components/language-provider-wrapper"
-import { GlobalContentLoader } from "@/components/ui/global-content-loader"
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -18,30 +15,20 @@ const nunito = Nunito({
 })
 
 export const metadata: Metadata = {
-  title: "Mario Verdú - Blog Personal y Portfolio",
-  description: "Blog personal de Mario Verdú con artículos sobre desarrollo web, tecnología, y experiencias profesionales. Portfolio y proyectos de desarrollo.",
+  title: "Light CMS Template",
+  description: "Una versión extremadamente ligera para desarrollo de componentes con Design System completo y Storybook integrado.",
   generator: "Next.js",
-  authors: [{ name: "Mario Verdú" }],
-  keywords: ["desarrollo web", "tecnología", "blog", "portfolio", "programación"],
+  keywords: ["cms", "template", "design system", "storybook", "nextjs"],
   openGraph: {
-    title: "Mario Verdú - Blog Personal y Portfolio",
-    description: "Blog personal de Mario Verdú con artículos sobre desarrollo web, tecnología, y experiencias profesionales.",
-    url: getSiteUrl(),
-    siteName: "Mario Verdú - Blog",
-    locale: "es_ES",
+    title: "Light CMS Template",
+    description: "Una versión extremadamente ligera para desarrollo de componentes con Design System completo y Storybook integrado.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mario Verdú - Blog Personal y Portfolio",
-    description: "Blog personal de Mario Verdú con artículos sobre desarrollo web, tecnología, y experiencias profesionales.",
+    title: "Light CMS Template",
+    description: "Una versión extremadamente ligera para desarrollo de componentes con Design System completo y Storybook integrado.",
   },
-}
-
-// Función para detectar si estamos en desarrollo
-function isDevelopment() {
-  return process.env.NODE_ENV === 'development' || 
-         process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production'
 }
 
 export default function RootLayout({
@@ -49,25 +36,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const isDev = isDevelopment()
-  
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        {/* Google Fonts Material Icons */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </head>
       <body className={nunito.className}>
         <SessionProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <FaviconLoader />
-            <LanguageProviderWrapper>
-              <GlobalChatProvider>
-                {children}
-              </GlobalChatProvider>
-            </LanguageProviderWrapper>
+            {children}
             <Toaster />
           </ThemeProvider>
         </SessionProvider>

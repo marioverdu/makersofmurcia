@@ -67,7 +67,7 @@ export const ConfirmableModal: React.FC<ConfirmableModalProps> = ({
       <div className="absolute inset-0 bg-black/30" onClick={handleOverlayClick} />
 
       {/* Modal */}
-      <div ref={contentRef} className={`relative bg-white rounded-lg p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto ${className}`}>
+      <div ref={contentRef} className={`relative bg-white rounded-lg p-4 sm:p-6 w-[calc(100%-32px)] sm:w-full max-w-6xl max-h-[90vh] overflow-y-auto ${className}`}>
         {(title || isDirty) && (
           <div className="flex items-center justify-between mb-4">
             {title && <h2 className="text-xl font-semibold">{title}</h2>}

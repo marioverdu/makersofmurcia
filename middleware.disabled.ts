@@ -21,6 +21,10 @@ const ALLOWED_PATHS = [
   '/favicon.ico',    // Favicon
   '/robots.txt',     // SEO
   '/sitemap.xml',    // SEO
+  // CMS Posts: no interferir con slugs mientras integramos el nuevo sistema
+  '/posts',
+  '/es/posts',
+  '/en/posts',
   '/admin',          // Panel admin (protegido por NextAuth)
   '/login',          // Página de login ⚠️ CRÍTICO para acceso
   '/signup',         // Página de registro
@@ -47,6 +51,11 @@ function extractLocale(pathname: string): { locale: string; cleanPath: string } 
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  
+  // Bypass completo del middleware en desarrollo para no bloquear navegación
+  if (process.env.NODE_ENV !== 'production') {
+    return NextResponse.next()
+  }
   
   // Permitir rutas especiales sin verificar
   if (ALLOWED_PATHS.some(allowed => pathname.startsWith(allowed))) {

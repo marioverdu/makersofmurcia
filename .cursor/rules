@@ -186,3 +186,148 @@ Archivos: [LISTA]
 
 ## 13) Ubicación del prompt
 - Archivo: `/.cursor/rules` (raíz). Reinicia el hilo para aplicar cambios.
+
+---
+
+## 14) Chat LLM - Documentación de Proveedores (NUEVO)
+
+### 📚 Ubicación de la Documentación
+- **Story en Storybook:** `stories/LLMProvidersComparison.stories.tsx`
+- **Título en Storybook:** "LLMProvidersComparison"
+- **Archivos de referencia:**
+  - `FREE_LLM_PROVIDERS_COMPARISON.md`
+  - `FREE_LLM_HUGGINGFACE_GOOGLE_COMPARISON.md`
+  - `FINAL_LLM_PROVIDERS_COMPARISON_TABLE.md`
+
+### ✅ Contenido de la Documentación
+La story contiene:
+- **Ranking de proveedores LLM** (Google Gemini, Groq, Cloudflare, etc.)
+- **Comparativa de tier FREE** con límites diarios y mensuales
+- **Tabla de velocidad y latencia** de cada proveedor
+- **Costos cuando excedes tier gratuito**
+- **Stack recomendado multi-provider** (3 tiers con fallback)
+- **Guía para obtener API keys** (Google, Groq, HF)
+- **Variables de entorno necesarias**
+- **Escalabilidad por fases** con estimación de costos
+- **Casos de uso por proveedor**
+
+### 🎯 Stack Recomendado Documentado
+```
+TIER 1: Google Gemini Flash (85% tráfico)
+  → 20,000 msgs/día FREE
+  → Mejor calidad
+
+TIER 2: Groq (10% tráfico)
+  → 500 msgs/día adicionales
+  → Ultra rápido (750 tok/s)
+
+TIER 3: Cloudflare Workers AI (5% emergencia)
+  → 1,000 msgs/día backup
+```
+
+### 📝 Reglas para Modificar esta Documentación
+1. **Solo editar la story:** `stories/LLMProvidersComparison.stories.tsx`
+2. **Mantener sincronizados los MDs** de referencia si se hacen cambios
+3. **NO crear nuevas stories** para variantes de esta documentación
+4. **Seguir formato visual consistente** con tablas y cards
+5. **Actualizar fecha** en footer cuando se modifique
+
+### 🚨 Cuando Actualizar
+- Cambios en límites FREE de proveedores
+- Nuevos proveedores LLM disponibles
+- Cambios en precios o velocidades
+- Actualización del stack recomendado
+- Nuevas API keys o servicios
+
+---
+
+## 15) Design System - Documentación (CRÍTICO)
+
+### 📚 Fuente Única de Verdad
+- **ÚNICO archivo para Design System:** `stories/DesignSystem.stories.tsx`
+- **NO crear archivos MD:** `DESIGN_SYSTEM_*.md`, `TOKENS_*.md`, `*_AUDIT.md`, `*_OPTIMIZATION.md`
+- **Tokens definidos en:** `styles/tokens.css`
+
+### ✅ Reglas Estrictas para Design System
+
+#### **1. NO Crear MDs para Design System**
+```
+❌ PROHIBIDO:
+- DESIGN_SYSTEM_*.md
+- TOKENS_*.md
+- *_AUDIT.md
+- *_OPTIMIZATION_*.md
+
+✅ USAR SIEMPRE:
+- stories/DesignSystem.stories.tsx
+```
+
+#### **2. NO Incluir Métricas Numéricas**
+```
+❌ PROHIBIDO en DesignSystem.stories.tsx:
+- Cards con números (140 tokens, 49 usados, 35%, etc.)
+- Grids de métricas
+- Porcentajes de utilización
+- Comparativas "Antes → Después" con números
+- Contadores de tokens
+
+✅ PERMITIDO:
+- Descripciones cualitativas ("Muchos tokens no usados")
+- Visualizaciones de tokens (swatches, ejemplos)
+- Código y ejemplos
+- Planes de optimización sin números específicos
+```
+
+#### **3. Estructura Permitida**
+```tsx
+// ✅ CORRECTO:
+<section>
+  <h2>📊 Auditoría</h2>
+  <div>
+    <p>Muchos tokens están definidos pero no se usan...</p>
+  </div>
+</section>
+
+// ❌ INCORRECTO:
+<section>
+  <div>140 Tokens Definidos</div>
+  <div>49 Tokens Usados</div>
+  <div>35% Utilización</div>
+</section>
+```
+
+#### **4. Tokens Dinámicos con getCSSVar()**
+```tsx
+// ✅ Siempre leer valores dinámicamente:
+const getCSSVar = (varName: string) => {
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue(varName).trim();
+};
+
+const value = getCSSVar('--color-primary-500');
+```
+
+#### **5. Workflow para Documentar**
+1. Abrir `stories/DesignSystem.stories.tsx`
+2. Agregar sección o actualizar existente
+3. Usar `getCSSVar()` para valores dinámicos
+4. NO incluir métricas numéricas
+5. Guardar y verificar en Storybook
+
+### 🚨 Validación Automática
+Antes de crear/editar documentación del Design System:
+1. ¿Es un archivo MD sobre Design System? → **Editar DesignSystem.stories.tsx**
+2. ¿Incluye métricas numéricas (140, 49, 35%)? → **Eliminarlas**
+3. ¿Los tokens son valores hardcoded? → **Usar getCSSVar()**
+
+### 📁 Archivos del Sistema
+```
+styles/
+  ├── tokens.css          # Tokens (fuente de verdad)
+  └── utilities.css       # Utility classes
+
+stories/
+  └── DesignSystem.stories.tsx  # Documentación (fuente única)
+```
+
+---
