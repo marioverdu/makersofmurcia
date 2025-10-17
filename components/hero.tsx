@@ -128,7 +128,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-20 flex flex-col items-center gap-6">
-        <div className="bg-background border-4 border-secondary p-4 rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <div className="bg-black border-4 border-secondary p-4 rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <p
             className="text-secondary text-lg md:text-xl font-bold uppercase tracking-wider"
             style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
@@ -154,7 +154,7 @@ export default function Hero() {
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
         <div className="w-8 h-12 border-4 border-background bg-secondary/50 flex items-start justify-center p-2">
-          <div className="w-2 h-4 bg-background animate-bounce" />
+          <div className="w-2 h-4 bg-black animate-bounce" />
         </div>
       </div>
       {/* </CHANGE> */}

@@ -89,7 +89,7 @@ export default function MasonrySection() {
   }, [])
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-8 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-24 px-4 md:px-8 bg-black relative overflow-hidden">
       <div className="absolute top-20 right-10 w-64 h-64 border-[20px] border-primary opacity-10 rotate-45" />
       <div className="absolute bottom-20 left-10 w-48 h-48 border-[20px] border-accent opacity-10 -rotate-12" />
       <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-primary opacity-5 rounded-full blur-3xl" />
@@ -142,7 +142,7 @@ export default function MasonrySection() {
 
               <div className="relative z-10">
                 {/* Icon with sticker effect */}
-                <div className="inline-block mb-4 p-4 bg-background border-4 border-secondary rotate-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:rotate-0 transition-transform">
+                <div className="inline-block mb-4 p-4 bg-black border-4 border-secondary rotate-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:rotate-0 transition-transform">
                   <div className="text-5xl">{card.icon}</div>
                 </div>
 

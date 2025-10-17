@@ -65,7 +65,7 @@ export default function FinalCTA() {
         </h2>
         {/* </CHANGE> */}
 
-        <div className="inline-block bg-background border-4 border-background p-6 mb-12 rotate-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <div className="inline-block bg-black border-4 border-background p-6 mb-12 rotate-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <p
             className="text-xl md:text-2xl lg:text-3xl font-bold text-secondary uppercase leading-tight"
             style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
