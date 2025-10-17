@@ -35,7 +35,7 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const text = "JUST DO IT"
+  const text = "No traigas tu mierda"
 
   return (
     <section
@@ -90,13 +90,13 @@ export default function Hero() {
       {/* Parallax text */}
       <div className="relative z-10 flex flex-col justify-center items-center gap-2 md:gap-4 px-4 mb-12">
         <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          {"JUST DO".split("").map((char, index) => (
+          {"No traigas tu".split("").map((char, index) => (
             <span
               key={index}
               ref={(el) => {
                 if (el) lettersRef.current[index] = el
               }}
-              className="text-[8vw] md:text-[10vw] lg:text-[12vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
+              className="text-[6vw] md:text-[8vw] lg:text-[10vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
               style={{
                 fontFamily: "var(--font-anton), Impact, sans-serif",
                 willChange: "transform, opacity",
@@ -108,17 +108,17 @@ export default function Hero() {
           ))}
         </div>
         <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          {"IT".split("").map((char, index) => (
+          {"mierda".split("").map((char, index) => (
             <span
-              key={index + 7}
+              key={index + 12}
               ref={(el) => {
-                if (el) lettersRef.current[index + 7] = el
+                if (el) lettersRef.current[index + 12] = el
               }}
-              className="text-[8vw] md:text-[10vw] lg:text-[12vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
+              className="text-[6vw] md:text-[8vw] lg:text-[10vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
               style={{
                 fontFamily: "var(--font-anton), Impact, sans-serif",
                 willChange: "transform, opacity",
-                filter: `drop-shadow(${(index + 7) * 2}px ${(index + 7) * 2}px 0px rgba(0,0,0,0.3))`,
+                filter: `drop-shadow(${(index + 12) * 2}px ${(index + 12) * 2}px 0px rgba(0,0,0,0.3))`,
               }}
             >
               {char}
