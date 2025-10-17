@@ -115,7 +115,7 @@ export default function Gallery() {
                   style={{ transform: `rotate(${image.rotation})` }}
                 >
                   <Image
-                    src={`/.jpg?height=600&width=800&query=${encodeURIComponent(image.query)}`}
+                    src="/placeholder.jpg"
                     alt={`Event ${image.id}`}
                     fill
                     className="object-cover"
