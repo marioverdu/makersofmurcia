@@ -1,6 +1,9 @@
-import { redirect } from 'next/navigation'
-
 export default function RootPage() {
-  // Redirigir a la página raíz en español por defecto
-  redirect('/es')
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-primary">
+      <h1 className="text-6xl font-bold text-white">
+        DESPIERTA
+      </h1>
+    </div>
+  )
 }
