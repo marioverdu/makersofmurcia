@@ -35,7 +35,7 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const text = "DESPIERTA"
+  const text = "JUST DO IT"
 
   return (
     <section
@@ -88,23 +88,43 @@ export default function Hero() {
       {/* </CHANGE> */}
 
       {/* Parallax text */}
-      <div className="relative z-10 flex flex-wrap justify-center items-center gap-2 md:gap-4 px-4 mb-12">
-        {text.split("").map((char, index) => (
-          <span
-            key={index}
-            ref={(el) => {
-              if (el) lettersRef.current[index] = el
-            }}
-            className="text-[12vw] md:text-[15vw] lg:text-[20vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
-            style={{
-              fontFamily: "var(--font-anton), Impact, sans-serif",
-              willChange: "transform, opacity",
-              filter: `drop-shadow(${index * 2}px ${index * 2}px 0px rgba(0,0,0,0.3))`,
-            }}
-          >
-            {char}
-          </span>
-        ))}
+      <div className="relative z-10 flex flex-col justify-center items-center gap-2 md:gap-4 px-4 mb-12">
+        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
+          {"JUST DO".split("").map((char, index) => (
+            <span
+              key={index}
+              ref={(el) => {
+                if (el) lettersRef.current[index] = el
+              }}
+              className="text-[8vw] md:text-[10vw] lg:text-[12vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
+              style={{
+                fontFamily: "var(--font-anton), Impact, sans-serif",
+                willChange: "transform, opacity",
+                filter: `drop-shadow(${index * 2}px ${index * 2}px 0px rgba(0,0,0,0.3))`,
+              }}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
+        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
+          {"IT".split("").map((char, index) => (
+            <span
+              key={index + 7}
+              ref={(el) => {
+                if (el) lettersRef.current[index + 7] = el
+              }}
+              className="text-[8vw] md:text-[10vw] lg:text-[12vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
+              style={{
+                fontFamily: "var(--font-anton), Impact, sans-serif",
+                willChange: "transform, opacity",
+                filter: `drop-shadow(${(index + 7) * 2}px ${(index + 7) * 2}px 0px rgba(0,0,0,0.3))`,
+              }}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
       </div>
 
       <div className="relative z-20 flex flex-col items-center gap-6">
