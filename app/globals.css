@@ -346,7 +346,7 @@
 /* Adding double stroke effect for extra impact */
 .text-stroke-double {
   -webkit-text-stroke: 4px black;
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: #CE261F;
   paint-order: stroke fill;
   filter: drop-shadow(4px 4px 0px oklch(0.55 0.22 29));
 }
