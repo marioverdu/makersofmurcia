@@ -28,6 +28,9 @@ const ALLOWED_PATHS = [
   '/en/login',       // Login localizado inglés
   '/es/signup',      // Signup localizado español
   '/en/signup',      // Signup localizado inglés
+  '/es',             // Página raíz español
+  '/en',             // Página raíz inglés
+  '/',               // Página raíz sin idioma
 ]
 
 // Extraer el locale de la URL
