@@ -1,33 +1,402 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
 
-/* Global styles for halftone effect */
+@custom-variant dark (&:is(.dark *));
+
+/* Custom grunge theme with red, white, black color scheme */
+:root {
+  --background: oklch(1 0 0); /* Pure white */
+  --foreground: oklch(0 0 0); /* Pure black */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0.55 0.22 29); /* Vibrant red #FF0000 */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0 0 0); /* Black */
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.4 0 0);
+  --accent: oklch(0.85 0.15 95); /* Neon yellow */
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.55 0.22 29);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0 0 0);
+  --input: oklch(0.95 0 0);
+  --ring: oklch(0.55 0.22 29);
+  --chart-1: oklch(0.55 0.22 29);
+  --chart-2: oklch(0 0 0);
+  --chart-3: oklch(0.85 0.15 95);
+  --chart-4: oklch(0.6 0.18 200);
+  --chart-5: oklch(0.7 0.12 150);
+  --radius: 0rem;
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0 0 0);
+  --sidebar-primary: oklch(0.55 0.22 29);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0 0 0);
+  --sidebar-border: oklch(0 0 0);
+  --sidebar-ring: oklch(0.55 0.22 29);
+}
+
+.dark {
+  --background: oklch(0 0 0);
+  --foreground: oklch(1 0 0);
+  --card: oklch(0.1 0 0);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.1 0 0);
+  --popover-foreground: oklch(1 0 0);
+  --primary: oklch(0.55 0.22 29);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.85 0.15 95);
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.55 0.22 29);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.2 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(0.55 0.22 29);
+  --chart-1: oklch(0.55 0.22 29);
+  --chart-2: oklch(0.3 0 0);
+  --chart-3: oklch(0.85 0.15 95);
+  --chart-4: oklch(0.6 0.18 200);
+  --chart-5: oklch(0.7 0.12 150);
+  --sidebar: oklch(0.1 0 0);
+  --sidebar-foreground: oklch(1 0 0);
+  --sidebar-primary: oklch(0.55 0.22 29);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.2 0 0);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-ring: oklch(0.55 0.22 29);
+}
+
+@theme inline {
+  --font-sans: "Anton", "Impact", "Bebas Neue", "Geist", "Geist Fallback", sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom grunge animations and effects */
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+.grain-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  z-index: 9999;
+  pointer-events: none;
+  animation: grain 0.8s steps(4) infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Adding more grunge-specific effects for magazine/poster aesthetic */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-diagonal {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, -10px);
+  }
+}
+
+/* Halftone pattern utility */
 .halftone-bg {
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  background-size: 4px 4px;
+  background-image: radial-gradient(circle, black 1.5px, transparent 1.5px);
+  background-size: 10px 10px;
 }
 
-/* Global styles for text stroke effect */
+/* Distressed border effect */
+.distressed-border {
+  position: relative;
+}
+
+.distressed-border::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, black 2px, black 3px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Magazine cutout text effect */
+.cutout-text {
+  background: linear-gradient(135deg, #ff0000 0%, #cc0000 50%, #ff0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.8));
+}
+
+/* Vintage poster shadow */
+.poster-shadow {
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 1), 12px 12px 0px rgba(255, 0, 0, 0.3), 18px 18px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Ink splatter decoration */
+.ink-splatter {
+  position: relative;
+}
+
+.ink-splatter::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, currentColor 30%, transparent 70%);
+  opacity: 0.15;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+/* Sticker/badge effect */
+.sticker {
+  position: relative;
+  transform: rotate(-3deg);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sticker:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.sticker::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 3px dashed rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Ripped paper edge effect */
+.ripped-edge {
+  position: relative;
+  clip-path: polygon(
+    0% 0%,
+    2% 1%,
+    4% 0%,
+    6% 2%,
+    8% 1%,
+    10% 0%,
+    12% 1%,
+    14% 0%,
+    16% 2%,
+    18% 0%,
+    20% 1%,
+    22% 0%,
+    24% 2%,
+    26% 1%,
+    28% 0%,
+    30% 1%,
+    32% 0%,
+    34% 2%,
+    36% 0%,
+    38% 1%,
+    40% 0%,
+    42% 2%,
+    44% 1%,
+    46% 0%,
+    48% 1%,
+    50% 0%,
+    52% 2%,
+    54% 0%,
+    56% 1%,
+    58% 0%,
+    60% 2%,
+    62% 1%,
+    64% 0%,
+    66% 1%,
+    68% 0%,
+    70% 2%,
+    72% 0%,
+    74% 1%,
+    76% 0%,
+    78% 2%,
+    80% 1%,
+    82% 0%,
+    84% 1%,
+    86% 0%,
+    88% 2%,
+    90% 0%,
+    92% 1%,
+    94% 0%,
+    96% 2%,
+    98% 1%,
+    100% 0%,
+    100% 100%,
+    0% 100%
+  );
+}
+
+/* Collage overlap effect */
+.collage-layer {
+  position: relative;
+  transform: rotate(-2deg);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.collage-layer:hover {
+  transform: rotate(0deg) translateY(-8px);
+  z-index: 10;
+}
+
 .text-stroke {
-  -webkit-text-stroke: 2px black;
-  text-stroke: 2px black;
-  color: transparent;
-}
-
-.text-stroke-double {
-  -webkit-text-stroke: 4px black;
-  text-stroke: 4px black;
-  color: transparent;
+  -webkit-text-stroke: 3px black;
+  -webkit-text-fill-color: white;
+  paint-order: stroke fill;
 }
 
 .text-stroke-red {
-  -webkit-text-stroke: 2px var(--accent); /* Using accent color for red stroke */
-  text-stroke: 2px var(--accent);
-  color: transparent;
+  -webkit-text-stroke: 3px black;
+  -webkit-text-fill-color: oklch(0.55 0.22 29);
+  paint-order: stroke fill;
 }
 
-/* Font family variables */
-:root {
-  --font-anton: 'Anton', sans-serif;
+/* Adding yellow stroke variant for more color variety */
+.text-stroke-yellow {
+  -webkit-text-stroke: 3px black;
+  -webkit-text-fill-color: oklch(0.85 0.15 95);
+  paint-order: stroke fill;
+}
+
+/* Adding double stroke effect for extra impact */
+.text-stroke-double {
+  -webkit-text-stroke: 4px black;
+  -webkit-text-fill-color: white;
+  paint-order: stroke fill;
+  filter: drop-shadow(4px 4px 0px oklch(0.55 0.22 29));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,60 +1,32 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Nunito, Anton } from "next/font/google"
+import { Anton } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import "@/styles/tokens.css"
-import "@/styles/utilities.css"
-import SessionProvider from "@/components/auth/session-provider"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/sonner"
-
-const nunito = Nunito({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-})
 
 const anton = Anton({
+  weight: "400",
   subsets: ["latin"],
-  weight: ["400"],
   variable: "--font-anton",
 })
 
 export const metadata: Metadata = {
-  title: "Light CMS Template",
-  description: "Una versión extremadamente ligera para desarrollo de componentes con Design System completo y Storybook integrado.",
-  generator: "Next.js",
-  keywords: ["cms", "template", "design system", "storybook", "nextjs"],
-  openGraph: {
-    title: "Light CMS Template",
-    description: "Una versión extremadamente ligera para desarrollo de componentes con Design System completo y Storybook integrado.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Light CMS Template",
-    description: "Una versión extremadamente ligera para desarrollo de componentes con Design System completo y Storybook integrado.",
-  },
+  title: "DESPIERTA - Asociación Sin Ánimo de Lucro",
+  description: "Únete al movimiento. Eventos para jóvenes que quieren cambiar el mundo.",
+  generator: "v0.app",
 }
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      </head>
-      <body className={`${nunito.className} ${anton.variable}`}>
-        <SessionProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </SessionProvider>
+    <html lang="es">
+      <body className={`${anton.variable} font-sans antialiased`}>
+        <div className="grain-overlay" />
+        {children}
+        <Analytics />
       </body>
     </html>
   )
