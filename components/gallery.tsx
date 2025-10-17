@@ -59,7 +59,7 @@ export default function Gallery() {
         <div className="relative mb-12">
           <h2
             className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
-            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
             NUESTROS EVENTOS
             <span

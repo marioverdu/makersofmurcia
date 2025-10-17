@@ -51,7 +51,7 @@ export default function Testimonials() {
         <div className="relative mb-16">
           <h2
             className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
-            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
             TESTIMONIOS
             <span
@@ -100,7 +100,7 @@ export default function Testimonials() {
             <div className="relative z-10">
               <p
                 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 leading-relaxed"
-                style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
               >
                 {testimonials[currentIndex].quote}
               </p>
@@ -109,7 +109,7 @@ export default function Testimonials() {
                 <div className="flex-1">
                   <p
                     className="text-xl md:text-2xl font-bold uppercase"
-                    style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+                    style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
                   >
                     {testimonials[currentIndex].author}
                   </p>

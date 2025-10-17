@@ -97,7 +97,7 @@ export default function MasonrySection() {
       <div className="relative mb-16">
         <h2
           className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
-          style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+          style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
         >
           QUÉ HACEMOS
           <span
@@ -148,7 +148,7 @@ export default function MasonrySection() {
 
                 <h3
                   className="text-3xl md:text-4xl font-bold uppercase mb-4 leading-tight"
-                  style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+                  style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
                 >
                   {card.title}
                 </h3>

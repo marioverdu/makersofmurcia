@@ -33,7 +33,7 @@ export default function FinalCTA() {
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         <h2
           className="text-6xl md:text-8xl lg:text-[12rem] font-bold uppercase mb-12 leading-none text-stroke relative inline-block"
-          style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+          style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
         >
           ÚNETE AL
           <br />
@@ -68,7 +68,7 @@ export default function FinalCTA() {
         <div className="inline-block bg-background border-4 border-background p-6 mb-12 rotate-1 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <p
             className="text-xl md:text-2xl lg:text-3xl font-bold text-secondary uppercase leading-tight"
-            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
             ★ NO ESPERES MÁS ★
             <br />
@@ -80,7 +80,7 @@ export default function FinalCTA() {
         <Button
           size="lg"
           className="relative bg-accent text-secondary hover:bg-accent/90 text-2xl md:text-3xl font-bold uppercase px-12 md:px-20 py-8 md:py-10 border-4 border-background shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[6px] hover:translate-y-[6px] transition-all duration-200 -rotate-2"
-          style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+          style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
         >
           DESPIERTA YA
           <span className="absolute -top-4 -right-4 w-10 h-10 bg-primary border-2 border-background rotate-45 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" />
@@ -91,7 +91,7 @@ export default function FinalCTA() {
         <div className="mt-12 inline-block bg-secondary border-4 border-background p-4 -rotate-1 shadow-[6px_6px_0px_0px_rgba(255,0,0,0.6)]">
           <p
             className="text-background text-lg md:text-xl font-bold uppercase"
-            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
             ☎ LLAMA: 900-XXX-XXX
           </p>

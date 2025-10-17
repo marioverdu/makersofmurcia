@@ -1,13 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Anton } from "next/font/google"
+import { Bebas_Neue } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const anton = Anton({
-  weight: "400",
+const bebasNeue = Bebas_Neue({
+  weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-anton",
+  variable: "--font-bebas-neue",
 })
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${anton.variable} font-sans antialiased`}>
+      <body className={`${bebasNeue.variable} font-sans antialiased`}>
         <div className="grain-overlay" />
         {children}
         <Analytics />

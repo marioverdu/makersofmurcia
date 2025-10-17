@@ -46,7 +46,7 @@ export default function Hero() {
         <div className="sticky top-20 p-4 md:p-6">
           <p
             className="text-background text-sm md:text-base font-bold uppercase [writing-mode:vertical-lr] rotate-180 tracking-wider"
-            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
             ASOCIACIÓN SIN ÁNIMO DE LUCRO
           </p>
@@ -57,7 +57,7 @@ export default function Hero() {
         <div className="sticky top-32 p-3 md:p-4">
           <p
             className="text-background text-xs md:text-sm font-bold uppercase [writing-mode:vertical-lr] rotate-180 tracking-wider"
-            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
             EVENTOS • CULTURA • COMUNIDAD
           </p>
@@ -131,7 +131,7 @@ export default function Hero() {
         <div className="bg-background border-4 border-secondary p-4 rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <p
             className="text-secondary text-lg md:text-xl font-bold uppercase tracking-wider"
-            style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
             ★ ÚNETE AL MOVIMIENTO ★
           </p>

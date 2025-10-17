@@ -6,7 +6,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold uppercase mb-4"
-              style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
             >
               CONTACTO
             </h3>
@@ -17,7 +17,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold uppercase mb-4"
-              style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
             >
               SÍGUENOS
             </h3>
@@ -37,7 +37,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold uppercase mb-4"
-              style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
+              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
             >
               LEGAL
             </h3>
