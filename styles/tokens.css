@@ -105,6 +105,7 @@
   /* 🌐 ASSETS */
   /* ============================================ */
   
-  --asset-bg-landing: url('https://assets.marioverdu.com/bg/landing-bg.png');
-  --asset-bg-work-experience: url('https://assets.marioverdu.com/bg/work-experience-bg.min.png');
+  /* Assets */
+  --asset-bg-landing: url('/asset/logo.png');
+  --asset-bg-work-experience: url('/asset/logo.png');
 }

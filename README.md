@@ -62,18 +62,6 @@ npm run storybook
 
 Accede a `http://localhost:6006` para ver la documentación completa.
 
-## 🔐 Autenticación
-
-Sistema de autenticación configurado con NextAuth.js:
-
-- **Desarrollo**: Acceso directo sin autenticación
-- **Producción**: Google OAuth obligatorio
-- **Rutas protegidas**: `/admin` requiere autenticación
-
-### Configuración
-
-Las variables de entorno necesarias están documentadas en el archivo de configuración de NextAuth.
-
 ## 🚀 Desarrollo
 
 ### Comandos Disponibles

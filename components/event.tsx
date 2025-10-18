@@ -131,6 +131,16 @@ export default function Event() {
             >
               EVENTOS ANTERIORES
             </span>
+            <span
+              className="absolute inset-0 text-accent opacity-20 -z-20"
+              style={{
+                transform: "translate(-4px, -4px)",
+                fontFamily: "Climate Crisis, cursive",
+              }}
+              aria-hidden="true"
+            >
+              EVENTOS ANTERIORES
+            </span>
           </h2>
           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
             <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />

@@ -11,9 +11,32 @@ const bebasNeue = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  title: "DESPIERTA - Asociación Sin Ánimo de Lucro",
-  description: "Únete al movimiento. Eventos para jóvenes que quieren cambiar el mundo.",
-  generator: "v0.app",
+  title: "Makers of Murcia - Asociación Sin Ánimo de Lucro",
+  description: "Si puedes pensarlo puedes crearlo. Únete a nosotros para construir el futuro que queremos ver.",
+  generator: "Next.js",
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' }
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
+    ]
+  },
+  manifest: '/manifest.json',
+  openGraph: {
+    title: 'Makers of Murcia',
+    description: 'Si puedes pensarlo puedes crearlo. Únete a nosotros para construir el futuro que queremos ver.',
+    images: ['/asset/logo.png'],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Makers of Murcia',
+    description: 'Si puedes pensarlo puedes crearlo. Únete a nosotros para construir el futuro que queremos ver.',
+    images: ['/asset/logo.png'],
+  }
 }
 
 export default function RootLayout({

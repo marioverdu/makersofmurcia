@@ -1,6 +1,6 @@
 {
-  "name": "Mario Verdú",
-  "short_name": "Mario Verdú",
+  "name": "Makers of Murcia",
+  "short_name": "Makers",
   "icons": [
     {
       "src": "/favicon-16x16.png",
@@ -18,7 +18,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#DD160B",
+  "background_color": "#ffe5db",
   "display": "standalone"
 }

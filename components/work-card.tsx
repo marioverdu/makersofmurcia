@@ -55,7 +55,7 @@ export function WorkCard({
   const [isExpanded, setIsExpanded] = useState(false)
   const imageRef = useRef<HTMLDivElement>(null)
 
-  const isWebUXUICard = companyName === "marioverdu.com"
+  const isWebUXUICard = companyName === "makersofmurcia.com"
   const isEducationCard =
     companyName === "UX/UI Design Bootcamp" ||
     companyName === "Publicidad y RRPP" ||
@@ -66,9 +66,9 @@ export function WorkCard({
     companyName === "Advertising and PR" ||
     companyName === "Driving license"
 
-  const isMarioVerduLogo = logoSrc === "https://assets.marioverdu.com/logo/empty.png"
+  const isMakersLogo = logoSrc === "https://assets.makersofmurcia.com/logo/empty.png"
 
-  const shouldShowFooter = companyName !== "marioverdu.com" && !isEducationCard && !hideExpandButton
+  const shouldShowFooter = companyName !== "makersofmurcia.com" && !isEducationCard && !hideExpandButton
 
   // Ajustar el padding-bottom para que sea consistente en todas las tarjetas
   const sectionClass = "pb-0"
@@ -88,7 +88,7 @@ export function WorkCard({
             <div className={cn("flex gap-2", isEducationCard ? "items-center" : "items-start")}>
               <div
                 ref={imageRef}
-                className={`rounded-md overflow-hidden flex-shrink-0 ${isMarioVerduLogo ? "bg-gray-100" : ""} ${!isEducationCard ? "w-9 h-9" : "w-10 h-10"}`}
+                className={`rounded-md overflow-hidden flex-shrink-0 ${isMakersLogo ? "bg-gray-100" : ""} ${!isEducationCard ? "w-9 h-9" : "w-10 h-10"}`}
               >
                 <img
                   src={logoSrc || "/placeholder.svg"}

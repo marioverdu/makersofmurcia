@@ -13,7 +13,7 @@ export default function FinalCTA() {
           <br />
           MOVIMIENTO
           <span
-            className="absolute inset-0 text-primary opacity-40 -z-10"
+            className="absolute inset-0 text-primary opacity-20 -z-10"
             style={{
               transform: "translate(6px, 6px)",
               fontFamily: "Climate Crisis, cursive",
@@ -25,7 +25,7 @@ export default function FinalCTA() {
             MOVIMIENTO
           </span>
           <span
-            className="absolute inset-0 text-accent opacity-40 -z-20"
+            className="absolute inset-0 text-accent opacity-20 -z-20"
             style={{
               transform: "translate(-4px, -4px)",
               fontFamily: "Climate Crisis, cursive",
