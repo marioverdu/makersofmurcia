@@ -35,7 +35,7 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const text = "¿Qué vas a crear hoy?"
+  const text = "Reduce, Reutiliza, Recicla. ¿Qué vas a crear Hoy?"
 
   return (
     <section
