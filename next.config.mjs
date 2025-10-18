@@ -32,6 +32,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  
+  // Configuración de exportación
+  output: 'standalone',
+  
+  // Excluir páginas del prerender
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 }
 
 export default nextConfig

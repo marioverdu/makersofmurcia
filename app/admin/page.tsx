@@ -6,6 +6,11 @@ import AdminPageContent from "./admin-content"
 // Forzar renderizado dinámico para evitar prerender
 export const dynamic = 'force-dynamic'
 
+// Evitar prerender completamente
+export async function generateStaticParams() {
+  return []
+}
+
 export default function AdminPage() {
   return (
     <Suspense fallback={
