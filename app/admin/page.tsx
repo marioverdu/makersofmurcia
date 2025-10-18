@@ -1,6 +1,9 @@
 "use client"
 
 import { useSession, signOut } from "next-auth/react"
+
+// Forzar renderizado dinámico para evitar prerender
+export const dynamic = 'force-dynamic'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
