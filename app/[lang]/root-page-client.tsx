@@ -2,7 +2,7 @@
 
 import Hero from "@/components/hero"
 import WhatIsMaker from "@/components/what-is-maker"
-import MasonrySection from "@/components/masonry-section"
+import Team from "@/components/team"
 import Gallery from "@/components/gallery"
 import Testimonials from "@/components/testimonials"
 import FinalCTA from "@/components/final-cta"
@@ -13,7 +13,7 @@ export default function RootPageClient() {
     <main className="min-h-screen">
       <Hero />
       <WhatIsMaker />
-      <MasonrySection />
+      <Team />
       <Gallery />
       <Testimonials />
       <FinalCTA />

@@ -37,8 +37,8 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const textLine1 = "La inspiración existe,"
-  const textLine2 = "pero tiene que encontrarte trabajando"
+  const textLine1 = "Si puedes pensarlo,"
+  const textLine2 = "puedes construirlo"
 
   return (
     <section
@@ -91,7 +91,7 @@ export default function Hero() {
       {/* </CHANGE> */}
 
       {/* Parallax text */}
-      <div className="relative z-10 flex flex-col justify-center items-center gap-2 md:gap-4 px-4 mb-12">
+      <div className="relative z-10 flex flex-col justify-center items-center gap-2 md:gap-4 px-4 mb-12 mt-24 md:mt-32">
         {/* Primera línea */}
         <div className="flex flex-wrap justify-center items-center gap-1 md:gap-2">
           {textLine1.split("").map((char, index) => (
@@ -157,7 +157,7 @@ export default function Hero() {
             className="text-secondary text-sm md:text-base font-bold uppercase tracking-wider"
             style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
-            HÁZTE MIEMBRO DEL TALLER
+            CONSTRÚYELO EN MOM
           </p>
         </div>
 

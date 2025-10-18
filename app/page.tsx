@@ -1,7 +1,7 @@
 import Hero from "@/components/hero"
-import MasonrySection from "@/components/masonry-section"
+import Team from "@/components/team"
 import Gallery from "@/components/gallery"
-import PastEvents from "@/components/past-events"
+import Event from "@/components/event"
 import Testimonials from "@/components/testimonials"
 import FinalCTA from "@/components/final-cta"
 import Footer from "@/components/footer"
@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
-      <MasonrySection />
+      <Team />
       <Gallery />
-      <PastEvents />
+      <Event />
       <Testimonials />
       <FinalCTA />
       <Footer />
