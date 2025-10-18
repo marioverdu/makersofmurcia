@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
+import MembershipModal from "@/components/membership-modal"
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null)
   const lettersRef = useRef<HTMLSpanElement[]>([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,7 +112,10 @@ export default function Hero() {
       </div>
 
       <div className="relative z-20 flex flex-col items-center gap-6">
-        <div className="bg-white border-4 border-secondary p-4 rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <div 
+          className="bg-white border-4 border-secondary p-4 rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] cursor-pointer hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200"
+          onClick={() => setIsModalOpen(true)}
+        >
           <p
             className="text-secondary text-sm md:text-base font-bold uppercase tracking-wider"
             style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
@@ -150,6 +155,12 @@ export default function Hero() {
         </div>
       </div>
       {/* </CHANGE> */}
+
+      {/* Membership Modal */}
+      <MembershipModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   )
 }
