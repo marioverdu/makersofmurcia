@@ -56,7 +56,7 @@ export default function FinalCTA() {
           className="relative bg-white text-secondary hover:bg-white/90 text-2xl md:text-3xl font-bold uppercase px-12 md:px-20 py-8 md:py-10 border-4 border-background shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[6px] hover:translate-y-[6px] transition-all duration-200 -rotate-2"
           style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif", backgroundColor: "var(--color-box)" }}
         >
-          DESPIERTA YA
+          ÚNETE A MAKERS OF MURCIA
           <span className="absolute -top-4 -right-4 w-10 h-10 bg-primary border-2 border-background rotate-45 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" />
           <span className="absolute -bottom-4 -left-4 w-8 h-8 bg-primary border-2 border-background rotate-45 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" />
         </Button>

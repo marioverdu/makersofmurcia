@@ -1,7 +1,7 @@
 /**
  * 🎨 Design System Tokens - CSS Variables ULTRA-LIMPIO
  * Sistema centralizado con SOLO tokens REALMENTE USADOS
- * Auditoría: 100% sincronizado con páginas públicas y admin
+ * Auditoría: 100% sincronizado con páginas de Makers of Murcia
  */
 
 :root {
@@ -23,9 +23,10 @@
   /* Layout Specific */
   --spacing-content-max-width: 1092px;
   --spacing-post-cards-max-width: 800px;
-  --spacing-posts-max-width: 1000px;
-  --spacing-posts-container-top: 140px;
-  --spacing-posts-container-bottom: 72px;
+  /* Spacing específico para contenido */
+  --spacing-content-max-width: 1000px;
+  --spacing-content-container-top: 140px;
+  --spacing-content-container-bottom: 72px;
   --spacing-profile-card-height: 204px;
   
   /* ============================================ */

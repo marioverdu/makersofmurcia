@@ -1,10 +1,8 @@
-// Service Worker para PWA y Push Notifications
-const CACHE_NAME = 'makersofmurcia-admin-v1'
+// Service Worker para PWA de Makers of Murcia
+const CACHE_NAME = 'makersofmurcia-v1'
 const urlsToCache = [
-  '/admin',
-  '/admin/booking',
-  '/admin/posts',
-  '/admin/analytics'
+  '/',
+  '/asset/logo.png'
 ]
 
 // Instalación del Service Worker
@@ -71,10 +69,10 @@ self.addEventListener('push', (event) => {
     body: 'Tienes una nueva reserva pendiente',
     icon: '/icons/icon-192x192.png',
     badge: '/icons/badge-72x72.png',
-    tag: 'booking-notification',
+    tag: 'makers-notification',
     requireInteraction: true,
     data: {
-      url: '/admin/booking'
+      url: '/'
     }
   }
 
@@ -107,7 +105,7 @@ self.addEventListener('notificationclick', (event) => {
   console.log('[Service Worker] Notification clicked:', event)
   event.notification.close()
 
-  const urlToOpen = event.notification.data?.url || '/admin/booking'
+  const urlToOpen = event.notification.data?.url || '/'
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true })
