@@ -32,9 +32,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  
-  // Configuración de exportación
-  output: 'standalone',
 }
 
 export default nextConfig

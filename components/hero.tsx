@@ -37,7 +37,8 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const text = "Reduce, Reutiliza, Recicla. ¿Qué vas a crear Hoy?"
+  const textLine1 = "La inspiración existe,"
+  const textLine2 = "pero tiene que encontrarte trabajando"
 
   return (
     <section
@@ -91,23 +92,59 @@ export default function Hero() {
 
       {/* Parallax text */}
       <div className="relative z-10 flex flex-col justify-center items-center gap-2 md:gap-4 px-4 mb-12">
-        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          {text.split("").map((char, index) => (
+        {/* Primera línea */}
+        <div className="flex flex-wrap justify-center items-center gap-1 md:gap-2">
+          {textLine1.split("").map((char, index) => (
             <span
-              key={index}
+              key={`line1-${index}`}
               ref={(el) => {
                 if (el) lettersRef.current[index] = el
               }}
-              className="text-[6vw] md:text-[8vw] lg:text-[10vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
+              className="font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
               style={{
                 fontFamily: "var(--font-bebas-neue), Impact, sans-serif",
+                fontSize: "calc(6vw - 2px)",
                 willChange: "transform, opacity",
-                filter: `drop-shadow(${index * 2}px ${index * 2}px 0px rgba(0,0,0,0.3))`,
+                filter: `drop-shadow(5px 5px 0px rgba(0,0,0,0.3))`,
               }}
             >
               {char}
             </span>
           ))}
+        </div>
+        
+        {/* Segunda línea */}
+        <div className="flex flex-wrap justify-center items-center gap-1 md:gap-2">
+          {textLine2.split("").map((char, index) => (
+            <span
+              key={`line2-${index}`}
+              ref={(el) => {
+                if (el) lettersRef.current[textLine1.length + index] = el
+              }}
+              className="font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
+              style={{
+                fontFamily: "var(--font-bebas-neue), Impact, sans-serif",
+                fontSize: "calc(6vw - 2px)",
+                willChange: "transform, opacity",
+                filter: `drop-shadow(5px 5px 0px rgba(0,0,0,0.3))`,
+              }}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
+        
+        {/* Párrafo descriptivo */}
+        <div className="mt-12 transform translate-y-2 translate-x-2">
+          <p 
+            className="text-background text-center max-w-2xl mx-auto leading-relaxed"
+            style={{ 
+              fontSize: 'calc(1rem - 5px)',
+              fontFamily: "var(--font-inter), system-ui, sans-serif"
+            }}
+          >
+            Somos una comunidad de creadores, innovadores y soñadores que creemos en el poder de la colaboración y la creatividad. Únete a nosotros para construir el futuro que queremos ver.
+          </p>
         </div>
       </div>
 
