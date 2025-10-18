@@ -7,20 +7,19 @@ import { Card } from "@/components/ui/card"
 
 const testimonials = [
   {
-    quote: "Esta asociación cambió mi vida. Encontré una comunidad que me entiende y eventos que realmente importan.",
-    author: "MARÍA, 19 AÑOS",
-    role: "MIEMBRO ACTIVO",
+    quote: "Esta asociación me ha permitido ampliar mi red de contactos profesionales en el ecosistema local, dándome acceso a un gran capital humano.",
+    author: "ROY PETTER DYRDahl",
+    role: "CEO DE OPENROV ESPAÑA",
   },
   {
-    quote:
-      "Los mejores eventos de la ciudad. Música increíble, gente auténtica y un ambiente que no encuentras en ningún otro lado.",
-    author: "CARLOS, 21 AÑOS",
-    role: "VOLUNTARIO",
+    quote: "Como estudiante de ingeniería esta iniciativa me permite poner en práctica mis conocimientos teóricos y, a su vez, compartir y aprender ideas con compañeros del mismo ámbito que complementan mis estudios universitarios.",
+    author: "MIGUEL ÁNGEL NAVARRO",
+    role: "ESTUDIANTE UPCT",
   },
   {
-    quote: "Ser parte de esto me ha dado propósito. No es solo ir a eventos, es ser parte de un movimiento real.",
-    author: "LUCÍA, 18 AÑOS",
-    role: "ORGANIZADORA",
+    quote: "Gracias al espíritu colaborativo de sus socios, se ha creado una comunidad donde cualquier proyecto o idea puede ser una realidad, sin importar su dificultad.",
+    author: "JOSÉ BILOTTA",
+    role: "INGENIERO IMPRESIÓN 3D",
   },
   {
     quote: "Nunca pensé que podría conocer tanta gente increíble. Cada evento es una nueva aventura.",

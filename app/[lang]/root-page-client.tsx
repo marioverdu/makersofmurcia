@@ -1,6 +1,7 @@
 "use client"
 
 import Hero from "@/components/hero"
+import WhatIsMaker from "@/components/what-is-maker"
 import MasonrySection from "@/components/masonry-section"
 import Gallery from "@/components/gallery"
 import Testimonials from "@/components/testimonials"
@@ -11,6 +12,7 @@ export default function RootPageClient() {
   return (
     <main className="min-h-screen">
       <Hero />
+      <WhatIsMaker />
       <MasonrySection />
       <Gallery />
       <Testimonials />
