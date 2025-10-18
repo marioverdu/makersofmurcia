@@ -1,1 +1,0 @@
-export { HeaderTabs } from './tabs'
