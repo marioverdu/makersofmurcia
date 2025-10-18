@@ -35,7 +35,7 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const text = "No traigas tu mierda"
+  const text = "¿Qué vas a crear hoy?"
 
   return (
     <section
