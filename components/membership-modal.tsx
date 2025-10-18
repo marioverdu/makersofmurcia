@@ -174,6 +174,14 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
         <div className="p-6 border-t-4 border-secondary bg-secondary/5">
           <div className="flex gap-4">
             <Button
+              onClick={onClose}
+              variant="outline"
+              className="flex-1 py-3 text-lg font-bold uppercase border-4 border-secondary text-secondary hover:bg-secondary hover:text-background transition-all duration-200"
+              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            >
+              CANCELAR
+            </Button>
+            <Button
               onClick={handleJoinMembership}
               disabled={!canJoin}
               className={`flex-1 py-3 text-lg font-bold uppercase transition-all duration-200 ${
@@ -184,14 +192,6 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
               style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
             >
               {canJoin ? "HACERME MIEMBRO" : "LEE TODAS LAS CONDICIONES"}
-            </Button>
-            <Button
-              onClick={onClose}
-              variant="outline"
-              className="flex-1 py-3 text-lg font-bold uppercase border-4 border-secondary text-secondary hover:bg-secondary hover:text-background transition-all duration-200"
-              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
-            >
-              CANCELAR
             </Button>
           </div>
         </div>
