@@ -20,7 +20,7 @@ const cards = [
     height: "min-h-[380px]",
     icon: "🤝",
     rotation: "1deg",
-    color: "bg-accent",
+    color: "bg-white",
   },
   {
     title: "SIN ÁNIMO DE LUCRO",
@@ -36,7 +36,7 @@ const cards = [
     height: "min-h-[340px]",
     icon: "⚡",
     rotation: "2deg",
-    color: "bg-primary text-primary-foreground",
+    color: "bg-white text-secondary",
   },
   {
     title: "CULTURA URBANA",
@@ -52,7 +52,7 @@ const cards = [
     height: "min-h-[360px]",
     icon: "🌟",
     rotation: "1deg",
-    color: "bg-accent",
+    color: "bg-white",
   },
 ]
 
