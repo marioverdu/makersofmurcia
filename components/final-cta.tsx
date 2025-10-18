@@ -88,7 +88,12 @@ export default function FinalCTA() {
         </Button>
 
         {/* Contact info block */}
-        <div className="mt-12 inline-block bg-secondary border-4 border-background p-4 -rotate-1 shadow-[6px_6px_0px_0px_rgba(255,0,0,0.6)]">
+        <a 
+          href="https://t.me/makersofmurcia" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="mt-12 inline-block bg-secondary border-4 border-background p-4 -rotate-1 shadow-[6px_6px_0px_0px_rgba(255,0,0,0.6)] hover:shadow-[8px_8px_0px_0px_rgba(255,0,0,0.8)] transition-all duration-200 cursor-pointer"
+        >
           <p
             className="text-background text-lg md:text-xl font-bold uppercase"
             style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
@@ -100,7 +105,7 @@ export default function FinalCTA() {
               @makersofmurcia
             </div>
           </p>
-        </div>
+        </a>
         {/* </CHANGE> */}
       </div>
     </section>
