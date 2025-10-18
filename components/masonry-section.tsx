@@ -11,7 +11,7 @@ const cards = [
     height: "min-h-[280px]",
     icon: "🎪",
     rotation: "-2deg",
-    color: "bg-background",
+    color: "bg-white",
   },
   {
     title: "COMUNIDAD ACTIVA",
@@ -28,7 +28,7 @@ const cards = [
     height: "min-h-[320px]",
     icon: "❤️",
     rotation: "-1deg",
-    color: "bg-background",
+    color: "bg-white",
   },
   {
     title: "IMPACTO REAL",
@@ -44,7 +44,7 @@ const cards = [
     height: "min-h-[300px]",
     icon: "🎨",
     rotation: "-3deg",
-    color: "bg-background",
+    color: "bg-white",
   },
   {
     title: "VOLUNTARIADO",
