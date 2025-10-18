@@ -16,7 +16,6 @@ interface PastEvent {
   description: string
 }
 
-// Imágenes cargadas desde /asset/event/ en lugar de /cured asset/
 const pastEvents: PastEvent[] = [
   {
     id: "1",
@@ -26,7 +25,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👩‍💻",
       subtitle: "Ingeniera Electrónica"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event1.jpg",
+    image: "/asset/event/event1.jpg",
     date: "15 Oct 2024",
     description: "Aprende los fundamentos de Arduino y crea tu primer proyecto"
   },
@@ -38,7 +37,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👨‍🔬",
       subtitle: "Diseñador Industrial"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event2.jpg",
+    image: "/asset/event/event2.jpg",
     date: "22 Oct 2024",
     description: "Explora las posibilidades de la impresión 3D en proyectos maker"
   },
@@ -50,7 +49,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👩‍🔧",
       subtitle: "Técnica en Electrónica"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event3.jpg", 
+    image: "/asset/event/event3.jpg", 
     date: "29 Oct 2024",
     description: "Técnicas profesionales de soldadura para proyectos electrónicos"
   },
@@ -62,7 +61,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👨‍💼",
       subtitle: "IoT Specialist"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event4.jpg",
+    image: "/asset/event/event4.jpg",
     date: "5 Nov 2024", 
     description: "Cómo la tecnología IoT está transformando las ciudades"
   },
@@ -74,7 +73,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👩‍🎨",
       subtitle: "UX Designer"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event5.jpg",
+    image: "/asset/event/event5.jpg",
     date: "12 Nov 2024",
     description: "48 horas para crear el proyecto maker más innovador"
   },
@@ -86,7 +85,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👨‍💻",
       subtitle: "Software Developer"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event6.jpg",
+    image: "/asset/event/event6.jpg",
     date: "19 Nov 2024",
     description: "Python aplicado a proyectos maker y automatización"
   }
@@ -131,14 +130,14 @@ export default function Event() {
         {/* Section title */}
         <div className="relative mb-12">
           <h2 
-            className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
+            style={{ fontFamily: "Climate Crisis, cursive" }}
           >
             EVENTOS ANTERIORES
             <span 
               className="absolute inset-0 text-primary opacity-50 -z-10" 
               aria-hidden="true" 
-              style={{ transform: "translate(5px, 5px)", fontFamily: "var(--font-anton), Impact, sans-serif" }}
+              style={{ transform: "translate(5px, 5px)", fontFamily: "Climate Crisis, cursive" }}
             >
               EVENTOS ANTERIORES
             </span>

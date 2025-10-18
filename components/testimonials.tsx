@@ -49,15 +49,15 @@ export default function Testimonials() {
       <div className="relative z-10 max-w-5xl mx-auto">
         <div className="relative mb-16">
           <h2
-            className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
+            style={{ fontFamily: "Climate Crisis, cursive" }}
           >
             TESTIMONIOS
             <span
               className="absolute inset-0 text-accent opacity-40 -z-10"
               style={{
                 transform: "translate(5px, 5px)",
-                fontFamily: "var(--font-anton), Impact, sans-serif",
+                fontFamily: "Climate Crisis, cursive",
               }}
               aria-hidden="true"
             >
@@ -99,7 +99,7 @@ export default function Testimonials() {
             <div className="relative z-10">
               <p
                 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 leading-relaxed"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 {testimonials[currentIndex].quote}
               </p>
@@ -108,7 +108,7 @@ export default function Testimonials() {
                 <div className="flex-1">
                   <p
                     className="text-xl md:text-2xl font-bold uppercase"
-                    style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                    style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
                   >
                     {testimonials[currentIndex].author}
                   </p>

@@ -6,7 +6,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold uppercase mb-4"
-              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+              style={{ fontFamily: "Climate Crisis, cursive" }}
             >
               CONTACTO
             </h3>
@@ -23,7 +23,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold uppercase mb-4"
-              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+              style={{ fontFamily: "Climate Crisis, cursive" }}
             >
               REDES SOCIALES
             </h3>
@@ -46,7 +46,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold uppercase mb-4"
-              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+              style={{ fontFamily: "Climate Crisis, cursive" }}
             >
               EVENTOS
             </h3>
@@ -61,7 +61,7 @@ export default function Footer() {
           <div>
             <h3
               className="text-3xl md:text-4xl font-bold uppercase mb-4"
-              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+              style={{ fontFamily: "Climate Crisis, cursive" }}
             >
               LEGAL
             </h3>
@@ -82,7 +82,7 @@ export default function Footer() {
         <div className="border-t-4 border-background pt-8 text-center">
           <p
             className="text-2xl md:text-3xl font-bold uppercase"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            style={{ fontFamily: "Climate Crisis, cursive" }}
           >
             © 2015 MAKERS OF MURCIA
           </p>

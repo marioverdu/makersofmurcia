@@ -1,19 +1,18 @@
 "use client"
 
 import { useRef } from "react"
-import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const images = [
-  { id: 1, query: "young people at urban music concert with red lights grunge aesthetic", rotation: "-2deg" },
-  { id: 2, query: "street art graffiti festival crowd vintage photo", rotation: "1deg" },
-  { id: 3, query: "youth community event outdoor gathering retro style", rotation: "-1deg" },
-  { id: 4, query: "underground music venue concert crowd punk aesthetic", rotation: "2deg" },
-  { id: 5, query: "urban art exhibition young visitors magazine style", rotation: "-3deg" },
-  { id: 6, query: "street festival youth dancing grunge poster", rotation: "1deg" },
-  { id: 7, query: "community gathering young people socializing vintage", rotation: "-2deg" },
-  { id: 8, query: "live music performance energetic crowd retro aesthetic", rotation: "2deg" },
+  { id: 1, src: "/asset/team/photo_223@18-09-2018_14-10-50.jpg", rotation: "-2deg" },
+  { id: 2, src: "/asset/team/photo_224@21-09-2018_10-24-07.jpg", rotation: "1deg" },
+  { id: 3, src: "/asset/team/photo_225@21-09-2018_10-24-07.jpg", rotation: "-1deg" },
+  { id: 4, src: "/asset/team/photo_226@21-09-2018_10-24-07.jpg", rotation: "2deg" },
+  { id: 5, src: "/asset/team/photo_227@21-09-2018_10-25-49.jpg", rotation: "-3deg" },
+  { id: 6, src: "/asset/team/photo_228@21-09-2018_10-39-28.jpg", rotation: "1deg" },
+  { id: 7, src: "/asset/team/photo_229@21-09-2018_23-46-46.jpg", rotation: "-2deg" },
+  { id: 8, src: "/asset/team/photo_230@22-09-2018_10-26-09.jpg", rotation: "2deg" },
 ]
 
 export default function Gallery() {
@@ -58,15 +57,15 @@ export default function Gallery() {
       <div className="relative z-10">
         <div className="relative mb-12">
           <h2
-            className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
+            style={{ fontFamily: "Climate Crisis, cursive" }}
           >
             EQUIPO
             <span
               className="absolute inset-0 text-primary opacity-50 -z-10"
               style={{
                 transform: "translate(5px, 5px)",
-                fontFamily: "var(--font-anton), Impact, sans-serif",
+                fontFamily: "Climate Crisis, cursive",
               }}
               aria-hidden="true"
             >
@@ -115,11 +114,10 @@ export default function Gallery() {
                   className="relative w-full h-full border-8 border-background shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[5px] group-hover:translate-y-[5px] transition-all duration-300 overflow-hidden"
                   style={{ transform: `rotate(${image.rotation})` }}
                 >
-                  <Image
-                    src={`/.jpg?height=600&width=800&query=${encodeURIComponent(image.query)}`}
-                    alt={`Event ${image.id}`}
-                    fill
-                    className="object-cover"
+                  <img
+                    src={image.src}
+                    alt={`Team photo ${image.id}`}
+                    className="w-full h-full object-cover"
                     style={{ filter: "contrast(1.3) saturate(1.4) brightness(0.9)" }}
                   />
 

@@ -17,14 +17,14 @@ export default function WhatIsMaker() {
         <div className="relative mb-16 text-center">
           <h2
             className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
           >
             ¿QUÉ ES UN MAKER?
             <span
               className="absolute inset-0 text-accent opacity-40 -z-10"
               style={{
                 transform: "translate(5px, 5px)",
-                fontFamily: "var(--font-bebas-neue), Impact, sans-serif",
+                fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif",
               }}
               aria-hidden="true"
             >
@@ -47,7 +47,7 @@ export default function WhatIsMaker() {
             <div className="relative z-10">
               <h3
                 className="text-3xl md:text-4xl font-bold uppercase mb-6 text-secondary"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 Definición
               </h3>
@@ -66,7 +66,7 @@ export default function WhatIsMaker() {
             <div className="relative z-10">
               <h3
                 className="text-3xl md:text-4xl font-bold uppercase mb-6 text-secondary"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 Nuestra Asociación
               </h3>
@@ -90,7 +90,7 @@ export default function WhatIsMaker() {
             <div className="relative z-10 text-center">
               <h3
                 className="text-3xl md:text-4xl font-bold uppercase mb-6 text-secondary"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 Makerspace
               </h3>

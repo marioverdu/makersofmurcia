@@ -32,8 +32,8 @@ export default function FinalCTA() {
 
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         <h2
-          className="text-6xl md:text-8xl lg:text-[12rem] font-bold uppercase mb-12 leading-none text-stroke relative inline-block"
-          style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+          className="text-4xl md:text-6xl lg:text-8xl font-bold uppercase mb-12 leading-none text-stroke relative inline-block"
+          style={{ fontFamily: "Climate Crisis, cursive" }}
         >
           ÚNETE AL
           <br />
@@ -42,7 +42,7 @@ export default function FinalCTA() {
             className="absolute inset-0 text-primary opacity-60 -z-10"
             style={{
               transform: "translate(6px, 6px)",
-              fontFamily: "var(--font-anton), Impact, sans-serif",
+              fontFamily: "Climate Crisis, cursive",
             }}
             aria-hidden="true"
           >
@@ -54,7 +54,7 @@ export default function FinalCTA() {
             className="absolute inset-0 text-accent opacity-40 -z-20"
             style={{
               transform: "translate(-4px, -4px)",
-              fontFamily: "var(--font-anton), Impact, sans-serif",
+              fontFamily: "Climate Crisis, cursive",
             }}
             aria-hidden="true"
           >

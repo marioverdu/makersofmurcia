@@ -49,7 +49,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
         <div className="flex items-center justify-between p-6 border-b-4 border-secondary">
           <h2
             className="text-3xl md:text-4xl font-bold uppercase text-secondary"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
           >
             CONDICIONES DE USO DEL TALLER
           </h2>
@@ -70,7 +70,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
             <div>
               <h3
                 className="text-xl font-bold uppercase text-secondary mb-3"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 1. ACCESO AL MAKERSPACE
               </h3>
@@ -85,7 +85,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
             <div>
               <h3
                 className="text-xl font-bold uppercase text-secondary mb-3"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 2. USO DE EQUIPAMIENTO
               </h3>
@@ -101,7 +101,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
             <div>
               <h3
                 className="text-xl font-bold uppercase text-secondary mb-3"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 3. SEGURIDAD Y RESPONSABILIDAD
               </h3>
@@ -117,7 +117,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
             <div>
               <h3
                 className="text-xl font-bold uppercase text-secondary mb-3"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 4. CUOTAS Y PAGOS
               </h3>
@@ -133,7 +133,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
             <div>
               <h3
                 className="text-xl font-bold uppercase text-secondary mb-3"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 5. PROYECTOS Y PROPIEDAD INTELECTUAL
               </h3>
@@ -149,7 +149,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
             <div>
               <h3
                 className="text-xl font-bold uppercase text-secondary mb-3"
-                style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+                style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
               >
                 6. COMUNIDAD Y COMPORTAMIENTO
               </h3>
@@ -177,7 +177,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
               onClick={onClose}
               variant="outline"
               className="flex-1 py-3 text-lg font-bold uppercase border-4 border-secondary text-secondary hover:bg-secondary hover:text-background transition-all duration-200"
-              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+              style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
             >
               CANCELAR
             </Button>
@@ -189,7 +189,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
                   ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
-              style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+              style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}
             >
               {canJoin ? "HACERME MIEMBRO" : "LEE TODAS LAS CONDICIONES"}
             </Button>

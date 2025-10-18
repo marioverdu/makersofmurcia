@@ -23,6 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
       <body className={`${bebasNeue.variable} font-sans antialiased`}>
         <div className="grain-overlay" />
         {children}

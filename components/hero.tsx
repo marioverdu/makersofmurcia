@@ -49,7 +49,7 @@ export default function Hero() {
         <div className="sticky top-20 p-4 md:p-6">
           <p
             className="text-background text-sm md:text-base font-bold uppercase [writing-mode:vertical-lr] rotate-180 tracking-wider"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            style={{ fontFamily: "Climate Crisis, cursive" }}
           >
             ASOCIACIÓN SIN ÁNIMO DE LUCRO
           </p>
@@ -60,7 +60,7 @@ export default function Hero() {
         <div className="sticky top-32 p-3 md:p-4">
           <p
             className="text-background text-xs md:text-sm font-bold uppercase [writing-mode:vertical-lr] rotate-180 tracking-wider"
-            style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+            style={{ fontFamily: "Climate Crisis, cursive" }}
           >
             EVENTOS • CULTURA • COMUNIDAD
           </p>
@@ -102,8 +102,8 @@ export default function Hero() {
               }}
               className="font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
               style={{
-                fontFamily: "var(--font-bebas-neue), Impact, sans-serif",
-                fontSize: "calc(6vw - 2px)",
+                fontFamily: "Climate Crisis, cursive",
+                fontSize: "calc(4vw - 2px)",
                 willChange: "transform, opacity",
                 filter: `drop-shadow(5px 5px 0px rgba(0,0,0,0.3))`,
               }}
@@ -123,8 +123,8 @@ export default function Hero() {
               }}
               className="font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
               style={{
-                fontFamily: "var(--font-bebas-neue), Impact, sans-serif",
-                fontSize: "calc(6vw - 2px)",
+                fontFamily: "Climate Crisis, cursive",
+                fontSize: "calc(4vw - 2px)",
                 willChange: "transform, opacity",
                 filter: `drop-shadow(5px 5px 0px rgba(0,0,0,0.3))`,
               }}
@@ -161,14 +161,16 @@ export default function Hero() {
           </p>
         </div>
 
-        <Button
-          size="lg"
-          className="relative bg-white text-secondary hover:bg-white/90 text-xl md:text-2xl font-bold uppercase px-8 md:px-16 py-6 md:py-8 border-4 border-secondary shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 -rotate-1"
+        <a 
+          href="https://t.me/makersofmurcia" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="relative bg-white text-secondary hover:bg-white/90 text-xl md:text-2xl font-bold uppercase px-4 md:px-6 py-3 md:py-4 border-4 border-secondary shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 -rotate-1 inline-block"
           style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
         >
-          DESPIERTA YA
+          COMPARTE Y UTILIZA EL ESPACIO
           <span className="absolute -top-3 -right-3 w-8 h-8 bg-primary border-2 border-secondary rotate-45" />
-        </Button>
+        </a>
 
         <a 
           href="https://t.me/makersofmurcia" 

@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import { Card } from "@/components/ui/card"
 
-// Imágenes del equipo cargadas desde /asset/team/
-// Cada card ahora incluye una imagen real del equipo de Makers of Murcia
 const cards = [
   {
     title: "FORMACIÓN TECNOLÓGICA",
@@ -12,7 +10,6 @@ const cards = [
       "Formación sobre tecnología, innovación y diseño. Aprende impresión 3D, robótica, electrónica y programación con expertos del sector.",
     height: "min-h-[280px]",
     icon: "🎓",
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/team/photo_223@18-09-2018_14-10-50.jpg",
     rotation: "-2deg",
     color: "bg-white",
   },
@@ -22,7 +19,6 @@ const cards = [
       "Eventos, ferias y conferencias. Desde la Feria Maker Murcia hasta Murmak18, organizamos los mejores encuentros de la cultura maker.",
     height: "min-h-[380px]",
     icon: "🎪",
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/team/photo_224@21-09-2018_10-24-07.jpg",
     rotation: "1deg",
     color: "bg-white",
   },
@@ -31,7 +27,6 @@ const cards = [
     description: "Taller comunitario donde makers con intereses en CTIM y artes se conocen, socializan y colaboran en proyectos reales.",
     height: "min-h-[320px]",
     icon: "🏭",
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/team/photo_225@21-09-2018_10-24-07.jpg",
     rotation: "-1deg",
     color: "bg-white",
   },
@@ -40,7 +35,6 @@ const cards = [
     description: "Impresión 3D, robótica, mecánica, electrónica, programación. La intersección de nuevas tecnologías con artes tradicionales.",
     height: "min-h-[340px]",
     icon: "⚡",
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/team/photo_226@21-09-2018_10-24-07.jpg",
     rotation: "2deg",
     color: "bg-white text-secondary",
   },
@@ -49,7 +43,6 @@ const cards = [
     description: "Más de 250 makers activos que comparten la misma pasión por la fabricación digital y la cultura maker en Murcia.",
     height: "min-h-[300px]",
     icon: "🤝",
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/team/photo_227@21-09-2018_10-25-49.jpg",
     rotation: "-3deg",
     color: "bg-white",
   },
@@ -58,7 +51,6 @@ const cards = [
     description: "Asociación sin ánimo de lucro que sirve como plataforma de encuentro para la cultura maker: CTIM y artes.",
     height: "min-h-[360px]",
     icon: "❤️",
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/team/photo_228@21-09-2018_10-39-28.jpg",
     rotation: "1deg",
     color: "bg-white",
   },
@@ -104,15 +96,15 @@ export default function Team() {
 
       <div className="relative mb-16">
         <h2
-          className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
-          style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
+          className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
+          style={{ fontFamily: "Climate Crisis, cursive" }}
         >
           QUÉ HACEMOS
           <span
             className="absolute inset-0 text-accent opacity-40 -z-10"
             style={{
               transform: "translate(6px, 6px)",
-              fontFamily: "var(--font-anton), Impact, sans-serif",
+              fontFamily: "Climate Crisis, cursive",
             }}
             aria-hidden="true"
           >
@@ -149,17 +141,6 @@ export default function Team() {
               )}
 
               <div className="relative z-10">
-                {/* Team image */}
-                <div className="relative w-full h-32 mb-4 overflow-hidden rounded-lg">
-                  <img 
-                    alt={card.title}
-                    className="w-full h-full object-cover"
-                    src={card.image}
-                    style={{ filter: "contrast(1.2) saturate(1.3) brightness(0.95)" }}
-                  />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300 halftone-bg" />
-                </div>
-
                 {/* Icon with sticker effect */}
                 <div className="inline-block mb-4 p-4 bg-white border-4 border-secondary rotate-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:rotate-0 transition-transform">
                   <div className="text-5xl">{card.icon}</div>
