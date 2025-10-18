@@ -90,7 +90,7 @@ export default function Hero() {
       {/* Parallax text */}
       <div className="relative z-10 flex flex-col justify-center items-center gap-2 md:gap-4 px-4 mb-12">
         <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          {"Reduce, Reutiliza, Recicla.".split("").map((char, index) => (
+          {text.split("").map((char, index) => (
             <span
               key={index}
               ref={(el) => {
@@ -98,27 +98,9 @@ export default function Hero() {
               }}
               className="text-[6vw] md:text-[8vw] lg:text-[10vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
               style={{
-                fontFamily: "var(--font-anton), Impact, sans-serif",
+                fontFamily: "var(--font-bebas-neue), Impact, sans-serif",
                 willChange: "transform, opacity",
                 filter: `drop-shadow(${index * 2}px ${index * 2}px 0px rgba(0,0,0,0.3))`,
-              }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          {"¿Qué vas a crear Hoy?".split("").map((char, index) => (
-            <span
-              key={index + 28}
-              ref={(el) => {
-                if (el) lettersRef.current[index + 28] = el
-              }}
-              className="text-[6vw] md:text-[8vw] lg:text-[10vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
-              style={{
-                fontFamily: "var(--font-anton), Impact, sans-serif",
-                willChange: "transform, opacity",
-                filter: `drop-shadow(${(index + 28) * 2}px ${(index + 28) * 2}px 0px rgba(0,0,0,0.3))`,
               }}
             >
               {char}
