@@ -90,7 +90,7 @@ export default function Hero() {
       {/* Parallax text */}
       <div className="relative z-10 flex flex-col justify-center items-center gap-2 md:gap-4 px-4 mb-12">
         <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          {"No traigas tu".split("").map((char, index) => (
+          {"Reduce, Reutiliza, Recicla.".split("").map((char, index) => (
             <span
               key={index}
               ref={(el) => {
@@ -108,17 +108,17 @@ export default function Hero() {
           ))}
         </div>
         <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
-          {"mierda".split("").map((char, index) => (
+          {"¿Qué vas a crear Hoy?".split("").map((char, index) => (
             <span
-              key={index + 12}
+              key={index + 28}
               ref={(el) => {
-                if (el) lettersRef.current[index + 12] = el
+                if (el) lettersRef.current[index + 28] = el
               }}
               className="text-[6vw] md:text-[8vw] lg:text-[10vw] font-bold uppercase leading-none text-stroke-double inline-block transition-all duration-100"
               style={{
                 fontFamily: "var(--font-anton), Impact, sans-serif",
                 willChange: "transform, opacity",
-                filter: `drop-shadow(${(index + 12) * 2}px ${(index + 12) * 2}px 0px rgba(0,0,0,0.3))`,
+                filter: `drop-shadow(${(index + 28) * 2}px ${(index + 28) * 2}px 0px rgba(0,0,0,0.3))`,
               }}
             >
               {char}
