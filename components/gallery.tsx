@@ -61,7 +61,7 @@ export default function Gallery() {
             className="text-5xl md:text-7xl lg:text-9xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
             style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
           >
-            NUESTROS EVENTOS
+            EQUIPO
             <span
               className="absolute inset-0 text-primary opacity-50 -z-10"
               style={{
@@ -70,7 +70,7 @@ export default function Gallery() {
               }}
               aria-hidden="true"
             >
-              NUESTROS EVENTOS
+              EQUIPO
             </span>
           </h2>
           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
