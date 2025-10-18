@@ -16,6 +16,7 @@ interface PastEvent {
   description: string
 }
 
+// Imágenes cargadas desde /asset/event/ en lugar de /cured asset/
 const pastEvents: PastEvent[] = [
   {
     id: "1",
@@ -25,7 +26,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👩‍💻",
       subtitle: "Ingeniera Electrónica"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/cured%20asset/1%20top%20-%205c5783f5-1bc6-41fa-a675-e20c27ae670e.jpeg",
+    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event1.jpg",
     date: "15 Oct 2024",
     description: "Aprende los fundamentos de Arduino y crea tu primer proyecto"
   },
@@ -37,7 +38,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👨‍🔬",
       subtitle: "Diseñador Industrial"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/cured%20asset/2%20top%20-%20clean_485489286.avif",
+    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event2.jpg",
     date: "22 Oct 2024",
     description: "Explora las posibilidades de la impresión 3D en proyectos maker"
   },
@@ -49,7 +50,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👩‍🔧",
       subtitle: "Técnica en Electrónica"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/cured%20asset/3top-highres_436486744.avif", 
+    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event3.jpg", 
     date: "29 Oct 2024",
     description: "Técnicas profesionales de soldadura para proyectos electrónicos"
   },
@@ -61,7 +62,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👨‍💼",
       subtitle: "IoT Specialist"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/cured%20asset/4%20top%20-%20highres_436499602%20(1).avif",
+    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event4.jpg",
     date: "5 Nov 2024", 
     description: "Cómo la tecnología IoT está transformando las ciudades"
   },
@@ -73,7 +74,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👩‍🎨",
       subtitle: "UX Designer"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/cured%20asset/5top%20-%20highres_457853772.avif",
+    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event5.jpg",
     date: "12 Nov 2024",
     description: "48 horas para crear el proyecto maker más innovador"
   },
@@ -85,7 +86,7 @@ const pastEvents: PastEvent[] = [
       avatar: "👨‍💻",
       subtitle: "Software Developer"
     },
-    image: "https://github.com/marioverdu/makersofmurcia/raw/main/cured%20asset/6%20top%20highres_457853791.avif",
+    image: "https://github.com/marioverdu/makersofmurcia/raw/main/asset/event/event6.jpg",
     date: "19 Nov 2024",
     description: "Python aplicado a proyectos maker y automatización"
   }

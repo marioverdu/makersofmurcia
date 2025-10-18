@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react"
 import { Card } from "@/components/ui/card"
 
+// Nota: Este componente usa iconos emoji, no imágenes
+// Si se agregaran imágenes del equipo, se cargarían desde /asset/team/
 const cards = [
   {
     title: "FORMACIÓN TECNOLÓGICA",
