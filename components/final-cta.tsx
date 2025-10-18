@@ -79,7 +79,7 @@ export default function FinalCTA() {
 
         <Button
           size="lg"
-          className="relative bg-accent text-secondary hover:bg-accent/90 text-2xl md:text-3xl font-bold uppercase px-12 md:px-20 py-8 md:py-10 border-4 border-background shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[6px] hover:translate-y-[6px] transition-all duration-200 -rotate-2"
+          className="relative bg-white text-secondary hover:bg-white/90 text-2xl md:text-3xl font-bold uppercase px-12 md:px-20 py-8 md:py-10 border-4 border-background shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[6px] hover:translate-y-[6px] transition-all duration-200 -rotate-2"
           style={{ fontFamily: "var(--font-bebas-neue), Impact, sans-serif" }}
         >
           DESPIERTA YA

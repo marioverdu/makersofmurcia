@@ -139,7 +139,7 @@ export default function Hero() {
 
         <Button
           size="lg"
-          className="relative bg-accent text-secondary hover:bg-accent/90 text-xl md:text-2xl font-bold uppercase px-8 md:px-16 py-6 md:py-8 border-4 border-secondary shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 -rotate-1"
+          className="relative bg-white text-secondary hover:bg-white/90 text-xl md:text-2xl font-bold uppercase px-8 md:px-16 py-6 md:py-8 border-4 border-secondary shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 -rotate-1"
           style={{ fontFamily: "var(--font-anton), Impact, sans-serif" }}
         >
           DESPIERTA YA
