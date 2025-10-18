@@ -115,23 +115,13 @@ export default function Event() {
   return (
     <section className="py-16 md:py-24 bg-secondary relative overflow-hidden">
       {/* Background effects */}
-      <div 
-        className="absolute inset-0 opacity-10" 
-        style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 15px, white 15px, white 16px), repeating-linear-gradient(-45deg, transparent, transparent 15px, white 15px, white 16px)`
-        }}
-      />
-      <div className="absolute inset-0 opacity-10 halftone-bg" />
-      <div className="absolute top-10 left-10 w-40 h-40 border-8 border-primary rotate-45 opacity-30" />
-      <div className="absolute bottom-10 right-10 w-48 h-48 border-8 border-accent -rotate-12 opacity-30" />
-      <div className="absolute top-1/2 left-20 w-32 h-32 bg-primary opacity-20 rotate-12" />
 
       <div className="relative z-10">
         {/* Section title */}
         <div className="relative mb-12">
           <h2 
-            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
-            style={{ fontFamily: "Climate Crisis, cursive" }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center px-4 relative inline-block w-full"
+            style={{ fontFamily: "Climate Crisis, cursive", color: "#DD160B !important", WebkitTextFillColor: "#DD160B !important" }}
           >
             EVENTOS ANTERIORES
             <span 
@@ -143,8 +133,8 @@ export default function Event() {
             </span>
           </h2>
           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-            <span className="w-48 h-4 bg-primary rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
-            <span className="w-48 h-4 bg-accent -rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+            <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+            <span className="w-48 h-4 bg-accent - shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
           </div>
         </div>
 
@@ -178,7 +168,7 @@ export default function Event() {
               >
                 <div 
                   className="relative w-full h-full border-8 border-background shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[5px] group-hover:translate-y-[5px] transition-all duration-300 overflow-hidden bg-white p-6 pb-8"
-                  style={{ transform: `rotate(${(index % 3 - 1) * 2}deg)` }}
+                  style={{ transform: `rotate(${(index % 3 - 1) * 2}deg)`, backgroundColor: "var(--color-box)" }}
                 >
                   {/* Event image */}
                   <div className="relative w-full h-32 mb-4 overflow-hidden rounded-lg">
@@ -188,7 +178,6 @@ export default function Event() {
                       src={event.image}
                       style={{ filter: "contrast(1.3) saturate(1.4) brightness(0.9)" }}
                     />
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-50 transition-opacity duration-300 halftone-bg" />
                   </div>
 
                   {/* Organizer info */}
@@ -219,7 +208,7 @@ export default function Event() {
                   <p className="text-sm text-gray-700 leading-relaxed">{event.description}</p>
 
                   {/* Decorative elements */}
-                  <div className="absolute -top-3 left-12 w-20 h-8 bg-accent/50 border-2 border-accent/70 rotate-12 shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
+                  <div className="absolute -top-3 left-12 w-20 h-8 bg-accent/50 border-2 border-accent/70  shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
                   <div className="absolute top-0 left-0 w-0 h-0 border-t-[30px] border-t-primary border-r-[30px] border-r-transparent" />
                   <div className="absolute bottom-0 right-0 w-0 h-0 border-b-[30px] border-b-primary border-l-[30px] border-l-transparent" />
                 </div>

@@ -43,37 +43,17 @@ export const Default: Story = {
 
     // TOKENS REALES USADOS EN LA PÁGINA RAÍZ
     const realColors = {
-      // Colores principales del sistema
       primary: '#000000', // bg-primary, text-primary
       secondary: '#3D5B6A', // bg-secondary, border-secondary, text-secondary
       accent: '#FF6B35', // bg-accent, border-accent
-      background: '#FFFFFF', // bg-background, text-background
+      background: '#ffe5db', // bg-background, text-background
+      caps: '#DD160B', // --color-caps, títulos principales
+      box: '#F7DDDC', // --color-box, elementos tipo sticker/card
       white: '#FFFFFF', // bg-white
-      
-      // Colores de texto específicos
-      'text-white': '#FFFFFF', // text-white
-      'text-gray-600': '#4B5563', // text-gray-600
-      'text-gray-700': '#374151', // text-gray-700
-      'text-gray-500': '#6B7280', // text-gray-500
-      'text-gray-800': '#1F2937', // text-gray-800
-      
-      // Colores de fondo específicos
-      'bg-gray-100': '#F3F4F6', // bg-gray-100
-      'bg-gray-300': '#D1D5DB', // bg-gray-300
-      'bg-white/90': 'rgba(255, 255, 255, 0.9)', // bg-white/90
-      'bg-white/50': 'rgba(255, 255, 255, 0.5)', // bg-white/50
-      'bg-white/30': 'rgba(255, 255, 255, 0.3)', // bg-white/30
-      'bg-white/40': 'rgba(255, 255, 255, 0.4)', // bg-white/40
-      'bg-white/60': 'rgba(255, 255, 255, 0.6)', // bg-white/60
-      'bg-white/90': 'rgba(255, 255, 255, 0.9)', // bg-white/90
-      
-      // Colores especiales
-      'bg-[#3D5B6A]': '#3D5B6A', // bg-[#3D5B6A] (secondary)
-      
-      // Opacidades especiales
-      'bg-secondary/50': 'rgba(61, 91, 106, 0.5)', // bg-secondary/50
-      'bg-accent/50': 'rgba(255, 107, 53, 0.5)', // bg-accent/50
-      'bg-primary/90': 'rgba(0, 0, 0, 0.9)', // bg-primary/90
+      gray: {
+        600: '#4B5563', // text-gray-600
+        700: '#374151', // text-gray-700
+      }
     };
 
     const realFonts = {
@@ -174,143 +154,42 @@ export const Default: Story = {
             color: '#000000',
             fontFamily: 'Climate Crisis, cursive'
           }}>
-            🎨 COLORES REALES COMPLETOS
+            🎨 COLORES REALES
           </h2>
-          
-          {/* Colores Principales */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px', color: '#000000' }}>
-              Colores Principales del Sistema
-            </h3>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-              gap: '16px' 
-            }}>
-              {Object.entries(realColors).slice(0, 5).map(([name, value]) => (
-                <div key={name} style={{ 
-                  backgroundColor: 'white', 
-                  padding: '16px', 
-                  borderRadius: '8px',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{ 
-                    width: '100%', 
-                    height: '60px', 
-                    backgroundColor: value,
-                    borderRadius: '4px',
-                    marginBottom: '12px',
-                    border: '2px solid #e5e7eb'
-                  }} />
-                  <h4 style={{ fontWeight: 'bold', marginBottom: '4px' }}>{name}</h4>
-                  <p style={{ fontSize: '14px', color: '#666', fontFamily: 'monospace' }}>{value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Colores de Texto */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px', color: '#000000' }}>
-              Colores de Texto
-            </h3>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
-              gap: '12px' 
-            }}>
-              {Object.entries(realColors).slice(5, 10).map(([name, value]) => (
-                <div key={name} style={{ 
-                  backgroundColor: 'white', 
-                  padding: '12px', 
-                  borderRadius: '6px',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{ 
-                    width: '100%', 
-                    height: '40px', 
-                    backgroundColor: value,
-                    borderRadius: '4px',
-                    marginBottom: '8px',
-                    border: '1px solid #e5e7eb',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: value === '#FFFFFF' ? '#000000' : '#FFFFFF',
-                    fontWeight: 'bold'
-                  }}>
-                    Aa
-                    </div>
-                  <h4 style={{ fontWeight: 'bold', marginBottom: '4px', fontSize: '14px' }}>{name}</h4>
-                  <p style={{ fontSize: '12px', color: '#666', fontFamily: 'monospace' }}>{value}</p>
-                </div>
-              ))}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+            gap: '16px' 
+          }}>
+            {Object.entries(realColors).map(([name, value]) => (
+              <div key={name} style={{ 
+                backgroundColor: 'white', 
+                padding: '16px', 
+                borderRadius: '8px',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                <div style={{ 
+                  width: '100%', 
+                  height: '60px', 
+                  backgroundColor: typeof value === 'string' ? value : value[600] || value[700],
+                  borderRadius: '4px',
+                  marginBottom: '12px',
+                  border: '2px solid #e5e7eb'
+                }} />
+                <h3 style={{ fontWeight: 'bold', marginBottom: '4px' }}>{name}</h3>
+                <p style={{ fontSize: '14px', color: '#666', fontFamily: 'monospace' }}>
+                  {typeof value === 'string' ? value : Object.values(value)[0]}
+                </p>
+                <p style={{ fontSize: '12px', color: '#888' }}>
+                  {typeof value === 'string' ? 
+                    (name === 'primary' ? 'bg-primary, text-primary' : 
+                     name === 'secondary' ? 'bg-secondary, border-secondary' :
+                     name === 'accent' ? 'bg-accent, border-accent' :
+                     name === 'background' ? 'bg-background, text-background' :
+                     'bg-white') : 'text-gray-600, text-gray-700'}
+                </p>
               </div>
-            </div>
-
-          {/* Colores de Fondo */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px', color: '#000000' }}>
-              Colores de Fondo
-            </h3>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
-              gap: '12px' 
-            }}>
-              {Object.entries(realColors).slice(10, 18).map(([name, value]) => (
-                <div key={name} style={{ 
-                  backgroundColor: 'white', 
-                  padding: '12px', 
-                  borderRadius: '6px',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{ 
-                    width: '100%', 
-                    height: '40px', 
-                    backgroundColor: value,
-                    borderRadius: '4px',
-                    marginBottom: '8px',
-                    border: '1px solid #e5e7eb'
-                  }} />
-                  <h4 style={{ fontWeight: 'bold', marginBottom: '4px', fontSize: '14px' }}>{name}</h4>
-                  <p style={{ fontSize: '12px', color: '#666', fontFamily: 'monospace' }}>{value}</p>
-                      </div>
-              ))}
-            </div>
-                        </div>
-
-
-          {/* Colores Especiales */}
-          <div style={{ marginBottom: '32px' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px', color: '#000000' }}>
-              Colores Especiales y Opacidades
-            </h3>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
-              gap: '12px' 
-            }}>
-              {Object.entries(realColors).slice(18).map(([name, value]) => (
-                <div key={name} style={{ 
-                  backgroundColor: 'white', 
-                  padding: '12px', 
-                  borderRadius: '6px',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{ 
-                    width: '100%', 
-                    height: '40px', 
-                    backgroundColor: value,
-                    borderRadius: '4px',
-                    marginBottom: '8px',
-                    border: '1px solid #e5e7eb'
-                  }} />
-                  <h4 style={{ fontWeight: 'bold', marginBottom: '4px', fontSize: '14px' }}>{name}</h4>
-                  <p style={{ fontSize: '12px', color: '#666', fontFamily: 'monospace' }}>{value}</p>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
         </section>
 
@@ -358,7 +237,7 @@ export const Default: Story = {
                 </p>
               </div>
             ))}
-                        </div>
+          </div>
         </section>
 
         {/* Spacing Real */}
@@ -391,7 +270,7 @@ export const Default: Story = {
                 </div>
               ))}
             </div>
-                      </div>
+          </div>
         </section>
 
         {/* Efectos Reales */}
@@ -421,12 +300,12 @@ export const Default: Story = {
               }}>
                 <div style={{ fontWeight: 'bold', marginBottom: '8px', fontFamily: 'monospace' }}>
                   .{effect}
-                    </div>
+                </div>
                 <div style={{ fontSize: '14px', color: '#666' }}>{description}</div>
               </div>
             ))}
-            </div>
-          </section>
+          </div>
+        </section>
 
         {/* Bordes Reales */}
         <section style={{ marginBottom: '48px' }}>
@@ -438,7 +317,7 @@ export const Default: Story = {
             fontFamily: 'Climate Crisis, cursive'
           }}>
             🔲 BORDES REALES
-            </h2>
+          </h2>
           <div style={{ 
             backgroundColor: 'white', 
             padding: '24px', 
@@ -459,8 +338,8 @@ export const Default: Story = {
                 </div>
               ))}
             </div>
-            </div>
-          </section>
+          </div>
+        </section>
 
         {/* Tipografía Real */}
         <section style={{ marginBottom: '48px' }}>
@@ -492,8 +371,8 @@ export const Default: Story = {
                   <div style={{ fontSize: '14px', color: '#666', fontFamily: 'monospace' }}>{value}</div>
                 </div>
               ))}
-              </div>
-              </div>
+            </div>
+          </div>
         </section>
 
         {/* Componentes Reales */}
@@ -507,7 +386,7 @@ export const Default: Story = {
           }}>
             🧩 COMPONENTES REALES
           </h2>
-              <div style={{ 
+          <div style={{ 
             backgroundColor: 'white', 
             padding: '24px', 
             borderRadius: '12px',
@@ -556,8 +435,8 @@ export const Default: Story = {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginTop: '24px' }}>
             <div>
-              <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FF6B35' }}>18</div>
-              <div style={{ fontSize: '14px' }}>Colores Reales</div>
+              <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FF6B35' }}>6</div>
+              <div style={{ fontSize: '14px' }}>Colores Principales</div>
             </div>
             <div>
               <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FF6B35' }}>5</div>
@@ -574,7 +453,7 @@ export const Default: Story = {
             <div>
               <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FF6B35' }}>5</div>
               <div style={{ fontSize: '14px' }}>Tipos de Bordes</div>
-              </div>
+            </div>
             <div>
               <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#FF6B35' }}>8</div>
               <div style={{ fontSize: '14px' }}>Componentes</div>

@@ -42,6 +42,8 @@
   --color-red-200: #FECACA;
   --color-red-600: #DC2626;
   --color-red-700: #B91C1C;
+  --color-red-title: #CE3530;
+  --color-caps: #DD160B;
   
   /* Green Palette (solo usados) */
   --color-green-500: #10B981;
@@ -56,8 +58,10 @@
   --color-badge-orange-border: #F2E4D8;
   
   /* Backgrounds */
+  --color-background: #ffe5db;
   --color-background-primary: #F7F8FC;
   --color-background-secondary: #FFFFFF;
+  --color-box: #F7DDDC;
   
   /* Borders */
   --color-border-default: var(--color-gray-200);

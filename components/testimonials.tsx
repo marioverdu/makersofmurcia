@@ -44,17 +44,17 @@ export default function Testimonials() {
       <div className="absolute top-0 left-0 w-80 h-80 bg-primary opacity-10 blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent opacity-10 blur-3xl" />
       <div className="absolute top-1/2 left-1/4 w-48 h-48 border-[20px] border-primary opacity-5 rotate-45" />
-      <div className="absolute top-1/4 right-1/4 w-40 h-40 border-[20px] border-accent opacity-5 -rotate-12" />
+      <div className="absolute top-1/4 right-1/4 w-40 h-40 border-[20px] border-accent opacity-5 -" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <div className="relative mb-16">
           <h2
-            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center text-stroke-red relative inline-block w-full"
-            style={{ fontFamily: "Climate Crisis, cursive" }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center px-4 relative inline-block w-full"
+            style={{ fontFamily: "Climate Crisis, cursive", color: "#DD160B !important", WebkitTextFillColor: "#DD160B !important" }}
           >
             TESTIMONIOS
             <span
-              className="absolute inset-0 text-accent opacity-40 -z-10"
+              className="absolute inset-0 text-primary opacity-50 -z-10"
               style={{
                 transform: "translate(5px, 5px)",
                 fontFamily: "Climate Crisis, cursive",
@@ -64,13 +64,14 @@ export default function Testimonials() {
               TESTIMONIOS
             </span>
           </h2>
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2">
-            <span className="block w-64 h-3 bg-primary rotate-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+            <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+            <span className="w-48 h-4 bg-accent - shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
           </div>
         </div>
 
         <div className="relative">
-          <Card className="bg-white text-secondary border-4 border-secondary p-8 md:p-12 lg:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden -rotate-1">
+          <Card className="bg-white text-secondary border-4 border-secondary p-8 md:p-12 lg:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden -" style={{ backgroundColor: "var(--color-box)" }}>
             {/* Giant quotation mark */}
             <div className="absolute -top-8 -left-4 text-[180px] md:text-[240px] opacity-20 leading-none select-none font-serif">
               "
@@ -136,8 +137,9 @@ export default function Testimonials() {
                   className={`w-6 h-6 border-3 border-secondary transition-all duration-300 rotate-45 ${
                     index === currentIndex
                       ? "bg-primary scale-125 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                      : "bg-white hover:bg-accent shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      : "hover:bg-accent shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                   }`}
+                  style={{ backgroundColor: index === currentIndex ? undefined : "var(--color-box)" }}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}

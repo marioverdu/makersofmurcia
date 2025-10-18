@@ -30,35 +30,12 @@ export default function Gallery() {
 
   return (
     <section className="py-16 md:py-24 bg-secondary relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 15px,
-          white 15px,
-          white 16px
-        ), repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 15px,
-          white 15px,
-          white 16px
-        )`,
-        }}
-      />
-      <div className="absolute inset-0 opacity-10 halftone-bg" />
-
-      <div className="absolute top-10 left-10 w-40 h-40 border-8 border-primary rotate-45 opacity-30" />
-      <div className="absolute bottom-10 right-10 w-48 h-48 border-8 border-accent -rotate-12 opacity-30" />
-      <div className="absolute top-1/2 left-20 w-32 h-32 bg-primary opacity-20 rotate-12" />
 
       <div className="relative z-10">
         <div className="relative mb-12">
           <h2
-            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center text-stroke px-4 relative inline-block w-full"
-            style={{ fontFamily: "Climate Crisis, cursive" }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center px-4 relative inline-block w-full"
+            style={{ fontFamily: "Climate Crisis, cursive", color: "#DD160B !important", WebkitTextFillColor: "#DD160B !important" }}
           >
             EQUIPO
             <span
@@ -73,15 +50,15 @@ export default function Gallery() {
             </span>
           </h2>
           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-            <span className="w-48 h-4 bg-primary rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
-            <span className="w-48 h-4 bg-accent -rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+            <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+            <span className="w-48 h-4 bg-accent - shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
           </div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 md:px-8">
           <Button
             onClick={() => scroll("left")}
-            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-16 h-16 bg-primary hover:bg-primary/90 border-4 border-background shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all -rotate-3"
+            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-16 h-16 bg-primary hover:bg-primary/90 border-4 border-background shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all -"
             size="icon"
           >
             <ChevronLeft className="w-8 h-8" />
@@ -89,7 +66,7 @@ export default function Gallery() {
 
           <Button
             onClick={() => scroll("right")}
-            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-16 h-16 bg-primary hover:bg-primary/90 border-4 border-background shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all rotate-3"
+            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-16 h-16 bg-primary hover:bg-primary/90 border-4 border-background shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all "
             size="icon"
           >
             <ChevronRight className="w-8 h-8" />
@@ -122,11 +99,10 @@ export default function Gallery() {
                   />
 
                   {/* Halftone overlay on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-50 transition-opacity duration-300 halftone-bg" />
 
                   {/* Tape decorations */}
-                  <div className="absolute -top-3 left-12 w-20 h-8 bg-accent/50 border-2 border-accent/70 rotate-12 shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
-                  <div className="absolute -bottom-3 right-12 w-20 h-8 bg-accent/50 border-2 border-accent/70 -rotate-12 shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
+                  <div className="absolute -top-3 left-12 w-20 h-8 bg-accent/50 border-2 border-accent/70 2 shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
+                  <div className="absolute -bottom-3 right-12 w-20 h-8 bg-accent/50 border-2 border-accent/70 -2 shadow-[2px_2px_4px_rgba(0,0,0,0.4)]" />
 
                   {/* Corner triangles */}
                   <div className="absolute top-0 left-0 w-0 h-0 border-t-[30px] border-t-primary border-r-[30px] border-r-transparent" />
