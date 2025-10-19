@@ -50,28 +50,45 @@ export default function Testimonials() {
         <div className="relative mb-16">
           <h2
             className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center px-4 relative inline-block w-full"
-            style={{ fontFamily: "Climate Crisis, cursive", color: "#DD160B !important", WebkitTextFillColor: "#DD160B !important" }}
+            style={{ fontFamily: "Climate Crisis, cursive", color: "#1D1414 !important", WebkitTextFillColor: "#1D1414 !important" }}
           >
             TESTIMONIOS
-            <span
-              className="absolute inset-0 text-primary opacity-50 -z-10"
+            {/* Sombras desactivadas */}
+            {/* <span
+              className="absolute inset-0 -z-10"
               style={{
                 transform: "translate(5px, 5px)",
                 fontFamily: "Climate Crisis, cursive",
+                color: "#EC6918 !important",
+                WebkitTextFillColor: "#EC6918 !important",
+                opacity: 0.3
               }}
               aria-hidden="true"
             >
               TESTIMONIOS
             </span>
+            <span
+              className="absolute inset-0 -z-20"
+              style={{
+                transform: "translate(-4px, -4px)",
+                fontFamily: "Climate Crisis, cursive",
+                color: "#EC6918 !important",
+                WebkitTextFillColor: "#EC6918 !important",
+                opacity: 0.4
+              }}
+              aria-hidden="true"
+            >
+              TESTIMONIOS
+            </span> */}
           </h2>
           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-            <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
-            <span className="w-48 h-4 bg-accent - shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+            <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_var(--color-black)]" />
+            <span className="w-48 h-4 bg-accent - shadow-[4px_4px_0px_0px_var(--color-black)]" />
           </div>
         </div>
 
         <div className="relative">
-          <Card className="bg-white text-secondary border-4 border-secondary p-8 md:p-12 lg:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden -" style={{ backgroundColor: "var(--color-box)" }}>
+          <Card className="bg-white text-secondary border-4 border-secondary p-8 md:p-12 lg:p-16 shadow-[12px_12px_0px_0px_var(--color-black)] relative overflow-hidden -" style={{ backgroundColor: "var(--color-box)" }}>
             {/* Giant quotation mark */}
             <div className="absolute -top-8 -left-4 text-[180px] md:text-[240px] opacity-20 leading-none select-none font-serif">
               "
@@ -124,9 +141,10 @@ export default function Testimonials() {
             <Button
               onClick={prev}
               size="icon"
-              className="w-12 h-12 bg-secondary hover:bg-secondary/90 border-4 border-secondary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all -rotate-2"
+              className="w-12 h-12 bg-transparent hover:bg-transparent text-secondary shadow-[1px_1px_12px_rgba(0,0,0,0.08)] hover:shadow-[1px_1px_8px_rgba(0,0,0,0.12)] hover:translate-x-[1px] hover:translate-y-[1px] transition-all -rotate-2"
+              style={{ borderColor: "var(--color-black) !important", backgroundColor: "#FFF3EF !important" }}
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-14 h-14" />
             </Button>
 
             <div className="flex gap-3">
@@ -136,8 +154,8 @@ export default function Testimonials() {
                   onClick={() => setCurrentIndex(index)}
                   className={`w-6 h-6 border-3 border-secondary transition-all duration-300 rotate-45 ${
                     index === currentIndex
-                      ? "bg-primary scale-125 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                      : "hover:bg-accent shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      ? "bg-primary scale-125 shadow-[4px_4px_0px_0px_var(--color-black)]"
+                      : "hover:bg-accent shadow-[2px_2px_0px_0px_var(--color-black)]"
                   }`}
                   style={{ backgroundColor: index === currentIndex ? undefined : "var(--color-box)" }}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -148,9 +166,10 @@ export default function Testimonials() {
             <Button
               onClick={next}
               size="icon"
-              className="w-12 h-12 bg-secondary hover:bg-secondary/90 border-4 border-secondary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all rotate-2"
+              className="w-12 h-12 bg-transparent hover:bg-transparent text-secondary shadow-[1px_1px_12px_rgba(0,0,0,0.08)] hover:shadow-[1px_1px_8px_rgba(0,0,0,0.12)] hover:translate-x-[1px] hover:translate-y-[1px] transition-all rotate-2"
+              style={{ borderColor: "var(--color-black) !important", backgroundColor: "#FFF3EF !important" }}
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-14 h-14" />
             </Button>
           </div>
         </div>

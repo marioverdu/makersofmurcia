@@ -14,10 +14,24 @@ export default function WhatIsMaker() {
           >
             ¿QUÉ ES UN MAKER?
             <span
-              className="absolute inset-0 text-primary opacity-50 -z-10"
+              className="absolute inset-0 -z-10"
               style={{
                 transform: "translate(5px, 5px)",
                 fontFamily: "Climate Crisis, cursive",
+                color: "var(--color-white)",
+                opacity: 0.5
+              }}
+              aria-hidden="true"
+            >
+              ¿QUÉ ES UN MAKER?
+            </span>
+            <span
+              className="absolute inset-0 -z-20"
+              style={{
+                transform: "translate(-4px, -4px)",
+                fontFamily: "Climate Crisis, cursive",
+                color: "var(--color-white)",
+                opacity: 0.2
               }}
               aria-hidden="true"
             >
@@ -25,15 +39,15 @@ export default function WhatIsMaker() {
             </span>
           </h2>
           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-            <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
-            <span className="w-48 h-4 bg-accent  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+            <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_var(--color-black)]" />
+            <span className="w-48 h-4 bg-accent  shadow-[4px_4px_0px_0px_var(--color-black)]" />
           </div>
         </div>
 
         {/* Main content */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           {/* Definition card */}
-          <Card className="bg-white border-4 border-secondary p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden " style={{ backgroundColor: "var(--color-box)" }}>
+          <Card className="bg-white border-4 border-secondary p-8 md:p-12 shadow-[12px_12px_0px_0px_var(--color-black)] relative overflow-hidden " style={{ backgroundColor: "var(--color-box)" }}>
             <div className="absolute -top-8 -left-4 text-[120px] md:text-[160px] opacity-20 leading-none select-none font-serif">
               ?
             </div>
@@ -52,7 +66,7 @@ export default function WhatIsMaker() {
           </Card>
 
           {/* Association info card */}
-          <Card className="bg-white border-4 border-secondary p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden " style={{ backgroundColor: "var(--color-box)" }}>
+          <Card className="bg-white border-4 border-secondary p-8 md:p-12 shadow-[12px_12px_0px_0px_var(--color-black)] relative overflow-hidden " style={{ backgroundColor: "var(--color-box)" }}>
             <div className="absolute -top-8 -right-4 text-[120px] md:text-[160px] opacity-20 leading-none select-none font-serif">
               ⚙️
             </div>
@@ -76,7 +90,7 @@ export default function WhatIsMaker() {
 
         {/* Makerspace info */}
         <div className="mt-12">
-          <Card className="bg-white border-4 border-secondary p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden " style={{ backgroundColor: "var(--color-box)" }}>
+          <Card className="bg-white border-4 border-secondary p-8 md:p-12 shadow-[12px_12px_0px_0px_var(--color-black)] relative overflow-hidden " style={{ backgroundColor: "var(--color-box)" }}>
             <div className="absolute -top-8 -left-4 text-[120px] md:text-[160px] opacity-20 leading-none select-none font-serif">
               🏭
             </div>

@@ -42,7 +42,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-2xl border-4 border-secondary shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] max-w-2xl w-full mx-4 max-h-[80vh] flex flex-col"
+        className="bg-white rounded-2xl border-4 border-secondary shadow-[12px_12px_0px_0px_var(--color-black)] max-w-2xl w-full mx-4 max-h-[80vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -186,7 +186,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
               disabled={!canJoin}
               className={`flex-1 py-3 text-lg font-bold uppercase transition-all duration-200 ${
                 canJoin
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[4px_4px_0px_0px_var(--color-black)] hover:shadow-[2px_2px_0px_0px_var(--color-black)] hover:translate-x-[2px] hover:translate-y-[2px]"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
               style={{ fontFamily: "var(--font-plus-jakarta-sans), system-ui, sans-serif" }}

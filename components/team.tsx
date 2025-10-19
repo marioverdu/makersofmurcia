@@ -97,30 +97,40 @@ export default function Team() {
       <div className="relative mb-16">
         <h2
             className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase text-center px-4 relative inline-block w-full"
-          style={{ fontFamily: "Climate Crisis, cursive", color: "#DD160B !important", WebkitTextFillColor: "#DD160B !important" }}
+          style={{ fontFamily: "Climate Crisis, cursive", color: "#1D1414 !important", WebkitTextFillColor: "#1D1414 !important" }}
         >
           QUÉ HACEMOS
-          <span 
-            className="absolute inset-0 text-primary opacity-50 -z-10" 
+          {/* Sombras desactivadas */}
+          {/* <span 
+            className="absolute inset-0 -z-10" 
             aria-hidden="true" 
-            style={{ transform: "translate(5px, 5px)", fontFamily: "Climate Crisis, cursive" }}
+            style={{ 
+              transform: "translate(5px, 5px)", 
+              fontFamily: "Climate Crisis, cursive",
+              color: "#EC6918 !important",
+              WebkitTextFillColor: "#EC6918 !important",
+              opacity: 0.3
+            }}
           >
             QUÉ HACEMOS
           </span>
           <span
-            className="absolute inset-0 text-accent opacity-20 -z-20"
+            className="absolute inset-0 -z-20"
             style={{
               transform: "translate(-4px, -4px)",
               fontFamily: "Climate Crisis, cursive",
+              color: "#EC6918 !important",
+              WebkitTextFillColor: "#EC6918 !important",
+              opacity: 0.4
             }}
             aria-hidden="true"
           >
             QUÉ HACEMOS
-          </span>
+          </span> */}
         </h2>
         <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-          <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
-          <span className="w-48 h-4 bg-accent - shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)]" />
+          <span className="w-48 h-4 bg-primary  shadow-[4px_4px_0px_0px_var(--color-black)]" />
+          <span className="w-48 h-4 bg-accent - shadow-[4px_4px_0px_0px_var(--color-black)]" />
         </div>
       </div>
 
@@ -134,7 +144,7 @@ export default function Team() {
             }`}
           >
             <Card
-              className={`${card.height} ${card.color} p-8 border-4 border-secondary shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300 cursor-pointer relative overflow-hidden group`}
+              className={`${card.height} ${card.color} p-8 border-4 border-secondary shadow-[8px_8px_0px_0px_var(--color-black)] hover:shadow-[4px_4px_0px_0px_var(--color-black)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300 cursor-pointer relative overflow-hidden group`}
               style={{
                 transform: `rotate(${card.rotation})`,
               }}
@@ -147,7 +157,7 @@ export default function Team() {
 
               <div className="relative z-10">
                 {/* Icon with sticker effect */}
-                <div className="inline-block mb-4 p-4 bg-white border-4 border-secondary  shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:rotate-0 transition-transform" style={{ backgroundColor: "var(--color-box)" }}>
+                <div className="inline-block mb-4 p-4 bg-white border-4 border-secondary  shadow-[4px_4px_0px_0px_var(--color-black)] group-hover:rotate-0 transition-transform" style={{ backgroundColor: "var(--color-box)" }}>
                   <div className="text-5xl">{card.icon}</div>
                 </div>
 
@@ -166,7 +176,7 @@ export default function Team() {
 
               {/* Tape effect */}
               {index % 2 === 0 && (
-                <div className="absolute -top-3 right-12 w-24 h-8 bg-accent/40 border-2 border-accent/60  shadow-[2px_2px_4px_rgba(0,0,0,0.3)]" />
+                <div className="absolute -top-3 right-12 w-24 h-8 bg-accent/40 border-2 border-accent/60  shadow-[2px_2px_4px_var(--color-black)]" />
               )}
 
               {/* Star decorations */}

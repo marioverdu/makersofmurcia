@@ -72,7 +72,18 @@
   /* Text */
   --color-text: hsl(206, 1%, 27%);
   --color-text-primary: var(--color-text);
-  --color-text-secondary: #6B7280;
+  --color-text-secondary: var(--color-secondary);
+  
+  /* Black */
+  --color-black: #1D1414;
+  
+  /* Secondary */
+  --color-secondary: #1D1414;
+  
+  /* White */
+  --color-white: #FFF3EF;
+  
+  /* Cache buster: 2024-12-19 15:30 */
   
   /* Surface */
   --color-surface-glass: rgba(255, 255, 255, 0.3);
@@ -110,3 +121,5 @@
   --asset-bg-landing: url('/asset/logo.png');
   --asset-bg-work-experience: url('/asset/logo.png');
 }
+/* Cache buster: Sun Oct 19 12:17:17 CEST 2025 */
+/* Cache buster: Sun Oct 19 12:22:19 CEST 2025 */
